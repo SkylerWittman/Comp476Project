@@ -78,3 +78,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/Classic Skybox/01/Thumbs.db.meta
+Assets/Standard Assets/Environment/Water/Water/Materials/WaterProDaytime.mat
