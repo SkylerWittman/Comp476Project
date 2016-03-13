@@ -1,3 +1,6 @@
+Eric (Mar 13)
+Changed the size of the bad guys to make them more fitting
+
 Eric (Mar 10)
 TerrainEngine script rewritten
 Spawner script added
