@@ -3,6 +3,9 @@ Changed the size of the bad guys to make them more fitting
 Spawns are now based on the grid and water level
 	Spawns will occur in 2x2 grids that are not currently occupied by a tree or other object
 	Spawns will not occur if the location is currently underwater
+Still working on: Power up spawns?
+	Underwater effect?
+	Initial framework for bad guy movement?
 
 Eric (Mar 10)
 TerrainEngine script rewritten
