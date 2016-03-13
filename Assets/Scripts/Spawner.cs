@@ -5,7 +5,9 @@ public class Spawner : MonoBehaviour
 {
 
     //Terrain vars
-    private GameObject terrainEngine; // setting up access to the terrain so we can get grid and find out where we can spawn
+    private Terrain terrain;
+    private bool[,] terrainGrid;
+    private float waterLevel;
 
     //Player vars
     private GameObject player;
@@ -21,7 +23,9 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         //Terrain initialization
-        terrainEngine = GameObject.FindGameObjectWithTag("TerrainEngine");
+        terrain = TerrainEngine.terrain;
+        terrainGrid = TerrainEngine.terrainGrid;
+        waterLevel = TerrainEngine.waterLevel;
 
         //Player initialization
         player = Resources.Load("PlayerPrefabs/Player") as GameObject;
@@ -45,6 +49,13 @@ public class Spawner : MonoBehaviour
     {
         float x = Random.Range(0.0f, 2000.0f);
         float z = Random.Range(0.0f, 2000.0f);
+
+        while (terrainGrid[(int)(x / 2.0f), (int)(z / 2.0f)] == true || terrain.SampleHeight(new Vector3(x, 0.0f, z)) <= waterLevel)
+        {
+            x = Random.Range(0.0f, 2000.0f);
+            z = Random.Range(0.0f, 2000.0f);
+        }
+
         Vector3 playerStartPosition = new Vector3(x, 10.0f, z);
         Instantiate(player, playerStartPosition, Quaternion.identity);
     }
@@ -55,6 +66,13 @@ public class Spawner : MonoBehaviour
         {
             float x = Random.Range(0.0f, 2000.0f);
             float z = Random.Range(0.0f, 2000.0f);
+
+            while (terrainGrid[(int)(x / 2.0f), (int)(z / 2.0f)] == true || terrain.SampleHeight(new Vector3(x, 0.0f, z)) <= waterLevel)
+            {
+                x = Random.Range(0.0f, 2000.0f);
+                z = Random.Range(0.0f, 2000.0f);
+            }
+            
             Vector3 spawnPosition = new Vector3(x, 10.0f, z);
 
             int typeOfEnemy = Random.Range(0, 3);

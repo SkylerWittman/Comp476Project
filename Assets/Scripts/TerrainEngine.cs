@@ -5,12 +5,11 @@ public class TerrainEngine : MonoBehaviour
 {
 
     //Terrain vars
-    private Terrain terrain;
+    public static Terrain terrain;
     private const float terrainSize = 2000.0f;
     private const float terrainHeight = 1500.0f;
-    public static bool[,] terrainGrid = new bool[1000, 1000]; //each index will indicate a 2x2 grid on the terrain
-    //this will help us keep track of what grids are occupied
-    private const float waterLevel = 75.0f;
+    public static bool[,] terrainGrid = new bool[1000, 1000]; //Each index will indicate a 2x2 grid on the terrain, and will evaluate to true if occupied
+    public static float waterLevel = 75.0f;  
 
     //Tree vars
     private const int numOfTrees = 200;
@@ -92,25 +91,24 @@ public class TerrainEngine : MonoBehaviour
         TreeInstance[] tr = new TreeInstance[numOfTrees];
         for (int i = 0; i < numOfTrees; i++)
         {
+            //Get a random starting x and z value
             float x = Random.value;
             float z = Random.value;
-            while (terrainGrid[(int)x, (int)z] == true && terrain.SampleHeight(new Vector3(x * 2000.0f, 0.0f, z * 2000.0f)) <= waterLevel)
+
+            //While the starting x and z values within the grid are occupied and/or under the water level, get new values
+            while (terrainGrid[(int)(x*1000.0f), (int)(z*1000.0f)] == true || terrain.SampleHeight(new Vector3(x * 2000.0f, 0.0f, z * 2000.0f)) <= waterLevel)
             {
                 x = Random.value;
                 z = Random.value;
             }
-            //If the x and z values chosen are within +/- 20 units of the player, get a new position
-            //while (x == playerStartPosition.x + 20.0f && x == playerStartPosition.x - 20.0f &&
-            //    z == playerStartPosition.z + 20.0f && z == playerStartPosition.z - 20.0f)
-            //{
-            //    x = Random.value;
-            //    z = Random.value;
-            //}
 
             float height = terrain.terrainData.GetInterpolatedHeight(x, z);
 
             tr[i].position = new Vector3(x, (height / 1550.0f), z);
-            terrainGrid[(int)x / 2000, (int)z / 2000] = true;
+            terrainGrid[(int)(x*1000.0f), (int)(z*1000.0f)] = true;
+
+            //Broad leafs trees have a probability of 2/3 of occuring
+            //Conifer trees have a probability of 1/3 of occuring
             int chance = Random.Range(0, 3);
             if (chance == 0)
             {
