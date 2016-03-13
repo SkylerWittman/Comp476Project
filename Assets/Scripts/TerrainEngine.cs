@@ -1,26 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TerrainEngine : MonoBehaviour {
+public class TerrainEngine : MonoBehaviour
+{
 
     //Terrain vars
     private Terrain terrain;
-    
+    private const float terrainSize = 2000.0f;
+    private const float terrainHeight = 1500.0f;
+    public static bool[,] terrainGrid = new bool[1000, 1000]; //each index will indicate a 2x2 grid on the terrain
+    //this will help us keep track of what grids are occupied
+    private const float waterLevel = 75.0f;
+
     //Tree vars
-    private const int numOfTreePrototypes = 2;
     private const int numOfTrees = 200;
+    private const int numOfTreePrototypes = 2;
     private GameObject[] trees = new GameObject[numOfTreePrototypes];
     private TreePrototype[] treePrototypes = new TreePrototype[numOfTreePrototypes];
-    
+
     //Splat vars
     private const int numOfSplats = 2;
-    private Texture2D[] terrainTextures = new Texture2D[numOfSplats];
     private SplatPrototype[] splatPrototypes = new SplatPrototype[numOfSplats];
-    private float terrainTile0 = 25.0f;
-    private float terrainTile1 = 30.0f;
+    private Texture2D[] terrainTextures = new Texture2D[numOfSplats];
+    private const float terrainTile0 = 25.0f;
+    private const float terrainTile1 = 30.0f;
 
     void Start()
     {
+        //Grid initialization
+        for (int x = 0; x < terrainGrid.GetLength(0); x++)
+        {
+            for (int z = 0; z < terrainGrid.GetLength(1); z++)
+            {
+                terrainGrid[x, z] = false;
+            }
+        }
+
         //Tree initialization
         trees[0] = Resources.Load("TreePrefabs/BroadLeafTree") as GameObject;
         trees[1] = Resources.Load("TreePrefabs/ConiferTree") as GameObject;
@@ -36,11 +51,11 @@ public class TerrainEngine : MonoBehaviour {
         //Splat initialization
         terrainTextures[0] = Resources.Load("TerrainTextures/GrassHillAlbedo") as Texture2D;
         terrainTextures[1] = Resources.Load("TerrainTextures/MudRockyAlbedoSpecular") as Texture2D;
-        
+
         Vector2[] splatTileSize = new Vector2[numOfSplats] { 
             new Vector2(terrainTile0, terrainTile0), new Vector2(terrainTile1, terrainTile1) 
         };
-       
+
         for (int i = 0; i < numOfSplats; i++)
         {
             splatPrototypes[i] = new SplatPrototype();
@@ -51,7 +66,6 @@ public class TerrainEngine : MonoBehaviour {
             splatPrototypes[i].texture = terrainTextures[i];
             splatPrototypes[i].tileOffset = Vector2.zero;
             splatPrototypes[i].tileSize = splatTileSize[i];
-            //splatPrototypes[i].texture.Apply(true);
         }
 
         TerrainData terrainData = new TerrainData();
@@ -75,36 +89,28 @@ public class TerrainEngine : MonoBehaviour {
         }
         terrain.terrainData.SetHeights(0, 0, heights);
 
-        //terrain.terrainData.RefreshPrototypes();
-
-        //float[, ,] splatMap = new float[terrain.terrainData.alphamapResolution, terrain.terrainData.alphamapResolution, 2];
-
-        //for (int x = 0; x < terrain.terrainData.alphamapHeight; x++)
-        //{
-        //    for (int z = 0; z < terrain.terrainData.alphamapWidth; z++)
-        //    {
-        //        float normalizedX = (float)x / (terrain.terrainData.alphamapWidth - 1);
-        //        float normalizedZ = (float)z / (terrain.terrainData.alphamapHeight - 1);
-
-        //        float steepness = terrain.terrainData.GetSteepness(normalizedX, normalizedZ);
-        //        float steepnessNormalized = Mathf.Clamp(steepness/1.5f, 0.0f, 1.0f);
-
-        //        splatMap[z, x, 0] = 1.0f - steepnessNormalized;
-        //        splatMap[z, x, 1] = steepnessNormalized;
-        //    }
-        //}
-
-        //terrainData.SetAlphamaps(0, 0, splatMap);
-
         TreeInstance[] tr = new TreeInstance[numOfTrees];
-        for (int i = 0; i < numOfTrees; i++) {
+        for (int i = 0; i < numOfTrees; i++)
+        {
             float x = Random.value;
-            float y = Random.value;
+            float z = Random.value;
+            while (terrainGrid[(int)x, (int)z] == true && terrain.SampleHeight(new Vector3(x * 2000.0f, 0.0f, z * 2000.0f)) <= waterLevel)
+            {
+                x = Random.value;
+                z = Random.value;
+            }
+            //If the x and z values chosen are within +/- 20 units of the player, get a new position
+            //while (x == playerStartPosition.x + 20.0f && x == playerStartPosition.x - 20.0f &&
+            //    z == playerStartPosition.z + 20.0f && z == playerStartPosition.z - 20.0f)
+            //{
+            //    x = Random.value;
+            //    z = Random.value;
+            //}
 
-            float angle = terrain.terrainData.GetSteepness(x, y);
-            float height = terrain.terrainData.GetInterpolatedHeight(x, y);
+            float height = terrain.terrainData.GetInterpolatedHeight(x, z);
 
-            tr[i].position = new Vector3(x, (height / 1500.0f), y);
+            tr[i].position = new Vector3(x, (height / 1550.0f), z);
+            terrainGrid[(int)x / 2000, (int)z / 2000] = true;
             int chance = Random.Range(0, 3);
             if (chance == 0)
             {
@@ -124,40 +130,8 @@ public class TerrainEngine : MonoBehaviour {
         terrain.treeCrossFadeLength = 20.0f;
         terrain.treeMaximumFullLODCount = 20;
 
-    //    TerrainData terrainData = new TerrainData();
-    //    terrainData.size = new Vector3(2000, 1500, 2000);
-    //    terrain = Terrain.CreateTerrainGameObject(terrainData).GetComponent<Terrain>();
-    //    float[,] heights = new float[terrain.terrainData.heightmapWidth, terrain.terrainData.heightmapHeight];
-
-    //    for (int i = 0; i < terrain.terrainData.heightmapWidth; i++)
-    //    {
-    //        for (int k = 0; k < terrain.terrainData.heightmapHeight; k++)
-    //        {
-    //            float ranW = Random.Range(5.0f, 10.0f);
-    //            float ranH = Random.Range(0.0f, 3.0f);
-    //            heights[i, k] = Mathf.PerlinNoise(((float)i / (float)terrain.terrainData.heightmapWidth) * ranW, ((float)k / (float)terrain.terrainData.heightmapHeight) * ranH) / 10.0f;
-                
-    //        }
-    //    }
-      
-    //    terrain.terrainData.SetHeights(0, 0, heights);
-    //    SplatPrototype[] splats = new SplatPrototype[1];
-    //    splats[0] = new SplatPrototype();
-    //    splats[0].texture = terrainTextures[0];
-    //    splats[0].tileSize = new Vector2(50, 50);
-    //    terrain.terrainData.splatPrototypes = splats;
-    //    //terrain.terrainData.treePrototypes = treePrototypes;
-    //    for (int i = 0; i < (int)terrain.terrainData.heightmapWidth; i += 10)
-    //    {
-    //        for (int j = 0; j < (int)terrain.terrainData.heightmapHeight; j += 10)
-    //        {
-    //            int chance = Random.Range(1, 3);
-    //            if (chance == 1)
-    //            {
-
-    //            }
-    //        }
-    //    }
-    //    terrain.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+        //This appears to be some sort of hack to get the colliders of the trees to work
+        terrain.GetComponent<TerrainCollider>().enabled = false;
+        terrain.GetComponent<TerrainCollider>().enabled = true;
     }
 }

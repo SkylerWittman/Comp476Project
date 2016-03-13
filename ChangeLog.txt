@@ -1,0 +1,10 @@
+Eric (Mar 10)
+TerrainEngine script rewritten
+Spawner script added
+Player prefab created
+Tree colliders fixed
+Zombies, dinos and goblins added
+
+Still working on: making spawns a little smarter 
+	Will be doing it grid based - terrain is chopped into 1000 blocks of 2x2
+	No more than one object will be spawned per block
