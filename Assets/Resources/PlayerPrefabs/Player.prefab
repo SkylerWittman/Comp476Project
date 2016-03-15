@@ -1677,9 +1677,9 @@ GameObject:
   - 4: {fileID: 429322}
   - 111: {fileID: 11163006}
   - 143: {fileID: 14318404}
-  - 114: {fileID: 11480178}
   - 114: {fileID: 11481450}
   - 114: {fileID: 11459556}
+  - 114: {fileID: 11447048}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4345,6 +4345,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 476778}
+--- !u!114 &11447048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05aca6ecd4ae93e45bc659c05a711a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10
+  walkSpeed: 12.46
+  runSpeed: 15
+  gravity: 18.07
+  jumpSpeed: 30
+  rotateSpeed: 5
+  player: {fileID: 429322}
 --- !u!114 &11459556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4357,36 +4375,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow_type: 0
---- !u!114 &11480178
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5ac211a643e447ca78c2d794a16381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleAnimation: {fileID: 7400000, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  walkAnimation: {fileID: 7400004, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  runAnimation: {fileID: 7400006, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  jumpPoseAnimation: {fileID: 7400008, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  walkMaxAnimationSpeed: 0.75
-  trotMaxAnimationSpeed: 1
-  runMaxAnimationSpeed: 1
-  jumpAnimationSpeed: 1.15
-  landAnimationSpeed: 1
-  walkSpeed: 4
-  trotSpeed: 4
-  runSpeed: 12
-  inAirControlAcceleration: 3
-  jumpHeight: 20
-  gravity: 30
-  speedSmoothing: 10
-  rotateSpeed: 500
-  trotAfterSeconds: 3
-  canJump: 1
 --- !u!114 &11481450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4414,7 +4402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 0
+  axes: 2
   sensitivityX: 0.2
   sensitivityY: 2
   minimumX: -30
@@ -6348,7 +6336,55 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Center.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gravity
+      value: 18.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: walkSpeed
+      value: 12.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 429322}
+    - target: {fileID: 0}
+      propertyPath: rotateSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: axes
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: jumpSpeed
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 197044}

@@ -597,6 +597,7 @@ GameObject:
   - 95: {fileID: 9595560}
   - 54: {fileID: 5461098}
   - 65: {fileID: 6571334}
+  - 114: {fileID: 11405520}
   m_Layer: 0
   m_Name: ZombieGrey
   m_TagString: Untagged
@@ -1294,7 +1295,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &6571334
 BoxCollider:
@@ -1325,6 +1326,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11405520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ddc1b9178804834c930b3f5e7c04f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceleration: 3
+  maxSpeed: 5
+  directionChangeTime: 3
+  rotateTime: 1.5
+  maxDirectionChange: 60
 --- !u!137 &13709042
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2074,7 +2091,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Constraints
-      value: 112
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x

@@ -934,8 +934,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 448574}
   - 111: {fileID: 11182070}
-  - 143: {fileID: 14367730}
-  - 114: {fileID: 11402222}
   - 114: {fileID: 11428578}
   - 114: {fileID: 11494806}
   m_Layer: 0
@@ -4332,36 +4330,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11402222
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5ac211a643e447ca78c2d794a16381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleAnimation: {fileID: 7400000, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  walkAnimation: {fileID: 7400004, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  runAnimation: {fileID: 7400006, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  jumpPoseAnimation: {fileID: 7400008, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  walkMaxAnimationSpeed: 0.75
-  trotMaxAnimationSpeed: 1
-  runMaxAnimationSpeed: 1
-  jumpAnimationSpeed: 1.15
-  landAnimationSpeed: 1
-  walkSpeed: 4
-  trotSpeed: 4
-  runSpeed: 12
-  inAirControlAcceleration: 3
-  jumpHeight: 20
-  gravity: 30
-  speedSmoothing: 10
-  rotateSpeed: 500
-  trotAfterSeconds: 3
-  canJump: 1
 --- !u!114 &11428578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4771,23 +4739,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0062797517, y: 0.014613502, z: -0.018638909}
     m_Extent: {x: 0.060422197, y: 0.066509016, z: 0.057748973}
   m_DirtyAABB: 0
---- !u!143 &14367730
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 157372}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.1
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!198 &19887130
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -6351,6 +6302,10 @@ Prefab:
       propertyPath: arrow
       value: 
       objectReference: {fileID: 137712, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157372}

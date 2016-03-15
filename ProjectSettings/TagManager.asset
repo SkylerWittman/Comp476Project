@@ -14,6 +14,7 @@ TagManager:
   - Camera
   - TerrainEngine
   - Spawner
+  - Tree
   layers:
   - Default
   - TransparentFX
