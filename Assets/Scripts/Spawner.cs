@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour
         dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
         dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
         dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;
-        spawnEnemies(500);
+        spawnEnemies(100);
 
 
     }
