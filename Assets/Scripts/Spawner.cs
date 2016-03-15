@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
 
         //Player initialization
         player = Resources.Load("PlayerPrefabs/Player") as GameObject;
-        spawnPlayer();
+        //spawnPlayer();
 
         //Enemy initialization
         zombies = new GameObject[numOfZombies];
@@ -43,7 +43,7 @@ public class Spawner : MonoBehaviour
         dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
         dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
         dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;
-        spawnEnemies(100);
+        spawnEnemies(50);
 
 
     }
