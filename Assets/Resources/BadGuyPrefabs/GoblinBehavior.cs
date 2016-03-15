@@ -16,18 +16,19 @@ public class GoblinBehavior : MonoBehaviour {
 	private Rigidbody rb;
 	private GameObject[] arrayOfTrees;
 	private bool canWalk = true;
-	public GameController controller;
+	private GameObject controller;
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
+		controller = GameObject.FindGameObjectWithTag ("controller");
 		StartCoroutine (GetTreePositions ());
 		StartCoroutine (FindNewPosition ());
 	}
 
 	IEnumerator GetTreePositions(){
 		yield return new WaitForSeconds (3);
-		arrayOfTrees = controller.GetTreeMarkers ();
-		Debug.Log ("THIS IS IT" + arrayOfTrees.Length);
+		arrayOfTrees = controller.GetComponent<GameController> ().GetTreeMarkers ();
+
 		FindClosetTree ();
 	}
 
@@ -36,6 +37,7 @@ public class GoblinBehavior : MonoBehaviour {
 		while (true) {
 			yield return new WaitForSeconds (timeToChangeBetweenTrees);
 			FindClosetTree ();
+			Debug.Log ("IM BEING CALLED");
 		}
 	}
 
@@ -47,6 +49,7 @@ public class GoblinBehavior : MonoBehaviour {
 				closetTree = Vector3.Distance (transform.position, tree.transform.position);
 				targetTreeDirection = tree.transform.position;
 
+
 				if (Vector3.Distance (transform.position, tree.transform.position) < minDistance) {
 					return;
 				}
@@ -56,24 +59,26 @@ public class GoblinBehavior : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
 
 	void FixedUpdate(){
 
+
+
 		if (Vector3.Distance (transform.position, targetTreeDirection) < distanceFromTreeToStop) { //stops character when he is very close to tree
-			rb.velocity = Vector3.zero;
+			rb.velocity = rb.velocity.normalized * 0;
 			canWalk = false;
 		}
 
 		if (Vector3.Distance (transform.position, targetTreeDirection) < distanceFromTreeToSlowDown && canWalk) { //slows down characetr once he is getting close to target tree
-			rb.AddForce (-targetTreeDirection * acceleration, ForceMode.VelocityChange);
+			
 		}
 
 		if (rb.velocity.magnitude < maxSpeed && canWalk) { 
-			rb.AddForce (targetTreeDirection * acceleration, ForceMode.VelocityChange);
-
+			
+			rb.velocity += rb.velocity + new Vector3 (targetTreeDirection.x, transform.position.y, targetTreeDirection.z);
 		}
 
 		if (rb.velocity.magnitude > maxSpeed && canWalk) {

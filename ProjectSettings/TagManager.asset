@@ -15,6 +15,7 @@ TagManager:
   - TerrainEngine
   - Spawner
   - Tree
+  - controller
   layers:
   - Default
   - TransparentFX

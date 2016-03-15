@@ -29,16 +29,11 @@ public class GameController : MonoBehaviour {
 		//the empty game object for the tree marker is tagged with tree we get an array of all the gameobjects to be used for pathfinding
 		treeGameObjects = GameObject.FindGameObjectsWithTag ("Tree");
 
-		foreach (GameObject t in treeGameObjects) {
-			Debug.Log ("Position is" + t.transform.position);
-		}
-
 	}
 
 
 
 	public GameObject[] GetTreeMarkers(){
-
 
 		return treeGameObjects;
 	}
