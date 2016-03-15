@@ -4347,16 +4347,17 @@ MonoBehaviour:
   walkAnimation: {fileID: 7400004, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
   runAnimation: {fileID: 7400006, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
   jumpPoseAnimation: {fileID: 7400008, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+  sensitivityX: 1.7
   walkMaxAnimationSpeed: 0.75
   trotMaxAnimationSpeed: 1
   runMaxAnimationSpeed: 1
   jumpAnimationSpeed: 1.15
   landAnimationSpeed: 1
-  walkSpeed: 2
+  walkSpeed: 5
   trotSpeed: 4
-  runSpeed: 6
+  runSpeed: 15
   inAirControlAcceleration: 3
-  jumpHeight: 0.5
+  jumpHeight: 20
   gravity: 20
   speedSmoothing: 10
   rotateSpeed: 500
@@ -4783,13 +4784,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1
+  m_Radius: 0.1
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!198 &19887130
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -6399,7 +6400,7 @@ Prefab:
       objectReference: {fileID: 448574}
     - target: {fileID: 0}
       propertyPath: walkSpeed
-      value: 12.46
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: gravity
@@ -6445,6 +6446,14 @@ Prefab:
       propertyPath: controller
       value: 
       objectReference: {fileID: 14325746}
+    - target: {fileID: 0}
+      propertyPath: jumpHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: runSpeed
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157372}
