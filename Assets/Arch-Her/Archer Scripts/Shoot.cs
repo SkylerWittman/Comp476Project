@@ -82,12 +82,19 @@ public class Shoot : MonoBehaviour {
                 var rotationVec = bow.rotation.eulerAngles;
 
                 rotationVec.y += 178;
-                if (mouseCounter > 20)
+                if (mouseCounter > 13)
                 {
-                    Ray ray2 = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x+90, Input.mousePosition.y+90, 150));
+                    //Ray ray2 = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 150));
                     GameObject shootArrow = Instantiate(arrow, bow.position, Quaternion.Euler(rotationVec)) as GameObject;
-                    var newDir = Vector3.RotateTowards(shootArrow.transform.forward, ray2.direction, 5, 5);
-                    shootArrow.transform.rotation = Quaternion.LookRotation(newDir);
+
+                    //var newDir = Vector3.RotateTowards(shootArrow.transform.position, ray2.direction,0, 0);
+                    //Vector3 newDir = new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z);
+                    Vector3 newDir = new Vector3(0, 90, 0);
+                    Debug.Log("mouse x pos: " + Input.mousePosition.x + " mouse y pos: " + Input.mousePosition.y);
+                    Debug.Log("bow x pos: " + bow.transform.position.x + " bow y pos: " + bow.transform.position.y);
+
+                    Vector3 aimDirection = shootArrow.transform.position + newDir;
+                    shootArrow.transform.rotation = Quaternion.LookRotation(aimDirection);
                     runForce(shootArrow);
                     //shootArrow.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, 0, -2f);
                     Debug.Log("Arrow Speed: " + arrowSpeed);

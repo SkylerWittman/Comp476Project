@@ -936,6 +936,8 @@ GameObject:
   - 111: {fileID: 11182070}
   - 114: {fileID: 11428578}
   - 114: {fileID: 11494806}
+  - 143: {fileID: 14325746}
+  - 114: {fileID: 11409022}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -1301,7 +1303,7 @@ GameObject:
   - 92: {fileID: 9269646}
   - 124: {fileID: 12474398}
   - 81: {fileID: 8173392}
-  - 114: {fileID: 11494004}
+  - 114: {fileID: 11473554}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4330,6 +4332,38 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!114 &11409022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5ac211a643e447ca78c2d794a16381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAnimation: {fileID: 7400000, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+  walkAnimation: {fileID: 7400004, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+  runAnimation: {fileID: 7400006, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+  jumpPoseAnimation: {fileID: 7400008, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+  sensitivityX: 1.7
+  walkMaxAnimationSpeed: 0.75
+  trotMaxAnimationSpeed: 1
+  runMaxAnimationSpeed: 1
+  jumpAnimationSpeed: 1.15
+  landAnimationSpeed: 1
+  walkSpeed: 5
+  trotSpeed: 4
+  runSpeed: 15
+  inAirControlAcceleration: 3
+  jumpHeight: 20
+  gravity: 20
+  speedSmoothing: 10
+  rotateSpeed: 500
+  trotAfterSeconds: 3
+  canJump: 1
+  controller: {fileID: 14325746}
 --- !u!114 &11428578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4345,8 +4379,8 @@ MonoBehaviour:
   attack: {fileID: 7400032, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
   hold: {fileID: 7400030, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
   isAttack: 0
-  mainCamera: {fileID: 0}
---- !u!114 &11494004
+  mainCamera: {fileID: 2057456}
+--- !u!114 &11473554
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -4354,15 +4388,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 174746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27acebc9ad1110f6d00074c88d76c639, type: 3}
+  m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 448740}
-  distance: 1
-  xSpeed: 250
-  ySpeed: 120
-  yMinLimit: -20
-  yMaxLimit: 80
+  axes: 0
+  sensitivityX: 0.2
+  sensitivityY: 2
+  minimumX: -30
+  maximumX: 45
+  minimumY: -20
+  maximumY: 15
 --- !u!114 &11494806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4739,6 +4774,23 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0062797517, y: 0.014613502, z: -0.018638909}
     m_Extent: {x: 0.060422197, y: 0.066509016, z: 0.057748973}
   m_DirtyAABB: 0
+--- !u!143 &14325746
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.1
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!198 &19887130
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -6305,6 +6357,102 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sensitivityX
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sensitivityY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: minimumX
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maximumX
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: minimumY
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maximumY
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 448574}
+    - target: {fileID: 0}
+      propertyPath: walkSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gravity
+      value: 18.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rotateSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 2057456}
+    - target: {fileID: 0}
+      propertyPath: idleAnimation
+      value: 
+      objectReference: {fileID: 7400000, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: walkAnimation
+      value: 
+      objectReference: {fileID: 7400004, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: runAnimation
+      value: 
+      objectReference: {fileID: 7400006, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: jumpPoseAnimation
+      value: 
+      objectReference: {fileID: 7400008, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: dacfe90b144ae4c4db83d39534b95982, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 0}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 14325746}
+    - target: {fileID: 0}
+      propertyPath: jumpHeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: runSpeed
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

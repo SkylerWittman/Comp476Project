@@ -7,7 +7,7 @@ public var walkAnimation : AnimationClip;
 public var runAnimation : AnimationClip;
 public var jumpPoseAnimation : AnimationClip;
 
-
+public var sensitivityX = 1.7;
 public var walkMaxAnimationSpeed : float = 0.75;
 public var trotMaxAnimationSpeed : float = 1.0;
 public var runMaxAnimationSpeed : float = 1.0;
@@ -90,6 +90,7 @@ private var lastGroundedTime = 0.0;
 
 
 private var isControllable = true;
+var controller : CharacterController;
 
 function Awake ()
 {
@@ -121,7 +122,7 @@ public var jumpPoseAnimation : AnimationClip;
 		_animation = null;
 		Debug.Log("No jump animation found and the character has canJump enabled. Turning off animations.");
 	}
-			
+    controller = GetComponent(CharacterController);
 }
 
 
@@ -164,7 +165,9 @@ function UpdateSmoothedMovementDirection ()
 
 		// We store speed and direction seperately,
 		// so that when the character stands still we still have a valid forward direction
-		// moveDirection is always normalized, and we only update it if there is user input.
+		
+	    // moveDirection is always normalized, and we only update it if there is user input.
+		/*
 		if (targetDirection != Vector3.zero)
 		{
 			// If we are really slow, just snap to the target direction
@@ -179,7 +182,7 @@ function UpdateSmoothedMovementDirection ()
 				
 				moveDirection = moveDirection.normalized;
 			}
-		}
+		}*/
 		
 		// Smooth the speed based on the current target direction
 		var curSmooth = speedSmoothing * Time.deltaTime;
@@ -224,7 +227,8 @@ function UpdateSmoothedMovementDirection ()
 			inAirVelocity += targetDirection.normalized * Time.deltaTime * inAirControlAcceleration;
 	}
 	
-
+     
+	moveDirection = Vector3(h, 0, v);
 		
 }
 
@@ -311,13 +315,16 @@ function Update() {
 	ApplyJumping ();
 	
 	// Calculate actual motion
-	var movement = moveDirection * moveSpeed + Vector3 (0, verticalSpeed, 0) + inAirVelocity;
+	//var movement = moveDirection * moveSpeed + Vector3 (0, verticalSpeed, 0) + inAirVelocity;
+	var movement = transform.TransformDirection(moveDirection) * moveSpeed + Vector3 (0, verticalSpeed, 0) + inAirVelocity;
+
 	movement *= Time.deltaTime;
-	
+	//controller.transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 	// Move the controller
-	var controller : CharacterController = GetComponent(CharacterController);
-	collisionFlags = controller.Move(movement);
 	
+	collisionFlags = controller.Move(movement);
+
+	controller.transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 	// ANIMATION sector
 	if(_animation) {
 		if(_characterState == CharacterState.Jumping) 
@@ -357,11 +364,13 @@ function Update() {
 	}
 	// ANIMATION sector
 	
-	// Set rotation to the move direction
+    // Set rotation to the move direction
+    /*
 	if (IsGrounded())
 	{
 		
-		transform.rotation = Quaternion.LookRotation(moveDirection);
+	    transform.rotation = Quaternion.LookRotation(moveDirection);
+	    //transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(moveDirection),Time.deltaTime*5);
 			
 	}	
 	else
@@ -372,7 +381,7 @@ function Update() {
 		{
 			transform.rotation = Quaternion.LookRotation(xzMove);
 		}
-	}	
+	}	*/
 	
 	// We are in jump mode but just became grounded
 	if (IsGrounded())
