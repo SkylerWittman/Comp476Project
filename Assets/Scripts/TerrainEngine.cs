@@ -4,6 +4,9 @@ using System.Collections;
 public class TerrainEngine : MonoBehaviour
 {
 
+
+
+
     //Terrain vars
     public static Terrain terrain;
     private const float terrainSize = 2000.0f;
@@ -39,10 +42,13 @@ public class TerrainEngine : MonoBehaviour
         trees[0] = Resources.Load("TreePrefabs/BroadLeafTree") as GameObject;
         trees[1] = Resources.Load("TreePrefabs/ConiferTree") as GameObject;
 
+
+
         for (int i = 0; i < numOfTreePrototypes; i++)
         {
             treePrototypes[i] = new TreePrototype();
             treePrototypes[i].prefab = trees[i];
+			treePrototypes [i].prefab.tag = "Tree";
         }
 
         //****************************//
@@ -102,6 +108,8 @@ public class TerrainEngine : MonoBehaviour
                 z = Random.value;
             }
 
+
+
             float height = terrain.terrainData.GetInterpolatedHeight(x, z);
 
             tr[i].position = new Vector3(x, (height / 1550.0f), z);
@@ -120,7 +128,10 @@ public class TerrainEngine : MonoBehaviour
             }
             tr[i].widthScale = Random.Range(8f, 9f);
             tr[i].heightScale = Random.Range(7f, 9f);
+
+
         }
+
 
         terrain.terrainData.treeInstances = tr;
         terrain.treeDistance = 400.0f;
@@ -132,4 +143,7 @@ public class TerrainEngine : MonoBehaviour
         terrain.GetComponent<TerrainCollider>().enabled = false;
         terrain.GetComponent<TerrainCollider>().enabled = true;
     }
+
+
+
 }

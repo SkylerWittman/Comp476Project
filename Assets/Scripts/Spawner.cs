@@ -20,6 +20,7 @@ public class Spawner : MonoBehaviour
     private GameObject[] goblins;
     private GameObject[] dinos;
 
+
     void Start()
     {
         //Terrain initialization
@@ -42,8 +43,11 @@ public class Spawner : MonoBehaviour
         dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
         dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
         dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;
-        spawnEnemies(500);
+        spawnEnemies(100);
+
+
     }
+
 
     private void spawnPlayer()
     {
@@ -96,4 +100,5 @@ public class Spawner : MonoBehaviour
             }
         }
     }
+
 }
