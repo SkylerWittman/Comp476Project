@@ -34,7 +34,20 @@
 </table>
 
 <strong>Skyler:</strong>
-<table></table>
+<table>
+	<tr>
+	<td>HUD
+	</td>
+	<td>Gameplay (general for now)
+	<ul>
+	<li>Player health/damage
+	</li>
+	<li>In-game drops
+	</li>
+	</ul>
+	</td>
+	</tr>
+</table>
 
 <strong>Eric:</strong>
 <table>
