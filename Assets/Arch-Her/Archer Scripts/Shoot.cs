@@ -85,6 +85,8 @@ public class Shoot : MonoBehaviour {
                 if (mouseCounter > 13)
                 {
                     //Ray ray2 = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 150));
+                   
+                    //GameObject shootArrow = Instantiate(arrow, bow.position, Quaternion.Euler(rotationVec)) as GameObject;
                     GameObject shootArrow = Instantiate(arrow, bow.position, Quaternion.Euler(rotationVec)) as GameObject;
 
                     //var newDir = Vector3.RotateTowards(shootArrow.transform.position, ray2.direction,0, 0);
