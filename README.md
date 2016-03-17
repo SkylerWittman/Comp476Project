@@ -40,10 +40,14 @@
 <table>
 <tr>
 <td>Reducing the size of the terrain</td>
-<td></td>
+<td>Done - let me know if it's better</td>
 </tr>
 <tr>
-<td>Working on AI</td>
-<td>Zombie logics</td>
+<td>Underwater effect</td>
+<td>Done - let me know what you think</td>
+</tr>
+<tr>
+<td>Working on AI - zombie logic</td>
+<td></td>
 </tr>
 </table>
