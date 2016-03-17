@@ -9,9 +9,10 @@ public class TerrainEngine : MonoBehaviour
 
     //Terrain vars
     public static Terrain terrain;
-    private const float terrainSize = 2000.0f;
-    private const float terrainHeight = 1500.0f;
-    public static bool[,] terrainGrid = new bool[1000, 1000]; //Each index will indicate a 2x2 grid on the terrain, and will evaluate to true if occupied
+    public const float terrainSize = 1000.0f;
+    public float terrainHeight = 1500.0f;
+    public const int gridSize = (int)(terrainSize / 2);
+    public static bool[,] terrainGrid = new bool[gridSize, gridSize]; //Each index will indicate a 2x2 grid on the terrain, and will evaluate to true if occupied
     public static float waterLevel = 75.0f;  
 
     //Tree vars
@@ -76,7 +77,7 @@ public class TerrainEngine : MonoBehaviour
         TerrainData terrainData = new TerrainData();
         terrainData.heightmapResolution = 5;
         terrainData.alphamapResolution = 3;
-        terrainData.size = new Vector3(2000.0f, 1500.0f, 2000.0f);
+        terrainData.size = new Vector3(terrainSize, terrainHeight, terrainSize);
         terrain = Terrain.CreateTerrainGameObject(terrainData).GetComponent<Terrain>();
         terrain.transform.parent = gameObject.transform;
         terrain.transform.position = new Vector3(0.0f, -75.0f, 0.0f);
@@ -102,7 +103,7 @@ public class TerrainEngine : MonoBehaviour
             float z = Random.value;
 
             //While the starting x and z values within the grid are occupied and/or under the water level, get new values
-            while (terrainGrid[(int)(x*1000.0f), (int)(z*1000.0f)] == true || terrain.SampleHeight(new Vector3(x * 2000.0f, 0.0f, z * 2000.0f)) <= waterLevel)
+            while (terrainGrid[(int)(x*gridSize), (int)(z*gridSize)] == true || terrain.SampleHeight(new Vector3(x * terrainSize, 0.0f, z * terrainSize)) <= waterLevel)
             {
                 x = Random.value;
                 z = Random.value;
@@ -113,7 +114,7 @@ public class TerrainEngine : MonoBehaviour
             float height = terrain.terrainData.GetInterpolatedHeight(x, z);
 
             tr[i].position = new Vector3(x, (height / 1550.0f), z);
-            terrainGrid[(int)(x*1000.0f), (int)(z*1000.0f)] = true;
+            terrainGrid[(int)(x*gridSize), (int)(z*gridSize)] = true;
 
             //Broad leafs trees have a probability of 2/3 of occuring
             //Conifer trees have a probability of 1/3 of occuring
@@ -126,8 +127,8 @@ public class TerrainEngine : MonoBehaviour
             {
                 tr[i].prototypeIndex = 0;
             }
-            tr[i].widthScale = Random.Range(8f, 9f);
-            tr[i].heightScale = Random.Range(7f, 9f);
+            tr[i].widthScale = Random.Range(5f, 6f);
+            tr[i].heightScale = Random.Range(3f, 5f);
 
 
         }

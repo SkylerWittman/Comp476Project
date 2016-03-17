@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 
     //Terrain vars
     private Terrain terrain;
+    private float terrainSize;
     private bool[,] terrainGrid;
     private float waterLevel;
 
@@ -25,6 +26,7 @@ public class Spawner : MonoBehaviour
     {
         //Terrain initialization
         terrain = TerrainEngine.terrain;
+        terrainSize = TerrainEngine.terrainSize;
         terrainGrid = TerrainEngine.terrainGrid;
         waterLevel = TerrainEngine.waterLevel;
 
@@ -45,19 +47,18 @@ public class Spawner : MonoBehaviour
         dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;
         spawnEnemies(50);
 
-
     }
 
 
     private void spawnPlayer()
     {
-        float x = Random.Range(0.0f, 2000.0f);
-        float z = Random.Range(0.0f, 2000.0f);
+        float x = Random.Range(0.0f, terrainSize);
+        float z = Random.Range(0.0f, terrainSize);
 
         while (terrainGrid[(int)(x / 2.0f), (int)(z / 2.0f)] == true || terrain.SampleHeight(new Vector3(x, 0.0f, z)) <= waterLevel)
         {
-            x = Random.Range(0.0f, 2000.0f);
-            z = Random.Range(0.0f, 2000.0f);
+            x = Random.Range(0.0f, terrainSize);
+            z = Random.Range(0.0f, terrainSize);
         }
 
         Vector3 playerStartPosition = new Vector3(x, 10.0f, z);
@@ -68,13 +69,13 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            float x = Random.Range(0.0f, 2000.0f);
-            float z = Random.Range(0.0f, 2000.0f);
+            float x = Random.Range(0.0f, terrainSize);
+            float z = Random.Range(0.0f, terrainSize);
 
             while (terrainGrid[(int)(x / 2.0f), (int)(z / 2.0f)] == true || terrain.SampleHeight(new Vector3(x, 0.0f, z)) <= waterLevel)
             {
-                x = Random.Range(0.0f, 2000.0f);
-                z = Random.Range(0.0f, 2000.0f);
+                x = Random.Range(0.0f, terrainSize);
+                z = Random.Range(0.0f, terrainSize);
             }
             
             Vector3 spawnPosition = new Vector3(x, 10.0f, z);
