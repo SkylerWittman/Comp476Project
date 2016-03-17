@@ -48,6 +48,6 @@
 </tr>
 <tr>
 <td>Working on AI - zombie logic</td>
-<td></td>
+<td>Primitive framework complete</td>
 </tr>
 </table>
