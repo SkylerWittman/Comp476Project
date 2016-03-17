@@ -36,19 +36,19 @@
 <strong>Skyler:</strong>
 <table>
 	<tr>
-	<td>HUD
-	</td>
-	<td></td>
+		<td>HUD
+		</td>
+		<td></td>
 	</tr>
 	<tr>
-	<td>Gameplay (general for now)
-	<ul>
-	<li>Player health/damage
-	</li>
-	<li>In-game drops
-	</li>
-	</ul>
-	</td>
+		<td>Gameplay (general for now)
+			<ul>
+				<li>Player health/damage
+				</li>
+				<li>In-game drops
+				</li>
+			</ul>
+		</td>
 	</tr>
 </table>
 
