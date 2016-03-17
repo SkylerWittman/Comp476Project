@@ -38,6 +38,9 @@
 	<tr>
 	<td>HUD
 	</td>
+	<td></td>
+	</tr>
+	<tr>
 	<td>Gameplay (general for now)
 	<ul>
 	<li>Player health/damage
