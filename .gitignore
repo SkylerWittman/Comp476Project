@@ -68,7 +68,6 @@ ExportedObj/
 *.booproj
 *.svd
 
-
 # Unity3D generated meta files
 *.pidb.meta
 
@@ -78,5 +77,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Random files from our project
 Assets/Classic Skybox/01/Thumbs.db.meta
 Assets/Standard Assets/Environment/Water/Water/Materials/WaterProDaytime.mat
+~$Tasks.docx
