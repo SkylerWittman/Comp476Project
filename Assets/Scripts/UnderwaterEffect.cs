@@ -19,7 +19,6 @@ public class UnderwaterEffect : MonoBehaviour {
     void checkIfUnderwater()
     {
         if((playerPosition.position.y < waterLevel) != currentlyUnderwater) {
-            Debug.Log(playerPosition.position.y);
             currentlyUnderwater = playerPosition.position.y < waterLevel;
             if (currentlyUnderwater) { setInWater(); }
             if (!currentlyUnderwater) { setOutOfWater(); }
