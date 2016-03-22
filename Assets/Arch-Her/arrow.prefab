@@ -8,13 +8,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 431174}
-  - 33: {fileID: 3391824}
-  - 23: {fileID: 2373474}
-  - 54: {fileID: 5409344}
-  - 65: {fileID: 6526664}
-  - 199: {fileID: 19945812}
-  - 198: {fileID: 19834658}
-  - 114: {fileID: 11487336}
+  - 33: {fileID: 3380828}
+  - 23: {fileID: 2342768}
+  - 54: {fileID: 5490276}
+  - 65: {fileID: 6511690}
+  - 199: {fileID: 19945568}
+  - 198: {fileID: 19896884}
+  - 114: {fileID: 11477952}
   m_Layer: 0
   m_Name: arrow
   m_TagString: Untagged
@@ -55,14 +55,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137712}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
   m_LocalPosition: {x: -18.418, y: 3.037, z: 1.363}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 404138}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2373474
+--- !u!23 &2342768
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -88,14 +88,14 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3391824
+--- !u!33 &3380828
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137712}
   m_Mesh: {fileID: 4300016, guid: 595e2f30b7e5e484b8aa4e1ed60ad12b, type: 3}
---- !u!54 &5409344
+--- !u!54 &5490276
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -110,7 +110,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6526664
+--- !u!65 &6511690
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,7 +122,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 94.70314, y: 3.5360358, z: 3.570456}
   m_Center: {x: -26.299341, y: 0.0021917135, z: -6.534151e-11}
---- !u!114 &11487336
+--- !u!114 &11477952
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   archer: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
---- !u!198 &19834658
+--- !u!198 &19896884
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1634,7 +1634,7 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
---- !u!199 &19945812
+--- !u!199 &19945568
 ParticleSystemRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

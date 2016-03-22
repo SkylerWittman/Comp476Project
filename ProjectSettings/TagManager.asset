@@ -16,6 +16,7 @@ TagManager:
   - Spawner
   - Tree
   - controller
+  - node
   layers:
   - Default
   - TransparentFX

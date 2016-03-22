@@ -535,9 +535,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 402528}
   - 111: {fileID: 11135904}
-  - 135: {fileID: 13524678}
   - 54: {fileID: 5440228}
   - 114: {fileID: 11481190}
+  - 114: {fileID: 11415358}
+  - 136: {fileID: 13668170}
   m_Layer: 0
   m_Name: GoblinBlue
   m_TagString: Untagged
@@ -700,7 +701,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -403.2663, y: 295.67514, z: 4174.2036}
+  m_LocalPosition: {x: 298.70587, y: 7.117667, z: -6.535054}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 471780}
@@ -1307,13 +1308,24 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11481190
+--- !u!114 &11415358
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179904}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2f2a64aef2bb844a2d673edbc54e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11481190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179904}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc70a01e75ea74545a3cee545d23128e, type: 3}
   m_Name: 
@@ -1324,8 +1336,10 @@ MonoBehaviour:
   distanceFromTreeToStop: 3
   distanceFromTreeToSlowDown: 8
   timeToChangeBetweenTrees: 6
---- !u!135 &13524678
-SphereCollider:
+  findPath: {fileID: 11415358}
+  maxNodeDistance: 60
+--- !u!136 &13668170
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1333,9 +1347,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 10
-  m_Center: {x: 0, y: 8, z: -0.9709571}
+  m_Radius: 3
+  m_Height: 15.28
+  m_Direction: 1
+  m_Center: {x: 0, y: 7.8, z: 0}
 --- !u!137 &13706540
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1431,6 +1446,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Radius
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: findPath
+      value: 
+      objectReference: {fileID: 11415358}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -117,6 +117,8 @@ GameObject:
   - 54: {fileID: 5410308}
   - 136: {fileID: 13654302}
   - 114: {fileID: 11485522}
+  - 135: {fileID: 13548712}
+  - 65: {fileID: 6595528}
   m_Layer: 0
   m_Name: DinoGreen
   m_TagString: Untagged
@@ -1213,7 +1215,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110760}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -1020.8723, y: 1495.3992, z: 2656.1091}
+  m_LocalPosition: {x: 332.69662, y: 115.960304, z: 411.7906}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 408318}
@@ -1251,6 +1253,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &6595528
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110760}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 2.35, z: -1.02}
 --- !u!111 &11141558
 Animation:
   m_ObjectHideFlags: 1
@@ -1291,10 +1305,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 4
-  maxSpeed: 8
+  maxSpeed: 7
   directionChangeTime: 3
   rotateTime: 1.5
   maxDirectionChange: 60
+--- !u!135 &13548712
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110760}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 1.95, z: -0.41}
 --- !u!136 &13654302
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1304,10 +1330,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2
+  m_Radius: 1
   m_Height: 1
   m_Direction: 2
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Center: {x: 0, y: 1, z: 0.42}
 --- !u!137 &13779048
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1413,6 +1439,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 2189b43d85a06b64f8f03357c617705c, type: 3}
+    - target: {fileID: 0}
+      propertyPath: maxSpeed
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

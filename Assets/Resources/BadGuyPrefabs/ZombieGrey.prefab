@@ -596,8 +596,8 @@ GameObject:
   - 4: {fileID: 433590}
   - 95: {fileID: 9595560}
   - 54: {fileID: 5461098}
-  - 65: {fileID: 6571334}
   - 114: {fileID: 11405520}
+  - 136: {fileID: 13689602}
   m_Layer: 0
   m_Name: ZombieGrey
   m_TagString: Untagged
@@ -916,7 +916,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8332839, y: -1.5819106, z: 0.37618685}
+  m_LocalPosition: {x: 348.04993, y: 6.000657, z: 89.72386}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 461778}
@@ -1297,18 +1297,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &6571334
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194368}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 1, z: 0.5}
-  m_Center: {x: 0, y: 0.5, z: 0.2}
 --- !u!95 &9595560
 Animator:
   serializedVersion: 3
@@ -1342,6 +1330,19 @@ MonoBehaviour:
   directionChangeTime: 3
   rotateTime: 1.5
   maxDirectionChange: 60
+--- !u!136 &13689602
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194368}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 1.59
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.79, z: 0.23}
 --- !u!137 &13709042
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

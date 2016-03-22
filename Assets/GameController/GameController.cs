@@ -10,15 +10,13 @@ public class GameController : MonoBehaviour {
 	private Vector3 tempPosition;
 
 	void Start () {
-
-		Debug.Log ("Creating");
-		StartCoroutine (runTree ());
+		runTreeMapper ();
 	}
 
 
-	IEnumerator runTree(){ //this method is called after 2 seconds (once all trees have been painted onto terrain) it then goes through each tree and finds the correct position
-		//of the tree by scaling the position to the size and orgin of the terrain, and empty game object is then instaniated at that position to be used as a marker for the tree
-		yield return new WaitForSeconds (2);
+	 //this method  goes through each tree and finds the correct position
+	//of the tree by scaling the position to the size and orgin of the terrain, and empty game object is then instaniated at that position to be used as a marker for the tree
+	void runTreeMapper(){
 		arrayOfTrees = Terrain.activeTerrain.terrainData.treeInstances;
 
 		foreach (TreeInstance tree in arrayOfTrees) {
@@ -27,19 +25,13 @@ public class GameController : MonoBehaviour {
 		}
 
 		//the empty game object for the tree marker is tagged with tree we get an array of all the gameobjects to be used for pathfinding
-		treeGameObjects = GameObject.FindGameObjectsWithTag ("Tree");
-
+		//treeGameObjects = GameObject.FindGameObjectsWithTag ("Tree");
+		GetComponent<NodeCreation> ().CreateNodeSystem (); //this method creates Node objects wit hpositions that correlate to each tree marker, these nodes are used for pathfinding
 	}
 
-
-
 	public GameObject[] GetTreeMarkers(){
-
 		return treeGameObjects;
 	}
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class GoblinBehavior : MonoBehaviour {
 
 
@@ -10,53 +10,73 @@ public class GoblinBehavior : MonoBehaviour {
 	public int distanceFromTreeToStop = 3;
 	public int distanceFromTreeToSlowDown = 8;
 	public float timeToChangeBetweenTrees = 10;
+	public AStarPathFinding findPath;
+	public float maxNodeDistance = 300;
 
-
-	private Vector3 targetTreeDirection;
+	private Node startNode;
+	private Node targetNode;
 	private Rigidbody rb;
-	private GameObject[] arrayOfTrees;
+	private List<Node> nodeList = new List<Node>();
+	private List<Node> pathToTraverse = new List<Node>();
+	private List<Node> nearList = new List<Node>();
 	private bool canWalk = true;
 	private GameObject controller;
+	private bool finishedPath;
+	private int pathCount;
+	private Vector3 pathDirection;
+	private Vector3 steering;
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		controller = GameObject.FindGameObjectWithTag ("controller");
-		StartCoroutine (GetTreePositions ());
-		StartCoroutine (FindNewPosition ());
+		StartCoroutine (GetNodeList ());
+
 	}
 
-	IEnumerator GetTreePositions(){
+	IEnumerator GetNodeList(){
 		yield return new WaitForSeconds (3);
-		arrayOfTrees = controller.GetComponent<GameController> ().GetTreeMarkers ();
-
-		FindClosetTree ();
+		nodeList = controller.GetComponent<NodeCreation> ().allNodeObjects;
+		FindNewPosition ();
 	}
 
 
-	IEnumerator FindNewPosition(){
-		while (true) {
-			yield return new WaitForSeconds (timeToChangeBetweenTrees);
-			FindClosetTree ();
-			Debug.Log ("IM BEING CALLED");
-		}
+	void FindNewPosition(){
+			pathCount = 0;
+			FindClosestNode ();
+			FindTargetNode ();
+			pathToTraverse = findPath.FindPathEuclidean (startNode, targetNode);
+			finishedPath = false;
+
 	}
 
-	void FindClosetTree(){ //this method looks through all of the trees on the map and find the closest one to the character and sets that has his target direction
-		float closetTree = 1000;
+	void FindClosestNode(){ //this method looks through all of the trees on the map and find the closest one to the character and sets that has his target direction
+		float closetTree = 100;
 
-		foreach (GameObject tree in arrayOfTrees) {
-			if (Vector3.Distance(transform.position,tree.transform.position) < closetTree) {
-				closetTree = Vector3.Distance (transform.position, tree.transform.position);
-				targetTreeDirection = tree.transform.position;
+		foreach (Node n in nodeList) {
+			if (Vector3.Distance(transform.position,n.getPosition()) < closetTree) {
+				closetTree = Vector3.Distance (transform.position, n.getPosition());
+				startNode = n;
 
-
-				if (Vector3.Distance (transform.position, tree.transform.position) < minDistance) {
-					return;
-				}
 			}
 		}
+		Debug.Log ("closet node is: " + startNode.getPosition ());
 	}
 		
+	void FindTargetNode(){ //this method looks through all of the trees on the map and find the closest one to the character and sets that has his target directio
+
+
+		foreach (Node n in nodeList) {
+			if (Vector3.Distance (transform.position, n.getPosition ()) < maxNodeDistance && Vector3.Distance (transform.position, n.getPosition ()) > 50 ) {
+				targetNode = n;
+				Debug.Log ("target node is: " + targetNode.getPosition ());
+				return;
+			}
+				
+		}
+	}
+
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -65,27 +85,23 @@ public class GoblinBehavior : MonoBehaviour {
 
 	void FixedUpdate(){
 
+		Debug.Log ("length" + pathToTraverse.Count);
 
-
-		if (Vector3.Distance (transform.position, targetTreeDirection) < distanceFromTreeToStop) { //stops character when he is very close to tree
-			rb.velocity = rb.velocity.normalized * 0;
-			canWalk = false;
+		if (finishedPath == false) {
+			pathDirection = (pathToTraverse [pathCount].getPosition () - transform.position).normalized;
+			steering = (pathDirection - rb.velocity) * 3;
+			rb.velocity += (pathDirection + steering);
+			//transform.rotation = Quaternion.RotateTowards (transform.rotation, Quaternion.LookRotation (pathDirection), 5);
 		}
 
-		if (Vector3.Distance (transform.position, targetTreeDirection) < distanceFromTreeToSlowDown && canWalk) { //slows down characetr once he is getting close to target tree
-			
+		if (Vector3.Distance (transform.position, pathToTraverse [pathCount].getPosition()) < distanceFromTreeToStop) {
+			pathCount += 1;
 		}
 
-		if (rb.velocity.magnitude < maxSpeed && canWalk) { 
-			
-			rb.velocity += rb.velocity + new Vector3 (targetTreeDirection.x, transform.position.y, targetTreeDirection.z);
+		if (pathCount >= pathToTraverse.Count) {
+			finishedPath = true;
+			FindNewPosition ();
 		}
-
-		if (rb.velocity.magnitude > maxSpeed && canWalk) {
-			rb.velocity = rb.velocity.normalized * maxSpeed;
-		}
-
-			
 	}
 
 }
