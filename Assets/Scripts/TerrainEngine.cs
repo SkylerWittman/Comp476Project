@@ -28,7 +28,7 @@ public class TerrainEngine : MonoBehaviour
     private const float terrainTile0 = 25.0f;
     private const float terrainTile1 = 30.0f;
 
-    void Start()
+    void Awake()
     {
         //Grid initialization
         for (int x = 0; x < terrainGrid.GetLength(0); x++)

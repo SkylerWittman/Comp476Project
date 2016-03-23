@@ -16,6 +16,9 @@ TagManager:
   - Spawner
   - Tree
   - controller
+  - Timer
+  - BadGuy
+  - WaveCount
   layers:
   - Default
   - TransparentFX

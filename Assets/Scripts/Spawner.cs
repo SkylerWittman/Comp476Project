@@ -3,103 +3,55 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
+    //WaveEngine vars
+    private WaveEngine waveEngine;
 
-    //Terrain vars
-    private Terrain terrain;
-    private float terrainSize;
-    private bool[,] terrainGrid;
-    private float waterLevel;
+    //Wave vars
+    private int currentWaveCount = -1;
 
-    //Player vars
-    private GameObject player;
+    //WaveCountText vars
+    private TextMesh waveCountText;
 
-    //Enemy vars
-    private const int numOfZombies = 1;
-    private const int numOfGoblins = 3;
-    private const int numOfDinos = 3;
-    private GameObject[] zombies;
-    private GameObject[] goblins;
-    private GameObject[] dinos;
+    //Timer vars
+    private Timer timer;
 
 
     void Start()
     {
-        //Terrain initialization
-        terrain = TerrainEngine.terrain;
-        terrainSize = TerrainEngine.terrainSize;
-        terrainGrid = TerrainEngine.terrainGrid;
-        waterLevel = TerrainEngine.waterLevel;
-
-        //Player initialization
-        player = Resources.Load("PlayerPrefabs/Player") as GameObject;
-        //spawnPlayer();
-
-        //Enemy initialization
-        zombies = new GameObject[numOfZombies];
-        goblins = new GameObject[numOfGoblins];
-        dinos = new GameObject[numOfDinos];
-        zombies[0] = Resources.Load("BadGuyPrefabs/ZombieGrey") as GameObject;
-        goblins[0] = Resources.Load("BadGuyPrefabs/GoblinGreen") as GameObject;
-        goblins[1] = Resources.Load("BadGuyPrefabs/GoblinBlue") as GameObject;
-        goblins[2] = Resources.Load("BadGuyPrefabs/GoblinRed") as GameObject;
-        dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
-        dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
-        dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;
-        spawnEnemies(50);
-
+        StartCoroutine(initialize());
     }
 
-
-    private void spawnPlayer()
+    //Spawns occur:
+    //Every 60 seconds and not at startTime, nor when the game ends
+    private void trySpawn()
     {
-        float x = Random.Range(0.0f, terrainSize);
-        float z = Random.Range(0.0f, terrainSize);
-
-        while (terrainGrid[(int)(x / 2.0f), (int)(z / 2.0f)] == true || terrain.SampleHeight(new Vector3(x, 0.0f, z)) <= waterLevel)
+        if (timer.getCurrentTime() % 60 == 0 && timer.getCurrentTime() != 600 && timer.getCurrentTime() != 0)
         {
-            x = Random.Range(0.0f, terrainSize);
-            z = Random.Range(0.0f, terrainSize);
-        }
-
-        Vector3 playerStartPosition = new Vector3(x, 10.0f, z);
-        Instantiate(player, playerStartPosition, Quaternion.identity);
-    }
-
-    private void spawnEnemies(int amount)
-    {
-        for (int i = 0; i < amount; i++)
-        {
-            float x = Random.Range(0.0f, terrainSize);
-            float z = Random.Range(0.0f, terrainSize);
-
-            while (terrainGrid[(int)(x / 2.0f), (int)(z / 2.0f)] == true || terrain.SampleHeight(new Vector3(x, 0.0f, z)) <= waterLevel)
-            {
-                x = Random.Range(0.0f, terrainSize);
-                z = Random.Range(0.0f, terrainSize);
-            }
-            
-            Vector3 spawnPosition = new Vector3(x, 10.0f, z);
-
-            int typeOfEnemy = Random.Range(0, 3);
-            switch (typeOfEnemy)
-            {
-                case 0:
-                    int zombieColor = Random.Range(0, numOfZombies - 1);
-                    Instantiate(zombies[zombieColor], spawnPosition, Quaternion.identity);
-                    break;
-                case 1:
-                    int goblinColor = Random.Range(0, numOfGoblins);
-                    Instantiate(goblins[goblinColor], spawnPosition, Quaternion.identity);
-                    break;
-                case 2:
-                    int dinoColor = Random.Range(0, numOfDinos);
-                    Instantiate(dinos[dinoColor], spawnPosition, Quaternion.identity);
-                    break;
-                default:
-                    Debug.Log("???");
-                    break;
-            }
+            waveEngine.spawnBadGuys(new Wave(++currentWaveCount));
+            StartCoroutine(showWaveText());
         }
     }
 
+    private IEnumerator initialize()
+    {
+        yield return new WaitForSeconds(1.0f);
+        
+        waveEngine = GetComponent<WaveEngine>();
+        timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
+        waveCountText = GameObject.FindGameObjectWithTag("WaveCount").GetComponent<TextMesh>();
+
+        //This is our initial spawn of 50 bad guys
+        waveEngine.spawnBadGuys(new Wave(++currentWaveCount));
+
+        //Try every second to see if we can spawn bad guys
+        InvokeRepeating("trySpawn", 0.0f, 1.0f);
+    }
+
+    private IEnumerator showWaveText()
+    {
+        waveCountText.GetComponent<Renderer>().enabled = true;
+        waveCountText.text = "WAVE " + currentWaveCount;
+        yield return new WaitForSeconds(5.0f);
+        waveCountText.GetComponent<Renderer>().enabled = false;
+    }
 }
