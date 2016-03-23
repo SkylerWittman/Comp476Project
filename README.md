@@ -70,6 +70,14 @@
 	</tr>
 	<tr>
 		<td>Wave spawning logic</td>
+		<td>Done</td>
+	</tr>
+	<tr>
+		<td>Power up spawning logic</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Fade in effect for bad guy spawns</td>
 		<td></td>
 	</tr>
 	<tr>
