@@ -42,10 +42,9 @@ SpeedTreeImporter:
     enableBump: 1
     enableHue: 1
     windQuality: 1
-  enableSmoothLODTransition: 0
+  enableSmoothLODTransition: 1
   billboardTransitionCrossFadeWidth: .25
   fadeOutWidth: .25
   scaleFactor: .304800004
   userData: 
   assetBundleName: 
-  assetBundleVariant: 
