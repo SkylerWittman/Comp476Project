@@ -72,4 +72,8 @@
 		<td>Wave spawning logic</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>Colliders for zombies</td>
+		<td></td>
+	</tr>
 </table>
