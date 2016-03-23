@@ -89,7 +89,7 @@ public class Shoot : MonoBehaviour {
         arrowSpeed = timeHeld * 4;
         if(arrowSpeed < 120 )
         {
-            arrowSpeed = 120;// the cap for the arrow speed
+            arrowSpeed = 120;// the minimum for the arrow speed
         }
         if (isAttack == true)
         {
@@ -138,6 +138,7 @@ public class Shoot : MonoBehaviour {
     void runForce(GameObject arrow)//Method for physics
     {
         arrow.GetComponent<Rigidbody>().AddForce((arrow.transform.forward * 5 * arrowSpeed) , ForceMode.Impulse);
+        arrow.GetComponent<Arrow>().damage = arrowSpeed;
         //shootArrow.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, 0, -2f); 
     }
     IEnumerator shoot() // CoRoutine to play the animation

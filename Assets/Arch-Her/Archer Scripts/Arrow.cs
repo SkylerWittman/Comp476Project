@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Arrow : MonoBehaviour {
 
-    public int damage;
+    public float damage;
     int counter = 0;
     public ArcherDetail archer;
     bool lockA = true;
@@ -11,6 +11,7 @@ public class Arrow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         archer = GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>();
+
 
 	}
 	
@@ -26,15 +27,15 @@ public class Arrow : MonoBehaviour {
                 {
                     case ArcherDetail.arrowType.regular:
                         transform.tag = "RegularArrow";
-                        damage = 10;
+                        damage += 10;
                         break;
                     case ArcherDetail.arrowType.poison:
                         transform.tag = "PoisonArrow";
-                        damage = 12;
+                        damage += 12;
                         break;
                     case ArcherDetail.arrowType.explosive:
                         transform.tag = "ExplosiveArrow";
-                        damage = 15;
+                        damage += 15;
                         break;
 
                 }

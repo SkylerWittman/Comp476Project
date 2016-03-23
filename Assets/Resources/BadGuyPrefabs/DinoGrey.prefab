@@ -102,6 +102,7 @@ GameObject:
   - 54: {fileID: 5428434}
   - 136: {fileID: 13604436}
   - 114: {fileID: 11417928}
+  - 114: {fileID: 11434742}
   m_Layer: 0
   m_Name: DinoGrey
   m_TagString: BadGuy
@@ -1295,6 +1296,18 @@ MonoBehaviour:
   directionChangeTime: 3
   rotateTime: 1.5
   maxDirectionChange: 60
+--- !u!114 &11434742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2a090b7d7875d41b15edf7312a6ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!136 &13604436
 CapsuleCollider:
   m_ObjectHideFlags: 1
