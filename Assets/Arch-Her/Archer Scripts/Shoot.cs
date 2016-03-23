@@ -100,25 +100,8 @@ public class Shoot : MonoBehaviour {
                 playOnce = 0;
                 if (mouseCounter > 13)
                 {
-<<<<<<< HEAD
-                    //Ray ray2 = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 150));
-                   
-                    //GameObject shootArrow = Instantiate(arrow, bow.position, Quaternion.Euler(rotationVec)) as GameObject;
-                    GameObject shootArrow = Instantiate(arrow, bow.position, Quaternion.Euler(rotationVec)) as GameObject;
 
-                    //var newDir = Vector3.RotateTowards(shootArrow.transform.position, ray2.direction,0, 0);
-                    //Vector3 newDir = new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z);
-                    Vector3 newDir = new Vector3(0, 90, 0);
-                    Debug.Log("mouse x pos: " + Input.mousePosition.x + " mouse y pos: " + Input.mousePosition.y);
-                    Debug.Log("bow x pos: " + bow.transform.position.x + " bow y pos: " + bow.transform.position.y);
-
-                    Vector3 aimDirection = shootArrow.transform.position + newDir;
-                    shootArrow.transform.rotation = Quaternion.LookRotation(aimDirection);
-                    runForce(shootArrow);
-                    //shootArrow.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, 0, -2f);
-                    Debug.Log("Arrow Speed: " + arrowSpeed);
                     mouseCounter = 0;
-=======
                     Quaternion rot = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z); // gets rotation of center of screen
                     GameObject shootArrow = Instantiate(arrow, bow.position, mainCamera.transform.rotation) as GameObject;   // instantiates arrow
                     runForce(shootArrow); // applies physics to the arrow
@@ -130,7 +113,7 @@ public class Shoot : MonoBehaviour {
                     Vector3 moveUp = transform.forward;
                     mainCamera.transform.position -= moveUp;
                     lockCam = true;
->>>>>>> refs/remotes/origin/March-13-NavMesh
+
                 }
             }
             else if (Input.GetMouseButton(0))//Playing the "Hold" Animation
