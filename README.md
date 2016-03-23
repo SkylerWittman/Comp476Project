@@ -58,14 +58,18 @@
 <table>
 	<tr>
 		<td>Reducing the size of the terrain</td>
-		<td>Done - let me know if it's better</td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Underwater effect</td>
-		<td>Done - let me know what you think</td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Working on AI - zombie logic</td>
 		<td>Primitive framework complete</td>
+	</tr>
+	<tr>
+		<td>Wave spawning logic</td>
+		<td></td>
 	</tr>
 </table>
