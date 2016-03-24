@@ -47,18 +47,14 @@ public class WaveEngine : MonoBehaviour {
 
             Vector3 spawnPosition = new Vector3(XZ[0], 10.0f, XZ[1]);
 
-            int typeOfEnemy = Random.Range(0, 3);
+            int typeOfEnemy = Random.Range(0, 2);
             switch (typeOfEnemy)
             {
                 case 0:
-                    int zombieColor = Random.Range(0, numOfZombies - 1);
-                    Instantiate(zombies[zombieColor], spawnPosition, Quaternion.identity);
-                    break;
-                case 1:
                     int goblinColor = Random.Range(0, numOfGoblins);
                     Instantiate(goblins[goblinColor], spawnPosition, Quaternion.identity);
                     break;
-                case 2:
+                case 1:
                     int dinoColor = Random.Range(0, numOfDinos);
                     GameObject dinoInstance = Instantiate(dinos[dinoColor], spawnPosition, Quaternion.identity) as GameObject;
                     float randSize = Random.Range(1.5f, 6.5f);
