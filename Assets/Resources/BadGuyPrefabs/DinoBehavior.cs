@@ -117,7 +117,7 @@ public class DinoBehavior : MonoBehaviour {
         {
             Vector3 chaseDirection = player.position - transform.position;
             Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, acceleration);
+            transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);
             //transform.rotation = Quaternion.LookRotation(-chaseDirection);
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(chaseDirection), Time.deltaTime);
             if (rigidbody.velocity.magnitude < maxRunSpeed)
@@ -178,4 +178,6 @@ public class DinoBehavior : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
         canAttack = true;
     }
+
+    
 }

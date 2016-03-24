@@ -36,6 +36,22 @@ public class WaveEngine : MonoBehaviour {
         dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
         dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
         dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;
+
+        int numTrue = 0;
+        int numFalse = 0;
+        for (int i = 0; i < terrainGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < terrainGrid.GetLength(1); j++)
+            {
+                if (terrainGrid[i, j] == true)
+                {
+                    numTrue++;
+                }
+                else { numFalse++; }
+            }
+        }
+        Debug.Log("num true: " + numTrue);
+        Debug.Log("num false: " + numFalse);
     }
 
     public void spawnBadGuys(Wave wave)
@@ -60,6 +76,7 @@ public class WaveEngine : MonoBehaviour {
                     float randSize = Random.Range(1.5f, 6.5f);
                     dinoInstance.transform.localScale = new Vector3(randSize, randSize, randSize);
                     dinoInstance.GetComponent<DinoBehavior>().maxSpeed = 11.0f - randSize;
+                    dinoInstance.GetComponent<DinoBehavior>().maxRunSpeed = 16.0f - randSize;
                     dinoInstance.GetComponent<NPCDetail>().health = 50.0f * randSize;
                     dinoInstance.GetComponent<NPCDetail>().damage = 20 * randSize;
                     break;

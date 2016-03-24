@@ -140,6 +140,15 @@ public class TerrainEngine : MonoBehaviour
         terrain.treeCrossFadeLength = 20.0f;
         terrain.treeMaximumFullLODCount = 20;
 
+        //Setup positions in the terrain grid where the terrain is below water level
+        for (int x = 0; x < terrainGrid.GetLength(0); x++)
+        {
+            for (int z = 0; z < terrainGrid.GetLength(1); z++)
+            {
+                terrainGrid[x,z] = terrain.SampleHeight(new Vector3(x, 0.0f, z)) <= waterLevel;
+            }
+        }
+
         //This appears to be some sort of hack to get the colliders of the trees to work
         terrain.GetComponent<TerrainCollider>().enabled = false;
         terrain.GetComponent<TerrainCollider>().enabled = true;

@@ -115,7 +115,6 @@ GameObject:
   - 4: {fileID: 496720}
   - 111: {fileID: 11141558}
   - 54: {fileID: 5410308}
-  - 136: {fileID: 13654302}
   - 114: {fileID: 11485522}
   - 114: {fileID: 11489974}
   m_Layer: 0
@@ -1340,19 +1339,6 @@ MonoBehaviour:
   die: {fileID: 7400000, guid: 92cf7fb090ba49a418f829d521feb727, type: 2}
   health: 100
   damage: 20
---- !u!136 &13654302
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 110760}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.43518025
-  m_Height: 3
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!136 &13672668
 CapsuleCollider:
   m_ObjectHideFlags: 1
