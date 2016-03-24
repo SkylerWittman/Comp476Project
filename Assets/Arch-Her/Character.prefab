@@ -938,6 +938,7 @@ GameObject:
   - 114: {fileID: 11494806}
   - 143: {fileID: 14325746}
   - 114: {fileID: 11409022}
+  - 82: {fileID: 8220354}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -4264,6 +4265,80 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174746}
   m_Enabled: 1
+--- !u!82 &8220354
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157372}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fc0af733ce54448439483f281b496b83, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!92 &9269646
 Behaviour:
   m_ObjectHideFlags: 1
@@ -4353,6 +4428,7 @@ MonoBehaviour:
   runMaxAnimationSpeed: 1
   jumpAnimationSpeed: 1.15
   landAnimationSpeed: 1
+  audioSrc: {fileID: 0}
   walkSpeed: 5
   trotSpeed: 4
   runSpeed: 15
@@ -4378,7 +4454,7 @@ MonoBehaviour:
   arrow: {fileID: 137712, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
   attack: {fileID: 7400032, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
   hold: {fileID: 7400030, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
-  isAttack: 0
+  arrowSpeed: 75
   mainCamera: {fileID: 2057456}
   crosshairTexture: {fileID: 2800000, guid: 8ae952a822ba31045bf8e1ddf38f2128, type: 3}
 --- !u!114 &11473554
@@ -4399,6 +4475,7 @@ MonoBehaviour:
   maximumX: 45
   minimumY: -20
   maximumY: 15
+  player: {fileID: 0}
 --- !u!114 &11494806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6459,6 +6536,18 @@ Prefab:
       propertyPath: crosshairTexture
       value: 
       objectReference: {fileID: 2800000, guid: 8ae952a822ba31045bf8e1ddf38f2128, type: 3}
+    - target: {fileID: 0}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fc0af733ce54448439483f281b496b83, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157372}

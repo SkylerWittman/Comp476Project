@@ -5,7 +5,8 @@ public class NPCDetail : MonoBehaviour {
     bool LockA = false;
     Animation anim;
     public AnimationClip die;
-    public float health = 100; 
+    public float health = 100;
+    public float damage = 20;
     int counter = 0;
     // Use this for initialization
     void Start()
