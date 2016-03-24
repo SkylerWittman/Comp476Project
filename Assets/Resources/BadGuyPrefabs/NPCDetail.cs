@@ -5,8 +5,8 @@ public class NPCDetail : MonoBehaviour {
     bool LockA = false;
     Animation anim;
     public AnimationClip die;
-    public float health = 100;
-    public float damage = 20;
+    public float health = 100.0f;
+    public float damage = 20.0f;
     int counter = 0;
     // Use this for initialization
     void Start()
@@ -23,7 +23,7 @@ public class NPCDetail : MonoBehaviour {
         {
             if (counter < 100)
             {
-                health -= 50;
+                health -= 50.0f;
                 ++counter;
             }
             else
@@ -33,7 +33,7 @@ public class NPCDetail : MonoBehaviour {
             }
         }
         Vector3 pos = transform.position;
-        if(health < 0)
+        if(health < 0.0f)
         {
             anim.Play(die.name);
             //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;

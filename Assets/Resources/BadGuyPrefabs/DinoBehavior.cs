@@ -3,11 +3,11 @@ using System.Collections;
 
 public class DinoBehavior : MonoBehaviour {
 
-	public float acceleration = 4;
-	public float maxSpeed = 10;
-	public float directionChangeTime = 3;
+	public float acceleration = 4.0f;
+	public float maxSpeed = 10.0f;
+	public float directionChangeTime = 3.0f;
 	public float rotateTime = 1.5f;
-	public float maxDirectionChange = 60;
+	public float maxDirectionChange = 60.0f;
 
 	private Rigidbody rb;
 	private Vector3 newDirection;

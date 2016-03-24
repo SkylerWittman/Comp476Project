@@ -12,7 +12,12 @@ public class GameController : MonoBehaviour {
 	void Start () {
 
 		Debug.Log ("Creating");
-		StartCoroutine (runTree ());
+        
+        //Comment this if you don't like how the cursor appears
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+		
+        StartCoroutine (runTree ());
 	}
 
 

@@ -1189,7 +1189,7 @@ Transform:
   m_GameObject: {fileID: 126990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 224.48962, y: -196.72699, z: 3060.0784}
-  m_LocalScale: {x: 3.7308164, y: 3.7308164, z: 3.7308164}
+  m_LocalScale: {x: 5.8867483, y: 5.8867483, z: 5.8867483}
   m_Children:
   - {fileID: 463392}
   - {fileID: 401204}
@@ -1292,7 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 4
-  maxSpeed: 10
+  maxSpeed: 20
   directionChangeTime: 3
   rotateTime: 1.5
   maxDirectionChange: 60
@@ -1308,8 +1308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   die: {fileID: 7400000, guid: 92cf7fb090ba49a418f829d521feb727, type: 2}
-  health: 8.175452e+31
-  damage: 1.6350904e+31
+  health: 100
+  damage: 20
 --- !u!136 &13662670
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1439,7 +1439,15 @@ Prefab:
       objectReference: {fileID: 7400000, guid: 92cf7fb090ba49a418f829d521feb727, type: 2}
     - target: {fileID: 0}
       propertyPath: maxSpeed
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damage
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
