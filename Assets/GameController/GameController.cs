@@ -8,14 +8,15 @@ public class GameController : MonoBehaviour {
 	private TreeInstance[] arrayOfTrees;
 	private GameObject[] treeGameObjects;
 	private Vector3 tempPosition;
+    public bool cursorVisible = true;
 
 	void Start () {
 
 		Debug.Log ("Creating");
         
         //Comment this if you don't like how the cursor appears
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = cursorVisible;
+       // Cursor.lockState = CursorLockMode.Locked;
 		
         StartCoroutine (runTree ());
 	}
