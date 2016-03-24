@@ -4,6 +4,14 @@
 <em>Second column in tables can be used for comments on task
 </em>
 
+<strong>Tasks up for grabs:</strong>
+<table>
+	<tr>
+		<td>Dinos and goblins should trigger a hit/damage animation when hit with an arrow</td>
+		<td></td>
+	</tr>
+</table>
+
 <strong>Derek:</strong>
 <table>
 	<tr>
@@ -65,7 +73,7 @@
 		<td>Done</td>
 	</tr>
 	<tr>
-		<td>Working on AI - zombie logic</td>
+		<td>Working on AI - dino logic</td>
 		<td>Primitive framework complete</td>
 	</tr>
 	<tr>
@@ -81,7 +89,7 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td>Colliders for zombies</td>
-		<td></td>
+		<td>Colliders for dinos</td>
+		<td>Done</td>
 	</tr>
 </table>
