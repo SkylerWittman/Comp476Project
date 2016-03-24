@@ -61,6 +61,11 @@ public class WaveEngine : MonoBehaviour {
                 case 2:
                     int dinoColor = Random.Range(0, numOfDinos);
                     Instantiate(dinos[dinoColor], spawnPosition, Quaternion.identity);
+                    float randSize = Random.Range(1.5f, 6.5f);
+                    dinos[dinoColor].transform.localScale = new Vector3(randSize, randSize, randSize);
+                    dinos[dinoColor].GetComponent<DinoBehavior>().maxSpeed -= randSize;
+                    dinos[dinoColor].GetComponent<NPCDetail>().health *= randSize;
+                    dinos[dinoColor].GetComponent<NPCDetail>().damage *= randSize;
                     break;
                 default:
                     Debug.Log("???");

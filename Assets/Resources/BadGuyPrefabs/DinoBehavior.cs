@@ -4,7 +4,7 @@ using System.Collections;
 public class DinoBehavior : MonoBehaviour {
 
 	public float acceleration = 4;
-	public float maxSpeed = 8;
+	public float maxSpeed = 10;
 	public float directionChangeTime = 3;
 	public float rotateTime = 1.5f;
 	public float maxDirectionChange = 60;
