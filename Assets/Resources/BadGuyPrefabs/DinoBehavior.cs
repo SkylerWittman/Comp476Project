@@ -3,11 +3,12 @@ using System.Collections;
 
 public class DinoBehavior : MonoBehaviour {
 
-    public float acceleration = 3;
-    public float maxSpeed = 5;
-    public float directionChangeTime = 3;
+    public float acceleration = 3.0f;
+    public float maxSpeed = 5.0f;
+    public float maxRunSpeed = 10.0f;
+    public float directionChangeTime = 3.0f;
     public float rotateTime = 1.5f;
-    public float maxDirectionChange = 15;
+    public float maxDirectionChange = 15.0f;
 
     private Rigidbody rigidbody;
     private Vector3 newDirection;
@@ -27,11 +28,14 @@ public class DinoBehavior : MonoBehaviour {
     private bool canAttack;
 
     private Animation anim;
+    private AnimationClip walkClip;
+    private AnimationClip runClip;
     private AnimationClip attackClip;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.centerOfMass = transform.position;
         directionToHeadTo = Random.Range(0, 360);
         transform.eulerAngles = new Vector3(0, directionToHeadTo, 0);
         currentState = State.WANDER;
@@ -49,7 +53,14 @@ public class DinoBehavior : MonoBehaviour {
         canAttack = true;
 
         anim = GetComponent<Animation>();
+        //Changing layers and adding weights allows us to play 2 animations at the same time
+        anim["Allosaurus_Attack02"].layer = 1;
+        anim["Allosaurus_Attack02"].weight = 0.7f;
+        walkClip = anim.GetClip("Allosaurus_Walk");
+        runClip = anim.GetClip("Allosaurus_Run");
         attackClip = anim.GetClip("Allosaurus_Attack02");
+
+        anim.Play(walkClip.name);
     }
 
     IEnumerator FaceNewDirection()
@@ -105,16 +116,18 @@ public class DinoBehavior : MonoBehaviour {
         if (player != null)
         {
             Vector3 chaseDirection = player.position - transform.position;
-            transform.rotation = Quaternion.LookRotation(-chaseDirection);
+            Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, acceleration);
+            //transform.rotation = Quaternion.LookRotation(-chaseDirection);
             //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(chaseDirection), Time.deltaTime);
-            if (rigidbody.velocity.magnitude < maxSpeed)
+            if (rigidbody.velocity.magnitude < maxRunSpeed)
             {
                 rigidbody.AddForce(chaseDirection.normalized * acceleration, ForceMode.VelocityChange);
             }
 
-            if (rigidbody.velocity.magnitude > maxSpeed)
+            if (rigidbody.velocity.magnitude > maxRunSpeed)
             {
-                rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+                rigidbody.velocity = rigidbody.velocity.normalized * maxRunSpeed;
             }
 
             if (Vector3.Distance(transform.position, player.position) > 100.0f)
@@ -129,6 +142,7 @@ public class DinoBehavior : MonoBehaviour {
         else
         {
             currentState = State.WANDER;
+            anim.Play(walkClip.name);
         }
     }
 
@@ -143,12 +157,13 @@ public class DinoBehavior : MonoBehaviour {
 
     void castSphere()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 30.0f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 70.0f);
         foreach (Collider c in colliders)
         {
             if (c.gameObject.tag == "Player")
             {
                 currentState = State.PURSUE;
+                anim.Play(runClip.name);
                 player = c.gameObject.transform;
                 break;
             }
@@ -159,7 +174,6 @@ public class DinoBehavior : MonoBehaviour {
     {
         canAttack = false;
         Debug.Log("Strike player with scaley appendage");
-        //AnimationClip attack = anim.GetClip("Allosaurus_Attack01");
         anim.Play(attackClip.name);
         yield return new WaitForSeconds(2.0f);
         canAttack = true;

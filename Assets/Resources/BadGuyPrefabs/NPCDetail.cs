@@ -12,6 +12,7 @@ public class NPCDetail : MonoBehaviour {
     void Start()
     {
         anim = GetComponent<Animation>();
+        anim[die.name].layer = 2;
         anim[die.name].speed = .7f;
     }
 
@@ -35,9 +36,11 @@ public class NPCDetail : MonoBehaviour {
         Vector3 pos = transform.position;
         if(health < 0.0f)
         {
-            anim.Play(die.name);
+            anim.CrossFade(die.name, 0.5f);
             //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
             transform.position = pos;
+            //Freeze all movement/rotations when NPC has been slain
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             Destroy(this.gameObject, anim[die.name].length+.5f);
             
         }
