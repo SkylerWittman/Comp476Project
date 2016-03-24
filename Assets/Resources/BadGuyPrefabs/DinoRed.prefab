@@ -1307,6 +1307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2a090b7d7875d41b15edf7312a6ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  die: {fileID: 7400000, guid: 92cf7fb090ba49a418f829d521feb727, type: 2}
   health: 100
 --- !u!136 &13662670
 CapsuleCollider:
@@ -1431,6 +1432,10 @@ Prefab:
       propertyPath: m_TagString
       value: BadGuy
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: die
+      value: 
+      objectReference: {fileID: 7400000, guid: 92cf7fb090ba49a418f829d521feb727, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 126990}

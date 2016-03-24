@@ -15,7 +15,7 @@ public var jumpAnimationSpeed : float = 1.15;
 public var landAnimationSpeed : float = 1.0;
 
 private var _animation : Animation;
-
+public var audioSrc : AudioSource;
 enum CharacterState {
 	Idle = 0,
 	Walking = 1,
@@ -95,7 +95,7 @@ var controller : CharacterController;
 function Awake ()
 {
 	moveDirection = transform.TransformDirection(Vector3.forward);
-	
+	audioSrc = GetComponent(AudioSource);
 	_animation = GetComponent(Animation);
 	if(!_animation)
 		Debug.Log("The character you would like to control doesn't have animations. Moving her might look weird.");
@@ -243,7 +243,8 @@ function ApplyJumping ()
 		// Jump
 		// - Only when pressing the button down
 		// - With a timeout so you can press the button slightly before landing		
-		if (canJump && Time.time < lastJumpButtonTime + jumpTimeout) {
+	    if (canJump && Time.time < lastJumpButtonTime + jumpTimeout) {
+	        audioSrc.Play();
 			verticalSpeed = CalculateJumpVerticalSpeed (jumpHeight);
 			SendMessage("DidJump", SendMessageOptions.DontRequireReceiver);
 		}

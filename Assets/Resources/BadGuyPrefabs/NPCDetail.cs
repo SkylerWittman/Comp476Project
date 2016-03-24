@@ -3,18 +3,21 @@ using System.Collections;
 
 public class NPCDetail : MonoBehaviour {
     bool LockA = false;
+    Animation anim;
+    public AnimationClip die;
     public float health = 100; 
     int counter = 0;
     // Use this for initialization
     void Start()
     {
-
+        anim = GetComponent<Animation>();
+        anim[die.name].speed = .7f;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         if (LockA == true)
         {
             if (counter < 100)
@@ -28,9 +31,14 @@ public class NPCDetail : MonoBehaviour {
                 counter = 0;
             }
         }
+        Vector3 pos = transform.position;
         if(health < 0)
         {
-            Destroy(this.gameObject);
+            anim.Play(die.name);
+            //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
+            transform.position = pos;
+            Destroy(this.gameObject, anim[die.name].length+.5f);
+            
         }
 
     }
@@ -54,4 +62,5 @@ public class NPCDetail : MonoBehaviour {
 
         Destroy(other.gameObject);
     }
+
 }
