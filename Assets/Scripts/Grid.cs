@@ -4,9 +4,16 @@ using System.Collections.Generic;
 
 public class Grid : MonoBehaviour {
 
-    private int gridSize;
-    public Node[,] grid;
-    private Node[,] reducedGrid;
+    /*
+     * Grid class is used for bad guy and tree spawning as well as pathfinding.
+     * There are two types of grids:
+     * grid is a 500 x 500 grid that contains information about every 2 units of the terrain. It is used strictly for bad guy and tree spawning.
+     * reducedGrid is a 50 x 50 grid that contains information about every 20 units of the terrain. It is uses strictly for path finding.
+     */
+
+    private int gridSize;   
+    public Node[,] grid; 
+    private Node[,] reducedGrid; 
 
     public GameObject marker;
 
@@ -17,6 +24,10 @@ public class Grid : MonoBehaviour {
         initializeGrid();
         reducedGrid = getReducedGrid();
     }
+
+    /*
+     * UNCOMMENT THE START IF YOU WANT TO SEE THE NODES GENERATED
+     */
 
     //void Start()
     //{
@@ -39,35 +50,39 @@ public class Grid : MonoBehaviour {
     //    }
     //}
 
+    //Initializes grid, not reducedGrid
     private void initializeGrid()
     {
         for (int x = 0; x < grid.GetLength(0); x++)
         {
             for (int z = 0; z < grid.GetLength(1); z++)
             {
+                //Just create the nodes, but doesn't have any data yet about the terrain
                 grid[x, z] = new Node(true, new Vector3(x * 2.0f, 0.0f, z * 2.0f), x, z);
             }
         }
     }
 
+    //Finds the closest node in reducedGrid from a given position 
+    //Only usable with reducedGrid
     public Node NodeFromPoint(Vector3 pos)
     {
-        //float percentX = (pos.x * 2.0f + gridSize / 2) / gridSize;
-        //float percentY = (pos.z * 2.0f + gridSize / 2) / gridSize;
-
-        //percentX = Mathf.Clamp01(percentX);
-        //percentY = Mathf.Clamp01(percentY);
-
-        //int x = Mathf.RoundToInt((gridSize - 1) * percentX);
-        //int y = Mathf.RoundToInt((gridSize - 1) * percentY);
         int x = Mathf.RoundToInt(pos.x / 20.0f);
         int z = Mathf.RoundToInt(pos.z / 20.0f);
-        x = x > 49 ? 49 : x; x = x < 0 ? 0 : x;
-        z = z > 49 ? 49 : z; z = z < 0 ? 0 : z;
+        x = Mathf.Clamp(x, 0, 49);
+        z = Mathf.Clamp(z, 0, 49);
 
         return reducedGrid[x, z];
     }
 
+    /*
+     * Given a node, getNeighbours will find all other nodes in a 3 x 3 grid of the node
+     * n n n
+     * n N n
+     * n n n
+     * Where n's represent neighbours and N represents the node given
+     * Only usable with reducedGrid
+     */
     public List<Node> getNeighbours(Node node)
     {
         List<Node> neighbours = new List<Node>();
@@ -91,9 +106,12 @@ public class Grid : MonoBehaviour {
         return neighbours;
     }
 
-    public Node[,] getReducedGrid()
+    //Initialization for reducedGrid, not grid
+    //Creates the reducedGrid, which is created from the data of every tenth node of the grid
+    private Node[,] getReducedGrid()
     {
-        Node[,] reducedGrid = new Node[50, 50];
+        int aTenth = gridSize / 10;
+        Node[,] reducedGrid = new Node[aTenth, aTenth];
 
         for (int x = 0; x < grid.GetLength(0); x+=10)
         {
@@ -107,78 +125,4 @@ public class Grid : MonoBehaviour {
 
         return reducedGrid;
     }
-
-    //private LayerMask unwalkable;
-    //private Vector2 gridSize;
-    //private float nodeRadius;
-    //public Node[,] grid;
-
-    //private float nodeDiameter;
-    //public int gridSizeX, gridSizeY;
-
-    //void Start()
-    //{
-    //    unwalkable = LayerMask.GetMask("Unwalkable");
-    //    gridSize = new Vector2(4300.0f, 3300.0f);
-    //    nodeRadius = 60.0f;
-    //    nodeDiameter = nodeRadius * 2.0f;
-    //    gridSizeX = Mathf.RoundToInt(gridSize.x / nodeDiameter);
-    //    gridSizeY = Mathf.RoundToInt(gridSize.y / nodeDiameter);
-    //    initializeGrid();
-    //}
-
-    //void initializeGrid()
-    //{
-    //    grid = new Node[gridSizeX, gridSizeY];
-    //    Vector3 bottomLeft = transform.position - Vector3.right * gridSize.x / 2 - Vector3.forward * gridSize.y / 2;
-
-
-    //    for (int x = 0; x < gridSizeX; x++)
-    //    {
-    //        for (int y = 0; y < gridSizeY; y++)
-    //        {
-    //            Vector3 point = bottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-    //            point.y = 50.0f;
-    //            bool canWalk = !(Physics.CheckSphere(point, nodeRadius, unwalkable));
-    //            grid[x, y] = new Node(canWalk, point, x, y);
-    //        }
-    //    }
-    //}
-
-    //public Node NodeFromPoint(Vector3 pos)
-    //{
-    //    float percentX = (pos.x + gridSize.x / 2) / gridSize.x;
-    //    float percentY = (pos.z + gridSize.y / 2) / gridSize.y;
-
-    //    percentX = Mathf.Clamp01(percentX);
-    //    percentY = Mathf.Clamp01(percentY);
-
-    //    int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
-    //    int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
-
-    //    return grid[x, y];
-    //}
-
-    //public List<Node> getNeighbours(Node node)
-    //{
-    //    List<Node> neighbours = new List<Node>();
-
-    //    for (int x = -1; x <= 1; x++)
-    //    {
-    //        for (int y = -1; y <= 1; y++)
-    //        {
-    //            if (x != 0 && y != 0)
-    //            {
-    //                int checkX = node.gridX + x;
-    //                int checkY = node.gridY + y;
-
-    //                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
-    //                {
-    //                    neighbours.Add(grid[checkX, checkY]);
-    //                }
-    //            }
-    //        }
-    //    }
-    //    return neighbours;
-    //}
 }

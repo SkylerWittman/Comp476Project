@@ -3,17 +3,12 @@ using System.Collections;
 
 public class TerrainEngine : MonoBehaviour
 {
-
-
-
-
     //Terrain vars
     public static Terrain terrain;
     public const float terrainSize = 1000.0f;
     public float terrainHeight = 1500.0f;
     public const int gridSize = (int)(terrainSize / 2);
-    //public static bool[,] terrainGrid = new bool[gridSize, gridSize]; //Each index will indicate a 2x2 grid on the terrain, and will evaluate to false if occupied
-    public static Grid terrainGrid;
+    public static Grid terrainGrid; //This grid is referring to grid in the Grid class (the 500 x 500 grid used for spawning)
     public static float waterLevel = 75.0f;  
 
     //Tree vars
@@ -36,12 +31,9 @@ public class TerrainEngine : MonoBehaviour
 
     void Start()
     {
-
         //Tree initialization
         trees[0] = Resources.Load("TreePrefabs/BroadLeafTree") as GameObject;
         trees[1] = Resources.Load("TreePrefabs/ConiferTree") as GameObject;
-
-
 
         for (int i = 0; i < numOfTreePrototypes; i++)
         {
@@ -49,8 +41,6 @@ public class TerrainEngine : MonoBehaviour
             treePrototypes[i].prefab = trees[i];
 			treePrototypes [i].prefab.tag = "Tree";
         }
-
-        //****************************//
 
         //Splat initialization
         terrainTextures[0] = Resources.Load("TerrainTextures/GrassHillAlbedo") as Texture2D;
@@ -107,8 +97,6 @@ public class TerrainEngine : MonoBehaviour
                 z = Random.value;
             }
 
-
-
             float height = terrain.terrainData.GetInterpolatedHeight(x, z);
 
             tr[i].position = new Vector3(x, (height / 1550.0f), z);
@@ -120,7 +108,6 @@ public class TerrainEngine : MonoBehaviour
                 }
             }
             
-
             //Broad leafs trees have a probability of 2/3 of occuring
             //Conifer trees have a probability of 1/3 of occuring
             int chance = Random.Range(0, 3);
@@ -132,9 +119,7 @@ public class TerrainEngine : MonoBehaviour
             {
                 tr[i].prototypeIndex = 0;
             }
-            //tr[i].widthScale = Random.Range(5f, 6f);
-            //tr[i].heightScale = Random.Range(3f, 5f);
-            //Testing
+
             tr[i].widthScale = Random.Range(3f, 4f);
             tr[i].heightScale = Random.Range(4f, 6f);
 
@@ -153,8 +138,7 @@ public class TerrainEngine : MonoBehaviour
             for (int z = 0; z < terrainGrid.grid.GetLength(1); z++)
             {
                 terrainGrid.grid[x,z].walkable = terrain.SampleHeight(new Vector3(x, 0.0f, z)) >= waterLevel;
-                //terrainGrid.grid[x, z].position.y = terrain.SampleHeight(new Vector3(x, 0.0f, z)) - waterLevel;
-                terrainGrid.grid[x, z].position.y = terrain.terrainData.GetInterpolatedHeight(x, z) - waterLevel;
+                terrainGrid.grid[x, z].position.y = terrain.terrainData.GetInterpolatedHeight(x, z) - (waterLevel + 10.0f);
             }
         }
 

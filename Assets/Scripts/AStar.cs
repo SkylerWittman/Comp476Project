@@ -4,25 +4,35 @@ using System.Collections.Generic;
 
 public class AStar : MonoBehaviour {
 
-    public Grid grid;
+    /*
+     * AStar is used strictly for pathfinding and uses the reducedGrid from the Grid class only
+     * It is a utility class that provides data to the user about which path to follow to get to their goal
+     * It contains data about:
+     * reducedGrid, a Grid object which it uses to compute its path
+     * path, the computed path
+     */
+
+    private Grid reducedGrid;
     private List<Node> path;
 
     void Start()
     {
-        grid = GetComponent<Grid>();
+        reducedGrid = GetComponent<Grid>();
         path = new List<Node>();
     }
 
+    //Returns a list to the user representing the path of nodes to get from start position to end position
     public List<Node> getPath(Vector3 startPos, Vector3 endPos)
     {
         FindPath(startPos, endPos);
         return path;
     }
 
-    public void FindPath(Vector3 startPos, Vector3 endPos)
+    //The actual A* algorithm
+    private void FindPath(Vector3 startPos, Vector3 endPos)
     {
-        Node startNode = grid.NodeFromPoint(startPos);
-        Node endNode = grid.NodeFromPoint(endPos);
+        Node startNode = reducedGrid.NodeFromPoint(startPos);
+        Node endNode = reducedGrid.NodeFromPoint(endPos);
 
         List<Node> openList = new List<Node>();
         HashSet<Node> closedList = new HashSet<Node>();
@@ -48,7 +58,7 @@ public class AStar : MonoBehaviour {
                 return;
             }
 
-            foreach (Node neighbour in grid.getNeighbours(currentNode))
+            foreach (Node neighbour in reducedGrid.getNeighbours(currentNode))
             {
                 if (!neighbour.walkable || closedList.Contains(neighbour))
                 {
@@ -73,6 +83,7 @@ public class AStar : MonoBehaviour {
         }
     }
 
+    //Traces path from end node to start node
     private List<Node> tracePath(Node s, Node e)
     {
         List<Node> path = new List<Node>();
@@ -89,6 +100,7 @@ public class AStar : MonoBehaviour {
         return path;
     }
 
+    //Used in evaluation of the heuristic
     private int getDistance(Node node1, Node node2)
     {
         int distX = Mathf.Abs(node1.gridX - node2.gridX);
