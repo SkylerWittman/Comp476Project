@@ -20,7 +20,7 @@ public class Wave {
         waveNumber = num;
         if (waveNumber == 0)
         {
-            badGuyCount = 50;
+            badGuyCount = 20;
         }
         else
         {

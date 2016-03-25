@@ -6,7 +6,7 @@ public class WaveEngine : MonoBehaviour {
     //Terrain vars
     private Terrain terrain;
     private float terrainSize;
-    private bool[,] terrainGrid;
+    private Grid terrainGrid;
     private float waterLevel;
 
     //Bad guy vars
@@ -36,22 +36,6 @@ public class WaveEngine : MonoBehaviour {
         dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
         dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
         dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;
-
-        int numTrue = 0;
-        int numFalse = 0;
-        for (int i = 0; i < terrainGrid.GetLength(0); i++)
-        {
-            for (int j = 0; j < terrainGrid.GetLength(1); j++)
-            {
-                if (terrainGrid[i, j] == true)
-                {
-                    numTrue++;
-                }
-                else { numFalse++; }
-            }
-        }
-        Debug.Log("num true: " + numTrue);
-        Debug.Log("num false: " + numFalse);
     }
 
     public void spawnBadGuys(Wave wave)
@@ -99,7 +83,7 @@ public class WaveEngine : MonoBehaviour {
         Vector3 samplePosition = new Vector3(x, 0.0f, z);
 
         //Check whether the position in the grid is occupied by a tree, or under the water level or there is a bad guy/player within a radius of 1 of samplePosition
-        while (terrainGrid[(int)(x / 2.0f), (int)(z / 2.0f)] == true || terrain.SampleHeight(samplePosition) <= waterLevel || checkAroundPosition(samplePosition))
+        while (terrainGrid.grid[(int)(x / 2.0f), (int)(z / 2.0f)].walkable == false || terrain.SampleHeight(samplePosition) <= waterLevel || checkAroundPosition(samplePosition))
         {
             x = Random.Range(0.0f, terrainSize);
             z = Random.Range(0.0f, terrainSize);

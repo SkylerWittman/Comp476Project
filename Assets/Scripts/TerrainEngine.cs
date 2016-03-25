@@ -12,7 +12,8 @@ public class TerrainEngine : MonoBehaviour
     public const float terrainSize = 1000.0f;
     public float terrainHeight = 1500.0f;
     public const int gridSize = (int)(terrainSize / 2);
-    public static bool[,] terrainGrid = new bool[gridSize, gridSize]; //Each index will indicate a 2x2 grid on the terrain, and will evaluate to true if occupied
+    //public static bool[,] terrainGrid = new bool[gridSize, gridSize]; //Each index will indicate a 2x2 grid on the terrain, and will evaluate to false if occupied
+    public static Grid terrainGrid;
     public static float waterLevel = 75.0f;  
 
     //Tree vars
@@ -30,14 +31,11 @@ public class TerrainEngine : MonoBehaviour
 
     void Awake()
     {
-        //Grid initialization
-        for (int x = 0; x < terrainGrid.GetLength(0); x++)
-        {
-            for (int z = 0; z < terrainGrid.GetLength(1); z++)
-            {
-                terrainGrid[x, z] = false;
-            }
-        }
+        terrainGrid = GetComponent<Grid>();
+    }
+
+    void Start()
+    {
 
         //Tree initialization
         trees[0] = Resources.Load("TreePrefabs/BroadLeafTree") as GameObject;
@@ -103,7 +101,7 @@ public class TerrainEngine : MonoBehaviour
             float z = Random.value;
 
             //While the starting x and z values within the grid are occupied and/or under the water level, get new values
-            while (terrainGrid[(int)(x*gridSize), (int)(z*gridSize)] == true || terrain.SampleHeight(new Vector3(x * terrainSize, 0.0f, z * terrainSize)) <= waterLevel)
+            while (terrainGrid.grid[(int)(x*gridSize), (int)(z*gridSize)].walkable == false || terrain.SampleHeight(new Vector3(x * terrainSize, 0.0f, z * terrainSize)) <= waterLevel)
             {
                 x = Random.value;
                 z = Random.value;
@@ -114,7 +112,14 @@ public class TerrainEngine : MonoBehaviour
             float height = terrain.terrainData.GetInterpolatedHeight(x, z);
 
             tr[i].position = new Vector3(x, (height / 1550.0f), z);
-            terrainGrid[(int)(x*gridSize), (int)(z*gridSize)] = true;
+            for (int X = (int)(x*gridSize) - 1; X <= (int)(x*gridSize) + 1; X++)
+            {
+                for (int Z = (int)(z*gridSize) - 1; Z <= (int)(z*gridSize) + 1; Z++)
+                {
+                    terrainGrid.grid[Mathf.Clamp(X, 0, 499), Mathf.Clamp(Z, 0, 499)].walkable = false;
+                }
+            }
+            
 
             //Broad leafs trees have a probability of 2/3 of occuring
             //Conifer trees have a probability of 1/3 of occuring
@@ -127,9 +132,11 @@ public class TerrainEngine : MonoBehaviour
             {
                 tr[i].prototypeIndex = 0;
             }
-            tr[i].widthScale = Random.Range(5f, 6f);
-            tr[i].heightScale = Random.Range(3f, 5f);
-
+            //tr[i].widthScale = Random.Range(5f, 6f);
+            //tr[i].heightScale = Random.Range(3f, 5f);
+            //Testing
+            tr[i].widthScale = Random.Range(3f, 4f);
+            tr[i].heightScale = Random.Range(4f, 6f);
 
         }
 
@@ -141,11 +148,11 @@ public class TerrainEngine : MonoBehaviour
         terrain.treeMaximumFullLODCount = 20;
 
         //Setup positions in the terrain grid where the terrain is below water level
-        for (int x = 0; x < terrainGrid.GetLength(0); x++)
+        for (int x = 0; x < terrainGrid.grid.GetLength(0); x++)
         {
-            for (int z = 0; z < terrainGrid.GetLength(1); z++)
+            for (int z = 0; z < terrainGrid.grid.GetLength(1); z++)
             {
-                terrainGrid[x,z] = terrain.SampleHeight(new Vector3(x, 0.0f, z)) <= waterLevel;
+                terrainGrid.grid[x,z].walkable = terrain.SampleHeight(new Vector3(x, 0.0f, z)) >= waterLevel;
             }
         }
 

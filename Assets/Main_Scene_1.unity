@@ -262,54 +262,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!1 &331162690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 331162692}
-  - 114: {fileID: 331162691}
-  m_Layer: 0
-  m_Name: NodeGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &331162691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 331162690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9f4721de8b87fb41b7952ccbd5c4a55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  node: {fileID: 11487060, guid: 069bfed6ff0b4a64b849a657565c5bf4, type: 2}
-  levelSize: {x: 70, y: 0, z: 70}
-  radius: 0
-  tileSize: {x: 2, y: 2, z: 2}
-  tileSize_Density: 7
-  x: 1000
-  z: 1000
-  nodeList: []
-  players: []
---- !u!4 &331162692
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 331162690}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 398, y: 0, z: 511}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
 --- !u!4 &382936464 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 633aba7763524e74d8aed8ad42e74506, type: 3}
@@ -869,6 +821,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1627497292}
   - 114: {fileID: 1627497291}
+  - 114: {fileID: 1627497294}
+  - 114: {fileID: 1627497293}
   m_Layer: 0
   m_Name: TerrainEngine
   m_TagString: TerrainEngine
@@ -900,6 +854,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1627497293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1627497290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9226c6e03e06386448e2c18517fd9bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 0}
+--- !u!114 &1627497294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1627497290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2de130ee268ca49943479a61d65ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1647316997
 GameObject:
   m_ObjectHideFlags: 0

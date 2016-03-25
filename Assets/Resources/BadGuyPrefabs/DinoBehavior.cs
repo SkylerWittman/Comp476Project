@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DinoBehavior : MonoBehaviour {
 
@@ -14,6 +15,11 @@ public class DinoBehavior : MonoBehaviour {
     private Vector3 newDirection;
     private float directionToHeadTo;
     private Transform player;
+
+    private AStar pathFinder;
+    private List<Node> currentPath;
+    private Node currentNode;
+    private Node goalNode;
 
     /*
     FSM:
@@ -61,6 +67,11 @@ public class DinoBehavior : MonoBehaviour {
         attackClip = anim.GetClip("Allosaurus_Attack02");
 
         anim.Play(walkClip.name);
+
+        pathFinder = GameObject.FindGameObjectWithTag("TerrainEngine").GetComponent<AStar>();
+        currentPath = new List<Node>();
+        currentNode = null;
+        goalNode = null;
     }
 
     IEnumerator FaceNewDirection()
@@ -98,7 +109,25 @@ public class DinoBehavior : MonoBehaviour {
 
     void wander()
     {
-        transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, newDirection, Time.deltaTime * rotateTime);
+        if (currentPath.Count == 0)
+        {
+            while (currentPath.Count < 2)
+            {
+                float wanderX = Random.Range(transform.position.x - 100.0f, transform.position.x + 100.0f);
+                float wanderZ = Random.Range(transform.position.z - 100.0f, transform.position.z + 100.0f);
+                Vector3 targetPos = new Vector3(wanderX, 0.0f, wanderZ);
+                currentPath = pathFinder.getPath(transform.position, targetPos);
+                Debug.Log(currentPath.Count);
+            }
+            currentNode = currentPath[0];
+            goalNode = currentPath[currentPath.Count - 1];
+        }
+
+        Vector3 chaseDirection = transform.position - currentNode.position;
+        Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);
+
+        //transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, currentNode.position, Time.deltaTime * rotateTime);
 
         if (rigidbody.velocity.magnitude < maxSpeed)
         {
@@ -108,6 +137,21 @@ public class DinoBehavior : MonoBehaviour {
         if (rigidbody.velocity.magnitude > maxSpeed)
         {
             rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+        }
+
+        if (Vector3.Distance(transform.position, currentNode.position) < 3.0f)
+        {
+            transform.position = currentNode.position;
+            if (currentNode.Equals(goalNode))
+            {
+                currentPath.Clear();
+                currentNode = null;
+                Debug.Log("Finding new path!");
+            }
+            else
+            {
+                currentNode = currentPath[currentPath.IndexOf(currentNode) + 1];
+            }
         }
     }
 
