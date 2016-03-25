@@ -128,6 +128,7 @@ public class DinoBehavior : MonoBehaviour {
         }
 
         Vector3 chaseDirection = currentNode.position - transform.position;
+        chaseDirection.y = 0.0f;
         //-chaseDirection because the dino model thinks its forward position is behind it. If not negative, the dino would walk backwards
         Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);
@@ -143,12 +144,10 @@ public class DinoBehavior : MonoBehaviour {
             rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
         }
 
-        //If position is less than 5 units away from node, we'll just immediately move to that location
+        //If position is less than 10 units away from node, we'll start to look for the next node in the path
         //This will for sure trigger a currentNode change
-        if (Vector3.Distance(transform.position, currentNode.position) < 5.0f)
-        {
-            transform.position = currentNode.position;
-            
+        if (Vector3.Distance(transform.position, currentNode.position) < 10.0f)
+        {  
             //If we've reached the goal, then we'll clear our path so we can get another one
             if (currentNode.Equals(goalNode))
             {

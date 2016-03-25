@@ -62,13 +62,14 @@ public class TerrainEngine : MonoBehaviour
             splatPrototypes[i].tileSize = splatTileSize[i];
         }
 
+        //Terrain initialization
         TerrainData terrainData = new TerrainData();
         terrainData.heightmapResolution = 5;
         terrainData.alphamapResolution = 3;
         terrainData.size = new Vector3(terrainSize, terrainHeight, terrainSize);
         terrain = Terrain.CreateTerrainGameObject(terrainData).GetComponent<Terrain>();
         terrain.transform.parent = gameObject.transform;
-        terrain.transform.position = new Vector3(0.0f, -75.0f, 0.0f);
+        terrain.transform.position = new Vector3(0.0f, -waterLevel, 0.0f);
         terrain.terrainData.splatPrototypes = splatPrototypes;
         terrain.terrainData.treePrototypes = treePrototypes;
         float[,] heights = new float[terrain.terrainData.heightmapWidth, terrain.terrainData.heightmapHeight];
@@ -83,6 +84,7 @@ public class TerrainEngine : MonoBehaviour
         }
         terrain.terrainData.SetHeights(0, 0, heights);
 
+        //Tree instances initialization
         TreeInstance[] tr = new TreeInstance[numOfTrees];
         for (int i = 0; i < numOfTrees; i++)
         {
@@ -97,12 +99,21 @@ public class TerrainEngine : MonoBehaviour
                 z = Random.value;
             }
 
+            //Get the height of the terrain at the location, and place the tree there
             float height = terrain.terrainData.GetInterpolatedHeight(x, z);
 
             tr[i].position = new Vector3(x, (height / 1550.0f), z);
-            for (int X = (int)(x*gridSize) - 1; X <= (int)(x*gridSize) + 1; X++)
+
+            /*
+             * We'll mark on the grid where the position of the tree is as unwalkable. Additionally, the surrounding positions will be marked as unwalkable as well.
+             * t t t
+             * t T t
+             * t t t
+             * Where t's are the current tree's neighbouring positions and T is the position of the current tree
+             */
+            for (int X = (int)(x*gridSize) - 2; X <= (int)(x*gridSize) + 2; X++)
             {
-                for (int Z = (int)(z*gridSize) - 1; Z <= (int)(z*gridSize) + 1; Z++)
+                for (int Z = (int)(z*gridSize) - 2; Z <= (int)(z*gridSize) + 2; Z++)
                 {
                     terrainGrid.grid[Mathf.Clamp(X, 0, 499), Mathf.Clamp(Z, 0, 499)].walkable = false;
                 }
@@ -120,12 +131,12 @@ public class TerrainEngine : MonoBehaviour
                 tr[i].prototypeIndex = 0;
             }
 
+            //These paramaters are used to vary the width and height of the tree
             tr[i].widthScale = Random.Range(3f, 4f);
             tr[i].heightScale = Random.Range(4f, 6f);
-
         }
 
-
+        //Tell the terrain about the instances of trees we've created
         terrain.terrainData.treeInstances = tr;
         terrain.treeDistance = 400.0f;
         terrain.treeBillboardDistance = 200.0f;
@@ -137,8 +148,12 @@ public class TerrainEngine : MonoBehaviour
         {
             for (int z = 0; z < terrainGrid.grid.GetLength(1); z++)
             {
-                terrainGrid.grid[x,z].walkable = terrain.SampleHeight(new Vector3(x, 0.0f, z)) >= waterLevel;
-                terrainGrid.grid[x, z].position.y = terrain.terrainData.GetInterpolatedHeight(x, z) - (waterLevel + 10.0f);
+                if (terrainGrid.grid[x, z].walkable)
+                {
+                    terrainGrid.grid[x, z].walkable = terrain.SampleHeight(new Vector3(x, 0.0f, z)) >= waterLevel;
+                    //terrainGrid.grid[x, z].position.y = terrain.SampleHeight(new Vector3(x, 0.0f, z)) - waterLevel;
+                }
+                terrainGrid.grid[x, z].position.y = terrain.terrainData.GetInterpolatedHeight(x, z) - (waterLevel);
             }
         }
 
@@ -146,7 +161,4 @@ public class TerrainEngine : MonoBehaviour
         terrain.GetComponent<TerrainCollider>().enabled = false;
         terrain.GetComponent<TerrainCollider>().enabled = true;
     }
-
-
-
 }
