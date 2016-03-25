@@ -113,8 +113,8 @@ public class DinoBehavior : MonoBehaviour {
         {
             while (currentPath.Count < 2)
             {
-                float wanderX = Random.Range(transform.position.x - 100.0f, transform.position.x + 100.0f);
-                float wanderZ = Random.Range(transform.position.z - 100.0f, transform.position.z + 100.0f);
+                float wanderX = Random.Range(Mathf.Clamp(transform.position.x - 150.0f, 0.0f, 1000.0f), Mathf.Clamp(transform.position.x + 150.0f, 0.0f, 1000.0f));
+                float wanderZ = Random.Range(Mathf.Clamp(transform.position.z - 150.0f, 0.0f, 1000.0f), Mathf.Clamp(transform.position.z + 150.0f, 0.0f, 1000.0f));
                 Vector3 targetPos = new Vector3(wanderX, 0.0f, wanderZ);
                 currentPath = pathFinder.getPath(transform.position, targetPos);
                 Debug.Log(currentPath.Count);
@@ -123,11 +123,9 @@ public class DinoBehavior : MonoBehaviour {
             goalNode = currentPath[currentPath.Count - 1];
         }
 
-        Vector3 chaseDirection = transform.position - currentNode.position;
+        Vector3 chaseDirection = currentNode.position - transform.position;
         Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);
-
-        //transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, currentNode.position, Time.deltaTime * rotateTime);
 
         if (rigidbody.velocity.magnitude < maxSpeed)
         {
@@ -139,14 +137,14 @@ public class DinoBehavior : MonoBehaviour {
             rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
         }
 
-        if (Vector3.Distance(transform.position, currentNode.position) < 3.0f)
+        if (Vector3.Distance(transform.position, currentNode.position) < 5.0f)
         {
             transform.position = currentNode.position;
+            
             if (currentNode.Equals(goalNode))
             {
                 currentPath.Clear();
                 currentNode = null;
-                Debug.Log("Finding new path!");
             }
             else
             {
@@ -158,12 +156,11 @@ public class DinoBehavior : MonoBehaviour {
     void pursue()
     {
         if (player != null)
-        {
+        {   
             Vector3 chaseDirection = player.position - transform.position;
             Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);
-            //transform.rotation = Quaternion.LookRotation(-chaseDirection);
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(chaseDirection), Time.deltaTime);
+
             if (rigidbody.velocity.magnitude < maxRunSpeed)
             {
                 rigidbody.AddForce(chaseDirection.normalized * acceleration, ForceMode.VelocityChange);
@@ -206,6 +203,8 @@ public class DinoBehavior : MonoBehaviour {
         {
             if (c.gameObject.tag == "Player")
             {
+                currentPath.Clear();
+                currentNode = null;
                 currentState = State.PURSUE;
                 anim.Play(runClip.name);
                 player = c.gameObject.transform;

@@ -153,6 +153,8 @@ public class TerrainEngine : MonoBehaviour
             for (int z = 0; z < terrainGrid.grid.GetLength(1); z++)
             {
                 terrainGrid.grid[x,z].walkable = terrain.SampleHeight(new Vector3(x, 0.0f, z)) >= waterLevel;
+                //terrainGrid.grid[x, z].position.y = terrain.SampleHeight(new Vector3(x, 0.0f, z)) - waterLevel;
+                terrainGrid.grid[x, z].position.y = terrain.terrainData.GetInterpolatedHeight(x, z) - waterLevel;
             }
         }
 

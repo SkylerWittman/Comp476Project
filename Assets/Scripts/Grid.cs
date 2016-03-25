@@ -8,6 +8,8 @@ public class Grid : MonoBehaviour {
     public Node[,] grid;
     private Node[,] reducedGrid;
 
+    public GameObject marker;
+
     void Awake()
     {
         gridSize = 500;
@@ -15,6 +17,27 @@ public class Grid : MonoBehaviour {
         initializeGrid();
         reducedGrid = getReducedGrid();
     }
+
+    //void Start()
+    //{
+    //    for (int i = 0; i < reducedGrid.GetLength(0); i++)
+    //    {
+    //        for (int j = 0; j < reducedGrid.GetLength(1); j++)
+    //        {
+    //            Node tempNode = reducedGrid[i, j];
+    //            GameObject m = Instantiate(marker, reducedGrid[i, j].position, Quaternion.identity) as GameObject;
+    //            Renderer r = m.GetComponent<Renderer>();
+    //            if (tempNode.walkable)
+    //            {
+    //                r.material.color = Color.green;
+    //            }
+    //            else
+    //            {
+    //                r.material.color = Color.red;
+    //            }
+    //        }
+    //    }
+    //}
 
     private void initializeGrid()
     {
