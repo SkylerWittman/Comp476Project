@@ -74,14 +74,14 @@
 	</tr>
 	<tr>
 		<td>Working on AI - dino logic</td>
-		<td>Primitive framework complete</td>
+		<td>A* pathfinding implemented. Couple issues still, nodes around trees not working correctly and dinos sometimes 			circle around nodes.</td>
 	</tr>
 	<tr>
 		<td>Wave spawning logic</td>
 		<td>Done</td>
 	</tr>
 	<tr>
-		<td>Power up spawning logic</td>
+		<td>Power up spawning logic (just the spawns, not the power up implementation)</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -94,6 +94,10 @@
 	</tr>
 	<tr>
 		<td>Comment and tidy up TerrainEngine</td>
+		<td>Done</td>
+	</tr>
+	<tr>
+		<td>Work on documentation</td>
 		<td></td>
 	</tr>
 </table>
