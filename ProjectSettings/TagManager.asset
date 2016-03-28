@@ -19,6 +19,7 @@ TagManager:
   - Timer
   - BadGuy
   - WaveCount
+  - SwarmGoblin
   layers:
   - Default
   - TransparentFX

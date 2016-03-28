@@ -535,13 +535,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 402528}
   - 111: {fileID: 11135904}
-  - 135: {fileID: 13524678}
   - 54: {fileID: 5440228}
-  - 114: {fileID: 11481190}
-  - 114: {fileID: 11423658}
+  - 136: {fileID: 13656334}
+  - 114: {fileID: 11490632}
+  - 114: {fileID: 11411234}
   m_Layer: 0
   m_Name: GoblinBlue
-  m_TagString: BadGuy
+  m_TagString: SwarmGoblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -701,7 +701,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -403.2663, y: 295.67514, z: 4174.2036}
+  m_LocalPosition: {x: 523.9, y: 535.87616, z: -193.75916}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 471780}
@@ -1276,7 +1276,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179904}
   serializedVersion: 2
-  m_Mass: 500
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -1308,7 +1308,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11423658
+--- !u!114 &11411234
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1316,14 +1316,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 179904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2a090b7d7875d41b15edf7312a6ff3, type: 3}
+  m_Script: {fileID: 11500000, guid: 468b4bca06bb11e44abd94ab91fdbb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   die: {fileID: 7400000, guid: 2788750f9cd2c174aa4fa84ba74dab03, type: 3}
-  hit: {fileID: 7400000, guid: 05a28ecbb33a989479703c11c26c36f5, type: 3}
   health: 100
   damage: 20
---- !u!114 &11481190
+--- !u!114 &11490632
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1331,17 +1330,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 179904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc70a01e75ea74545a3cee545d23128e, type: 3}
+  m_Script: {fileID: 11500000, guid: c24ca48d64fdf9e45b3ac1574641fdbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 7
-  maxSpeed: 12
-  minDistance: 10
-  distanceFromTreeToStop: 3
-  distanceFromTreeToSlowDown: 8
-  timeToChangeBetweenTrees: 6
---- !u!135 &13524678
-SphereCollider:
+  swarmDistance: 300
+--- !u!136 &13656334
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1349,9 +1343,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 10
-  m_Center: {x: 0, y: 8, z: -0.9709571}
+  m_Radius: 3.41
+  m_Height: 15.9
+  m_Direction: 1
+  m_Center: {x: 0, y: 7.68, z: 0}
 --- !u!137 &13706540
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1450,7 +1445,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: BadGuy
+      value: SwarmGoblin
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: die
@@ -1460,6 +1455,18 @@ Prefab:
       propertyPath: hit
       value: 
       objectReference: {fileID: 7400000, guid: 05a28ecbb33a989479703c11c26c36f5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: SwarmGoblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 179904}

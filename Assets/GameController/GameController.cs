@@ -8,15 +8,17 @@ public class GameController : MonoBehaviour {
 	private TreeInstance[] arrayOfTrees;
 	private GameObject[] treeGameObjects;
 	private Vector3 tempPosition;
+	private bool canSlowTime = true;
     public bool cursorVisible = true;
 
 	void Start () {
 
 		Debug.Log ("Creating");
-        
+		Terrain.activeTerrain.tag = "Terrain";
+
         //Comment this if you don't like how the cursor appears
         Cursor.visible = cursorVisible;
-       // Cursor.lockState = CursorLockMode.Locked;
+       //Cursor.lockState = CursorLockMode.Locked;
 		
         StartCoroutine (runTree ());
 	}
@@ -44,8 +46,21 @@ public class GameController : MonoBehaviour {
 		return treeGameObjects;
 	}
 
+
+	IEnumerator SlowTime(){
+		Time.timeScale = 0.4f;
+		canSlowTime = false;
+		yield return new WaitForSeconds (3.0f);
+		Time.timeScale = 1.0f;
+		yield return new WaitForSeconds (10.0f);
+		canSlowTime = true;
+	}
 	// Update is called once per frame
 	void Update () {
 	
+		if (Input.GetKeyDown (KeyCode.F) && canSlowTime) {
+			StartCoroutine (SlowTime ());
+
+		}
 	}
 }

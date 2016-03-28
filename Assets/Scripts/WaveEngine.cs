@@ -11,7 +11,7 @@ public class WaveEngine : MonoBehaviour {
 
     //Bad guy vars
     private const int numOfZombies = 1;
-    private const int numOfGoblins = 3;
+    private const int numOfGoblins = 2;
     private const int numOfDinos = 3;
     private GameObject[] zombies;
     private GameObject[] goblins;
@@ -30,9 +30,8 @@ public class WaveEngine : MonoBehaviour {
         goblins = new GameObject[numOfGoblins];
         dinos = new GameObject[numOfDinos];
         zombies[0] = Resources.Load("BadGuyPrefabs/ZombieGrey") as GameObject;
-        goblins[0] = Resources.Load("BadGuyPrefabs/GoblinGreen") as GameObject;
-        goblins[1] = Resources.Load("BadGuyPrefabs/GoblinBlue") as GameObject;
-        goblins[2] = Resources.Load("BadGuyPrefabs/GoblinRed") as GameObject;
+        goblins[0] = Resources.Load("BadGuyPrefabs/GoblinBlue") as GameObject;
+        goblins[1] = Resources.Load("BadGuyPrefabs/GoblinRed") as GameObject;
         dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
         dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
         dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;

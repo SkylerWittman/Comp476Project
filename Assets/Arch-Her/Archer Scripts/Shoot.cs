@@ -10,6 +10,7 @@ using System.Collections;
 public class Shoot : MonoBehaviour {
     Animation anim;
     public GameObject arrow;
+	public GameObject Explosivearrow;
     public AnimationClip attack;
     public AnimationClip hold;
     bool isAttack = false;
@@ -103,7 +104,7 @@ public class Shoot : MonoBehaviour {
 
                     mouseCounter = 0;
                     Quaternion rot = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z); // gets rotation of center of screen
-                    GameObject shootArrow = Instantiate(arrow, bow.position, mainCamera.transform.rotation) as GameObject;   // instantiates arrow
+					GameObject shootArrow = Instantiate(arrow, bow.position, mainCamera.transform.rotation) as GameObject;   // instantiates arrow
                     runForce(shootArrow); // applies physics to the arrow
                     mouseCounter = 0; // reset mouse counter
                 }

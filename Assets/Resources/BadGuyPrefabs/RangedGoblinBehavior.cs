@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GoblinBehavior : MonoBehaviour {
+public class RangedGoblinBehavior : MonoBehaviour {
 
 
 	public float acceleration = 7;

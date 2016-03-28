@@ -853,7 +853,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
 --- !u!114 &1627497293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,7 +865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9226c6e03e06386448e2c18517fd9bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
 --- !u!114 &1627497294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,7 +1125,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
 --- !u!114 &1814058492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,7 +1241,7 @@ Transform:
   - {fileID: 1734193816}
   - {fileID: 1329463468}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
 --- !u!4 &1948970396 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 633aba7763524e74d8aed8ad42e74506, type: 3}
@@ -1314,6 +1313,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2059387997}
   - 114: {fileID: 2059387996}
+  - 114: {fileID: 2059387998}
   m_Layer: 0
   m_Name: GameController
   m_TagString: controller
@@ -1345,7 +1345,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
+--- !u!114 &2059387998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2059387995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8c93bac40de854f9943a4889f08693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2059537955 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 633aba7763524e74d8aed8ad42e74506, type: 3}

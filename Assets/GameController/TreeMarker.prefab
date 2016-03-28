@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 498152}
+  - 114: {fileID: 11409104}
   m_Layer: 0
   m_Name: TreeMarker
   m_TagString: Tree
@@ -27,13 +28,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11409104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b6db53379eca24f98dc5fa10818ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goblin: {fileID: 185332, guid: b4dd75122fdad234ea6cfde5fc254983, type: 2}
+  distanceToSpawn: 10
+  timeToRespawn: 30
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: goblin
+      value: 
+      objectReference: {fileID: 185332, guid: b4dd75122fdad234ea6cfde5fc254983, type: 2}
+    - target: {fileID: 0}
+      propertyPath: distanceToSpawn
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153932}

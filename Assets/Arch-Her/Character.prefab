@@ -4452,6 +4452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 137712, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
+  Explosivearrow: {fileID: 140166, guid: b6f7a33538707e845b7d3bd321eda69a, type: 2}
   attack: {fileID: 7400032, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
   hold: {fileID: 7400030, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
   arrowSpeed: 75
@@ -6548,6 +6549,10 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: fc0af733ce54448439483f281b496b83, type: 3}
+    - target: {fileID: 0}
+      propertyPath: Explosivearrow
+      value: 
+      objectReference: {fileID: 140166, guid: b6f7a33538707e845b7d3bd321eda69a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157372}

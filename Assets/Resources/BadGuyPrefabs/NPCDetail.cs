@@ -36,12 +36,15 @@ public class NPCDetail : MonoBehaviour {
         Vector3 pos = transform.position;
         if(health < 0.0f)
         {
-            anim.CrossFade(die.name, 0.5f);
+           
+			anim.CrossFade(die.name, 0.5f);
             //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
             transform.position = pos;
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            Destroy(this.gameObject, anim[die.name].length+.5f);
+           
+
+			Destroy(this.gameObject, anim[die.name].length+.5f);
             
         }
 
@@ -61,7 +64,6 @@ public class NPCDetail : MonoBehaviour {
                 //No clue yet
                 break;
         }
-
 
 
         Destroy(other.gameObject);

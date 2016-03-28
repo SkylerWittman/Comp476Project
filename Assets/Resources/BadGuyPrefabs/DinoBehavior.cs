@@ -167,6 +167,7 @@ public class DinoBehavior : MonoBehaviour {
         if (player != null)
         {   
             Vector3 chaseDirection = player.position - transform.position;
+			chaseDirection.y = 0.0f;
             //Look at the comment in wander if -chaseDirection looks funny
             Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);

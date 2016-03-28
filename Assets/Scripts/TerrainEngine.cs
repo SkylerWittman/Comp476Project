@@ -35,6 +35,7 @@ public class TerrainEngine : MonoBehaviour
         trees[0] = Resources.Load("TreePrefabs/BroadLeafTree") as GameObject;
         trees[1] = Resources.Load("TreePrefabs/ConiferTree") as GameObject;
 
+
         for (int i = 0; i < numOfTreePrototypes; i++)
         {
             treePrototypes[i] = new TreePrototype();
