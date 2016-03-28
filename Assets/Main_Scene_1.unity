@@ -818,9 +818,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1486291284}
   - 20: {fileID: 1486291288}
-  - 124: {fileID: 1486291287}
-  - 92: {fileID: 1486291286}
-  - 81: {fileID: 1486291285}
   m_Layer: 0
   m_Name: miniMap
   m_TagString: Untagged
@@ -840,27 +837,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1664725776}
   m_RootOrder: 11
---- !u!81 &1486291285
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1486291283}
-  m_Enabled: 1
---- !u!92 &1486291286
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1486291283}
-  m_Enabled: 1
---- !u!124 &1486291287
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1486291283}
-  m_Enabled: 1
 --- !u!20 &1486291288
 Camera:
   m_ObjectHideFlags: 0
@@ -1490,11 +1466,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 409922, guid: 8fb5f2060060b934fa5d3af81a2c1d90, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.41
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 409922, guid: 8fb5f2060060b934fa5d3af81a2c1d90, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: 409922, guid: 8fb5f2060060b934fa5d3af81a2c1d90, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1530,11 +1506,11 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 2dc8deebfb4e06e4f850a6cb6a55539c, type: 2}
     - target: {fileID: 409922, guid: 8fb5f2060060b934fa5d3af81a2c1d90, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.02
+      value: 0.015
       objectReference: {fileID: 0}
     - target: {fileID: 409922, guid: 8fb5f2060060b934fa5d3af81a2c1d90, type: 2}
       propertyPath: m_LocalScale.z
-      value: 0.02
+      value: 0.015
       objectReference: {fileID: 0}
     - target: {fileID: 409922, guid: 8fb5f2060060b934fa5d3af81a2c1d90, type: 2}
       propertyPath: m_LocalScale.y
