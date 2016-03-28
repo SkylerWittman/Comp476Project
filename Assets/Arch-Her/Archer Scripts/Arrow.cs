@@ -48,4 +48,8 @@ public class Arrow : MonoBehaviour {
 
         counter++;
 	}
+    void OnCollisionEnter(Collision Collision)
+    {
+        Debug.Log("collide");
+    }
 }
