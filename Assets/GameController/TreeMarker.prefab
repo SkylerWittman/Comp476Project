@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b6db53379eca24f98dc5fa10818ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goblin: {fileID: 185332, guid: b4dd75122fdad234ea6cfde5fc254983, type: 2}
+  goblin: {fileID: 185332, guid: e1cf5626696f2404d9d10c204ce910c6, type: 2}
   distanceToSpawn: 10
   timeToRespawn: 30
 --- !u!1001 &100100000
@@ -52,7 +52,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: goblin
       value: 
-      objectReference: {fileID: 185332, guid: b4dd75122fdad234ea6cfde5fc254983, type: 2}
+      objectReference: {fileID: 185332, guid: e1cf5626696f2404d9d10c204ce910c6, type: 2}
     - target: {fileID: 0}
       propertyPath: distanceToSpawn
       value: 10
