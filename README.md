@@ -16,19 +16,15 @@
 <table>
 	<tr>
 		<td>Rotation Arrow (redo prefab)</td>
-		<td></td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Crosshair</td>
-		<td></td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Arrow Physics</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Particle System</td>
-		<td></td>
+		<td>Done</td>
 	</tr>
 </table>
 
@@ -36,7 +32,7 @@
 <table>
 	<tr>
 		<td>AI
-			<ul><li>A* Star</li></ul>
+			<ul><li>A*</li></ul>
 		</td>
 		<td></td>
 	</tr>
@@ -54,8 +50,14 @@
 			<ul>
 				<li>Player health/damage
 				</li>
+				<li>Score and end game trigger</li>
 				<li>In-game drops
 				</li>
+				<li>Enemy damage</li>
+				<li>Start screen, load screen, end screen, settings</li>
+				<li>Documentation</li>
+				<li>Enemy player collision</li>
+				<li>Arrow type in HUD</li>
 			</ul>
 		</td>
 		<td></td>
@@ -97,7 +99,11 @@
 		<td>Done</td>
 	</tr>
 	<tr>
-		<td>Work on documentation</td>
+		<td>Seeding the RNG</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Tweak environment (Fog, leaves, more textures, change heights, trees etc</td>
 		<td></td>
 	</tr>
 </table>
