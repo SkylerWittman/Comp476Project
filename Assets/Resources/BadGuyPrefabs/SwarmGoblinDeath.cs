@@ -48,7 +48,7 @@ public class SwarmGoblinDeath : MonoBehaviour {
 			//Freeze all movement/rotations when NPC has been slain
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<SwarmGoblinBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
-			Destroy(this.gameObject, anim[die.name].length+3.0f);
+			Destroy(this.gameObject, anim[die.name].length+5.0f);
 
 		}
 

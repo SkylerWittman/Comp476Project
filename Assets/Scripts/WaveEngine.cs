@@ -74,7 +74,7 @@ public class WaveEngine : MonoBehaviour {
     //Once it has found a valid spawning coordinate, it returns an array XZ of size 2
     //XZ[0] is the x coordinate
     //XZ[1] is the z coordinate
-    private float[] getXZ()
+    public float[] getXZ()
     {
         float[] XZ = new float[2];
         float x = Random.Range(0.0f, terrainSize);

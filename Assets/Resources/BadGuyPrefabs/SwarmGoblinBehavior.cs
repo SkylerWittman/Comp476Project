@@ -6,7 +6,6 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 
 	private Rigidbody rb;
 	private GameObject target;
-	//private GameObject[] SwarmGoblins;
 	private GameObject swarmController;
 	private SwarmController swarmer;
 	private List<GameObject> swarmNeighbors = new List<GameObject>();
@@ -17,19 +16,20 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 	private Vector3 wanderVector;
 	private bool canHunt = false;
 	private bool canWander = false;
-	private float moveSpeed = 20;
+	private bool cantSeePlayer = true;
+	private float moveSpeed = 10;
 	private float collisionTimer = 120;
-	private float wanderTimer = 200;
+	private float searchTimer = 120;
+	private float distanceToHunt = 50;
 	private Animation anim;
 	private AnimationClip runClip;
 	private AnimationClip attackClip;
 
-	public float swarmDistance = 250.0f;
+	public float swarmDistance = 100.0f;
 
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
-		//SwarmGoblins = GameObject.FindGameObjectsWithTag ("SwarmGoblin");
 		swarmController = GameObject.FindGameObjectWithTag("controller");
 		swarmer = swarmController.GetComponent<SwarmController> ();
 
@@ -43,12 +43,14 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 		runClip = anim.GetClip("run");
 		attackClip = anim.GetClip("attack02");
 
+		canWander = true;
+
 	}
 	
 	//when a goblin in the swarm dies he must inform his swarm members so they can recalcualte thier swarm mebers for proper movement
 	public void InformSwarmMembersOfDeath(GameObject swarmMember){
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
-		swarmNeighbors.Remove(swarmMember); //removes the dead goblin who alled this method
+		swarmNeighbors.Remove(swarmMember); //removes the dead goblin who called this method
 
 		for(int i =0; i< swarmNeighbors.Count; i++){
 			swarmNeighbors [i].GetComponent<SwarmGoblinBehavior> ().FindMySwarm ();
@@ -56,6 +58,14 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 		}
 	}
 
+	//when a goblin in the swarm dies he must inform his swarm members so they can recalcualte thier swarm mebers for proper movement
+	public void InformSwarmMembersOfSighting(){
+		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
+		for(int i =0; i< swarmNeighbors.Count; i++){
+			swarmNeighbors [i].GetComponent<SwarmGoblinBehavior> ().setCanHunt ();
+
+		}
+	}
 
 	//finds swarm goblins who are nearby and add them to the list to keep track
 	public void FindMySwarm(){
@@ -66,7 +76,6 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 					swarmNeighbors.Add (goblin);		
 			}
 		}
-		canWander = true;
 	}
 
 	private Vector3 AlignVectorCalculate(){
@@ -172,65 +181,92 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 	IEnumerator RecalculateSwarm(){
 		while (true) {
 			FindMySwarm ();
-			yield return new WaitForSeconds (15.0f);
+			int rand = Random.Range (15, 20);
+			yield return new WaitForSeconds (rand);
 		}
 	}
 
 	private void CollisionAvoidance(){
 		RaycastHit hit;
 		Vector3 avoidanceVector;
-		if (Physics.Raycast (transform.position, transform.forward, out hit, 30)) {
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 50)) {
 			if (hit.collider.tag == "Tree") {
-				Debug.Log ("TREEEEEEEEE");
 				avoidanceVector = (rb.velocity - hit.collider.transform.position).normalized;
 				avoidanceVector *= moveSpeed;
 				rb.velocity += avoidanceVector;
 			}
 		}
 	}
+		
 
-	// Update is called once per frame
+	public void setCanHunt(){
+		canHunt = true;
+		canWander = false;
+	}
+
+
+	private void PlayerCloseEnoughToHunt(){
+
+		//checks if player is close enough to chase if they are they inform there swarm members
+		if (Vector3.Distance (target.transform.position, transform.position) < distanceToHunt) {
+			cantSeePlayer = false;
+			setCanHunt ();
+			InformSwarmMembersOfSighting ();
+
+
+		} 
+	}
+
+
 	void FixedUpdate () {
 	
 		collisionTimer--;
+		searchTimer--;
 
+		//if the goblin hasnt spotted a player then every 2 seconds he will see if the player is in sight
+		if (cantSeePlayer && searchTimer < 0) {
+			PlayerCloseEnoughToHunt ();
+			searchTimer = 120;
+
+		}
+		//every 3seconds the goblins raycast ahead to make sure the wont run into a tree
 		if (collisionTimer < 0) {
 			CollisionAvoidance ();
-			collisionTimer = 120;
+			collisionTimer = 180;
 		}
-
-
-
-
-//		if (canWander) {
-//
-//			//apply gravity to enemies
-//			rb.AddForce (Vector3.down * rb.mass * 20);
-//
-//
-//			//recalcualte swarm information to be used in movement
-//			alignment = AlignVectorCalculate ();
-//			cohesion = CenterOfMassOfSwarm ();
-//			seperation = SeperationOfSwarm ();
-//
-//			//getCurrent Swarms Wander Direction
-//			//wanderVector = swarmer.GetWanderDirection();
-//
-//
-//			Quaternion newRotation = Quaternion.LookRotation(wanderVector);
-//			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10.0f);
-//
-//			rb.velocity += ( wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
-//			rb.velocity = rb.velocity.normalized * moveSpeed;
-//		
-//			anim.Play(runClip.name);
-//		}
 
 
 		if (canWander) {
 
 			//apply gravity to enemies
-			rb.AddForce (Vector3.down * rb.mass * 20);
+			rb.AddForce (Vector3.down * rb.mass * 40);
+
+
+			//recalcualte swarm information to be used in movement
+			alignment = AlignVectorCalculate ();
+			cohesion = CenterOfMassOfSwarm ();
+			seperation = SeperationOfSwarm ();
+
+			//getCurrent Swarms Wander Direction
+			wanderVector = (swarmer.GetWanderTarget() - transform.position);
+
+
+			Quaternion newRotation = Quaternion.LookRotation(wanderVector);
+			newRotation.x = 0.0f;
+			newRotation.z = 0.0f;
+			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10.0f);
+
+			rb.velocity += ( wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
+			rb.velocity = rb.velocity.normalized * moveSpeed;
+		
+			anim.Play(runClip.name);
+		}
+
+
+		if (canHunt) {
+
+			//apply gravity to enemies
+			rb.AddForce (Vector3.down * rb.mass * 30);
 
 			//recalcualte swarm information to be used in movement
 			alignment = AlignVectorCalculate ();
@@ -239,10 +275,10 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 
 			//look towards the target
 			Vector3 newDirection = (target.transform.position - this.transform.position).normalized;
-			Quaternion newRotation = Quaternion.LookRotation(newDirection);
+			Quaternion newRotation = Quaternion.LookRotation(newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
 			newRotation.x = 0.0f;
 			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10.0f);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 10.0f);
 
 			//move towards the target as a swarm
 			rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
@@ -250,8 +286,6 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 
 			anim.Play(runClip.name);
 		}
-
-
-
+			
 	}
 }
