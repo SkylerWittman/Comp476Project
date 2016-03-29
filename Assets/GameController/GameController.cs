@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 	private Vector3 tempPosition;
 	private bool canSlowTime = true;
     public bool cursorVisible = true;
+	private Camera theCamera;
 
 	void Start () {
 
@@ -19,7 +20,8 @@ public class GameController : MonoBehaviour {
         //Comment this if you don't like how the cursor appears
         Cursor.visible = cursorVisible;
        	Cursor.lockState = CursorLockMode.Locked;
-		
+
+		theCamera = Camera.main;
         StartCoroutine (runTree ());
 	}
 
@@ -55,11 +57,28 @@ public class GameController : MonoBehaviour {
 		yield return new WaitForSeconds (10.0f);
 		canSlowTime = true;
 	}
+
+	private void ForcePower(){
+		
+		Ray ray = theCamera.ViewportPointToRay (new Vector3(0.5f, 0.5f, 0));
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit, 30)) {
+			Debug.Log ("im looking at " + hit.transform.name);
+			hit.rigidbody.velocity = Vector3.zero;
+			hit.rigidbody.AddForce (Vector3.up * 500, ForceMode.VelocityChange);
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 	
 		if (Input.GetKeyDown (KeyCode.F) && canSlowTime) {
 			StartCoroutine (SlowTime ());
+
+		}
+
+		if (Input.GetButton ("Fire2")) {
+			ForcePower ();
 
 		}
 	}

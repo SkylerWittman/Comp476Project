@@ -329,6 +329,7 @@ GameObject:
   - 54: {fileID: 5425926}
   - 114: {fileID: 11485646}
   - 114: {fileID: 11476002}
+  - 114: {fileID: 11475274}
   m_Layer: 0
   m_Name: GoblinRed
   m_TagString: BadGuy
@@ -1371,6 +1372,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!114 &11475274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b85dc5748abe149a72e5c53d394296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwingAxe: {fileID: 177788, guid: b12b1733a3338a84cbe3342681cda664, type: 2}
+  spear: {fileID: 174674, guid: be9a965428e36cd4ebd46010677e7e6d, type: 2}
 --- !u!114 &11476002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1391,7 +1405,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149360}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc70a01e75ea74545a3cee545d23128e, type: 3}
   m_Name: 
@@ -1522,6 +1536,18 @@ Prefab:
       propertyPath: hit
       value: 
       objectReference: {fileID: 7400000, guid: 05a28ecbb33a989479703c11c26c36f5, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: throwingAxe
+      value: 
+      objectReference: {fileID: 177788, guid: b12b1733a3338a84cbe3342681cda664, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spear
+      value: 
+      objectReference: {fileID: 174674, guid: be9a965428e36cd4ebd46010677e7e6d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149360}
