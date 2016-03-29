@@ -72,7 +72,6 @@ public class Shoot : MonoBehaviour {
                     lockCam = false;
                 }
             }
-            Debug.Log("Time Held: " + timeHeld);
             // timeHeld = 0;
             timeHeld++;//multiplier for how long it is held
             mouseCounter++;//counts how many frames the mouse has been held

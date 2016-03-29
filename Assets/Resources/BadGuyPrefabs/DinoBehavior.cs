@@ -236,7 +236,7 @@ public class DinoBehavior : MonoBehaviour {
     IEnumerator attack()
     {
         canAttack = false;
-        Debug.Log("Strike player with scaley appendage");
+
         anim.Play(attackClip.name);
         yield return new WaitForSeconds(2.0f);
         canAttack = true;

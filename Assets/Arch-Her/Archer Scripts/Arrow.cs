@@ -6,7 +6,9 @@ public class Arrow : MonoBehaviour {
     public float damage;
     int counter = 0;
     public ArcherDetail archer;
+    public Explosion explosion;
     bool lockA = true;
+    bool hitLock = true;
 
 	// Use this for initialization
 	void Start () {
@@ -48,8 +50,29 @@ public class Arrow : MonoBehaviour {
 
         counter++;
 	}
-    void OnCollisionEnter(Collision Collision)
+    void OnTriggerEnter(Collider Collision)
     {
-        Debug.Log("collide");
+
+        if (hitLock == true)
+        {
+            /*
+            //RaycastHit[] hit = Physics.SphereCastAll(transform.position - transform.up * 10.0f, 10.0f, transform.up, 100f);
+            if (hit != null)
+            {
+                Debug.Log(hit.Length);
+                
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    if(hit[i].transform.gameObject.tag == "Player")
+                    {
+
+                        hit[i].transform.GetComponent<Rigidbody>().AddExplosionForce(50, transform.position, 15f, 50);
+                    }
+                }
+                    
+            }*/
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            hitLock = false;
+        }
     }
 }

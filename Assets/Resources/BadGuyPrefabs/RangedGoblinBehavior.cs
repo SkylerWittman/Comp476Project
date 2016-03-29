@@ -37,7 +37,6 @@ public class RangedGoblinBehavior : MonoBehaviour {
 		while (true) {
 			yield return new WaitForSeconds (timeToChangeBetweenTrees);
 			FindClosetTree ();
-			Debug.Log ("IM BEING CALLED");
 		}
 	}
 
