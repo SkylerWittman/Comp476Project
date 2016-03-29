@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 498152}
   - 114: {fileID: 11409104}
+  - 136: {fileID: 13658980}
   m_Layer: 0
   m_Name: TreeMarker
   m_TagString: Tree
@@ -23,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 993.14075, y: -15.875858, z: 1022.67926}
+  m_LocalPosition: {x: 81.660065, y: -0.93, z: 224.884}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,6 +43,19 @@ MonoBehaviour:
   goblin: {fileID: 185332, guid: e1cf5626696f2404d9d10c204ce910c6, type: 2}
   distanceToSpawn: 10
   timeToRespawn: 30
+--- !u!136 &13658980
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153932}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 26.21
+  m_Direction: 1
+  m_Center: {x: 0, y: 6.25, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

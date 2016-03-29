@@ -76,14 +76,14 @@ public class TreeGoblinBehavior : MonoBehaviour {
 
 			anim.Play(runClip.name);
 
+			//apply gravity to enemies
+			rb.AddForce (Vector3.down * rb.mass * 20);
 
 			//find direction towards target and look towards target
 			directionToMove = (target.transform.position - this.transform.position).normalized;
 			Quaternion newRotation = Quaternion.LookRotation (directionToMove);
 			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 10.0f);
 
-			//restricts enemies ability to "jump" when character jumps
-			directionToMove.y = 0.0f;
 
 			//addforce in direction of character
 			if (rb.velocity.magnitude < maxSpeed) {

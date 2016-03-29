@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour {
 
         //Comment this if you don't like how the cursor appears
         Cursor.visible = cursorVisible;
-       //Cursor.lockState = CursorLockMode.Locked;
+       	Cursor.lockState = CursorLockMode.Locked;
 		
         StartCoroutine (runTree ());
 	}

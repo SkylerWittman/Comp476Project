@@ -14,13 +14,18 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 	private Vector3 cohesion;
 	private Vector3 seperation;
 	private Vector3 moveDirection;
-	private bool canMove = false;
-	private float moveSpeed = 10;
+	private Vector3 wanderVector;
+	private bool canHunt = false;
+	private bool canWander = false;
+	private float moveSpeed = 20;
+	private float collisionTimer = 120;
+	private float wanderTimer = 200;
 	private Animation anim;
 	private AnimationClip runClip;
 	private AnimationClip attackClip;
 
-	public float swarmDistance = 100.0f;
+	public float swarmDistance = 250.0f;
+
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
@@ -61,7 +66,7 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 					swarmNeighbors.Add (goblin);		
 			}
 		}
-		canMove = true;
+		canWander = true;
 	}
 
 	private Vector3 AlignVectorCalculate(){
@@ -171,14 +176,62 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 		}
 	}
 
-
+	private void CollisionAvoidance(){
+		RaycastHit hit;
+		Vector3 avoidanceVector;
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 30)) {
+			if (hit.collider.tag == "Tree") {
+				Debug.Log ("TREEEEEEEEE");
+				avoidanceVector = (rb.velocity - hit.collider.transform.position).normalized;
+				avoidanceVector *= moveSpeed;
+				rb.velocity += avoidanceVector;
+			}
+		}
+	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
 	
-		if (canMove) {
+		collisionTimer--;
 
-			rb.AddForce (Vector3.down * rb.mass * 10);
+		if (collisionTimer < 0) {
+			CollisionAvoidance ();
+			collisionTimer = 120;
+		}
+
+
+
+
+		if (canWander) {
+
+			//apply gravity to enemies
+			rb.AddForce (Vector3.down * rb.mass * 20);
+
+
+			//recalcualte swarm information to be used in movement
+			alignment = AlignVectorCalculate ();
+			cohesion = CenterOfMassOfSwarm ();
+			seperation = SeperationOfSwarm ();
+
+			//getCurrent Swarms Wander Direction
+			wanderVector = swarmer.GetWanderDirection();
+
+
+			Quaternion newRotation = Quaternion.LookRotation(wanderVector);
+			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10.0f);
+
+			rb.velocity += ( wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
+			rb.velocity = rb.velocity.normalized * moveSpeed;
+		
+			anim.Play(runClip.name);
+		}
+
+
+		if (canHunt) {
+
+			//apply gravity to enemies
+			rb.AddForce (Vector3.down * rb.mass * 20);
+
 			//recalcualte swarm information to be used in movement
 			alignment = AlignVectorCalculate ();
 			cohesion = CenterOfMassOfSwarm ();
@@ -191,8 +244,7 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 			newRotation.z = 0.0f;
 			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10.0f);
 
-			//move towards the target as a swarm, zeroing out the y coordinate restricts ability to move upwards when player jumps
-			//newDirection.y = 0.0f;
+			//move towards the target as a swarm
 			rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
 			rb.velocity = rb.velocity.normalized * moveSpeed;
 
