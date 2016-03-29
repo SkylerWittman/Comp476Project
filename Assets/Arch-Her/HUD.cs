@@ -5,16 +5,18 @@ using System.Collections;
 public class HUD : MonoBehaviour {
 
 	//can be gotten from player script health value
-    //PlayerMovement PlayerMovementScript;
+    public GameObject playerObject;
+    public ArcherDetail archerDetailScript;
+    public Arrow arrowScript;
 	public int playerHealth;
-	public int playerHealthCritical;
-	public int projectileDamage;
+	public float projectileDamage;
 
 	//tag used to compare collision tag and damage player
 	public string collisionTag;
 
 	//UI elements
 	//Health
+	public Text hpText;
 	public Slider display;
 	public Image sliderFill;
 	
@@ -25,29 +27,34 @@ public class HUD : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-        //PlayerMovementScript = GetComponentInParent<PlayerMovement>();
-        //playerHealth = PlayerMovementScript.
-        display = GetComponentInChildren<Slider> ();
-		sliderFill = GetComponentInChildren<Image> ();
-        
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        archerDetailScript = playerObject.GetComponent<ArcherDetail>();
+        // ----------BUG---------------
+        // After the first shot, the newly instantiated arrow object has a different tag if it's anything but a regular arrow
+        // so we have to deal with that
+        arrowScript = GameObject.FindGameObjectWithTag ("RegularArrow").GetComponent<Arrow>();
+		display = GameObject.FindGameObjectWithTag("Health").GetComponentInChildren<Slider> ();
+		sliderFill = GameObject.FindGameObjectWithTag ("HPFill").GetComponent<Image> ();
+		hpText = GameObject.FindGameObjectWithTag ("HPText").GetComponent<Text> ();
+        scoreText = GameObject.FindGameObjectWithTag ("score").GetComponent<Text>();
+
+        playerHealth = archerDetailScript.health;
+        projectileDamage = arrowScript.damage;
+
         score = 0;
-		//StartCoroutine(HealthWait());
+		StartCoroutine(HealthWait());
 	}
 	
-	// Update is called once per frame
 	void Update () 
 	{
-		//Perhaps to run smoother, best to only check for these things in an external method whenever the player gets hit
-		//by an enemy sword or projectile
-
-		//Debug.Log (sliderFill.color.r);
-		//Debug.Log (sliderFill.color.g);
-		//Debug.Log (sliderFill.color.b);
 		//Health
 		display.value = playerHealth;
-		if (playerHealth <= playerHealthCritical) 
+        if (playerHealth <= archerDetailScript.playerHealthCritical) 
 		{
 			sliderFill.color = Color.red;
+			hpText.color = Color.red;
+
 		}
 //		if (playerHealth <= 0)
 //		{
@@ -56,19 +63,13 @@ public class HUD : MonoBehaviour {
 
 		//Score
 		scoreText.text = "score: " + score;
-	}
 
-	void OnTriggerEnter(Collider col)
-	{
-		if (col.gameObject.tag == collisionTag) 
-		{
-			playerHealth -= projectileDamage;
-		}
 	}
 
 	IEnumerator HealthWait()
 	{
 		yield return new WaitForSeconds(3);
-		playerHealth = playerHealthCritical;
+        playerHealth = archerDetailScript.playerHealthCritical;
+        score += 10;
 	}
 }
