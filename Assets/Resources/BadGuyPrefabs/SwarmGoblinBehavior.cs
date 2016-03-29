@@ -202,32 +202,32 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 
 
 
+//		if (canWander) {
+//
+//			//apply gravity to enemies
+//			rb.AddForce (Vector3.down * rb.mass * 20);
+//
+//
+//			//recalcualte swarm information to be used in movement
+//			alignment = AlignVectorCalculate ();
+//			cohesion = CenterOfMassOfSwarm ();
+//			seperation = SeperationOfSwarm ();
+//
+//			//getCurrent Swarms Wander Direction
+//			//wanderVector = swarmer.GetWanderDirection();
+//
+//
+//			Quaternion newRotation = Quaternion.LookRotation(wanderVector);
+//			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10.0f);
+//
+//			rb.velocity += ( wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
+//			rb.velocity = rb.velocity.normalized * moveSpeed;
+//		
+//			anim.Play(runClip.name);
+//		}
+
+
 		if (canWander) {
-
-			//apply gravity to enemies
-			rb.AddForce (Vector3.down * rb.mass * 20);
-
-
-			//recalcualte swarm information to be used in movement
-			alignment = AlignVectorCalculate ();
-			cohesion = CenterOfMassOfSwarm ();
-			seperation = SeperationOfSwarm ();
-
-			//getCurrent Swarms Wander Direction
-			wanderVector = swarmer.GetWanderDirection();
-
-
-			Quaternion newRotation = Quaternion.LookRotation(wanderVector);
-			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10.0f);
-
-			rb.velocity += ( wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
-			rb.velocity = rb.velocity.normalized * moveSpeed;
-		
-			anim.Play(runClip.name);
-		}
-
-
-		if (canHunt) {
 
 			//apply gravity to enemies
 			rb.AddForce (Vector3.down * rb.mass * 20);
