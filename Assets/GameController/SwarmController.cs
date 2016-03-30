@@ -10,7 +10,6 @@ public class SwarmController : MonoBehaviour {
 
 	void Start () {
 		SwarmGoblins = GameObject.FindGameObjectsWithTag ("SwarmGoblin");
-		InvokeRepeating ("UpdateSwarm", 10.0f, 20.0f);
 		InvokeRepeating ("SetWanderTarget", 0.0f, 8.0f);
 		targetGenerator = spawnEngine.GetComponent<WaveEngine> ();
 

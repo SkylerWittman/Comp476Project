@@ -82,6 +82,8 @@ public class TreeGoblinBehavior : MonoBehaviour {
 			//find direction towards target and look towards target
 			directionToMove = (target.transform.position - this.transform.position).normalized;
 			Quaternion newRotation = Quaternion.LookRotation (directionToMove);
+			newRotation.x = 0.0f;
+			newRotation.z = 0.0f;
 			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 10.0f);
 
 

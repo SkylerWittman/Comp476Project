@@ -24,7 +24,7 @@ public class Explosion : MonoBehaviour {
                         hit[i].transform.GetComponent<NPCDetail>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 1.5f;
                         break;
                     case "SwarmGoblin":
-                        hit[i].transform.GetComponent<NPCDetail>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 1.5f;
+                        hit[i].transform.GetComponent<SwarmGoblinDeath>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 1.5f;
                         break;
                 }
 

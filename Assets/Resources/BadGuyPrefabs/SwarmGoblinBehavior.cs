@@ -58,7 +58,7 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 		}
 	}
 
-	//when a goblin in the swarm dies he must inform his swarm members so they can recalcualte thier swarm mebers for proper movement
+	//when a goblin in the swarm finds the player he notifys his swarm
 	public void InformSwarmMembersOfSighting(){
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
 		for(int i =0; i< swarmNeighbors.Count; i++){
@@ -69,6 +69,7 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 
 	//finds swarm goblins who are nearby and add them to the list to keep track
 	public void FindMySwarm(){
+		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
 		GameObject[] swarm = swarmer.getSwarm (); //gets most recent list of goblins on the map
 		swarmNeighbors.Clear (); //clears the list
 		foreach (GameObject goblin in swarm) {
