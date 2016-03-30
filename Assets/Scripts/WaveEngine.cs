@@ -19,6 +19,9 @@ public class WaveEngine : MonoBehaviour {
 
     void Start()
     {
+        //RNG initialization
+        Random.seed = (int)System.DateTime.Now.Ticks;
+        
         //Terrain initialization
         terrain = TerrainEngine.terrain;
         terrainSize = TerrainEngine.terrainSize;

@@ -41,6 +41,9 @@ public class DinoBehavior : MonoBehaviour {
 
     void Start()
     {
+        //RNG initialization
+        Random.seed = (int)System.DateTime.Now.Ticks;
+        
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = transform.position;
         directionToHeadTo = Random.Range(0, 360);

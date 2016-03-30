@@ -17,7 +17,6 @@ public class GameController : MonoBehaviour {
 		Debug.Log ("Creating");
 		Terrain.activeTerrain.tag = "Terrain";
 
-        //Comment this if you don't like how the cursor appears
         Cursor.visible = cursorVisible;
        	Cursor.lockState = CursorLockMode.Locked;
 
@@ -69,6 +68,13 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+    private void toggleCursor()
+    {
+        cursorVisible = !cursorVisible;
+        Cursor.visible = cursorVisible;
+        Cursor.lockState = cursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -81,5 +87,11 @@ public class GameController : MonoBehaviour {
 			ForcePower ();
 
 		}
+
+        if (Input.GetKey(KeyCode.M))
+        {
+            toggleCursor();
+        }
 	}
+
 }
