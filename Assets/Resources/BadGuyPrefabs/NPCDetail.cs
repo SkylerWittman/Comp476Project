@@ -56,11 +56,9 @@ public class NPCDetail : MonoBehaviour {
             case "PoisionArrow":
                 health -= other.GetComponent<Arrow>().damage;
                 LockA = true;
-                Destroy(other.gameObject);
                 break;
             case "ExplosiveArrow":
                 Destroy(this.gameObject, anim[die.name].length + .5f);
-                Destroy(other.gameObject);
                 break;
             case "Gas":
                 LockA = true;

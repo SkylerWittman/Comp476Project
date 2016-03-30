@@ -62,11 +62,13 @@ public class Arrow : MonoBehaviour {
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
             hitLock = false;
+            Destroy(this.gameObject);
         }
         else if(poisonLock == true)
         {
             Instantiate(poisonExplosion, transform.position, Quaternion.identity);
             poisonLock = false;
+            Destroy(this.gameObject);
         }
     }
 }
