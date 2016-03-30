@@ -238,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   archer: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
-  explosion: {fileID: 11409074, guid: 3f91f8417194cea4c9aaec7910569674, type: 2}
+  explosion: {fileID: 11484784, guid: 28241d7b34b09c146a1f2a0e96a06d87, type: 2}
 --- !u!198 &19854722
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1878,7 +1878,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: explosion
       value: 
-      objectReference: {fileID: 11409074, guid: 3f91f8417194cea4c9aaec7910569674,
+      objectReference: {fileID: 11484784, guid: 28241d7b34b09c146a1f2a0e96a06d87,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

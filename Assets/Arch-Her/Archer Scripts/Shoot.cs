@@ -10,7 +10,10 @@ using System.Collections;
 public class Shoot : MonoBehaviour {
     Animation anim;
     public GameObject arrow;
-	public GameObject Explosivearrow;
+    public GameObject regularArrow;
+    public GameObject poisonArrow;
+    public GameObject explosiveArrow;
+
     public AnimationClip attack;
     public AnimationClip hold;
     bool isAttack = false;
@@ -34,14 +37,15 @@ public class Shoot : MonoBehaviour {
     bool OriginalOn = true;
     bool lockCam = true;
     int mouseCounter = 0;
-	// Use this for initialization
-	void Start () {
+    public ArcherDetail archer;
+    // Use this for initialization
+    void Start () {
         
         anim = GetComponent<Animation>();
         anim[attack.name].speed = .7f;
         rightHand = GameObject.FindGameObjectWithTag("righthand").transform;
         bow = GameObject.FindGameObjectWithTag("bow").transform;
-
+        archer = GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>();
 
         crossHairPosition = new Rect( ((Screen.width - crosshairTexture.width)/ 2.05f),
             ((Screen.height - crosshairTexture.height) /1.9f), crosshairTexture.width, crosshairTexture.height);
@@ -102,6 +106,8 @@ public class Shoot : MonoBehaviour {
                 {
 
                     mouseCounter = 0;
+                    arrow = getArrow();
+                    checkArrowStock();
                     Quaternion rot = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z); // gets rotation of center of screen
 					GameObject shootArrow = Instantiate(arrow, bow.position, mainCamera.transform.rotation) as GameObject;   // instantiates arrow
                     runForce(shootArrow); // applies physics to the arrow
@@ -135,6 +141,36 @@ public class Shoot : MonoBehaviour {
         }
     }
 
+    GameObject getArrow()
+    {
+        
+        switch (archer.arrow_type)
+        {
+            case ArcherDetail.arrowType.poison:
+                return poisonArrow;
+            case ArcherDetail.arrowType.explosive:
+                return explosiveArrow;
+            default:
+                return regularArrow;
+
+        }
+        
+    }
+
+    void checkArrowStock()
+    {
+        switch (archer.arrow_type)
+        {
+            case ArcherDetail.arrowType.regular:
+                break;
+            case ArcherDetail.arrowType.poison:
+                --archer.poisonArrowStock;
+                break;
+            case ArcherDetail.arrowType.explosive:
+                --archer.explosiveArrowStock;
+                break;
+        }
+    }
     void runForce(GameObject arrow)//Method for physics
     {
         arrow.GetComponent<Rigidbody>().AddForce((arrow.transform.forward * 5 * arrowSpeed) , ForceMode.Impulse);

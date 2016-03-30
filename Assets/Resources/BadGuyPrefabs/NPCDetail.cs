@@ -24,7 +24,7 @@ public class NPCDetail : MonoBehaviour {
         {
             if (counter < 100)
             {
-                health -= 50.0f;
+                health -= 10f;
                 ++counter;
             }
             else
@@ -61,7 +61,7 @@ public class NPCDetail : MonoBehaviour {
                 LockA = true;
                 break;
             case "ExplosiveArrow":
-                //No clue yet
+                Destroy(this.gameObject, anim[die.name].length + .5f);
                 break;
         }
 

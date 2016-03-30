@@ -5,6 +5,12 @@ public class Explosion : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+
+    }
+	
+	// Update is called once per frame
+	void Update () {
         RaycastHit[] hit = Physics.SphereCastAll(transform.position - transform.up * 10.0f, 10.0f, transform.up, 100f);
         if (hit != null)
         {
@@ -12,19 +18,20 @@ public class Explosion : MonoBehaviour {
 
             for (int i = 0; i < hit.Length; i++)
             {
-                if (hit[i].transform.gameObject.tag == "Player")
+                switch (hit[i].transform.gameObject.tag)
                 {
-                    Debug.Log("Totally");
-                    hit[i].transform.GetComponent<Rigidbody>().AddExplosionForce(50, transform.position, 0, 50);
+                    case "BadGuy":
+                        hit[i].transform.GetComponent<NPCDetail>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 1.5f;
+                        break;
+                    case "SwarmGoblin":
+                        hit[i].transform.GetComponent<NPCDetail>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 1.5f;
+                        break;
                 }
+
             }
 
-        }
+           Destroy(this.gameObject, 1f);
 
+        }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

@@ -1,10 +1,19 @@
 fileFormatVersion: 2
 guid: 76ece354e9d24384189cc54e57ebaceb
-timeCreated: 1455225433
+timeCreated: 1459297286
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - arrow: {instanceID: 0}
+  - regularArrow: {fileID: 137712, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
+  - poisonArrow: {fileID: 138416, guid: 45f38499af343cc40a64208a2d6f0bd3, type: 2}
+  - explosiveArrow: {fileID: 140166, guid: b6f7a33538707e845b7d3bd321eda69a, type: 2}
+  - attack: {instanceID: 0}
+  - hold: {instanceID: 0}
+  - mainCamera: {instanceID: 0}
+  - crosshairTexture: {instanceID: 0}
+  - archer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

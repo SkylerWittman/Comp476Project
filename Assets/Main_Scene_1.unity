@@ -848,7 +848,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 431174, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
@@ -1302,6 +1302,30 @@ Prefab:
       propertyPath: m_CullingMask.m_Bits
       value: 4294967039
       objectReference: {fileID: 0}
+    - target: {fileID: 11428578, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: explosiveArrow
+      value: 
+      objectReference: {fileID: 140166, guid: b6f7a33538707e845b7d3bd321eda69a, type: 2}
+    - target: {fileID: 11428578, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: poisonArrow
+      value: 
+      objectReference: {fileID: 138416, guid: 45f38499af343cc40a64208a2d6f0bd3, type: 2}
+    - target: {fileID: 11428578, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: arrow
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428578, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: regularArrow
+      value: 
+      objectReference: {fileID: 137712, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
+    - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: poisonArrowStock
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: explosiveArrowStock
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
   m_IsPrefabParent: 0
@@ -1732,7 +1756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   treeMarker: {fileID: 153932, guid: c1f1bb793010afa40823bf67b28e16c1, type: 2}
-  cursorVisible: 1
+  cursorVisible: 0
 --- !u!4 &2059387997
 Transform:
   m_ObjectHideFlags: 0
