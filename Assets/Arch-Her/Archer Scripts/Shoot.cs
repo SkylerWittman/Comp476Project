@@ -42,7 +42,7 @@ public class Shoot : MonoBehaviour {
     void Start () {
         
         anim = GetComponent<Animation>();
-        anim[attack.name].speed = .7f;
+        anim[attack.name].speed = 1.2f;
         rightHand = GameObject.FindGameObjectWithTag("righthand").transform;
         bow = GameObject.FindGameObjectWithTag("bow").transform;
         archer = GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>();
@@ -102,7 +102,7 @@ public class Shoot : MonoBehaviour {
             {
                 isAttack = false;
                 playOnce = 0;
-                if (mouseCounter > 13)
+                if (mouseCounter > 5)
                 {
 
                     mouseCounter = 0;

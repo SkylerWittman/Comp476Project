@@ -1051,7 +1051,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1339,6 +1339,10 @@ Prefab:
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: explosiveArrowStock
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220354, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
