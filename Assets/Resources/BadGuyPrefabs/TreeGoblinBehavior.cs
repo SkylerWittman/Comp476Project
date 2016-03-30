@@ -77,7 +77,7 @@ public class TreeGoblinBehavior : MonoBehaviour {
 			anim.Play(runClip.name);
 
 			//apply gravity to enemies
-			rb.AddForce (Vector3.down * rb.mass * 20);
+			rb.AddForce (Vector3.down * rb.mass * 30);
 
 			//find direction towards target and look towards target
 			directionToMove = (target.transform.position - this.transform.position).normalized;

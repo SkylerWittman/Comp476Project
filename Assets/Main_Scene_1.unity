@@ -1780,6 +1780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8c93bac40de854f9943a4889f08693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnEngine: {fileID: 1814058490}
 --- !u!4 &2059537955 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 633aba7763524e74d8aed8ad42e74506, type: 3}

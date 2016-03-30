@@ -4,17 +4,22 @@ using System.Collections;
 public class SwarmController : MonoBehaviour {
 
 	private GameObject[] SwarmGoblins;
-	private Vector3 wanderVector = new Vector3();
+	private Vector3 wanderVector;
+	public GameObject spawnEngine;
+	private WaveEngine targetGenerator;
 
 	void Start () {
 		SwarmGoblins = GameObject.FindGameObjectsWithTag ("SwarmGoblin");
 		InvokeRepeating ("UpdateSwarm", 10.0f, 20.0f);
-		InvokeRepeating ("SetWanderTarget", 1.0f, 8.0f);
+		InvokeRepeating ("SetWanderTarget", 0.0f, 8.0f);
+		targetGenerator = spawnEngine.GetComponent<WaveEngine> ();
+
 	}
 	
 	public void SetWanderTarget(){
+		float[] XZ = targetGenerator.getXZ ();
+		wanderVector = new Vector3 (XZ [0], -3.0f, XZ [1]);
 
-		//find random position on the map
 	}
 
 
@@ -27,7 +32,7 @@ public class SwarmController : MonoBehaviour {
 		return SwarmGoblins;
 	}
 
-	public Vector3 GetWanderDirection(){
+	public Vector3 GetWanderTarget(){
 
 		return wanderVector;
 	}

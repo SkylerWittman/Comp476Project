@@ -32,6 +32,9 @@ public class TerrainEngine : MonoBehaviour
     void Start()
     {
      //   terrain.gameObject.tag = "Terrain";
+        //RNG initialization
+        Random.seed = (int)System.DateTime.Now.Ticks;
+        
         //Tree initialization
         trees[0] = Resources.Load("TreePrefabs/BroadLeafTree") as GameObject;
         trees[1] = Resources.Load("TreePrefabs/ConiferTree") as GameObject;

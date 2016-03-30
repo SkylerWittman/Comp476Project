@@ -33,7 +33,7 @@ public class GoblinSpawn : MonoBehaviour {
 			rand %= 2;
 
 			if (rand == 0) {
-				Instantiate (goblin, new Vector3 (this.transform.position.x, this.transform.position.y + 40, this.transform.position.z + 10), Quaternion.identity);
+				Instantiate (goblin, new Vector3 (this.transform.position.x, this.transform.position.y + 35, this.transform.position.z + 10), Quaternion.identity);
 				Debug.Log ("Goblin");
 			}
 
