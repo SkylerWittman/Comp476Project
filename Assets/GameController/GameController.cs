@@ -17,9 +17,7 @@ public class GameController : MonoBehaviour {
 		Terrain.activeTerrain.tag = "Terrain";
 
         //Comment this if you don't like how the cursor appears
-        //Cursor.visible = cursorVisible;
-       //	Cursor.lockState = CursorLockMode.Locked;
-		
+
         StartCoroutine (runTree ());
 	}
 
@@ -55,6 +53,10 @@ public class GameController : MonoBehaviour {
 		yield return new WaitForSeconds (10.0f);
 		canSlowTime = true;
 	}
+
+
+
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -62,5 +64,8 @@ public class GameController : MonoBehaviour {
 			StartCoroutine (SlowTime ());
 
 		}
+
+
+
 	}
 }
