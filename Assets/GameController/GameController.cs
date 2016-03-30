@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 	private Vector3 tempPosition;
 	private bool canSlowTime = true;
     public bool cursorVisible = true;
+	private Camera mainCamera;
 
 	void Start () {
 
@@ -17,6 +18,9 @@ public class GameController : MonoBehaviour {
 		Terrain.activeTerrain.tag = "Terrain";
 
         //Comment this if you don't like how the cursor appears
+        Cursor.visible = cursorVisible;
+       	Cursor.lockState = CursorLockMode.Locked;
+		mainCamera = Camera.main;
 
         StartCoroutine (runTree ());
 	}
@@ -55,6 +59,15 @@ public class GameController : MonoBehaviour {
 	}
 
 
+	private void ForceLift(){
+		Ray ray = mainCamera.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0));
+		RaycastHit hit;
+
+		if (Physics.Raycast (ray, out hit, 40)) {
+			hit.rigidbody.AddForce (Vector3.up * 250, ForceMode.VelocityChange);
+		}
+
+	}
 
 
 	// Update is called once per frame
@@ -65,6 +78,10 @@ public class GameController : MonoBehaviour {
 
 		}
 
+		if (Input.GetButton ("Fire2")) {
+			ForceLift ();
+
+		}
 
 
 	}
