@@ -1089,6 +1089,7 @@ GameObject:
   - 114: {fileID: 1627497291}
   - 114: {fileID: 1627497294}
   - 114: {fileID: 1627497293}
+  - 182: {fileID: 1627497295}
   m_Layer: 0
   m_Name: TerrainEngine
   m_TagString: TerrainEngine
@@ -1143,6 +1144,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   marker: {fileID: 189828, guid: 6d111866597fb68448e1a1e0fd5a9f42, type: 2}
+--- !u!182 &1627497295
+WindZone:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1627497290}
+  m_Enabled: 1
+  m_Mode: 0
+  m_Radius: 20
+  m_WindMain: 0.2
+  m_WindTurbulence: 0.1
+  m_WindPulseMagnitude: 1
+  m_WindPulseFrequency: 0.25
 --- !u!1 &1647316997
 GameObject:
   m_ObjectHideFlags: 0

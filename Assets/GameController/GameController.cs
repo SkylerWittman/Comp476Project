@@ -99,7 +99,7 @@ public class GameController : MonoBehaviour {
 
 			}
 
-			if (Input.GetKey(KeyCode.M))
+			if (Input.GetKeyDown(KeyCode.M))
 			{
 				toggleCursor();
 			}
