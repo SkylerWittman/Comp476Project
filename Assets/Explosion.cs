@@ -21,10 +21,10 @@ public class Explosion : MonoBehaviour {
                 switch (hit[i].transform.gameObject.tag)
                 {
                     case "BadGuy":
-                        hit[i].transform.GetComponent<NPCDetail>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 1.5f;
+                        hit[i].transform.GetComponent<NPCDetail>().health -= Vector3.Distance(transform.position, hit[i].transform.position) *20f;
                         break;
                     case "SwarmGoblin":
-                        hit[i].transform.GetComponent<SwarmGoblinDeath>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 1.5f;
+                        hit[i].transform.GetComponent<SwarmGoblinDeath>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 20f;
                         break;
                 }
 
