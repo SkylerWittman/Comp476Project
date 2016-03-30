@@ -22,16 +22,12 @@ public class NPCDetail : MonoBehaviour {
         
         if (LockA == true)
         {
-            if (counter < 100)
+            if (counter > 5)
             {
                 health -= 10f;
-                ++counter;
-            }
-            else
-            {
-                LockA = false;
                 counter = 0;
             }
+            counter++; 
         }
         Vector3 pos = transform.position;
         if(health < 0.0f)
@@ -55,18 +51,24 @@ public class NPCDetail : MonoBehaviour {
         {
             case "RegularArrow":
                 health -= other.GetComponent<Arrow>().damage;
+                Destroy(other.gameObject);
                 break;
             case "PoisionArrow":
                 health -= other.GetComponent<Arrow>().damage;
                 LockA = true;
+                Destroy(other.gameObject);
                 break;
             case "ExplosiveArrow":
                 Destroy(this.gameObject, anim[die.name].length + .5f);
+                Destroy(other.gameObject);
+                break;
+            case "Gas":
+                LockA = true;
                 break;
         }
 
 
-        Destroy(other.gameObject);
+        
     }
 
 }

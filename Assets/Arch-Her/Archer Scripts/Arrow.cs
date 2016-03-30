@@ -7,8 +7,10 @@ public class Arrow : MonoBehaviour {
     int counter = 0;
     public ArcherDetail archer;
     public Explosion explosion;
+    public poisonExplosion poisonExplosion;
     bool lockA = true;
     bool hitLock = false;
+    bool poisonLock = false;
 
 
 	// Use this for initialization
@@ -33,6 +35,7 @@ public class Arrow : MonoBehaviour {
                         damage += 10;
                         break;
                     case ArcherDetail.arrowType.poison:
+                        poisonLock = true;
                         transform.tag = "PoisonArrow";
                         damage += 50;
                         break;
@@ -59,6 +62,11 @@ public class Arrow : MonoBehaviour {
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
             hitLock = false;
+        }
+        else if(poisonLock == true)
+        {
+            Instantiate(poisonExplosion, transform.position, Quaternion.identity);
+            poisonLock = false;
         }
     }
 }

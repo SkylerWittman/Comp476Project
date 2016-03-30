@@ -239,6 +239,7 @@ MonoBehaviour:
   damage: 0
   archer: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
   explosion: {fileID: 11484784, guid: 28241d7b34b09c146a1f2a0e96a06d87, type: 2}
+  poisonExplosion: {fileID: 11483906, guid: 4a5c9ec11a5cf274dab588a8b8e965b5, type: 2}
 --- !u!198 &19854722
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1879,6 +1880,11 @@ Prefab:
       propertyPath: explosion
       value: 
       objectReference: {fileID: 11484784, guid: 28241d7b34b09c146a1f2a0e96a06d87,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: poisonExplosion
+      value: 
+      objectReference: {fileID: 11483906, guid: 4a5c9ec11a5cf274dab588a8b8e965b5,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

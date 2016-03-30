@@ -20,6 +20,12 @@ TagManager:
   - BadGuy
   - WaveCount
   - SwarmGoblin
+  - HUD
+  - HPText
+  - score
+  - Health
+  - HPFill
+  - Gas
   layers:
   - Default
   - TransparentFX
