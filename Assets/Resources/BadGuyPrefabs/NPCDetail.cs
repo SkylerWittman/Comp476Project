@@ -5,8 +5,8 @@ public class NPCDetail : MonoBehaviour {
     bool LockA = false;
     Animation anim;
     public AnimationClip die;
-    public float health = 100.0f;
-    public float damage = 20.0f;
+    public float health;
+    public float damage;
     int counter = 0;
     // Use this for initialization
     void Start()
@@ -24,13 +24,13 @@ public class NPCDetail : MonoBehaviour {
         {
             if (counter > 5)
             {
-                health -= 10f;
+                health -= 10.0f;
                 counter = 0;
             }
             counter++; 
         }
         Vector3 pos = transform.position;
-        if(health < 0.0f)
+        if(health <= 0.0f)
         {
            
 			anim.CrossFade(die.name, 0.5f);
@@ -53,7 +53,8 @@ public class NPCDetail : MonoBehaviour {
                 health -= other.GetComponent<Arrow>().damage;
                 Destroy(other.gameObject);
                 break;
-            case "PoisionArrow":
+                //misspelled poison...
+            case "PoisonArrow":
                 health -= other.GetComponent<Arrow>().damage;
                 LockA = true;
                 break;

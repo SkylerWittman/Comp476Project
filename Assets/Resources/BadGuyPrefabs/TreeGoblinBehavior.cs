@@ -20,10 +20,15 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	public float attackDistance = 3;
 	public float impulse = 50;
 
+    public float treeGoblinHealth = 350.0f;
+    public float treeGoblinDamage = 10.0f;
 
-	void Start () {
+    void Start () {
 
-		target = GameObject.FindGameObjectWithTag ("Player");
+        GetComponent<NPCDetail>().health = treeGoblinHealth;
+        GetComponent<NPCDetail>().damage = treeGoblinDamage;
+
+        target = GameObject.FindGameObjectWithTag ("Player");
 		rb = GetComponent<Rigidbody> ();
 		anim = GetComponent<Animation>();
 		StartCoroutine (chaseTarget ());
@@ -54,7 +59,9 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	IEnumerator attack()
 	{
 		canAttack = false;
-		Debug.Log("Strike player with goblin appendage");
+        GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(treeGoblinDamage);
+        Debug.Log("Tree goblin did " + treeGoblinDamage + " damage");
+        Debug.Log("Strike player with goblin appendage");
 		anim.Play(attackClip.name);
 		yield return new WaitForSeconds(2.0f);
 		canAttack = true;

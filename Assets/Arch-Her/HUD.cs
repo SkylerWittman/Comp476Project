@@ -7,7 +7,7 @@ public class HUD : MonoBehaviour {
 	//can be gotten from player script health value
     public GameObject playerObject;
     public ArcherDetail archerDetailScript;
-	int playerHealth;
+	float playerHealth;
 	float projectileDamage;
 
 	//tag used to compare collision tag and damage player
@@ -70,7 +70,7 @@ public class HUD : MonoBehaviour {
         score += addedScore;
     }
 
-    public void dodamageHUD(int amountOfDamage)
+    public void dodamageHUD(float amountOfDamage)
     {
         display.value -= amountOfDamage;
     }

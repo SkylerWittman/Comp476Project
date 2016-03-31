@@ -11,15 +11,19 @@ public class RangedGoblinBehavior : MonoBehaviour {
 	public int distanceFromTreeToSlowDown = 8;
 	public float timeToChangeBetweenTrees = 10;
 
-
 	private Vector3 targetTreeDirection;
 	private Rigidbody rb;
 	private GameObject[] arrayOfTrees;
 	private bool canWalk = true;
 	private GameObject controller;
 
-	void Start () {
-		rb = GetComponent<Rigidbody> ();
+    public float rangedGoblinHealth = 300.0f;
+    public float rangedGoblinDamage = 6.0f;
+
+    void Start () {
+        GetComponent<NPCDetail>().health = rangedGoblinHealth;
+        GetComponent<NPCDetail>().damage = rangedGoblinDamage;
+        rb = GetComponent<Rigidbody> ();
 		controller = GameObject.FindGameObjectWithTag ("controller");
 		StartCoroutine (GetTreePositions ());
 		StartCoroutine (FindNewPosition ());
@@ -86,5 +90,15 @@ public class RangedGoblinBehavior : MonoBehaviour {
 
 			
 	}
+
+    //IEnumerator attack()
+    //{
+        //canAttack = false;
+        //only works if there is a single player
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(rangedGoblinDamage);
+        //anim.Play(attackClip.name);
+        //yield return new WaitForSeconds(dinoAttackCooldown);
+        //canAttack = true;
+    //}
 
 }

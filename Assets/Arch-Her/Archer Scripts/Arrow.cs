@@ -16,8 +16,6 @@ public class Arrow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         archer = GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>();
-
-
 	}
 	
 	// Update is called once per frame

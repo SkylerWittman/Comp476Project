@@ -27,9 +27,15 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 
 	public float swarmDistance = 100.0f;
 
+    
+    public float swarmGoblinHealth = 100.0f;
+    public float swarmGoblinDamage = 4.0f;
 
-	void Start () {
-		rb = GetComponent<Rigidbody> ();
+    void Start () {
+        GetComponent<SwarmGoblinDeath>().health = swarmGoblinHealth;
+        GetComponent<SwarmGoblinDeath>().damage = swarmGoblinDamage;
+
+        rb = GetComponent<Rigidbody> ();
 		swarmController = GameObject.FindGameObjectWithTag("controller");
 		swarmer = swarmController.GetComponent<SwarmController> ();
 
@@ -207,14 +213,11 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 
 
 	private void PlayerCloseEnoughToHunt(){
-
 		//checks if player is close enough to chase if they are they inform there swarm members
 		if (Vector3.Distance (target.transform.position, transform.position) < distanceToHunt) {
 			cantSeePlayer = false;
 			setCanHunt ();
 			InformSwarmMembersOfSighting ();
-
-
 		} 
 	}
 

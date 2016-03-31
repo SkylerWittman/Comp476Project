@@ -7,8 +7,8 @@ public class SwarmGoblinDeath : MonoBehaviour {
 	private bool isDead = false;
 	Animation anim;
 	public AnimationClip die;
-	public float health = 100.0f;
-	public float damage = 20.0f;
+	public float health;
+	public float damage;
 	int counter = 0;
 	// Use this for initialization
 	void Start()
@@ -60,7 +60,7 @@ public class SwarmGoblinDeath : MonoBehaviour {
 		case "RegularArrow":
 			health -= other.GetComponent<Arrow>().damage;
 			break;
-		case "PoisionArrow":
+		case "PoisonArrow":
 			health -= other.GetComponent<Arrow>().damage;
 			LockA = true;
 			break;

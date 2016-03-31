@@ -64,7 +64,7 @@ public class WaveEngine : MonoBehaviour {
                     dinoInstance.GetComponent<DinoBehavior>().maxSpeed = 11.0f - randSize;
                     dinoInstance.GetComponent<DinoBehavior>().maxRunSpeed = 16.0f - randSize;
                     dinoInstance.GetComponent<NPCDetail>().health = 50.0f * randSize;
-                    dinoInstance.GetComponent<NPCDetail>().damage = 20 * randSize;
+                    dinoInstance.GetComponent<NPCDetail>().damage = 20.0f * randSize;
                     break;
                 default:
                     Debug.Log("???");
