@@ -7,7 +7,6 @@ public class HUD : MonoBehaviour {
 	//can be gotten from player script health value
     public GameObject playerObject;
     public ArcherDetail archerDetailScript;
-    public Arrow arrowScript;
 	int playerHealth;
 	float projectileDamage;
 
@@ -29,14 +28,12 @@ public class HUD : MonoBehaviour {
 	{
         playerObject = GameObject.FindGameObjectWithTag("Player");
         archerDetailScript = playerObject.GetComponent<ArcherDetail>();
-        arrowScript = GameObject.FindGameObjectWithTag ("RegularArrow").GetComponent<Arrow>();
 		display = GameObject.FindGameObjectWithTag("Health").GetComponentInChildren<Slider> ();
 		sliderFill = GameObject.FindGameObjectWithTag ("HPFill").GetComponent<Image> ();
 		hpText = GameObject.FindGameObjectWithTag ("HPText").GetComponent<Text> ();
         scoreText = GameObject.FindGameObjectWithTag ("Score").GetComponent<Text>();
 
         playerHealth = archerDetailScript.health;
-        projectileDamage = arrowScript.damage;
 
         score = 0;
 		StartCoroutine(HealthWait());
@@ -44,23 +41,20 @@ public class HUD : MonoBehaviour {
 	
 	void Update () 
 	{
-        Debug.Log(archerDetailScript);
-        Debug.Log(playerHealth);
-		//Health
-		//display.value = playerHealth;
-  //      if (playerHealth <= archerDetailScript.playerHealthCritical) 
-		//{
-		//	sliderFill.color = Color.red;
-		//	hpText.color = Color.red;
+        display.value = playerHealth;
+        if (playerHealth <= archerDetailScript.playerHealthCritical)
+        {
+            sliderFill.color = Color.red;
+            hpText.color = Color.red;
 
-		//}
-//		if (playerHealth <= 0)
-//		{
-//			//die? restart screen?
-//		}
+        }
+        //		if (playerHealth <= 0)
+        //		{
+        //			//die? restart screen?
+        //		}
 
-		//Score
-		scoreText.text = "score: " + score;
+        //Score
+        scoreText.text = "score: " + score;
 
 	}
 
