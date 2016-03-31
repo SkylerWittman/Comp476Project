@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Spawner : MonoBehaviour
     private int currentWaveCount = -1;
 
     //WaveCountText vars
-    private TextMesh waveCountText;
+    private Text waveCountText;
 
     //Timer vars
     private Timer timer;
@@ -38,7 +39,7 @@ public class Spawner : MonoBehaviour
         
         waveEngine = GetComponent<WaveEngine>();
         timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
-        waveCountText = GameObject.FindGameObjectWithTag("WaveCount").GetComponent<TextMesh>();
+        waveCountText = GameObject.FindGameObjectWithTag("WaveCount").GetComponent<Text>();
 
         //This is our initial spawn of 50 bad guys
         waveEngine.spawnBadGuys(new Wave(++currentWaveCount));
@@ -49,9 +50,9 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator showWaveText()
     {
-        waveCountText.GetComponent<Renderer>().enabled = true;
-        waveCountText.text = "WAVE " + currentWaveCount;
-        yield return new WaitForSeconds(5.0f);
-        waveCountText.GetComponent<Renderer>().enabled = false;
+        waveCountText.enabled = true;
+        waveCountText.text = "wave " + currentWaveCount;
+        yield return new WaitForSeconds(4.0f);
+        waveCountText.enabled = false;
     }
 }
