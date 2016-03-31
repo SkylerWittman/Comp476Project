@@ -1701,7 +1701,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 500
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1738,6 +1738,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swarmDistance: 100
+  swarmGoblinHealth: 100
+  swarmGoblinDamage: 4
 --- !u!114 &11461022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1749,7 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468b4bca06bb11e44abd94ab91fdbb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  die: {fileID: 7400002, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
+  die: {fileID: 7400008, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
   health: 100
   damage: 20
 --- !u!135 &13551980
@@ -1867,7 +1869,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: die
       value: 
-      objectReference: {fileID: 7400002, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
+      objectReference: {fileID: 7400008, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
     - target: {fileID: 0}
       propertyPath: m_Mass
       value: 500
@@ -1875,6 +1877,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Constraints
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

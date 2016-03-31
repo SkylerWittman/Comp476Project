@@ -7,5 +7,5 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/Scenes/MapGeneratorScene(Test).unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NewMapGeneratorScene(Test).unity
