@@ -62,7 +62,7 @@
 	</tr
 	<tr>
 		<td>In-game drops</td>
-		<td></td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Enemy damage to player</td>
