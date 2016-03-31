@@ -51,14 +51,24 @@
 	<tr>
 		<td>Player health/player damage to enemies
 		<td>Done</td>
+	</tr>
+	<tr>
 		<td>Hit indicator possibly with camera shake</td>
+	</tr>
+	<tr>
 		<td>Score and end game trigger</td>
+	</tr
+	<tr>
 		<td>In-game drops</td>
+	</tr>
+	<tr>
 		<td>Enemy damage to player</td>
+	</tr>
+	<tr>
 		<td>Start screen, load screen, end screen, settings</td>
-			
-		</td>
-		<td></td>
+	</tr		
+	</td>
+	<td></td>
 	</tr>
 	<tr>
 		<td>Documentation slogging</td><td></td>
