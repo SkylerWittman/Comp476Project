@@ -46,7 +46,7 @@
 				<li>Arrow type in HUD</li>
 			</ul>
 		</td>
-		<td></td>
+		<td>Done (Derek)</td>
 	</tr>
 	<tr>
 		<td>Player health/player damage to enemies
