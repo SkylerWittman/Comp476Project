@@ -33,7 +33,7 @@ public class WaveEngine : MonoBehaviour {
         goblins = new GameObject[numOfGoblins];
         dinos = new GameObject[numOfDinos];
         zombies[0] = Resources.Load("BadGuyPrefabs/ZombieGrey") as GameObject;
-        goblins[0] = Resources.Load("BadGuyPrefabs/GoblinBlue") as GameObject;
+        goblins[0] = Resources.Load("BadGuyPrefabs/spider") as GameObject;
         goblins[1] = Resources.Load("BadGuyPrefabs/GoblinRed") as GameObject;
         dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
         dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
