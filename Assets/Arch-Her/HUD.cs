@@ -25,8 +25,8 @@ public class HUD : MonoBehaviour {
 
     //Arrow type
     Canvas arrowDisplay;
-    ParticleSystem poison;
-    ParticleSystem explosive;
+    ParticleSystem poisonParticleSystem;
+    ParticleSystem explosiveParticleSystem;
 
     // Use this for initialization
     void Start () 
@@ -43,12 +43,12 @@ public class HUD : MonoBehaviour {
         score = 0;
 
         arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplay").GetComponent<Canvas>();
-        poison = GameObject.FindGameObjectWithTag("Poison").GetComponent<ParticleSystem>();
-        explosive = GameObject.FindGameObjectWithTag("Explosive").GetComponent<ParticleSystem>();
-        poison.Stop();
-        explosive.Stop();
-        Debug.Log(poison);
-        Debug.Log(explosive);
+        poisonParticleSystem = GameObject.FindGameObjectWithTag("PoisonParticleSystem").GetComponentInChildren<ParticleSystem>();
+        explosiveParticleSystem = GameObject.FindGameObjectWithTag("ExplosiveParticleSystem").GetComponentInChildren<ParticleSystem>();
+        poisonParticleSystem.Stop();
+        explosiveParticleSystem.Stop();
+        Debug.Log(poisonParticleSystem);
+        Debug.Log(explosiveParticleSystem);
         //StartCoroutine(HealthWait());
     }
 	
@@ -74,15 +74,17 @@ public class HUD : MonoBehaviour {
 
             case ArcherDetail.arrowType.regular:
                 //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
-                //arrowDisplay.GetComponentInChildren<ParticleSystem>().enableEmission = false;
+                //poisonParticleSystem.Stop();
+                //explosiveParticleSystem.Stop();
                 break;
             case ArcherDetail.arrowType.poison:
                 //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
-                //arrowDisplay.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+                //poisonParticleSystem.Play();
                 break;
             case ArcherDetail.arrowType.explosive:
                 //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
-                //arrowDisplay.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+                //poisonParticleSystem.Stop();
+                //explosiveParticleSystem.Play();
                 break;
         }
 
@@ -100,7 +102,7 @@ public class HUD : MonoBehaviour {
         score += addedScore;
     }
 
-    public void dodamageHUD(float amountOfDamage)
+    public void doDamageHUD(float amountOfDamage)
     {
         display.value -= amountOfDamage;
     }

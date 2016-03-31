@@ -29,8 +29,10 @@ TagManager:
   - Score
   - HPBackground
   - ArrowDisplay
-  - Poison
-  - Explosive
+  - PoisonParticleSystem
+  - ExplosiveParticleSystem
+  - PoisonPowerup
+  - ExplosivePowerup
   layers:
   - Default
   - TransparentFX

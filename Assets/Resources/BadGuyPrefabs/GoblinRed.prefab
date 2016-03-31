@@ -1342,7 +1342,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 500
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1416,6 +1416,8 @@ MonoBehaviour:
   distanceFromTreeToStop: 3
   distanceFromTreeToSlowDown: 8
   timeToChangeBetweenTrees: 6
+  rangedGoblinHealth: 300
+  rangedGoblinDamage: 6
 --- !u!135 &13505516
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -1548,6 +1550,10 @@ Prefab:
       propertyPath: spear
       value: 
       objectReference: {fileID: 174674, guid: be9a965428e36cd4ebd46010677e7e6d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149360}

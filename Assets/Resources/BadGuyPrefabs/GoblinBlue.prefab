@@ -1341,7 +1341,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 500
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1397,6 +1397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swarmDistance: 100
+  swarmGoblinHealth: 100
+  swarmGoblinDamage: 4
 --- !u!136 &13656334
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1537,6 +1539,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: swarmDistance
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

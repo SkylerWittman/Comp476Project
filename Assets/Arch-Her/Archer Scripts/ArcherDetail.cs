@@ -5,8 +5,10 @@ public class ArcherDetail : MonoBehaviour {
     public enum arrowType { regular, poison, explosive}
     public arrowType arrow_type;
     public int regularArrowStock = 99999;
-    public int poisonArrowStock = 2;
-    public int explosiveArrowStock = 2;
+    public int poisonArrowStock;
+    public int poisonPowerupAddedArrowStock;
+    public int explosiveArrowStock;
+    public int explosivePowerupAddedArrowStock;
     public int ArrowState = 0;
 	public float health;
 	public float playerHealthCritical;
@@ -91,14 +93,18 @@ public class ArcherDetail : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.CompareTag("poison"))
+		if (col.gameObject.CompareTag("PoisonPowerup"))
 		{
-			arrow_type = arrowType.poison;
-		}
+            Debug.Log("+15 poison arrows");
+            poisonArrowStock += poisonPowerupAddedArrowStock;
+            Destroy(col.gameObject);
+        }
 
-		if (col.gameObject.CompareTag("explosive"))
+		if (col.gameObject.CompareTag("ExplosivePowerup"))
 		{
-			arrow_type = arrowType.explosive;
+            Debug.Log("+5 explosive arrows");
+            explosiveArrowStock += explosivePowerupAddedArrowStock;
+            Destroy(col.gameObject);
 		}
 	}
 
@@ -106,6 +112,6 @@ public class ArcherDetail : MonoBehaviour {
     {
         Debug.Log("Health is currently " + health);
         health -= amountOfDamage;
-        GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().dodamageHUD(amountOfDamage);
+        GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().doDamageHUD(amountOfDamage);
     }
 }
