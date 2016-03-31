@@ -42,25 +42,28 @@
 <table>
 	<tr>
 		<td>HUD
+			<ul>
+				<li>Arrow type in HUD</li>
+			</ul>
 		</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>Gameplay (general for now)
 			<ul>
-				<li>Player health/damage
-				</li>
+				<li>Player health/damage</li>
 				<li>Score and end game trigger</li>
-				<li>In-game drops
-				</li>
+				<li>In-game drops</li>
 				<li>Enemy damage</li>
 				<li>Start screen, load screen, end screen, settings</li>
-				<li>Documentation</li>
 				<li>Enemy player collision</li>
-				<li>Arrow type in HUD</li>
+				
 			</ul>
 		</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>Documentation slogging</td><td></td>
 	</tr>
 </table>
 
