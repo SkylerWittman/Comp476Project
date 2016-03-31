@@ -62,6 +62,11 @@ public class HUD : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(3);
         playerHealth = archerDetailScript.playerHealthCritical;
-        score += 12345;
+        addScore(50);
 	}
+
+    public void addScore(int addedScore)
+    {
+        score += addedScore;
+    }
 }
