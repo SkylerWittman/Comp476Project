@@ -54,23 +54,23 @@
 	</tr>
 	<tr>
 		<td>Hit indicator possibly with camera shake</td>
-		<td></td
+		<td></td>
 	</tr>
 	<tr>
 		<td>Score and end game trigger</td>
-		<td></td
+		<td></td>
 	</tr
 	<tr>
 		<td>In-game drops</td>
-		<td></td
+		<td></td>
 	</tr>
 	<tr>
 		<td>Enemy damage to player</td>
-		<td></td
+		<td></td>
 	</tr>
 	<tr>
 		<td>Start screen, load screen, end screen, settings</td>
-		<td></td
+		<td></td>
 	</tr		
 	</td>
 	<td></td>
