@@ -71,12 +71,10 @@
 	<tr>
 		<td>Start screen, load screen, end screen, settings</td>
 		<td></td>
-	</tr		
-	</td>
-	<td></td>
-	</tr>
+	</tr>		
 	<tr>
-		<td>Documentation slogging</td><td></td>
+		<td>Documentation slogging</td>
+		<td></td>
 	</tr>
 </table>
 
