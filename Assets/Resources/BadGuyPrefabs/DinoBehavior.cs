@@ -33,7 +33,8 @@ public class DinoBehavior : MonoBehaviour {
     private State currentState;
 
     private bool canAttack;
-    public int dinoDamage = 15;
+    public float dinoHealth = 600.0f;
+    public float dinoDamage = 15.0f;
     public float dinoAttackCooldown = 3.0f;
 
     private Animation anim;
@@ -43,6 +44,9 @@ public class DinoBehavior : MonoBehaviour {
 
     void Start()
     {
+        GetComponent<NPCDetail>().health = dinoHealth;
+        GetComponent<NPCDetail>().damage = dinoDamage;
+
         //RNG initialization
         Random.seed = (int)System.DateTime.Now.Ticks;
         
@@ -242,7 +246,8 @@ public class DinoBehavior : MonoBehaviour {
     {
         canAttack = false;
         //only works if there is a single player
-        GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().doDamage(dinoDamage);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(dinoDamage);
+        Debug.Log("Dino did " + dinoDamage + " damage");
         anim.Play(attackClip.name);
         yield return new WaitForSeconds(dinoAttackCooldown);
         canAttack = true;

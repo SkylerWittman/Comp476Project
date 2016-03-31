@@ -8,8 +8,8 @@ public class ArcherDetail : MonoBehaviour {
     public int poisonArrowStock = 2;
     public int explosiveArrowStock = 2;
     public int ArrowState = 0;
-	public int health;
-	public int playerHealthCritical;
+	public float health;
+	public float playerHealthCritical;
 	// Use this for initialization
 	void Start () {
         arrow_type = arrowType.regular;
@@ -102,8 +102,9 @@ public class ArcherDetail : MonoBehaviour {
 		}
 	}
 
-    public void doDamage(int amountOfDamage)
+    public void takeDamage(float amountOfDamage)
     {
+        Debug.Log("Health is currently " + health);
         health -= amountOfDamage;
         GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().dodamageHUD(amountOfDamage);
     }
