@@ -33,6 +33,9 @@ TagManager:
   - ExplosiveParticleSystem
   - PoisonPowerup
   - ExplosivePowerup
+  - Explosive
+  - Poison
+  - arrow
   layers:
   - Default
   - TransparentFX

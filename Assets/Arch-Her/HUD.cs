@@ -27,6 +27,8 @@ public class HUD : MonoBehaviour {
     Canvas arrowDisplay;
     ParticleSystem poisonParticleSystem;
     ParticleSystem explosiveParticleSystem;
+    public Transform cameraTransform;
+    public Transform HUDarrowTransform;
 
     // Use this for initialization
     void Start () 
@@ -49,10 +51,12 @@ public class HUD : MonoBehaviour {
         explosiveParticleSystem.Stop();
         Debug.Log(poisonParticleSystem);
         Debug.Log(explosiveParticleSystem);
+        //cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        //HUDarrowTransform = GameObject.FindGameObjectWithTag("arrow").transform;
         //StartCoroutine(HealthWait());
     }
-	
-	void Update () 
+
+    void Update () 
 	{
         //display.value = playerHealth;
         if (playerHealth <= archerDetailScript.playerHealthCritical)
@@ -69,6 +73,8 @@ public class HUD : MonoBehaviour {
         //Score
         scoreText.text = "score: " + score;
 
+        //Debug.Log(HUDarrowTransform);
+        //HUDarrowTransform.rotation = cameraTransform.rotation;
         switch (archerDetailScript.arrow_type)
         {
 
