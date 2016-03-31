@@ -12,10 +12,13 @@ public class ArcherDetail : MonoBehaviour {
     public int ArrowState = 0;
 	public float health;
 	public float playerHealthCritical;
+
+    GameObject arrowDisplay;
 	// Use this for initialization
 	void Start () {
         arrow_type = arrowType.regular;
-	
+        arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplayParticle");
+       
 	}
 	
 	// Update is called once per frame
@@ -66,25 +69,35 @@ public class ArcherDetail : MonoBehaviour {
         {
             case 0:
                 arrow_type = arrowType.regular;
+                arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
                 break;
             case 1:
                 if (poisonArrowStock > 0)
+                {
                     arrow_type = arrowType.poison;
+                    arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.green;
+                }
                 else if (explosiveArrowStock > 0)
                 {
                     ArrowState = 2;
                     arrow_type = arrowType.explosive;
+                    arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.red;
                 }
                 else {
                     arrow_type = arrowType.regular;
+                    arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
                     ArrowState = 0;
                 }
                 break;
             case 2:
                 if (explosiveArrowStock > 0)
+                {
                     arrow_type = arrowType.explosive;
+                    arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.red;
+                }
                 else {
                     arrow_type = arrowType.regular;
+                    arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
                     ArrowState = 0;
                 }
                 break;

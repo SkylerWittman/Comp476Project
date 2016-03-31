@@ -36,6 +36,7 @@ TagManager:
   - Explosive
   - Poison
   - arrow
+  - ArrowDisplayParticle
   layers:
   - Default
   - TransparentFX
