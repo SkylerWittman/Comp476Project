@@ -66,7 +66,7 @@
 	</tr>
 	<tr>
 		<td>Enemy damage to player</td>
-		<td></td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Start screen, load screen, end screen, settings</td>
@@ -75,6 +75,10 @@
 	<tr>
 		<td>Documentation slogging</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>TWEAKING - enemy damage/hp, player damage/hp, etc.</td>
+		<td></td
 	</tr>
 </table>
 
