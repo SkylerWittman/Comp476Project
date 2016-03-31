@@ -10,10 +10,10 @@ public class WaveEngine : MonoBehaviour {
     private float waterLevel;
 
     //Bad guy vars
-    private const int numOfZombies = 1;
-    private const int numOfGoblins = 2;
+    private const int numOfSpiders = 1;
+    private const int numOfGoblins = 1;
     private const int numOfDinos = 3;
-    private GameObject[] zombies;
+    private GameObject[] spiders;
     private GameObject[] goblins;
     private GameObject[] dinos;
 
@@ -29,12 +29,11 @@ public class WaveEngine : MonoBehaviour {
         waterLevel = TerrainEngine.waterLevel;
         
         //Bad guy initialization
-        zombies = new GameObject[numOfZombies];
+        spiders = new GameObject[numOfSpiders];
         goblins = new GameObject[numOfGoblins];
         dinos = new GameObject[numOfDinos];
-        zombies[0] = Resources.Load("BadGuyPrefabs/ZombieGrey") as GameObject;
-        goblins[0] = Resources.Load("BadGuyPrefabs/spider") as GameObject;
-        goblins[1] = Resources.Load("BadGuyPrefabs/GoblinRed") as GameObject;
+        spiders[0] = Resources.Load("BadGuyPrefabs/Spider") as GameObject;
+        goblins[0] = Resources.Load("BadGuyPrefabs/GoblinRed") as GameObject;
         dinos[0] = Resources.Load("BadGuyPrefabs/DinoGreen") as GameObject;
         dinos[1] = Resources.Load("BadGuyPrefabs/DinoGrey") as GameObject;
         dinos[2] = Resources.Load("BadGuyPrefabs/DinoRed") as GameObject;
@@ -49,7 +48,7 @@ public class WaveEngine : MonoBehaviour {
 
             Vector3 spawnPosition = new Vector3(XZ[0], 10.0f, XZ[1]);
 
-            int typeOfEnemy = Random.Range(0, 2);
+            int typeOfEnemy = Random.Range(0, 3);
             switch (typeOfEnemy)
             {
                 case 0:
@@ -65,6 +64,10 @@ public class WaveEngine : MonoBehaviour {
                     dinoInstance.GetComponent<DinoBehavior>().maxRunSpeed = 16.0f - randSize;
                     dinoInstance.GetComponent<NPCDetail>().health = 50.0f * randSize;
                     dinoInstance.GetComponent<NPCDetail>().damage = 20.0f * randSize;
+                    break;
+                case 2:
+                    int spiderType = Random.Range(0, numOfSpiders);
+                    Instantiate(spiders[spiderType], spawnPosition, Quaternion.identity);
                     break;
                 default:
                     Debug.Log("???");
