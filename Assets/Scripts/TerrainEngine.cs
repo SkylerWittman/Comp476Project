@@ -31,7 +31,7 @@ public class TerrainEngine : MonoBehaviour
 
     void Start()
     {
-     //   terrain.gameObject.tag = "Terrain";
+
         //RNG initialization
         Random.seed = (int)System.DateTime.Now.Ticks;
         
@@ -116,11 +116,11 @@ public class TerrainEngine : MonoBehaviour
              * t t t
              * Where t's are the current tree's neighbouring positions and T is the position of the current tree
              */
-            for (int X = (int)(x*gridSize) - 2; X <= (int)(x*gridSize) + 2; X++)
+            for (int X = (int)(x*gridSize) - 5; X <= (int)(x*gridSize) + 5; X++)
             {
-                for (int Z = (int)(z*gridSize) - 2; Z <= (int)(z*gridSize) + 2; Z++)
+                for (int Z = (int)(z*gridSize) - 5; Z <= (int)(z*gridSize) + 5; Z++)
                 {
-                    terrainGrid.grid[Mathf.Clamp(X, 0, 499), Mathf.Clamp(Z, 0, 499)].walkable = false;
+                    terrainGrid.grid[Mathf.Clamp(X, 0, gridSize-1), Mathf.Clamp(Z, 0, gridSize-1)].walkable = false;
                 }
             }
             
@@ -155,10 +155,9 @@ public class TerrainEngine : MonoBehaviour
             {
                 if (terrainGrid.grid[x, z].walkable)
                 {
-                    terrainGrid.grid[x, z].walkable = terrain.SampleHeight(new Vector3(x, 0.0f, z)) >= waterLevel;
-                    //terrainGrid.grid[x, z].position.y = terrain.SampleHeight(new Vector3(x, 0.0f, z)) - waterLevel;
+                    terrainGrid.grid[x, z].walkable = terrain.SampleHeight(new Vector3(x*2.0f, 0.0f, z*2.0f)) >= waterLevel;
                 }
-                terrainGrid.grid[x, z].position.y = terrain.terrainData.GetInterpolatedHeight(x, z) - (waterLevel);
+                terrainGrid.grid[x, z].position.y = terrain.SampleHeight(new Vector3(x * 2.0f, 0.0f, z * 2.0f)) - waterLevel;
             }
         }
 

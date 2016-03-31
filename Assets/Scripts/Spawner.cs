@@ -53,7 +53,7 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator showWaveText()
     {
-        yield return new WaitForSeconds(3.0f);
+        //yield return new WaitForSeconds(3.0f); ????
         waveCountText.enabled = true;
         waveCountText.text = "wave " + currentWaveCount;
         yield return new WaitForSeconds(4.0f);

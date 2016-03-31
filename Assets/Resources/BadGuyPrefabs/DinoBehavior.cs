@@ -153,9 +153,9 @@ public class DinoBehavior : MonoBehaviour {
             rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
         }
 
-        //If position is less than 10 units away from node, we'll start to look for the next node in the path
+        //If position is less than 5 units away from node, we'll start to look for the next node in the path
         //This will for sure trigger a currentNode change
-        if (Vector3.Distance(transform.position, currentNode.position) < 10.0f)
+        if (Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z), new Vector3(currentNode.position.x, 0.0f, currentNode.position.z)) < 5.0f)
         {  
             //If we've reached the goal, then we'll clear our path so we can get another one
             if (currentNode.Equals(goalNode))
@@ -231,8 +231,8 @@ public class DinoBehavior : MonoBehaviour {
             {
                 //We'll clear the path, as we are now pursuing the player. 
                 //This will ensure that if we return to wander state, we will search for a new path.
-                currentPath.Clear();
                 currentState = State.PURSUE;
+                currentPath.Clear();
                 anim.Play(runClip.name);
                 //Assign the transform of the player so that way we have a way to track their position
                 player = c.gameObject.transform;
