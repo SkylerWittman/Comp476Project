@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     private WaveEngine waveEngine;
 
     //Wave vars
+    //maybe change it to 0 so that first wave is wave 1
     private int currentWaveCount = -1;
 
     //WaveCountText vars

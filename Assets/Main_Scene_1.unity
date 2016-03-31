@@ -1016,7 +1016,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: wave 1
+  m_Text: 
 --- !u!222 &781113337
 CanvasRenderer:
   m_ObjectHideFlags: 0
