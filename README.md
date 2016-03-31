@@ -49,16 +49,14 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td>Gameplay (general for now)
-			<ul>
-				<li>Player health/player damage to enemies</li>
-				<td>Done</td>
-				<li>Hit indicator possibly with camera shake</li>
-				<li>Score and end game trigger</li>
-				<li>In-game drops</li>
-				<li>Enemy damage to player</li>
-				<li>Start screen, load screen, end screen, settings</li>
-			</ul>
+		<td>Player health/player damage to enemies
+		<td>Done</td>
+		<td>Hit indicator possibly with camera shake</td>
+		<td>Score and end game trigger</td>
+		<td>In-game drops</td>
+		<td>Enemy damage to player</td>
+		<td>Start screen, load screen, end screen, settings</td>
+			
 		</td>
 		<td></td>
 	</tr>
