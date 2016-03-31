@@ -46,7 +46,7 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 		//Changing layers and adding weights allows us to play 2 animations at the same time
 		anim["attackSpider"].layer = 1;
 		anim["attackSpider"].weight = 0.7f;
-		anim ["walkSpider"].speed = 10000.0f;
+		anim ["walkSpider"].speed = 8.0f;
 		runClip = anim.GetClip("walkSpider");
 		attackClip = anim.GetClip("attackSpider");
 

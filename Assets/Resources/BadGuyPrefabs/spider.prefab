@@ -1390,7 +1390,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 632.5081, y: 298.05508, z: 433.54843}
+  m_LocalPosition: {x: 547.2515, y: 280.8581, z: 417.4224}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 455898}
@@ -1764,8 +1764,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.35
-  m_Center: {x: 0, y: 1.08, z: 0}
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 1.56, z: 0}
 --- !u!137 &13797164
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1884,15 +1884,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
