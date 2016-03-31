@@ -52,6 +52,7 @@
 		<td>Gameplay (general for now)
 			<ul>
 				<li>Player health/damage</li>
+				<li>Hit indicator</li>
 				<li>Score and end game trigger</li>
 				<li>In-game drops</li>
 				<li>Enemy damage</li>
