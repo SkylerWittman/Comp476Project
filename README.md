@@ -52,13 +52,12 @@
 		<td>Gameplay (general for now)
 			<ul>
 				<li>Player health/player damage to enemies</li>
+				<td>Done</td>
 				<li>Hit indicator possibly with camera shake</li>
 				<li>Score and end game trigger</li>
 				<li>In-game drops</li>
 				<li>Enemy damage to player</li>
 				<li>Start screen, load screen, end screen, settings</li>
-				<li>Enemy player collision</li>
-				
 			</ul>
 		</td>
 		<td></td>
