@@ -33,6 +33,8 @@ public class DinoBehavior : MonoBehaviour {
     private State currentState;
 
     private bool canAttack;
+    public int dinoDamage = 15;
+    public float dinoAttackCooldown = 3.0f;
 
     private Animation anim;
     private AnimationClip walkClip;
@@ -239,9 +241,10 @@ public class DinoBehavior : MonoBehaviour {
     IEnumerator attack()
     {
         canAttack = false;
-
+        //only works if there is a single player
+        GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().doDamage(dinoDamage);
         anim.Play(attackClip.name);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(dinoAttackCooldown);
         canAttack = true;
     }
 

@@ -36,12 +36,12 @@ public class HUD : MonoBehaviour {
         playerHealth = archerDetailScript.health;
 
         score = 0;
-		StartCoroutine(HealthWait());
+		//StartCoroutine(HealthWait());
 	}
 	
 	void Update () 
 	{
-        display.value = playerHealth;
+        //display.value = playerHealth;
         if (playerHealth <= archerDetailScript.playerHealthCritical)
         {
             sliderFill.color = Color.red;
@@ -58,15 +58,20 @@ public class HUD : MonoBehaviour {
 
 	}
 
-	IEnumerator HealthWait()
-	{
-		yield return new WaitForSeconds(3);
-        playerHealth = archerDetailScript.playerHealthCritical;
-        addScore(50);
-	}
+	//IEnumerator HealthWait()
+	//{
+	//	yield return new WaitForSeconds(3);
+ //       playerHealth = archerDetailScript.playerHealthCritical;
+ //       addScore(50);
+	//}
 
     public void addScore(int addedScore)
     {
         score += addedScore;
+    }
+
+    public void dodamageHUD(int amountOfDamage)
+    {
+        display.value -= amountOfDamage;
     }
 }

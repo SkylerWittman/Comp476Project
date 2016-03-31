@@ -101,4 +101,10 @@ public class ArcherDetail : MonoBehaviour {
 			arrow_type = arrowType.explosive;
 		}
 	}
+
+    public void doDamage(int amountOfDamage)
+    {
+        health -= amountOfDamage;
+        GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().dodamageHUD(amountOfDamage);
+    }
 }
