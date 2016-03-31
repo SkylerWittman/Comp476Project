@@ -8,6 +8,7 @@ public class Arrow : MonoBehaviour {
     public ArcherDetail archer;
     public Explosion explosion;
     public poisonExplosion poisonExplosion;
+
     bool lockA = true;
     bool hitLock = false;
     bool poisonLock = false;

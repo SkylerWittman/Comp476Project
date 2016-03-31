@@ -23,8 +23,13 @@ public class HUD : MonoBehaviour {
 	public static int score;
 	public Text scoreText;
 
-	// Use this for initialization
-	void Start () 
+    //Arrow type
+    Canvas arrowDisplay;
+    ParticleSystem poison;
+    ParticleSystem explosive;
+
+    // Use this for initialization
+    void Start () 
 	{
         playerObject = GameObject.FindGameObjectWithTag("Player");
         archerDetailScript = playerObject.GetComponent<ArcherDetail>();
@@ -36,8 +41,16 @@ public class HUD : MonoBehaviour {
         playerHealth = archerDetailScript.health;
 
         score = 0;
-		//StartCoroutine(HealthWait());
-	}
+
+        arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplay").GetComponent<Canvas>();
+        poison = GameObject.FindGameObjectWithTag("Poison").GetComponent<ParticleSystem>();
+        explosive = GameObject.FindGameObjectWithTag("Explosive").GetComponent<ParticleSystem>();
+        poison.Stop();
+        explosive.Stop();
+        Debug.Log(poison);
+        Debug.Log(explosive);
+        //StartCoroutine(HealthWait());
+    }
 	
 	void Update () 
 	{
@@ -56,7 +69,24 @@ public class HUD : MonoBehaviour {
         //Score
         scoreText.text = "score: " + score;
 
-	}
+        switch (archerDetailScript.arrow_type)
+        {
+
+            case ArcherDetail.arrowType.regular:
+                //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
+                //arrowDisplay.GetComponentInChildren<ParticleSystem>().enableEmission = false;
+                break;
+            case ArcherDetail.arrowType.poison:
+                //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
+                //arrowDisplay.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+                break;
+            case ArcherDetail.arrowType.explosive:
+                //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
+                //arrowDisplay.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+                break;
+        }
+
+    }
 
 	//IEnumerator HealthWait()
 	//{

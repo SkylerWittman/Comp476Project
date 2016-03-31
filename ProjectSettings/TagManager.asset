@@ -28,6 +28,9 @@ TagManager:
   - Gas
   - Score
   - HPBackground
+  - ArrowDisplay
+  - Poison
+  - Explosive
   layers:
   - Default
   - TransparentFX
