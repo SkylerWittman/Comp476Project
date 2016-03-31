@@ -8,8 +8,8 @@ public class HUD : MonoBehaviour {
     public GameObject playerObject;
     public ArcherDetail archerDetailScript;
     public Arrow arrowScript;
-	public int playerHealth;
-	public float projectileDamage;
+	int playerHealth;
+	float projectileDamage;
 
 	//tag used to compare collision tag and damage player
 	public string collisionTag;
@@ -28,16 +28,12 @@ public class HUD : MonoBehaviour {
 	void Start () 
 	{
         playerObject = GameObject.FindGameObjectWithTag("Player");
-
         archerDetailScript = playerObject.GetComponent<ArcherDetail>();
-        // ----------BUG---------------
-        // After the first shot, the newly instantiated arrow object has a different tag if it's anything but a regular arrow
-        // so we have to deal with that
         arrowScript = GameObject.FindGameObjectWithTag ("RegularArrow").GetComponent<Arrow>();
 		display = GameObject.FindGameObjectWithTag("Health").GetComponentInChildren<Slider> ();
 		sliderFill = GameObject.FindGameObjectWithTag ("HPFill").GetComponent<Image> ();
 		hpText = GameObject.FindGameObjectWithTag ("HPText").GetComponent<Text> ();
-        scoreText = GameObject.FindGameObjectWithTag ("score").GetComponent<Text>();
+        scoreText = GameObject.FindGameObjectWithTag ("Score").GetComponent<Text>();
 
         playerHealth = archerDetailScript.health;
         projectileDamage = arrowScript.damage;
@@ -48,14 +44,16 @@ public class HUD : MonoBehaviour {
 	
 	void Update () 
 	{
+        Debug.Log(archerDetailScript);
+        Debug.Log(playerHealth);
 		//Health
-		display.value = playerHealth;
-        if (playerHealth <= archerDetailScript.playerHealthCritical) 
-		{
-			sliderFill.color = Color.red;
-			hpText.color = Color.red;
+		//display.value = playerHealth;
+  //      if (playerHealth <= archerDetailScript.playerHealthCritical) 
+		//{
+		//	sliderFill.color = Color.red;
+		//	hpText.color = Color.red;
 
-		}
+		//}
 //		if (playerHealth <= 0)
 //		{
 //			//die? restart screen?
@@ -70,6 +68,6 @@ public class HUD : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(3);
         playerHealth = archerDetailScript.playerHealthCritical;
-        score += 10;
+        score += 12345;
 	}
 }

@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
 
-    private TextMesh timerText;
+    private Text timerText;
     private const int startTime = 600;
     private int currentTime;
 
 	void Start () {
-        timerText = GameObject.FindGameObjectWithTag("Timer").GetComponent<TextMesh>();
+        timerText = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
         timerText.text = convertToTime(startTime);
         currentTime = startTime;
         

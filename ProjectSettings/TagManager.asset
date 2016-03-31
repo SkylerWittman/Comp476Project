@@ -26,6 +26,8 @@ TagManager:
   - Health
   - HPFill
   - Gas
+  - Score
+  - HPBackground
   layers:
   - Default
   - TransparentFX
