@@ -82,6 +82,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 	}
 
 	private void FindPath(){
+		treeController.ResetGCostOfNeighbours ();
 		canTraversePath = false;
 		FindATreeTarget ();
 		FindStartTree ();

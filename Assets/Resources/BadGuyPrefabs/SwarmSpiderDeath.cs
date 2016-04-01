@@ -40,6 +40,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		if(health < 0.0f && !isDead)
 		{
 
+			this.tag = null;
 			isDead = true;
 			anim.CrossFade(die.name, 0.5f);
 			//GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
@@ -48,7 +49,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			//Freeze all movement/rotations when NPC has been slain
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<SwarmSpiderBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
-			Destroy(this.gameObject, anim[die.name].length+2.0f);
+			Destroy(this.gameObject, anim[die.name].length + 0.5f);
 
 		}
 

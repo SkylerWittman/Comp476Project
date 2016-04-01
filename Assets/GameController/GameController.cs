@@ -55,6 +55,15 @@ public class GameController : MonoBehaviour {
 		}
 
 
+	public void ResetGCostOfNeighbours(){
+		foreach (TreeNode nodeA in listOfTreeNodes) {
+			foreach (TreeNode nodeB in nodeA.GetNeighbourNodes()) {
+				nodeB.gCost = 0;
+			}
+		}
+	}
+
+
 	private void FindVisibleTrees(){
 		foreach (TreeNode nodeA in listOfTreeNodes) {
 			foreach (TreeNode nodeB in listOfTreeNodes) {

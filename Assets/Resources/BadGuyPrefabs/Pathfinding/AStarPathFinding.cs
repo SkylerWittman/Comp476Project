@@ -21,7 +21,7 @@ public class AStarPathFinding : MonoBehaviour {
 		startNode = start;
 		targetNode = end;
 
-
+		Debug.Log ("cost of start node" + start.gCost);
 
 		openList.Add (startNode);
 
@@ -36,6 +36,7 @@ public class AStarPathFinding : MonoBehaviour {
 				}
 			}
 
+			Debug.Log ("cost of current node" + currentNode.gCost);
 
 			openList.Remove(currentNode);
 			closedList.Add(currentNode);
