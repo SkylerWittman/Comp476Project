@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SwarmGoblinDeath : MonoBehaviour {
+public class SwarmSpiderDeath : MonoBehaviour {
 
 	bool LockA = false;
 	private bool isDead = false;
@@ -47,7 +47,7 @@ public class SwarmGoblinDeath : MonoBehaviour {
 
 			//Freeze all movement/rotations when NPC has been slain
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-			GetComponent<SwarmGoblinBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
+			GetComponent<SwarmSpiderBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
 			Destroy(this.gameObject, anim[die.name].length+2.0f);
 
 		}

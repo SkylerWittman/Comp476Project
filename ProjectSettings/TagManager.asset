@@ -14,12 +14,12 @@ TagManager:
   - Camera
   - TerrainEngine
   - Spawner
-  - Tree
+  - TreeMarker
   - controller
   - Timer
   - BadGuy
   - WaveCount
-  - SwarmGoblin
+  - SwarmSpider
   - HUD
   - HPText
   - score
@@ -37,6 +37,7 @@ TagManager:
   - Poison
   - arrow
   - ArrowDisplayParticle
+  - Tree
   layers:
   - Default
   - TransparentFX

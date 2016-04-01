@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class GameController : MonoBehaviour {
 		public GameObject treeMarker;
 		private TreeInstance[] arrayOfTrees;
 		private GameObject[] treeGameObjects;
+		private List<TreeNode> listOfTreeNodes = new List<TreeNode>();
 		private Vector3 tempPosition;
 		private bool canSlowTime = true;
 		public bool cursorVisible = true;
@@ -40,16 +42,45 @@ public class GameController : MonoBehaviour {
 			}
 
 			//the empty game object for the tree marker is tagged with tree we get an array of all the gameobjects to be used for pathfinding
-			treeGameObjects = GameObject.FindGameObjectsWithTag("Tree");
+			treeGameObjects = GameObject.FindGameObjectsWithTag("TreeMarker");
+
+			
+			foreach (GameObject tree in treeGameObjects) {
+				TreeNode node = new TreeNode(tree.transform.position);
+				listOfTreeNodes.Add (node);
+			}
+
+		FindVisibleTrees ();
 
 		}
 
 
+	private void FindVisibleTrees(){
+		foreach (TreeNode nodeA in listOfTreeNodes) {
+			foreach (TreeNode nodeB in listOfTreeNodes) {
 
-		public GameObject[] GetTreeMarkers()
+				if (nodeA == nodeB) {
+					continue;
+				}
+
+				if (Vector3.Distance (nodeA.getPosition (), nodeB.getPosition ()) < 140.0f) {
+					nodeA.AddToNeighbourNodes (nodeB);
+					Debug.Log ("Found Neighbour");
+				}
+
+			}
+		}
+		foreach (TreeNode nodeA in listOfTreeNodes) {
+			if (nodeA.GetNeighbourNodes ().Count == 0) {
+				Debug.Log ("IM EMPTY");
+			}
+		}
+	}
+
+		public List<TreeNode> GetTreeNodes()
 		{
 
-			return treeGameObjects;
+			return listOfTreeNodes;
 		}
 
 
@@ -70,9 +101,11 @@ public class GameController : MonoBehaviour {
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, 30))
 			{
-				Debug.Log("im looking at " + hit.transform.name);
-				hit.rigidbody.velocity = Vector3.zero;
-				hit.rigidbody.AddForce(Vector3.up * 500, ForceMode.VelocityChange);
+				if (hit.transform.tag == "BadGuy" || hit.transform.tag == "SwarmSpider") {
+					Debug.Log ("im looking at " + hit.transform.name);
+					hit.rigidbody.velocity = Vector3.zero;
+					hit.rigidbody.AddForce (Vector3.up * 100, ForceMode.VelocityChange);
+				}
 			}
 		}
 

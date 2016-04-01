@@ -824,11 +824,11 @@ GameObject:
   - 111: {fileID: 11194206}
   - 54: {fileID: 5458864}
   - 135: {fileID: 13551980}
-  - 114: {fileID: 11433106}
-  - 114: {fileID: 11461022}
+  - 114: {fileID: 11492390}
+  - 114: {fileID: 11442358}
   m_Layer: 0
   m_Name: spider
-  m_TagString: Untagged
+  m_TagString: SwarmSpider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1550,7 +1550,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145820}
-  m_LocalRotation: {x: 0.5264059, y: 0.7953878, z: -0.16580454, w: 0.25052705}
+  m_LocalRotation: {x: 0.52640593, y: 0.7953879, z: -0.16580455, w: 0.25052708}
   m_LocalPosition: {x: -0.10308055, y: -1.4876988e-16, z: -2.375877e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1726,7 +1726,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11433106
+--- !u!114 &11442358
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1734,13 +1734,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 188628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c24ca48d64fdf9e45b3ac1574641fdbb, type: 3}
+  m_Script: {fileID: 11500000, guid: 70df4dd8ee01be847a99159a476591c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   swarmDistance: 100
-  swarmGoblinHealth: 100
-  swarmGoblinDamage: 4
---- !u!114 &11461022
+  swarmSpiderHealth: 100
+  swarmSpiderDamage: 4
+--- !u!114 &11492390
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1748,12 +1748,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 188628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 468b4bca06bb11e44abd94ab91fdbb81, type: 3}
+  m_Script: {fileID: 11500000, guid: ef2b3b30423ad964ab81776746bf1065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   die: {fileID: 7400008, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
   health: 100
-  damage: 20
+  damage: 100
 --- !u!135 &13551980
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -1893,6 +1893,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: SwarmSpider
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damage
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -3,13 +3,13 @@ using System.Collections;
 
 public class SwarmController : MonoBehaviour {
 
-	private GameObject[] SwarmGoblins;
+	private GameObject[] swarmSpiders;
 	private Vector3 wanderVector;
 	public GameObject spawnEngine;
 	private WaveEngine targetGenerator;
 
 	void Start () {
-		SwarmGoblins = GameObject.FindGameObjectsWithTag ("SwarmGoblin");
+		swarmSpiders = GameObject.FindGameObjectsWithTag ("SwarmSpider");
 		InvokeRepeating ("SetWanderTarget", 0.0f, 8.0f);
 		targetGenerator = spawnEngine.GetComponent<WaveEngine> ();
 
@@ -23,12 +23,12 @@ public class SwarmController : MonoBehaviour {
 
 
 	public void UpdateSwarm(){
-		SwarmGoblins = GameObject.FindGameObjectsWithTag ("SwarmGoblin");
+		swarmSpiders = GameObject.FindGameObjectsWithTag ("SwarmSpider");
 	}
 
 	public GameObject[] getSwarm(){
 
-		return SwarmGoblins;
+		return swarmSpiders;
 	}
 
 	public Vector3 GetWanderTarget(){

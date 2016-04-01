@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SwarmGoblinBehavior : MonoBehaviour {
+public class SwarmSpiderBehavior : MonoBehaviour {
 
 	private Rigidbody rb;
 	private GameObject target;
@@ -28,12 +28,12 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 	public float swarmDistance = 100.0f;
 
     
-    public float swarmGoblinHealth = 100.0f;
-    public float swarmGoblinDamage = 4.0f;
+    public float swarmSpiderHealth = 100.0f;
+	public float swarmSpiderDamage = 4.0f;
 
     void Start () {
-        GetComponent<SwarmGoblinDeath>().health = swarmGoblinHealth;
-        GetComponent<SwarmGoblinDeath>().damage = swarmGoblinDamage;
+		GetComponent<SwarmSpiderDeath>().health = swarmSpiderHealth;
+		GetComponent<SwarmSpiderDeath>().damage = swarmSpiderDamage;
 
         rb = GetComponent<Rigidbody> ();
 		swarmController = GameObject.FindGameObjectWithTag("controller");
@@ -54,34 +54,34 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 
 	}
 	
-	//when a goblin in the swarm dies he must inform his swarm members so they can recalcualte thier swarm mebers for proper movement
+	//when a spider in the swarm dies he must inform his swarm members so they can recalcualte thier swarm mebers for proper movement
 	public void InformSwarmMembersOfDeath(GameObject swarmMember){
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
-		swarmNeighbors.Remove(swarmMember); //removes the dead goblin who called this method
+		swarmNeighbors.Remove(swarmMember); //removes the dead spider who called this method
 
 		for(int i =0; i< swarmNeighbors.Count; i++){
-			swarmNeighbors [i].GetComponent<SwarmGoblinBehavior> ().FindMySwarm ();
+			swarmNeighbors [i].GetComponent<SwarmSpiderBehavior> ().FindMySwarm ();
 
 		}
 	}
 
-	//when a goblin in the swarm finds the player he notifys his swarm
+	//when a spider in the swarm finds the player he notifys his swarm
 	public void InformSwarmMembersOfSighting(){
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
 		for(int i =0; i< swarmNeighbors.Count; i++){
-			swarmNeighbors [i].GetComponent<SwarmGoblinBehavior> ().setCanHunt ();
+			swarmNeighbors [i].GetComponent<SwarmSpiderBehavior> ().setCanHunt ();
 
 		}
 	}
 
-	//finds swarm goblins who are nearby and add them to the list to keep track
+	//finds swarm spider who are nearby and add them to the list to keep track
 	public void FindMySwarm(){
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
-		GameObject[] swarm = swarmer.getSwarm (); //gets most recent list of goblins on the map
+		GameObject[] swarm = swarmer.getSwarm (); //gets most recent list of spider on the map
 		swarmNeighbors.Clear (); //clears the list
-		foreach (GameObject goblin in swarm) {
-			if (Vector3.Distance (goblin.transform.position, this.transform.position) < swarmDistance && (goblin != this)) {
-					swarmNeighbors.Add (goblin);		
+		foreach (GameObject spider in swarm) {
+			if (Vector3.Distance (spider.transform.position, this.transform.position) < swarmDistance && (spider != this)) {
+				swarmNeighbors.Add (spider);		
 			}
 		}
 	}
@@ -94,20 +94,20 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 			return compuationVector;
 		}
 
-		//find velocity of all goblins in the swarm
-		foreach (GameObject goblin in swarmNeighbors) {
-			if (goblin == null) {
+		//find velocity of all Spider lins in the swarm
+		foreach (GameObject spider in swarmNeighbors) {
+			if (spider == null) {
 				continue;
 			}
 
-			if (goblin != this) {
-				compuationVector.x += goblin.GetComponent<Rigidbody> ().velocity.x;
-				compuationVector.z += goblin.GetComponent<Rigidbody> ().velocity.z;
+			if (spider != this) {
+				compuationVector.x += spider.GetComponent<Rigidbody> ().velocity.x;
+				compuationVector.z += spider.GetComponent<Rigidbody> ().velocity.z;
 
 			}
 		}
 
-		//divide the vector values by the amount of goblins in the swarm
+		//divide the vector values by the amount of Spider in the swarm
 		compuationVector.x /= swarmNeighbors.Count;
 		compuationVector.z /= swarmNeighbors.Count;
 		compuationVector.Normalize (); 
@@ -126,24 +126,24 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 			return compuationVector;
 		}
 
-		//find position of all goblins in the swarm
-		foreach (GameObject goblin in swarmNeighbors) {
-			if (goblin == null) {
+		//find position of all Spider in the swarm
+		foreach (GameObject spider in swarmNeighbors) {
+			if (spider == null) {
 				continue;
 			}
 
-			if (goblin != this) {
-				compuationVector.x += goblin.transform.position.x;
-				compuationVector.z += goblin.transform.position.z;
+			if (spider != this) {
+				compuationVector.x += spider.transform.position.x;
+				compuationVector.z += spider.transform.position.z;
 
 			}
 		}
 
-		//divide the vector values by the amount of goblins in the swarm
+		//divide the vector values by the amount of spider in the swarm
 		compuationVector.x /= swarmNeighbors.Count;
 		compuationVector.z /= swarmNeighbors.Count;
 
-		//find the direction to the center of mass relitive to this goblin and steer towards it
+		//find the direction to the center of mass relitive to this spider and steer towards it
 		finalVector = new Vector3((compuationVector.x - this.transform.position.x), this.transform.position.y, (compuationVector.z - this.transform.position.z));
 		finalVector.Normalize (); 
 
@@ -151,7 +151,7 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 	}
 
 
-	//finds the distance between goblins in the swarm, so the goblins can stay serperated
+	//finds the distance between spider in the swarm, so the spider can stay serperated
 	private Vector3 SeperationOfSwarm(){
 		Vector3 compuationVector = new Vector3();
 		Vector3 finalVector;
@@ -161,21 +161,21 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 			return compuationVector;
 		}
 
-		//find distance from goblin and all other neighbours in the swarm and add it to the serperation vector
-		foreach (GameObject goblin in swarmNeighbors) {
+		//find distance from spider and all other neighbours in the swarm and add it to the serperation vector
+		foreach (GameObject spider in swarmNeighbors) {
 
-			if (goblin == null) {
+			if (spider == null) {
 				continue;
 			}
 
-			if (goblin != this) {
-				compuationVector.x += goblin.transform.position.x - this.transform.position.x;
-				compuationVector.z += goblin.transform.position.z - this.transform.position.z;
+			if (spider != this) {
+				compuationVector.x += spider.transform.position.x - this.transform.position.x;
+				compuationVector.z += spider.transform.position.z - this.transform.position.z;
 
 			}
 		}
 
-		//divide the vector values by the amount of goblins in the swarm and negated the x and z values so the goblin steers away from swarm properly
+		//divide the vector values by the amount of spider in the swarm and negated the x and z values so the spider steers away from swarm properly
 		compuationVector.x /= swarmNeighbors.Count;
 		compuationVector.z /= swarmNeighbors.Count;
 		compuationVector.x *= -8;
@@ -198,7 +198,7 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 		RaycastHit hit;
 		Vector3 avoidanceVector;
 		if (Physics.Raycast (transform.position, transform.forward, out hit, 50)) {
-			if (hit.collider.tag == "Tree") {
+			if (hit.collider.tag == "TreeMarker") {
 				avoidanceVector = (rb.velocity - hit.collider.transform.position).normalized;
 				avoidanceVector *= moveSpeed;
 				rb.velocity += avoidanceVector;
@@ -228,13 +228,13 @@ public class SwarmGoblinBehavior : MonoBehaviour {
 		collisionTimer--;
 		searchTimer--;
 
-		//if the goblin hasnt spotted a player then every 2 seconds he will see if the player is in sight
+		//if the spider hasnt spotted a player then every 2 seconds he will see if the player is in sight
 		if (cantSeePlayer && searchTimer < 0) {
 			PlayerCloseEnoughToHunt ();
 			searchTimer = 120;
 
 		}
-		//every 3seconds the goblins raycast ahead to make sure the wont run into a tree
+		//every 3seconds the spider raycast ahead to make sure the wont run into a tree
 		if (collisionTimer < 0) {
 			CollisionAvoidance ();
 			collisionTimer = 180;
