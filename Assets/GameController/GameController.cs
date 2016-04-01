@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour {
 		void Start()
 		{
 
-			Debug.Log("Creating");
+			
 			Terrain.activeTerrain.tag = "Terrain";
 
 			Cursor.visible = cursorVisible;
@@ -58,23 +58,20 @@ public class GameController : MonoBehaviour {
 	private void FindVisibleTrees(){
 		foreach (TreeNode nodeA in listOfTreeNodes) {
 			foreach (TreeNode nodeB in listOfTreeNodes) {
-
+				
 				if (nodeA == nodeB) {
 					continue;
 				}
 
-				if (Vector3.Distance (nodeA.getPosition (), nodeB.getPosition ()) < 140.0f) {
+				if (Vector3.Distance (nodeA.getPosition (), nodeB.getPosition ()) < 300.0f) {
 					nodeA.AddToNeighbourNodes (nodeB);
-					Debug.Log ("Found Neighbour");
+
 				}
+
 
 			}
 		}
-		foreach (TreeNode nodeA in listOfTreeNodes) {
-			if (nodeA.GetNeighbourNodes ().Count == 0) {
-				Debug.Log ("IM EMPTY");
-			}
-		}
+
 	}
 
 		public List<TreeNode> GetTreeNodes()

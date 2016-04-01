@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class RangedGoblinBehavior : MonoBehaviour {
 
 
-	public float acceleration = 7;
-	public float maxSpeed = 12;
+	public float acceleration = 20;
+	public float maxSpeed = 25;
 	public int minDistance = 10;
 	public int distanceFromTreeToStop = 3;
 	public int distanceFromTreeToSlowDown = 8;
@@ -24,11 +24,11 @@ public class RangedGoblinBehavior : MonoBehaviour {
 	private TreeNode targetNode;
 	private bool canTraversePath = false;
 	private bool pathFound = false;
-	private bool canSearchForNewPath = true;
+	private bool startPath = false;
 	private GameObject controller;
 	private GameController treeController;
 	private int pathCount = 0;
-	private float radiusOfTrees = 70;
+	private float minDistanceFromTrees = 500;
     public float rangedGoblinHealth = 300.0f;
     public float rangedGoblinDamage = 6.0f;
 
@@ -49,22 +49,8 @@ public class RangedGoblinBehavior : MonoBehaviour {
 		yield return new WaitForSeconds (3);
 		treeController = controller.GetComponent<GameController>();
 		listOfTreeNodes = treeController.GetTreeNodes ();
-		FindTreesInMyArea();
 
 	}
-
-
-	private void FindTreesInMyArea(){ //this method looks through all of the trees on the map and find the closest one to the character and sets that has his target direction
-		
-		foreach (TreeNode tree in listOfTreeNodes) {
-			if (Vector3.Distance(transform.position,tree.getPosition()) < radiusOfTrees) {
-				myTreeNodes.Add (tree);
-			}
-		}
-
-		Debug.Log ("Size of list of trees in my area " + myTreeNodes.Count);
-	}
-		
 
 
 	private void SetCanTraversePath(){
@@ -72,34 +58,37 @@ public class RangedGoblinBehavior : MonoBehaviour {
 	}
 
 	private void FindATreeTarget(){
-		int rand = Random.Range (0, myTreeNodes.Count);
-		targetTree = myTreeNodes [rand];
+		int rand = Random.Range (0, listOfTreeNodes.Count);
+
+		while (Vector3.Distance (transform.position, listOfTreeNodes [rand].getPosition ()) < minDistanceFromTrees) {
+			 rand = Random.Range (0, listOfTreeNodes.Count-1);
+		}
+
+		targetTree = listOfTreeNodes [rand];
+		Debug.Log (targetTree.getPosition () + " target position");
 	
 	}
 
-	private void FindStartNode(){
-		float closestTree = 200;
+	private void FindStartTree(){
+		float closestTree = 100;
 
-		foreach (TreeNode node in myTreeNodes) {
+		foreach (TreeNode node in listOfTreeNodes) {
 			if(Vector3.Distance(transform.position, node.getPosition()) < closestTree){
 				closestTree = Vector3.Distance (transform.position, node.getPosition ());
 				startTree = node;
-
+				Debug.Log (startTree.getPosition () + " start position");
 			}
 		}
 	}
 
 	private void FindPath(){
-		
+		canTraversePath = false;
 		FindATreeTarget ();
-		FindStartNode ();
+		FindStartTree ();
 		finalPath = pathFinder.FindPathEuclidean (startTree, targetTree);
-
-
-		if (finalPath.Count >= 1) {
-			canTraversePath = false;
-			Debug.Log ("final paht count is:" + finalPath.Count);
-		}
+		pathFound = true;
+		startPath = true;
+		Debug.Log ("Size of final path" + finalPath.Count);
 
 	}
 
@@ -127,23 +116,35 @@ public class RangedGoblinBehavior : MonoBehaviour {
 	// Update is called once per frame
 
 
-	void Update(){
+	void FixedUpdate(){
 
 		//apply gravity to enemies
 		rb.AddForce (Vector3.down * rb.mass * 30);
 
 		if (canTraversePath) {
 			FindPath ();
+			Debug.Log ("FindingPath");
 		}
 
-		if (finalPath.Count > 0 ) {
+		if (finalPath == null) {
+			Debug.Log ("NULL");
+		}
+
+		if (pathFound) {
+			
+
 
 			//We'll assign the currentNode to the first node in the path, and goalNode to the last node in the path
-			currentNode = finalPath [0];
-			targetNode = finalPath [finalPath.Count - 1];
+			if (startPath) {
+				currentNode = finalPath [0];
+				targetNode = finalPath [finalPath.Count - 1];
+				startPath = false;
+			}
 
 			Vector3 moveDirection = (currentNode.getPosition () - transform.position).normalized;
-			//Vector3 steeringDirection = (moveDirection - rb.velocity)*acceleration;
+			Vector3 steeringDirection = (moveDirection - rb.velocity).normalized;
+			moveDirection.y = 0.0f;
+			steeringDirection.y = 0.0f;
 
 			Quaternion newRotation = Quaternion.LookRotation (moveDirection);
 			newRotation.x = 0.0f;
@@ -151,7 +152,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 10.0f);
 
 			if (rb.velocity.magnitude < maxSpeed) {
-				rb.velocity += (moveDirection) * acceleration;
+				rb.AddForce ((moveDirection + steeringDirection) * acceleration, ForceMode.VelocityChange);
 
 			}
 
@@ -160,12 +161,13 @@ public class RangedGoblinBehavior : MonoBehaviour {
 				rb.velocity = rb.velocity.normalized * maxSpeed;
 			}
 
-			if (Vector3.Distance (this.transform.position, currentNode.getPosition ()) < 5.0f) {
+			if (Vector3.Distance (this.transform.position, currentNode.getPosition ()) < 15.0f) {
 
 				//If we've reached the goal, then we'll clear our path so we can get another one
 				if (currentNode.Equals (targetNode)) {
+					rb.velocity = Vector3.zero;
+					pathFound = false;
 					finalPath.Clear ();
-					Debug.Log ("they are equal");
 					StartCoroutine (ScanArea ());
 				}
 				//Else, get the next node in the path

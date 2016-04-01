@@ -20,7 +20,7 @@ public class AStarPathFinding : MonoBehaviour {
 
 		startNode = start;
 		targetNode = end;
-		startNode.gCost = 0;
+
 
 
 		openList.Add (startNode);
@@ -43,8 +43,9 @@ public class AStarPathFinding : MonoBehaviour {
 
 			if(currentNode == targetNode){
 				finalPath = RetracePath(startNode, targetNode);
-				return finalPath;
 				Debug.Log ("PathFound");
+				return finalPath;
+
 			}
 
 			foreach(TreeNode neighbour in currentNode.GetNeighbourNodes() ){
@@ -61,12 +62,7 @@ public class AStarPathFinding : MonoBehaviour {
 					neighbour.hCost = GetHCost(neighbour);
 					neighbour.SetParent(currentNode);
 					openList.Add(neighbour);
-					Debug.Log ("IM IN");
 
-					if (!openList.Contains(neighbour))
-					{
-						openList.Add(neighbour);
-					}
 
 				}
 

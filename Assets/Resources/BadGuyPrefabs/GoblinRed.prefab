@@ -1411,8 +1411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc70a01e75ea74545a3cee545d23128e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 7
-  maxSpeed: 12
+  acceleration: 17.4
+  maxSpeed: 35.77
   minDistance: 10
   distanceFromTreeToStop: 3
   distanceFromTreeToSlowDown: 8
@@ -1570,6 +1570,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Name
       value: RangedGoblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: acceleration
+      value: 17.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxSpeed
+      value: 35.77
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
