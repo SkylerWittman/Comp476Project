@@ -7,6 +7,7 @@ public class UnderwaterEffect : MonoBehaviour {
     private float waterLevel = -3.0f;
     private bool currentlyUnderwater = false;
     private Color underwaterColor = new Color(0.22f, 0.65f, 0.9f, 0.5f);
+    private Color normalColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 
 	void Start () {
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
@@ -27,12 +28,12 @@ public class UnderwaterEffect : MonoBehaviour {
 
     void setOutOfWater()
     {
-        RenderSettings.fog = false;
+        RenderSettings.fogColor = normalColor;
+        RenderSettings.fogDensity = 0.001f;
     }
 
     void setInWater()
     {
-        RenderSettings.fog = true;
         RenderSettings.fogColor = underwaterColor;
         RenderSettings.fogDensity = 0.03f;
     }

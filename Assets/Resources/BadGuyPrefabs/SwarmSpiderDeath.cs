@@ -40,7 +40,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		if(health < 0.0f && !isDead)
 		{
 
-			this.tag = null;
+			this.tag = "SpiderDead";
 			isDead = true;
 			anim.CrossFade(die.name, 0.5f);
 			//GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;

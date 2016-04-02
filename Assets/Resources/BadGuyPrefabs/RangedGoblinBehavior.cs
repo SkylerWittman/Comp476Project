@@ -65,7 +65,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 		}
 
 		targetTree = listOfTreeNodes [rand];
-		Debug.Log (targetTree.getPosition () + " target position");
+		//Debug.Log (targetTree.getPosition () + " target position");
 	
 	}
 
@@ -76,7 +76,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 			if(Vector3.Distance(transform.position, node.getPosition()) < closestTree){
 				closestTree = Vector3.Distance (transform.position, node.getPosition ());
 				startTree = node;
-				Debug.Log (startTree.getPosition () + " start position");
+				//Debug.Log (startTree.getPosition () + " start position");
 			}
 		}
 	}
@@ -89,7 +89,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 		finalPath = pathFinder.FindPathEuclidean (startTree, targetTree);
 		pathFound = true;
 		startPath = true;
-		Debug.Log ("Size of final path" + finalPath.Count);
+		//Debug.Log ("Size of final path" + finalPath.Count);
 
 	}
 
@@ -107,7 +107,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 		Vector3 avoidanceVector;
 		if (Physics.Raycast (transform.position, transform.forward, out hit, 50)) {
 			if (hit.collider.tag == "TreeMarker") {
-				Debug.Log ("HIT TREE");
+				//Debug.Log ("HIT TREE");
 				avoidanceVector = (hit.collider.transform.position - rb.velocity).normalized;
 				avoidanceVector *= 30;
 				rb.AddForce (avoidanceVector, ForceMode.VelocityChange);
@@ -124,11 +124,11 @@ public class RangedGoblinBehavior : MonoBehaviour {
 
 		if (canTraversePath) {
 			FindPath ();
-			Debug.Log ("FindingPath");
+			//Debug.Log ("FindingPath");
 		}
 
 		if (finalPath == null) {
-			Debug.Log ("NULL");
+			//Debug.Log ("NULL");
 		}
 
 		if (pathFound) {

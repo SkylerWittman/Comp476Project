@@ -21,7 +21,7 @@ public class AStarPathFinding : MonoBehaviour {
 		startNode = start;
 		targetNode = end;
 
-		Debug.Log ("cost of start node" + start.gCost);
+		//Debug.Log ("cost of start node" + start.gCost);
 
 		openList.Add (startNode);
 
@@ -36,7 +36,7 @@ public class AStarPathFinding : MonoBehaviour {
 				}
 			}
 
-			Debug.Log ("cost of current node" + currentNode.gCost);
+			//Debug.Log ("cost of current node" + currentNode.gCost);
 
 			openList.Remove(currentNode);
 			closedList.Add(currentNode);
@@ -44,7 +44,7 @@ public class AStarPathFinding : MonoBehaviour {
 
 			if(currentNode == targetNode){
 				finalPath = RetracePath(startNode, targetNode);
-				Debug.Log ("PathFound");
+				//Debug.Log ("PathFound");
 				return finalPath;
 
 			}
