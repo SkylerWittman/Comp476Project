@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinForce: 200
+  impulseForce: 22.31
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -102,6 +103,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Constraints
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: impulseForce
+      value: 22.31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
