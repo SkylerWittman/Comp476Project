@@ -5,15 +5,29 @@ public class NPCDetail : MonoBehaviour {
     bool LockA = false;
     Animation anim;
     public AnimationClip die;
+    public AnimationClip hit;
     public float health;
     public float damage;
     int counter = 0;
+
+    private AudioSource audioSource;
+
+    private AudioClip hitSound;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animation>();
         anim[die.name].layer = 2;
         anim[die.name].speed = .7f;
+        anim[hit.name].layer = 3;
+
+        hitSound = Resources.Load("Sounds/GeneralSounds/Hit") as AudioClip; 
     }
 
     // Update is called once per frame
@@ -47,19 +61,29 @@ public class NPCDetail : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
+        DinoBehavior dinoBehave = GetComponent<DinoBehavior>();
+        if (dinoBehave != null)
+        {
+            dinoBehave.gotHit();
+        }
+        
         switch (other.gameObject.tag)
         {
             case "RegularArrow":
                 health -= other.GetComponent<Arrow>().damage;
+                anim.CrossFade(hit.name, 0.5f);
+                playHitSound();
                 Destroy(other.gameObject);
                 break;
                 //misspelled poison...
             case "PoisonArrow":
                 health -= other.GetComponent<Arrow>().damage;
+                anim.CrossFade(hit.name, 0.5f);
                 LockA = true;
                 break;
             case "ExplosiveArrow":
                 Destroy(this.gameObject, anim[die.name].length + .5f);
+                anim.CrossFade(hit.name, 0.5f);
                 break;
             case "Gas":
                 LockA = true;
@@ -68,6 +92,11 @@ public class NPCDetail : MonoBehaviour {
 
 
         
+    }
+
+    private void playHitSound()
+    {
+        audioSource.PlayOneShot(hitSound, 0.5f);
     }
 
 }
