@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
 		IEnumerator runTree()
 		{ //this method is called after 2 seconds (once all trees have been painted onto terrain) it then goes through each tree and finds the correct position
 			//of the tree by scaling the position to the size and orgin of the terrain, and empty game object is then instaniated at that position to be used as a marker for the tree
-			yield return new WaitForSeconds(2);
+			yield return new WaitForSeconds(3);
 			arrayOfTrees = Terrain.activeTerrain.terrainData.treeInstances;
 
 			foreach (TreeInstance tree in arrayOfTrees)

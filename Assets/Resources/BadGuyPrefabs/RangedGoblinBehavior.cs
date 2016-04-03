@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class RangedGoblinBehavior : MonoBehaviour {
 
 
-	public float acceleration = 20;
+	public float acceleration = 10;
 	public float maxSpeed = 25;
 	public int minDistance = 10;
 	public int distanceFromTreeToStop = 3;
@@ -31,22 +31,30 @@ public class RangedGoblinBehavior : MonoBehaviour {
 	private float minDistanceFromTrees = 500;
     public float rangedGoblinHealth = 300.0f;
     public float rangedGoblinDamage = 6.0f;
+	public float distanceToNewTree = 25.0f;
+	private Animation anim;
+	private AnimationClip runClip;
+	private AnimationClip standClip;
 
     void Start () {
         GetComponent<NPCDetail>().health = rangedGoblinHealth;
         GetComponent<NPCDetail>().damage = rangedGoblinDamage;
+
+		anim = GetComponent<Animation>();
+		runClip = anim.GetClip("run");
+		standClip = anim.GetClip ("stand");
         rb = GetComponent<Rigidbody> ();
 		pathFinder = GetComponent<AStarPathFinding> ();
 		controller = GameObject.FindGameObjectWithTag ("controller");
 		StartCoroutine (GetTreePositions ());
-		int time = Random.Range (4, 8);
+		int time = Random.Range (5, 8);
 		Invoke ("SetCanTraversePath", time);
 		InvokeRepeating ("CollisionAvoidance", 8.0f, 2.0f);
 
 	}
 
 	IEnumerator GetTreePositions(){
-		yield return new WaitForSeconds (3);
+		yield return new WaitForSeconds (4.0f);
 		treeController = controller.GetComponent<GameController>();
 		listOfTreeNodes = treeController.GetTreeNodes ();
 
@@ -95,6 +103,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 
 
 	IEnumerator ScanArea(){
+		anim.Play(standClip.name);
 		int rand = Random.Range (2, 5);
 		yield return new WaitForSeconds (rand);
 		canTraversePath = true;
@@ -119,8 +128,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 
 	void FixedUpdate(){
 
-		//apply gravity to enemies
-		rb.AddForce (Vector3.down * rb.mass * 30);
+
 
 		if (canTraversePath) {
 			FindPath ();
@@ -132,8 +140,13 @@ public class RangedGoblinBehavior : MonoBehaviour {
 		}
 
 		if (pathFound) {
-			
 
+
+			//apply gravity to enemies
+			rb.AddForce (Vector3.down * rb.mass * 30);
+
+
+			anim.Play(runClip.name);
 
 			//We'll assign the currentNode to the first node in the path, and goalNode to the last node in the path
 			if (startPath) {
@@ -148,21 +161,19 @@ public class RangedGoblinBehavior : MonoBehaviour {
 			steeringDirection.y = 0.0f;
 
 			Quaternion newRotation = Quaternion.LookRotation (moveDirection);
-			newRotation.x = 0.0f;
-			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 10.0f);
-
-			if (rb.velocity.magnitude < maxSpeed) {
-				rb.AddForce ((moveDirection + steeringDirection) * acceleration, ForceMode.VelocityChange);
-
-			}
+			transform.rotation = Quaternion.RotateTowards (transform.rotation, newRotation, 8.0f);
 
 
 			if (rb.velocity.magnitude > maxSpeed) {
 				rb.velocity = rb.velocity.normalized * maxSpeed;
 			}
 
-			if (Vector3.Distance (this.transform.position, currentNode.getPosition ()) < 15.0f) {
+			if (rb.velocity.magnitude < maxSpeed) {
+				rb.velocity += (steeringDirection + moveDirection) * acceleration;
+
+			}
+
+			if (Vector3.Distance (this.transform.position, currentNode.getPosition ()) < distanceToNewTree) {
 
 				//If we've reached the goal, then we'll clear our path so we can get another one
 				if (currentNode.Equals (targetNode)) {

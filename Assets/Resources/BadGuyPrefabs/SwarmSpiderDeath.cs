@@ -66,7 +66,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			LockA = true;
 			break;
 		case "ExplosiveArrow":
-			//No clue yet
+			Destroy(this.gameObject, anim[die.name].length + .5f);
 			break;
 		}
 

@@ -443,6 +443,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &159908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 473672}
+  m_Layer: 0
+  m_Name: ThrowPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &160404
 GameObject:
   m_ObjectHideFlags: 1
@@ -940,12 +955,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 547.9081, y: 279.95007, z: 422.72028}
+  m_LocalPosition: {x: 213.4626, y: 466.53168, z: 9.129656}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 441520}
   - {fileID: 410890}
   - {fileID: 405294}
+  - {fileID: 473672}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &444530
@@ -1106,6 +1122,18 @@ Transform:
   - {fileID: 488518}
   m_Father: {fileID: 471454}
   m_RootOrder: 0
+--- !u!4 &473672
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159908}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.5, y: 3.39, z: -0.4}
+  m_LocalScale: {x: 13, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 443422}
+  m_RootOrder: 3
 --- !u!4 &473838
 Transform:
   m_ObjectHideFlags: 1
@@ -1386,6 +1414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwingAxe: {fileID: 177788, guid: b12b1733a3338a84cbe3342681cda664, type: 2}
   spear: {fileID: 174674, guid: be9a965428e36cd4ebd46010677e7e6d, type: 2}
+  throwPosition: {fileID: 159908}
 --- !u!114 &11476002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1411,7 +1440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc70a01e75ea74545a3cee545d23128e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 17.4
+  acceleration: 20
   maxSpeed: 35.77
   minDistance: 10
   distanceFromTreeToStop: 3
@@ -1419,6 +1448,7 @@ MonoBehaviour:
   timeToChangeBetweenTrees: 6
   rangedGoblinHealth: 300
   rangedGoblinDamage: 6
+  distanceToNewTree: 25
 --- !u!114 &11499442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1573,12 +1603,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: acceleration
-      value: 17.4
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpeed
       value: 35.77
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: throwPosition
+      value: 
+      objectReference: {fileID: 159908}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 149360}
