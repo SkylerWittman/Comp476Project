@@ -7,9 +7,6 @@ public class DinoBehavior : MonoBehaviour {
     public float acceleration = 3.0f;
     public float maxSpeed = 5.0f;
     public float maxRunSpeed = 10.0f;
-    public float directionChangeTime = 3.0f;
-    public float rotateTime = 1.5f;
-    public float maxDirectionChange = 15.0f;
 
     private Rigidbody rigidbody;
     private Vector3 newDirection;
@@ -32,6 +29,7 @@ public class DinoBehavior : MonoBehaviour {
     private enum State { WANDER, PURSUE, COMBAT };
     private State currentState;
 
+    private float pursueDistance = 100.0f;
     private bool canAttack;
     public float dinoHealth = 600.0f;
     public float dinoDamage = 15.0f;
@@ -64,10 +62,7 @@ public class DinoBehavior : MonoBehaviour {
         
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = transform.position;
-        directionToHeadTo = Random.Range(0, 360);
-        transform.eulerAngles = new Vector3(0, directionToHeadTo, 0);
         currentState = State.WANDER;
-        StartCoroutine(FaceNewDirection());
         InvokeRepeating("assessState", 0.0f, 0.1f);
 
         //Each dino will cast a ray at some random interval between 2 and 3
@@ -100,24 +95,7 @@ public class DinoBehavior : MonoBehaviour {
         dinoHit = Resources.Load("Sounds/Dino/DinoHit") as AudioClip;
     }
 
-    IEnumerator FaceNewDirection()
-    {
-        while (true)
-        {
-            GetNewDirection();
-            yield return new WaitForSeconds(directionChangeTime);
-        }
-    }
-
-    void GetNewDirection()
-    {
-        float floor = Mathf.Clamp(directionToHeadTo - maxDirectionChange, 0, 360);
-        float ceiling = Mathf.Clamp(directionToHeadTo + maxDirectionChange, 0, 360);
-        directionToHeadTo = Random.Range(floor, ceiling);
-        newDirection = new Vector3(0, directionToHeadTo, 0);
-    }
-
-    void assessState()
+    private void assessState()
     {
         if (currentState == State.WANDER)
         {
@@ -133,7 +111,7 @@ public class DinoBehavior : MonoBehaviour {
         }
     }
 
-    void wander()
+    private void wander()
     {
         //If there is no current path, then we will have to find a new path
         if (currentPath.Count == 0)
@@ -154,9 +132,14 @@ public class DinoBehavior : MonoBehaviour {
 
         Vector3 chaseDirection = currentNode.position - transform.position;
         chaseDirection.y = 0.0f;
+        wanderMovement(chaseDirection);
+    }
+
+    private void wanderMovement(Vector3 chaseDirection)
+    {
         //-chaseDirection because the dino model thinks its forward position is behind it. If not negative, the dino would walk backwards
         Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxSpeed);
 
         if (rigidbody.velocity.magnitude < maxSpeed)
         {
@@ -172,7 +155,7 @@ public class DinoBehavior : MonoBehaviour {
         //If position is less than 5 units away from node, we'll start to look for the next node in the path
         //This will for sure trigger a currentNode change
         if (Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z), new Vector3(currentNode.position.x, 0.0f, currentNode.position.z)) < 5.0f)
-        {  
+        {
             //If we've reached the goal, then we'll clear our path so we can get another one
             if (currentNode.Equals(goalNode))
             {
@@ -186,37 +169,14 @@ public class DinoBehavior : MonoBehaviour {
         }
     }
 
-    void pursue()
-    {
+    private void pursue()
+    {   
         //If player is not null, it means we've been assigned a player to pursue
         if (player != null)
         {   
             Vector3 chaseDirection = player.position - transform.position;
 			chaseDirection.y = 0.0f;
-            //Look at the comment in wander if -chaseDirection looks funny
-            Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);
-
-            if (rigidbody.velocity.magnitude < maxRunSpeed)
-            {
-                rigidbody.AddForce(chaseDirection.normalized * acceleration, ForceMode.VelocityChange);
-            }
-
-            if (rigidbody.velocity.magnitude > maxRunSpeed)
-            {
-                rigidbody.velocity = rigidbody.velocity.normalized * maxRunSpeed;
-            }
-
-            //If the player is more than 100 units away, then we have "lost" the player, and we'll assign it to null so we can transition to wander state
-            if (Vector3.Distance(transform.position, player.position) > 100.0f)
-            {
-                player = null;
-            }
-            //If the player is less than 10 units away, we transition to combat state
-            else if (Vector3.Distance(transform.position, player.position) < 10.0f)
-            {
-                currentState = State.COMBAT;
-            }
+            pursueMovement(chaseDirection);
         }
         //Else, we've lost the player and we can transition back to wander state
         else
@@ -226,7 +186,35 @@ public class DinoBehavior : MonoBehaviour {
         }
     }
 
-    void combat()
+    private void pursueMovement(Vector3 chaseDirection)
+    {
+        //Look at the comment in wander if -chaseDirection looks funny
+        Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxRunSpeed);
+
+        if (rigidbody.velocity.magnitude < maxRunSpeed)
+        {
+            rigidbody.AddForce(chaseDirection.normalized * acceleration, ForceMode.VelocityChange);
+        }
+
+        if (rigidbody.velocity.magnitude > maxRunSpeed)
+        {
+            rigidbody.velocity = rigidbody.velocity.normalized * maxRunSpeed;
+        }
+
+        //If the player is more than 100 units away, then we have "lost" the player, and we'll assign it to null so we can transition to wander state
+        if (Vector3.Distance(transform.position, player.position) > pursueDistance)
+        {
+            player = null;
+        }
+        //If the player is less than 10 units away, we transition to combat state
+        else if (Vector3.Distance(transform.position, player.position) < 10.0f)
+        {
+            currentState = State.COMBAT;
+        }
+    }
+
+    private void combat()
     {
         //Attacks occur every 2 seconds
         if (canAttack)
@@ -238,7 +226,7 @@ public class DinoBehavior : MonoBehaviour {
     }
 
     //This finds whether the player is in a 70 unit radius of the dino
-    void castSphere()
+    private void castSphere()
     {
         if (currentState == State.WANDER)
         {
@@ -262,13 +250,14 @@ public class DinoBehavior : MonoBehaviour {
         //We'll clear the path, as we are now pursuing the player. 
         //This will ensure that if we return to wander state, we will search for a new path.
         currentState = State.PURSUE;
+        currentNode = null;
         currentPath.Clear();
         anim.Play(runClip.name);
         audioSource.PlayOneShot(dinoCall, 0.5f);
     }
 
     //The attack routine, which triggers the animation and do damage to the player.
-    IEnumerator attack()
+    private IEnumerator attack()
     {
         canAttack = false;
         //only works if there is a single player
@@ -283,7 +272,11 @@ public class DinoBehavior : MonoBehaviour {
     //If the dino has been hit by an arrow, he will find the player and then follow the pursue routine
     public void gotHit()
     {
-        setPursue();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (currentState != State.PURSUE)
+        {
+            setPursue();
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            pursueDistance = float.MaxValue;
+        }
     }
 }

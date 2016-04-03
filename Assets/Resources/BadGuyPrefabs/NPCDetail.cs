@@ -52,7 +52,7 @@ public class NPCDetail : MonoBehaviour {
             transform.position = pos;
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-           
+            
 
 			Destroy(this.gameObject, anim[die.name].length+.5f);
             
@@ -96,7 +96,7 @@ public class NPCDetail : MonoBehaviour {
 
     private void playHitSound()
     {
-        audioSource.PlayOneShot(hitSound, 0.5f);
+        audioSource.PlayOneShot(hitSound, 0.1f);
     }
 
 }

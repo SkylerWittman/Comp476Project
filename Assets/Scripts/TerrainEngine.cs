@@ -116,9 +116,9 @@ public class TerrainEngine : MonoBehaviour
              * t t t
              * Where t's are the current tree's neighbouring positions and T is the position of the current tree
              */
-            for (int X = (int)(x*gridSize) - 5; X <= (int)(x*gridSize) + 5; X++)
+            for (int X = (int)(x*gridSize) - 8; X <= (int)(x*gridSize) + 8; X++)
             {
-                for (int Z = (int)(z*gridSize) - 5; Z <= (int)(z*gridSize) + 5; Z++)
+                for (int Z = (int)(z*gridSize) - 8; Z <= (int)(z*gridSize) + 8; Z++)
                 {
                     terrainGrid.grid[Mathf.Clamp(X, 0, gridSize-1), Mathf.Clamp(Z, 0, gridSize-1)].walkable = false;
                 }
