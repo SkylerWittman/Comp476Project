@@ -61,6 +61,12 @@ public class NPCDetail : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
+        DinoBehavior dinoBehave = GetComponent<DinoBehavior>();
+        if (dinoBehave != null)
+        {
+            dinoBehave.gotHit();
+        }
+        
         switch (other.gameObject.tag)
         {
             case "RegularArrow":

@@ -247,18 +247,24 @@ public class DinoBehavior : MonoBehaviour {
             {
                 if (c.gameObject.tag == "Player")
                 {
-                    //We'll clear the path, as we are now pursuing the player. 
-                    //This will ensure that if we return to wander state, we will search for a new path.
-                    currentState = State.PURSUE;
-                    currentPath.Clear();
-                    anim.Play(runClip.name);
-                    audioSource.PlayOneShot(dinoCall, 0.5f);
+                    setPursue();
                     //Assign the transform of the player so that way we have a way to track their position
                     player = c.gameObject.transform;
                     break;
                 }
             }
         }
+    }
+
+    //Pursuing will follow a certain routine
+    private void setPursue()
+    {
+        //We'll clear the path, as we are now pursuing the player. 
+        //This will ensure that if we return to wander state, we will search for a new path.
+        currentState = State.PURSUE;
+        currentPath.Clear();
+        anim.Play(runClip.name);
+        audioSource.PlayOneShot(dinoCall, 0.5f);
     }
 
     //The attack routine, which triggers the animation and do damage to the player.
@@ -272,5 +278,12 @@ public class DinoBehavior : MonoBehaviour {
         audioSource.PlayOneShot(dinoBite);
         yield return new WaitForSeconds(dinoAttackCooldown);
         canAttack = true;
+    }
+
+    //If the dino has been hit by an arrow, he will find the player and then follow the pursue routine
+    public void gotHit()
+    {
+        setPursue();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 }
