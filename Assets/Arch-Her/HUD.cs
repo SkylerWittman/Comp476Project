@@ -44,13 +44,13 @@ public class HUD : MonoBehaviour {
 
         score = 0;
 
-        arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplay").GetComponent<Canvas>();
-        poisonParticleSystem = GameObject.FindGameObjectWithTag("PoisonParticleSystem").GetComponentInChildren<ParticleSystem>();
-        explosiveParticleSystem = GameObject.FindGameObjectWithTag("ExplosiveParticleSystem").GetComponentInChildren<ParticleSystem>();
-        poisonParticleSystem.Stop();
-        explosiveParticleSystem.Stop();
-        Debug.Log(poisonParticleSystem);
-        Debug.Log(explosiveParticleSystem);
+        //arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplay").GetComponent<Canvas>();
+        //poisonParticleSystem = GameObject.FindGameObjectWithTag("PoisonParticleSystem").GetComponentInChildren<ParticleSystem>();
+        //explosiveParticleSystem = GameObject.FindGameObjectWithTag("ExplosiveParticleSystem").GetComponentInChildren<ParticleSystem>();
+        //poisonParticleSystem.Stop();
+        //explosiveParticleSystem.Stop();
+        //Debug.Log(poisonParticleSystem);
+        //Debug.Log(explosiveParticleSystem);
         //cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
         //HUDarrowTransform = GameObject.FindGameObjectWithTag("arrow").transform;
         //StartCoroutine(HealthWait());
