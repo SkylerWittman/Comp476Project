@@ -5,6 +5,7 @@ public class NPCDetail : MonoBehaviour {
     bool LockA = false;
     Animation anim;
     public AnimationClip die;
+    public AnimationClip hit;
     public float health;
     public float damage;
     int counter = 0;
@@ -14,6 +15,7 @@ public class NPCDetail : MonoBehaviour {
         anim = GetComponent<Animation>();
         anim[die.name].layer = 2;
         anim[die.name].speed = .7f;
+        anim[hit.name].layer = 3;
     }
 
     // Update is called once per frame
@@ -51,15 +53,18 @@ public class NPCDetail : MonoBehaviour {
         {
             case "RegularArrow":
                 health -= other.GetComponent<Arrow>().damage;
+                anim.CrossFade(hit.name, 0.5f);
                 Destroy(other.gameObject);
                 break;
                 //misspelled poison...
             case "PoisonArrow":
                 health -= other.GetComponent<Arrow>().damage;
+                anim.CrossFade(hit.name, 0.5f);
                 LockA = true;
                 break;
             case "ExplosiveArrow":
                 Destroy(this.gameObject, anim[die.name].length + .5f);
+                anim.CrossFade(hit.name, 0.5f);
                 break;
             case "Gas":
                 LockA = true;

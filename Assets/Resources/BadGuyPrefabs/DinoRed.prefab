@@ -1403,6 +1403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   die: {fileID: 7400000, guid: 92cf7fb090ba49a418f829d521feb727, type: 2}
+  hit: {fileID: 7400000, guid: d1ad455fa0850374cbe78b60bc11c305, type: 2}
   health: 100
   damage: 20
 --- !u!136 &13681930

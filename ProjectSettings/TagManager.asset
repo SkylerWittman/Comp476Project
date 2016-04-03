@@ -38,6 +38,7 @@ TagManager:
   - arrow
   - ArrowDisplayParticle
   - Tree
+  - SpiderDead
   layers:
   - Default
   - TransparentFX
