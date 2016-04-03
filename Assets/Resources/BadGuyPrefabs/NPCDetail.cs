@@ -9,6 +9,16 @@ public class NPCDetail : MonoBehaviour {
     public float health;
     public float damage;
     int counter = 0;
+
+    private AudioSource audioSource;
+
+    private AudioClip hitSound;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -16,6 +26,8 @@ public class NPCDetail : MonoBehaviour {
         anim[die.name].layer = 2;
         anim[die.name].speed = .7f;
         anim[hit.name].layer = 3;
+
+        hitSound = Resources.Load("Sounds/GeneralSounds/Hit") as AudioClip; 
     }
 
     // Update is called once per frame
@@ -54,6 +66,7 @@ public class NPCDetail : MonoBehaviour {
             case "RegularArrow":
                 health -= other.GetComponent<Arrow>().damage;
                 anim.CrossFade(hit.name, 0.5f);
+                playHitSound();
                 Destroy(other.gameObject);
                 break;
                 //misspelled poison...
@@ -73,6 +86,11 @@ public class NPCDetail : MonoBehaviour {
 
 
         
+    }
+
+    private void playHitSound()
+    {
+        audioSource.PlayOneShot(hitSound, 0.5f);
     }
 
 }
