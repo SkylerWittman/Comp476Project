@@ -118,16 +118,16 @@ public class DinoBehavior : MonoBehaviour {
         {
             //We will loop until we have found a path that contains at least 2 nodes
             int numIterations = 0; //TEMPORARY DEBUGGING
-            while (currentPath.Count < 2)
+            while (currentPath.Count < 1)
             {
-                //We will attempt to wander to some position that is +/- 150 units from the dino's current position. It is clamped to the boundaries of the level
-                float wanderX = Random.Range(Mathf.Clamp(transform.position.x - 150.0f, 0.0f, 1000.0f), Mathf.Clamp(transform.position.x + 150.0f, 0.0f, 1000.0f));
-                float wanderZ = Random.Range(Mathf.Clamp(transform.position.z - 150.0f, 0.0f, 1000.0f), Mathf.Clamp(transform.position.z + 150.0f, 0.0f, 1000.0f));
+                //We will attempt to wander to some position that is +/- 40 units from the dino's current position. It is clamped to the boundaries of the level
+                float wanderX = Random.Range(Mathf.Clamp(transform.position.x - 40.0f, 0.0f, 1000.0f), Mathf.Clamp(transform.position.x + 40.0f, 0.0f, 1000.0f));
+                float wanderZ = Random.Range(Mathf.Clamp(transform.position.z - 40.0f, 0.0f, 1000.0f), Mathf.Clamp(transform.position.z + 40.0f, 0.0f, 1000.0f));
                 Vector3 targetPos = new Vector3(wanderX, 0.0f, wanderZ);
                 currentPath = pathFinder.getPath(transform.position, targetPos);
                 
                 numIterations++;
-                if (numIterations == 10)
+                if (numIterations == 20)
                 {
                     Debug.Log("I BUGGED OUT LOL. COMMITTING SUICIDE NOW. IGNORE THE ARUMENT OUT OF RANGE EXCEPTION");
                     gameObject.name = "I BUGGED OUT LOL";

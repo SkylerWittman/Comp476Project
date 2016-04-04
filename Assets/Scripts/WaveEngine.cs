@@ -88,7 +88,7 @@ public class WaveEngine : MonoBehaviour {
         Vector3 samplePosition = new Vector3(x, 0.0f, z);
 
         //Check whether the position in the grid is occupied by a tree, or under the water level or there is a bad guy/player within a radius of 1 of samplePosition
-        while (terrainGrid.grid[(int)(x / 2.0f), (int)(z / 2.0f)].walkable == false || terrain.SampleHeight(samplePosition) <= waterLevel || checkAroundPosition(samplePosition))
+        while (terrainGrid.NodeFromPoint(samplePosition).walkable == false || terrain.SampleHeight(samplePosition) <= waterLevel || checkAroundPosition(samplePosition))
         {
             x = Random.Range(0.0f, terrainSize);
             z = Random.Range(0.0f, terrainSize);
@@ -110,7 +110,7 @@ public class WaveEngine : MonoBehaviour {
         
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject.tag.Equals("Player") || colliders[i].gameObject.tag.Equals("BadGuy"))
+            if (colliders[i].gameObject.tag.Equals("Player") || colliders[i].gameObject.tag.Equals("BadGuy") || colliders[i].gameObject.tag.Equals("Tree"))
             {
                 found = true;
                 break;
