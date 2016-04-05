@@ -83,15 +83,15 @@ public class WaveEngine : MonoBehaviour {
     public float[] getXZ()
     {
         float[] XZ = new float[2];
-        float x = Random.Range(0.0f, terrainSize);
-        float z = Random.Range(0.0f, terrainSize);
+        float x = Random.Range(100.0f, terrainSize - 100.0f);
+        float z = Random.Range(100.0f, terrainSize - 100.0f);
         Vector3 samplePosition = new Vector3(x, 0.0f, z);
 
         //Check whether the position in the grid is occupied by a tree, or under the water level or there is a bad guy/player within a radius of 1 of samplePosition
         while (terrainGrid.NodeFromPoint(samplePosition).walkable == false || terrain.SampleHeight(samplePosition) <= waterLevel || checkAroundPosition(samplePosition))
         {
-            x = Random.Range(0.0f, terrainSize);
-            z = Random.Range(0.0f, terrainSize);
+            x = Random.Range(100.0f, terrainSize - 100.0f);
+            z = Random.Range(100.0f, terrainSize - 100.0f);
             samplePosition.x = x;
             samplePosition.z = z;
         }

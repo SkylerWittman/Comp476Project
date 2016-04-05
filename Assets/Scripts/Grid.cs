@@ -29,26 +29,26 @@ public class Grid : MonoBehaviour {
      * UNCOMMENT THE START IF YOU WANT TO SEE THE NODES GENERATED
      */
 
-    void Start()
-    {
-        for (int i = 0; i < reducedGrid.GetLength(0); i++)
-        {
-            for (int j = 0; j < reducedGrid.GetLength(1); j++)
-            {
-                Node tempNode = reducedGrid[i, j];
-                GameObject m = Instantiate(marker, reducedGrid[i, j].position, Quaternion.identity) as GameObject;
-                Renderer r = m.GetComponent<Renderer>();
-                if (tempNode.walkable)
-                {
-                    r.material.color = Color.green;
-                }
-                else
-                {
-                    r.material.color = Color.red;
-                }
-            }
-        }
-    }
+    //void Start()
+    //{
+    //    for (int i = 0; i < reducedGrid.GetLength(0); i++)
+    //    {
+    //        for (int j = 0; j < reducedGrid.GetLength(1); j++)
+    //        {
+    //            Node tempNode = reducedGrid[i, j];
+    //            GameObject m = Instantiate(marker, reducedGrid[i, j].position, Quaternion.identity) as GameObject;
+    //            Renderer r = m.GetComponent<Renderer>();
+    //            if (tempNode.walkable)
+    //            {
+    //                r.material.color = Color.green;
+    //            }
+    //            else
+    //            {
+    //                r.material.color = Color.red;
+    //            }
+    //        }
+    //    }
+    //}
 
     //Initializes grid, not reducedGrid
     private void initializeGrid()
