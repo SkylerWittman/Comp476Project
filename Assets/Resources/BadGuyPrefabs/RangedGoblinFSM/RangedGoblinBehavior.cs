@@ -16,7 +16,6 @@ public class RangedGoblinBehavior : MonoBehaviour {
 	private Rigidbody rb;
 	private AStarPathFinding pathFinder;
 	private List<TreeNode> listOfTreeNodes = new List<TreeNode>();
-	private List<TreeNode> myTreeNodes = new List<TreeNode>();
 	private List<TreeNode> finalPath = new List<TreeNode>();
 	private TreeNode startTree;
 	private TreeNode targetTree;
