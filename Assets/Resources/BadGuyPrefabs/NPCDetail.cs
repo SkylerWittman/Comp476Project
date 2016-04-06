@@ -67,11 +67,12 @@ public class NPCDetail : MonoBehaviour {
             dinoBehave.gotHit();
         }
         
+
         switch (other.gameObject.tag)
         {
-            case "RegularArrow":
-                health -= other.GetComponent<Arrow>().damage;
-                anim.CrossFade(hit.name, 0.5f);
+		case "RegularArrow":
+			health -= other.GetComponent<Arrow> ().damage;
+				anim.Play (hit.name);
                 playHitSound();
                 Destroy(other.gameObject);
                 break;

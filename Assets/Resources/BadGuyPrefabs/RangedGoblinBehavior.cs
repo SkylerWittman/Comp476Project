@@ -105,9 +105,8 @@ public class RangedGoblinBehavior : MonoBehaviour {
 	IEnumerator ScanArea(){
 		anim.Play(standClip.name);
 		int rand = Random.Range (2, 5);
-		yield return new WaitForSeconds (rand);
 		canTraversePath = true;
-
+		yield return new WaitForSeconds (rand);
 
 	}
 

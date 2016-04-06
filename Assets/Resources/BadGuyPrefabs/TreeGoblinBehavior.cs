@@ -93,6 +93,7 @@ public class TreeGoblinBehavior : MonoBehaviour {
 			newRotation.z = 0.0f;
 			transform.rotation = Quaternion.RotateTowards (transform.rotation, newRotation, 15.0f);
 
+			directionToMove.y = 0.0f;
 
 			//addforce in direction of character
 			if (rb.velocity.magnitude < maxSpeed) {

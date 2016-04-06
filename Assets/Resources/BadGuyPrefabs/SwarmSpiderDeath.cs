@@ -7,6 +7,8 @@ public class SwarmSpiderDeath : MonoBehaviour {
 	private bool isDead = false;
 	Animation anim;
 	public AnimationClip die;
+	private AudioSource audioSource;
+	public AudioClip spiderDeath;
 	public float health;
 	public float damage;
 	int counter = 0;
@@ -16,6 +18,9 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		anim = GetComponent<Animation>();
 		anim[die.name].layer = 2;
 		anim[die.name].speed = .7f;
+		audioSource = GetComponent<AudioSource> ();
+
+
 	}
 
 	// Update is called once per frame
@@ -42,14 +47,16 @@ public class SwarmSpiderDeath : MonoBehaviour {
 
 			this.gameObject.tag = "SpiderDead";
 			isDead = true;
-			anim.CrossFade(die.name, 0.5f);
+			GetComponent<SwarmSpiderBehavior> ().SpiderDeath ();
+			//audioSource.PlayOneShot (spiderDeath, .5f);
+			anim.Play(die.name);
 			//GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
 			//transform.position = pos;
 
 			//Freeze all movement/rotations when NPC has been slain
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<SwarmSpiderBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
-			Destroy(this.gameObject, anim[die.name].length + 0.5f);
+			Destroy(this.gameObject, anim[die.name].length + 1.0f);
 
 		}
 

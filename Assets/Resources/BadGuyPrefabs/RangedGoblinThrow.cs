@@ -40,12 +40,12 @@ public class RangedGoblinThrow : MonoBehaviour {
 
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		attackTimer--;
 
 		if (Vector3.Distance (transform.position, playerTarget) < distanceToAttack && attackTimer < 0.0f) {
 			ThrowWeapon ();
-			attackTimer = 60.0f;
+			attackTimer = 120.0f;
 		}
 
 	}

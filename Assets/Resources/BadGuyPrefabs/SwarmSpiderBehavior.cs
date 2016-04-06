@@ -53,7 +53,15 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		canWander = true;
 
 	}
-	
+
+
+	public void SpiderDeath(){
+		canWander = false;
+		canHunt = false;
+		anim.Stop ();
+	}
+
+
 	//when a spider in the swarm dies he must inform his swarm members so they can recalcualte thier swarm mebers for proper movement
 	public void InformSwarmMembersOfDeath(GameObject swarmMember){
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
