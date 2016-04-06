@@ -61,8 +61,8 @@
 		<td></td>
 	</tr
 	<tr>
-		<td>In-game drops</td>
-		<td>Done</td>
+		<td>In-game drops/add health potion drop</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>Enemy damage to player</td>
