@@ -91,7 +91,7 @@ public class TreeGoblinBehavior : MonoBehaviour {
 			Quaternion newRotation = Quaternion.LookRotation (directionToMove);
 			newRotation.x = 0.0f;
 			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.deltaTime * 10.0f);
+			transform.rotation = Quaternion.RotateTowards (transform.rotation, newRotation, 15.0f);
 
 
 			//addforce in direction of character

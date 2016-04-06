@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class RangedGoblinBehavior : MonoBehaviour {
 
 
-	public float acceleration = 10;
-	public float maxSpeed = 25;
+	public float acceleration = 8;
+	public float maxSpeed = 15;
 	public int minDistance = 10;
 	public int distanceFromTreeToStop = 3;
 	public int distanceFromTreeToSlowDown = 8;
@@ -73,7 +73,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 		}
 
 		targetTree = listOfTreeNodes [rand];
-		//Debug.Log (targetTree.getPosition () + " target position");
+
 	
 	}
 
@@ -84,7 +84,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 			if(Vector3.Distance(transform.position, node.getPosition()) < closestTree){
 				closestTree = Vector3.Distance (transform.position, node.getPosition ());
 				startTree = node;
-				//Debug.Log (startTree.getPosition () + " start position");
+
 			}
 		}
 	}
@@ -97,7 +97,7 @@ public class RangedGoblinBehavior : MonoBehaviour {
 		finalPath = pathFinder.FindPathEuclidean (startTree, targetTree);
 		pathFound = true;
 		startPath = true;
-		//Debug.Log ("Size of final path" + finalPath.Count);
+		Debug.Log ("Size of final path" + finalPath.Count);
 
 	}
 
@@ -132,12 +132,8 @@ public class RangedGoblinBehavior : MonoBehaviour {
 
 		if (canTraversePath) {
 			FindPath ();
-			//Debug.Log ("FindingPath");
 		}
-
-		if (finalPath == null) {
-			//Debug.Log ("NULL");
-		}
+			
 
 		if (pathFound) {
 
@@ -161,15 +157,19 @@ public class RangedGoblinBehavior : MonoBehaviour {
 			steeringDirection.y = 0.0f;
 
 			Quaternion newRotation = Quaternion.LookRotation (moveDirection);
-			transform.rotation = Quaternion.RotateTowards (transform.rotation, newRotation, 8.0f);
+			newRotation.x = 0.0f;
+			newRotation.z = 0.0f;
+			transform.rotation = Quaternion.RotateTowards (transform.rotation, newRotation, 15.0f);
 
+			moveDirection *= acceleration;
 
 			if (rb.velocity.magnitude > maxSpeed) {
 				rb.velocity = rb.velocity.normalized * maxSpeed;
+
 			}
 
 			if (rb.velocity.magnitude < maxSpeed) {
-				rb.velocity += (steeringDirection + moveDirection) * acceleration;
+				rb.velocity += (steeringDirection + moveDirection);
 
 			}
 

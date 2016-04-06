@@ -14,12 +14,13 @@ public class ThrowAxe : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		playerTarget = GameObject.FindGameObjectWithTag ("Player");
 		directionToThrow = (playerTarget.transform.position - this.transform.position).normalized;
+		rb.AddForce (directionToThrow * impulseForce, ForceMode.VelocityChange);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		rb.maxAngularVelocity = 15.0f;
 		rb.AddTorque (-transform.forward *spinForce);
-		rb.AddForce (directionToThrow * impulseForce, ForceMode.VelocityChange);
+
 	}
 }

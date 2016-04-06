@@ -178,8 +178,8 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		//divide the vector values by the amount of spider in the swarm and negated the x and z values so the spider steers away from swarm properly
 		compuationVector.x /= swarmNeighbors.Count;
 		compuationVector.z /= swarmNeighbors.Count;
-		compuationVector.x *= -8;
-		compuationVector.z *= -8;
+		compuationVector.x *= -20;
+		compuationVector.z *= -20;
 		compuationVector.Normalize ();
 
 		return compuationVector;
@@ -283,7 +283,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			Quaternion newRotation = Quaternion.LookRotation(newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
 			newRotation.x = 0.0f;
 			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 10.0f);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 15.0f);
 
 			//move towards the target as a swarm
 			rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);

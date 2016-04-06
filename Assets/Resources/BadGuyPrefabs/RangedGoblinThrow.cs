@@ -9,7 +9,7 @@ public class RangedGoblinThrow : MonoBehaviour {
 	private GameObject player;
 	public GameObject throwPosition;
 	private Vector3 playerTarget;
-	private float distanceToAttack = 100;
+	private float distanceToAttack = 75;
 	private Animation anim;
 	private AnimationClip throwClip;
 	private Vector3 throwDirection;
@@ -24,7 +24,7 @@ public class RangedGoblinThrow : MonoBehaviour {
 
 
 	private void ThrowWeapon(){
-		int rand = Random.Range (0, 2);
+		int rand = Random.Range (0, 1);
 
 		if (rand == 0) {
 			Instantiate (throwingAxe, throwPosition.transform.position, Quaternion.identity);
@@ -45,7 +45,7 @@ public class RangedGoblinThrow : MonoBehaviour {
 
 		if (Vector3.Distance (transform.position, playerTarget) < distanceToAttack && attackTimer < 0.0f) {
 			ThrowWeapon ();
-			attackTimer = 120.0f;
+			attackTimer = 60.0f;
 		}
 
 	}
