@@ -39,6 +39,8 @@ TagManager:
   - ArrowDisplayParticle
   - Tree
   - SpiderDead
+  - HealthPowerup
+  - PowerupSpawner
   layers:
   - Default
   - TransparentFX

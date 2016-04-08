@@ -14,6 +14,9 @@ public class NPCDetail : MonoBehaviour {
 
     private AudioClip hitSound;
 
+    private bool triedSpawning = false;
+    private PowerupSpawner powerupSpawner;
+
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -27,7 +30,9 @@ public class NPCDetail : MonoBehaviour {
         anim[die.name].speed = .7f;
         anim[hit.name].layer = 3;
 
-        hitSound = Resources.Load("Sounds/GeneralSounds/Hit") as AudioClip; 
+        hitSound = Resources.Load("Sounds/GeneralSounds/Hit") as AudioClip;
+
+        powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").GetComponent<PowerupSpawner>();
     }
 
     // Update is called once per frame
@@ -52,8 +57,13 @@ public class NPCDetail : MonoBehaviour {
             transform.position = pos;
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            if (!triedSpawning)
+            {
+                powerupSpawner.trySpawn(pos);
+                triedSpawning = true;
+            }
             
-
+            
 			Destroy(this.gameObject, anim[die.name].length+.5f);
             
         }

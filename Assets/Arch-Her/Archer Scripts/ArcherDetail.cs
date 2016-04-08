@@ -119,6 +119,12 @@ public class ArcherDetail : MonoBehaviour {
             explosiveArrowStock += explosivePowerupAddedArrowStock;
             Destroy(col.gameObject);
 		}
+
+        if (col.gameObject.CompareTag("HealthPowerup"))
+        {
+            Debug.Log("+X health");
+            Destroy(col.gameObject);
+        }
 	}
 
     public void takeDamage(float amountOfDamage)

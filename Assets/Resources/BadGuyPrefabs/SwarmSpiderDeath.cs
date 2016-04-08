@@ -12,6 +12,8 @@ public class SwarmSpiderDeath : MonoBehaviour {
 	public float health;
 	public float damage;
 	int counter = 0;
+    private bool triedSpawning = false;
+    private PowerupSpawner powerupSpawner;
 	// Use this for initialization
 	void Start()
 	{
@@ -19,7 +21,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		anim[die.name].layer = 2;
 		anim[die.name].speed = .7f;
 		audioSource = GetComponent<AudioSource> ();
-
+        powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").GetComponent<PowerupSpawner>();
 
 	}
 
@@ -52,7 +54,11 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			anim.Play(die.name);
 			//GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
 			//transform.position = pos;
-
+            if (!triedSpawning)
+            {
+                powerupSpawner.trySpawn(transform.position);
+                triedSpawning = true;
+            }
 			//Freeze all movement/rotations when NPC has been slain
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<SwarmSpiderBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
