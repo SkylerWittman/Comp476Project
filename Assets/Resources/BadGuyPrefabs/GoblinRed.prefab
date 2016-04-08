@@ -1493,7 +1493,11 @@ MonoBehaviour:
   anim: {fileID: 0}
   runClip: {fileID: 0}
   standClip: {fileID: 0}
+  throwClip: {fileID: 0}
   canChangeState: 0
+  throwingAxe: {fileID: 177788, guid: b12b1733a3338a84cbe3342681cda664, type: 2}
+  spear: {fileID: 174674, guid: be9a965428e36cd4ebd46010677e7e6d, type: 2}
+  throwPosition: {fileID: 131818}
 --- !u!114 &11476002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1529,7 +1533,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 5
+  m_Radius: 5.5
   m_Height: 15.9
   m_Direction: 1
   m_Center: {x: 0, y: 7.68, z: 0}
@@ -1627,7 +1631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Radius
-      value: 5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString

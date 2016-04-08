@@ -13,6 +13,7 @@ GameObject:
   - 54: {fileID: 5417320}
   - 114: {fileID: 11471284}
   - 82: {fileID: 8298222}
+  - 65: {fileID: 6539200}
   m_Layer: 0
   m_Name: ThrowingAxe
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177788}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 313.13583, y: 29.052382, z: 222.18864}
+  m_LocalPosition: {x: 422.71, y: -12.65, z: 388.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,6 +82,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
+--- !u!65 &6539200
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.75259787, y: 1.4875369, z: 0.36225376}
+  m_Center: {x: 0.16059932, y: 0.20390245, z: -0.017876208}
 --- !u!82 &8298222
 AudioSource:
   m_ObjectHideFlags: 1
@@ -166,8 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c076208a6790f4a916e0a4ac821a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinForce: 200
-  impulseForce: 43.47
+  spinForce: 103.7
+  impulseForce: 50.82
   throwSound: {fileID: 8300000, guid: b268631b279b16b48bbe4fa9c5bff92f, type: 3}
 --- !u!1001 &100100000
 Prefab:
@@ -182,11 +195,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: impulseForce
-      value: 43.47
+      value: 50.82
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spinForce
-      value: 200
+      value: 103.7
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: panLevelCustomCurve.m_RotationOrder
@@ -204,6 +217,10 @@ Prefab:
       propertyPath: throwSound
       value: 
       objectReference: {fileID: 8300000, guid: b268631b279b16b48bbe4fa9c5bff92f, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 177788}

@@ -13,7 +13,7 @@ public class WaitState : IGoblinState {
 	}
 
 	public void UpdateState (){
-		Debug.Log ("Waiting State");
+		
 		LookForTarget ();
 		rangeGoblin.startWait ();
 
@@ -38,8 +38,10 @@ public class WaitState : IGoblinState {
 	}
 
 	private void LookForTarget(){
-		if (Vector3.Distance (rangeGoblin.transform.position, rangeGoblin.playerTarget) < distanceToAttack) {
+		if (Vector3.Distance (rangeGoblin.transform.position, rangeGoblin.playerTarget) <= distanceToAttack) {
+			Debug.Log ("to attacking state");
 			ToAttackState ();
+
 		}
 	}
 }

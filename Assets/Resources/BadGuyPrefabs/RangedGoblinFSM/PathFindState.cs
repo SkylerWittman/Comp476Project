@@ -21,7 +21,9 @@ public class PathFindState : IGoblinState {
 	private bool pathFound = false;
 	private bool startPath = false;
 	private float minDistanceFromTrees = 500;
-	public float distanceToNewTree = 25.0f;
+	public float distanceToNewTree = 15.0f;
+	private float distanceToAttack = 75;
+
 
 	public PathFindState(StatePattern pattern){
 		rangeGoblin = pattern;
@@ -32,6 +34,10 @@ public class PathFindState : IGoblinState {
 	}
 
 	public void UpdateState (){
+
+		CollisionAvoidance ();
+		LookForTarget ();
+
 		if (noPath) {
 			noPath = false;
 			FindPath ();
@@ -41,7 +47,7 @@ public class PathFindState : IGoblinState {
 			TraversePath ();
 		}
 
-		CollisionAvoidance ();
+
 	}
 		
 
@@ -57,6 +63,13 @@ public class PathFindState : IGoblinState {
 		Debug.Log ("current state");
 	}
 
+	private void LookForTarget(){
+		if (Vector3.Distance (rangeGoblin.transform.position, rangeGoblin.playerTarget) < distanceToAttack) {
+			Debug.Log ("to attacking state");
+			ToAttackState ();
+
+		}
+	}
 
 	private void FindATreeTarget(){
 		int rand = Random.Range (0, listOfTreeNodes.Count);
@@ -143,19 +156,17 @@ public class PathFindState : IGoblinState {
 
 			//If we've reached the goal, then we'll clear our path so we can get another one
 			if (rangeGoblin.currentNode.Equals (rangeGoblin.targetNode)) {
-				Debug.Log ("At end of path, now waiting");
 				rangeGoblin.anim.Play(rangeGoblin.standClip.name);
-				rb.velocity = Vector3.zero;
-				noPath = true;
+				rb.velocity = rb.velocity.normalized* 0.0f;
 				finalPath.Clear ();
 				ToWaitState ();
+				noPath = true;
 
 			}
 			//Else, get the next node in the path
 			else {
 				rangeGoblin.currentNode = finalPath [finalPath.IndexOf (rangeGoblin.currentNode) + 1];
-				Debug.Log ("At next position of path, now waiting");
-				rb.velocity = Vector3.zero;
+				rb.velocity = rb.velocity.normalized * 0.0f;
 				rangeGoblin.anim.Play(rangeGoblin.standClip.name);
 				ToWaitState ();
 			}

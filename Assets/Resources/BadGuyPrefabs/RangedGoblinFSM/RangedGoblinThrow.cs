@@ -19,12 +19,12 @@ public class RangedGoblinThrow : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerTarget = player.transform.position;
-		Random.seed = System.DateTime.Now.Millisecond;
+
 	}
 
 
 	private void ThrowWeapon(){
-		int rand = Random.Range (0, 1);
+		int rand = Random.Range (0, 2);
 
 		if (rand == 0) {
 			Instantiate (throwingAxe, throwPosition.transform.position, Quaternion.identity);

@@ -15,10 +15,17 @@ public class StatePattern : MonoBehaviour {
 	[HideInInspector] public Animation anim;
 	[HideInInspector] public AnimationClip runClip;
 	[HideInInspector] public AnimationClip standClip;
+	[HideInInspector] public AnimationClip throwClip;
 	[HideInInspector] public bool canChangeState = false;
 	[HideInInspector] public List<TreeNode> listOfTreeNodes = new List<TreeNode>();
 	[HideInInspector] public TreeNode currentNode;
 	[HideInInspector] public TreeNode targetNode;
+
+
+	public GameObject throwingAxe;
+	public GameObject spear;
+	public GameObject throwPosition;
+
 
 	private GameObject controller;
 	private GameObject player;
@@ -26,14 +33,15 @@ public class StatePattern : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		Random.seed = System.DateTime.Now.Millisecond;
 		attackState = new AttackState (this);
 		waitState = new WaitState (this);
 		player = GameObject.FindGameObjectWithTag ("Player");
-		playerTarget = player.transform.position;
 		anim = GetComponent<Animation>();
+		anim ["attack01"].speed = 3.0f;
 		runClip = anim.GetClip("run");
 		standClip = anim.GetClip ("stand");
+		throwClip = anim.GetClip ("attack01");
 		rb = GetComponent<Rigidbody> ();
 		pathFinder = GetComponent<AStarPathFinding> ();
 		controller = GameObject.FindGameObjectWithTag ("controller");
@@ -52,6 +60,13 @@ public class StatePattern : MonoBehaviour {
 		gameStart = true;
 	}
 
+	public void ThrowAxe(){
+		StartCoroutine (ThrowDelayAxe ());
+	}
+
+	public void ThrowSpear(){
+		StartCoroutine (ThrowDelaySpear ());
+	}
 
 	public void startWait(){
 		StartCoroutine(WaitToMove());
@@ -62,8 +77,20 @@ public class StatePattern : MonoBehaviour {
 		canChangeState = true;
 	}
 
+	public IEnumerator ThrowDelaySpear(){
+		yield return new WaitForSeconds (.2f);
+		Instantiate (spear, throwPosition.transform.position, Quaternion.identity);
+	}
+
+	public IEnumerator ThrowDelayAxe(){
+		yield return new WaitForSeconds (.2f);
+		Instantiate (throwingAxe, throwPosition.transform.position, Quaternion.identity);
+	}
+
 	// Update is called once per frame
 	void Update () {
+	
+		playerTarget = player.transform.position;
 
 		if (gameStart) {
 			currentState.UpdateState ();
