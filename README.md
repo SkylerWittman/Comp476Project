@@ -26,6 +26,14 @@
 		<td>Arrow Physics</td>
 		<td>Done</td>
 	</tr>
+	<tr>
+		<td>*BUG* arrow damage doesn't change according to arrowSpeed in Arrow script</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>*BUG* Explosive damage is super OP, it does 6000+ damage, need to tweak</td>
+		<td></td>
+	</tr>
 </table>
 
 <strong>Matt:</strong>
