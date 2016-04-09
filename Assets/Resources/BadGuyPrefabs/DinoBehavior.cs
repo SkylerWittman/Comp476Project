@@ -71,6 +71,8 @@ public class DinoBehavior : MonoBehaviour {
         float ranTime = Random.Range(2.0f, 3.0f);
         InvokeRepeating("castSphere", 0.0f, ranTime);
 
+        InvokeRepeating("collisionAvoidance", 0.0f, 0.1f);
+
         //Initially do not know the position of player
         player = null;
 
@@ -261,7 +263,7 @@ public class DinoBehavior : MonoBehaviour {
         currentNode = null;
         currentPath.Clear();
         anim.Play(runClip.name);
-        audioSource.PlayOneShot(dinoCall, 0.5f);
+        audioSource.PlayOneShot(dinoCall, 0.1f);
     }
 
     //The attack routine, which triggers the animation and do damage to the player.
@@ -285,6 +287,21 @@ public class DinoBehavior : MonoBehaviour {
             setPursue();
             player = GameObject.FindGameObjectWithTag("Player").transform;
             pursueDistance = float.MaxValue;
+        }
+    }
+
+    private void collisionAvoidance()
+    {
+        if (currentState == State.PURSUE)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 10.0f);
+            foreach (Collider c in colliders)
+            {
+                if (c.gameObject.tag == "TreeMarker")
+                {
+                    rigidbody.AddForce(transform.right.normalized * acceleration, ForceMode.VelocityChange);
+                }
+            }
         }
     }
 }
