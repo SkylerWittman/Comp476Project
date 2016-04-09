@@ -4,14 +4,16 @@ using System.Collections;
 public class ArcherDetail : MonoBehaviour {
     public enum arrowType { regular, poison, explosive}
     public arrowType arrow_type;
-    public int regularArrowStock = 99999;
+    //public int regularArrowStock = 99999;
     public int poisonArrowStock;
     public int poisonPowerupAddedArrowStock;
     public int explosiveArrowStock;
     public int explosivePowerupAddedArrowStock;
     public int ArrowState = 0;
+
 	public float health;
 	public float playerHealthCritical;
+    public float healthPowerupAdded;
 
     GameObject arrowDisplay;
 	// Use this for initialization
@@ -108,21 +110,22 @@ public class ArcherDetail : MonoBehaviour {
 	{
 		if (col.gameObject.CompareTag("PoisonPowerup"))
 		{
-            Debug.Log("+15 poison arrows");
+            Debug.Log("+ " + poisonPowerupAddedArrowStock + " poison arrows");
             poisonArrowStock += poisonPowerupAddedArrowStock;
             Destroy(col.gameObject);
         }
 
 		if (col.gameObject.CompareTag("ExplosivePowerup"))
 		{
-            Debug.Log("+5 explosive arrows");
+            Debug.Log("+ " + explosivePowerupAddedArrowStock + " explosive arrows");
             explosiveArrowStock += explosivePowerupAddedArrowStock;
             Destroy(col.gameObject);
 		}
 
         if (col.gameObject.CompareTag("HealthPowerup"))
         {
-            Debug.Log("+X health");
+            Debug.Log("+ " + healthPowerupAdded + " health");
+            health += healthPowerupAdded;
             Destroy(col.gameObject);
         }
 	}

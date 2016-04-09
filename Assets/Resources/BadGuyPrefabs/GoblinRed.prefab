@@ -1511,8 +1511,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   die: {fileID: 7400000, guid: 2788750f9cd2c174aa4fa84ba74dab03, type: 3}
   hit: {fileID: 7400000, guid: 05a28ecbb33a989479703c11c26c36f5, type: 3}
-  health: 100
-  damage: 20
+  health: 50
+  damage: 4
 --- !u!114 &11499442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1692,6 +1692,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Mass
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: damage
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

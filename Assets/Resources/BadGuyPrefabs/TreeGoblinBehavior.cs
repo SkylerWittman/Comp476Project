@@ -20,8 +20,8 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	public float attackDistance = 3;
 	public float impulse = 50;
 
-    public float treeGoblinHealth = 350.0f;
-    public float treeGoblinDamage = 10.0f;
+    public float treeGoblinHealth;
+    public float treeGoblinDamage;
 
     void Start () {
 

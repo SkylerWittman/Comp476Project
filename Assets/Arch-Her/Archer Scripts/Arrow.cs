@@ -31,17 +31,17 @@ public class Arrow : MonoBehaviour {
                 {
                     case ArcherDetail.arrowType.regular:
                         transform.tag = "RegularArrow";
-                        damage += 10;
+                        damage = 10;
                         break;
                     case ArcherDetail.arrowType.poison:
                         poisonLock = true;
                         transform.tag = "PoisonArrow";
-                        damage += 50;
+                        damage = 50;
                         break;
                     case ArcherDetail.arrowType.explosive:
                         hitLock = true;
                         transform.tag = "ExplosiveArrow";
-                        damage += 15;
+                        damage = 15;
                         break;
 
                 }

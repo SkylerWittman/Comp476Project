@@ -3559,6 +3559,10 @@ Prefab:
       propertyPath: playerHealthCritical
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 11428578, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: attack
+      value: 
+      objectReference: {fileID: 7400048, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
   m_IsPrefabParent: 0
@@ -4153,6 +4157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treeMarker: {fileID: 153932, guid: c1f1bb793010afa40823bf67b28e16c1, type: 2}
   cursorVisible: 0
+  auraEffect: {fileID: 0}
 --- !u!4 &2059387997
 Transform:
   m_ObjectHideFlags: 0

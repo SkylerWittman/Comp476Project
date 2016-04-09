@@ -31,8 +31,8 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	public float swarmDistance = 100.0f;
 
     
-    public float swarmSpiderHealth = 100.0f;
-	public float swarmSpiderDamage = 4.0f;
+    public float swarmSpiderHealth;
+	public float swarmSpiderDamage;
 
     void Start () {
 		GetComponent<SwarmSpiderDeath>().health = swarmSpiderHealth;

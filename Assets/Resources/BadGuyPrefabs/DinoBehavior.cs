@@ -32,8 +32,8 @@ public class DinoBehavior : MonoBehaviour {
 
     private float pursueDistance = 100.0f;
     private bool canAttack;
-    public float dinoHealth = 600.0f;
-    public float dinoDamage = 15.0f;
+    public float dinoHealth;
+    public float dinoDamage;
     public float dinoAttackCooldown = 3.0f;
 
     //Animation vars

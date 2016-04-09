@@ -43,17 +43,6 @@ public class HUD : MonoBehaviour {
         playerHealth = archerDetailScript.health;
 
         score = 0;
-
-        //arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplay").GetComponent<Canvas>();
-        //poisonParticleSystem = GameObject.FindGameObjectWithTag("PoisonParticleSystem").GetComponentInChildren<ParticleSystem>();
-        //explosiveParticleSystem = GameObject.FindGameObjectWithTag("ExplosiveParticleSystem").GetComponentInChildren<ParticleSystem>();
-        //poisonParticleSystem.Stop();
-        //explosiveParticleSystem.Stop();
-        //Debug.Log(poisonParticleSystem);
-        //Debug.Log(explosiveParticleSystem);
-        //cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        //HUDarrowTransform = GameObject.FindGameObjectWithTag("arrow").transform;
-        //StartCoroutine(HealthWait());
     }
 
     void Update () 
@@ -72,28 +61,6 @@ public class HUD : MonoBehaviour {
 
         //Score
         scoreText.text = "score: " + score;
-
-        //Debug.Log(HUDarrowTransform);
-        //HUDarrowTransform.rotation = cameraTransform.rotation;
-        switch (archerDetailScript.arrow_type)
-        {
-
-            case ArcherDetail.arrowType.regular:
-                //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
-                //poisonParticleSystem.Stop();
-                //explosiveParticleSystem.Stop();
-                break;
-            case ArcherDetail.arrowType.poison:
-                //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
-                //poisonParticleSystem.Play();
-                break;
-            case ArcherDetail.arrowType.explosive:
-                //Debug.Log("arrow type is " + archerDetailScript.arrow_type);
-                //poisonParticleSystem.Stop();
-                //explosiveParticleSystem.Play();
-                break;
-        }
-
     }
 
 	//IEnumerator HealthWait()
