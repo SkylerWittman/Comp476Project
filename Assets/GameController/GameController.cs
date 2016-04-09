@@ -14,8 +14,9 @@ public class GameController : MonoBehaviour {
 		private bool canSlowTime = true;
 		private bool canUseForce = true;
 		public bool cursorVisible = true;
-
+		public GameObject auraEffect;
 		private Camera theCamera;
+		private float forceToApply = 2;	
 
 		void Start()
 		{
@@ -118,12 +119,15 @@ public class GameController : MonoBehaviour {
 					Debug.Log ("im looking at " + hit.transform.name);
 					hit.rigidbody.velocity = Vector3.zero;
 					canUseForce = false;
+					Instantiate (auraEffect, hit.transform.position, Quaternion.identity);
 					
-					for (int i = 0; i < 10000; i++) {
-						hit.rigidbody.AddForce (Vector3.up * 100, ForceMode.Force);
+				for (int i = 0; i < 10000; i++) {
+						if (i % 1000 == 0) {
+							forceToApply += 2;
+						}
 
+						hit.rigidbody.AddForce (Vector3.up * forceToApply, ForceMode.Force);
 					}
-					
 				}
 			}
 		}

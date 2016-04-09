@@ -23,6 +23,7 @@ public class PathFindState : IGoblinState {
 	private float minDistanceFromTrees = 500;
 	public float distanceToNewTree = 15.0f;
 	private float distanceToAttack = 75;
+	private float slowDownRadius = 30;
 
 
 	public PathFindState(StatePattern pattern){
@@ -65,9 +66,8 @@ public class PathFindState : IGoblinState {
 
 	private void LookForTarget(){
 		if (Vector3.Distance (rangeGoblin.transform.position, rangeGoblin.playerTarget) < distanceToAttack) {
-			Debug.Log ("to attacking state");
 			ToAttackState ();
-
+			rangeGoblin.rb.velocity = Vector3.zero;
 		}
 	}
 
@@ -84,7 +84,7 @@ public class PathFindState : IGoblinState {
 	}
 
 	private void FindStartTree(){
-		float closestTree = 100;
+		float closestTree = 200;
 
 		foreach (TreeNode node in listOfTreeNodes) {
 			if(Vector3.Distance(rangeGoblin.transform.position, node.getPosition()) < closestTree){
@@ -98,10 +98,8 @@ public class PathFindState : IGoblinState {
 	private void CollisionAvoidance(){
 		RaycastHit hit;
 		Vector3 avoidanceVector;
-		if (Physics.Raycast (rangeGoblin.transform.position, rangeGoblin.transform.forward, out hit, 10)) {
+		if (Physics.Raycast (rangeGoblin.transform.position, rangeGoblin.transform.forward, out hit, 15)) {
 			if (hit.collider.tag == "TreeMarker") {
-				Debug.Log ("HIT TREE");
-
 				rb.AddForce (rangeGoblin.transform.right * 20, ForceMode.VelocityChange);
 			}
 		}
@@ -113,7 +111,6 @@ public class PathFindState : IGoblinState {
 		FindStartTree ();
 		finalPath = pathFinder.FindPathEuclidean (startTree, targetTree);
 		startPath = true;
-		Debug.Log ("Size of final path" + finalPath.Count);
 		pathFound = true;
 	}
 
@@ -138,9 +135,14 @@ public class PathFindState : IGoblinState {
 		Quaternion newRotation = Quaternion.LookRotation (moveDirection);
 		newRotation.x = 0.0f;
 		newRotation.z = 0.0f;
-		rangeGoblin.transform.rotation = Quaternion.RotateTowards (rangeGoblin.transform.rotation, newRotation, 15.0f);
+		rangeGoblin.transform.rotation = Quaternion.RotateTowards (rangeGoblin.transform.rotation, newRotation, 500.0f * Time.deltaTime);
 
 		moveDirection *= acceleration;
+
+
+		if (Vector3.Distance (rangeGoblin.transform.position, rangeGoblin.playerTarget) < slowDownRadius) {
+			maxSpeed = 9.0f;
+		}
 
 		if (rb.velocity.magnitude > maxSpeed) {
 			rb.velocity = rb.velocity.normalized * maxSpeed;
@@ -157,7 +159,7 @@ public class PathFindState : IGoblinState {
 			//If we've reached the goal, then we'll clear our path so we can get another one
 			if (rangeGoblin.currentNode.Equals (rangeGoblin.targetNode)) {
 				rangeGoblin.anim.Play(rangeGoblin.standClip.name);
-				rb.velocity = rb.velocity.normalized* 0.0f;
+				rb.velocity = Vector3.zero;
 				finalPath.Clear ();
 				ToWaitState ();
 				noPath = true;
@@ -166,7 +168,7 @@ public class PathFindState : IGoblinState {
 			//Else, get the next node in the path
 			else {
 				rangeGoblin.currentNode = finalPath [finalPath.IndexOf (rangeGoblin.currentNode) + 1];
-				rb.velocity = rb.velocity.normalized * 0.0f;
+				rb.velocity = Vector3.zero;
 				rangeGoblin.anim.Play(rangeGoblin.standClip.name);
 				ToWaitState ();
 			}

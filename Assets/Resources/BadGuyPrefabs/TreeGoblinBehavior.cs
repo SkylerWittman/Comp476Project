@@ -70,10 +70,9 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	// Update is called once per frame
 
 	void Update(){
-		if (Vector3.Distance (target.transform.position, this.transform.position) < attackDistance) {
+		if (Vector3.Distance (target.transform.position, this.transform.position) < attackDistance && canAttack) {
 			StartCoroutine (attack ());
 		}
-
 	}
 
 
@@ -91,7 +90,7 @@ public class TreeGoblinBehavior : MonoBehaviour {
 			Quaternion newRotation = Quaternion.LookRotation (directionToMove);
 			newRotation.x = 0.0f;
 			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.RotateTowards (transform.rotation, newRotation, 15.0f);
+			transform.rotation = Quaternion.RotateTowards (transform.rotation, newRotation, 500.0f* Time.deltaTime);
 
 			directionToMove.y = 0.0f;
 

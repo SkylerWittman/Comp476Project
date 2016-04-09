@@ -18,11 +18,11 @@ public class AttackState : IGoblinState {
 		LookForTarget ();
 	
 		Quaternion newRotation = Quaternion.LookRotation (rangeGoblin.playerTarget - rangeGoblin.transform.position);
-		rangeGoblin.transform.rotation = Quaternion.RotateTowards (rangeGoblin.transform.rotation, newRotation, 15.0f);
+		rangeGoblin.transform.rotation = Quaternion.RotateTowards (rangeGoblin.transform.rotation, newRotation, 400.0f* Time.deltaTime);
 
 		if (timer <= 0) {
 			Attack ();
-			timer = 2;
+			timer = 2.5f;
 		}
 	}
 
@@ -59,7 +59,6 @@ public class AttackState : IGoblinState {
 
 	private void LookForTarget(){
 		if (Vector3.Distance (rangeGoblin.transform.position, rangeGoblin.playerTarget) > distanceToAttack) {
-			Debug.Log ("back to pathfinding");
 			ToPathFindingState ();
 
 		}

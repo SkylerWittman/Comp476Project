@@ -17,10 +17,13 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private bool canHunt = false;
 	private bool canWander = false;
 	private bool cantSeePlayer = true;
+	private bool canAttack = true;
 	private float moveSpeed = 10;
 	private float collisionTimer = 120;
 	private float searchTimer = 120;
 	private float distanceToHunt = 50;
+	private float spiderDamage = 2.0f;
+	private float attackDistance = 3.0f;
 	private Animation anim;
 	private AnimationClip runClip;
 	private AnimationClip attackClip;
@@ -43,10 +46,8 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		target = GameObject.FindGameObjectWithTag ("Player");
 
 		anim = GetComponent<Animation>();
-		//Changing layers and adding weights allows us to play 2 animations at the same time
-		anim["attackSpider"].layer = 1;
-		anim["attackSpider"].weight = 0.7f;
-		anim ["walkSpider"].speed = 8.0f;
+
+		anim ["walkSpider"].speed = 7.0f;
 		runClip = anim.GetClip("walkSpider");
 		attackClip = anim.GetClip("attackSpider");
 
@@ -54,6 +55,16 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 
 	}
 
+	private IEnumerator Attack()
+	{
+		canAttack = false;
+		//only works if there is a single player
+		GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(spiderDamage);
+		Debug.Log("Spider did " + spiderDamage + " damage");
+		anim.Play(attackClip.name);
+		yield return new WaitForSeconds(2.0f);
+		canAttack = true;
+	}
 
 	public void SpiderDeath(){
 		canWander = false;
@@ -205,11 +216,9 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private void CollisionAvoidance(){
 		RaycastHit hit;
 		Vector3 avoidanceVector;
-		if (Physics.Raycast (transform.position, transform.forward, out hit, 50)) {
+		if (Physics.Raycast (transform.position, transform.forward, out hit, 10)) {
 			if (hit.collider.tag == "TreeMarker") {
-				avoidanceVector = (rb.velocity - hit.collider.transform.position).normalized;
-				avoidanceVector *= moveSpeed;
-				rb.velocity += avoidanceVector;
+				rb.AddForce (transform.right * 30 * Time.deltaTime, ForceMode.VelocityChange);
 			}
 		}
 	}
@@ -230,6 +239,13 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		} 
 	}
 
+	// Update is called once per frame
+
+	void Update(){
+		if (Vector3.Distance (target.transform.position, this.transform.position) < attackDistance && canAttack) {
+			StartCoroutine (Attack ());
+		}
+	}
 
 	void FixedUpdate () {
 	
@@ -262,12 +278,12 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 
 			//getCurrent Swarms Wander Direction
 			wanderVector = (swarmer.GetWanderTarget() - transform.position);
-
+			wanderVector.y = 0.0f;
 
 			Quaternion newRotation = Quaternion.LookRotation(wanderVector);
 			newRotation.x = 0.0f;
 			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10.0f);
+			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 500.0f * Time.deltaTime);
 
 			rb.velocity += ( wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
 			rb.velocity = rb.velocity.normalized * moveSpeed;
@@ -291,9 +307,10 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			Quaternion newRotation = Quaternion.LookRotation(newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
 			newRotation.x = 0.0f;
 			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 15.0f);
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 500.0f * Time.deltaTime);
 
 			//move towards the target as a swarm
+			newDirection.y = 0.0f;
 			rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
 			rb.velocity = rb.velocity.normalized * moveSpeed;
 
