@@ -52,7 +52,7 @@ public class NPCDetail : MonoBehaviour {
         if(health <= 0.0f)
         {
            
-			anim.CrossFade(die.name, 0.5f);
+            anim.Play(die.name);
             //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
             transform.position = pos;
             //Freeze all movement/rotations when NPC has been slain
@@ -82,7 +82,7 @@ public class NPCDetail : MonoBehaviour {
         {
 		case "RegularArrow":
 			health -= other.GetComponent<Arrow> ().damage;
-				anim.Play (hit.name);
+				anim.CrossFade(hit.name, 0.5f);
                 playHitSound();
                 Destroy(other.gameObject);
                 break;

@@ -17,7 +17,7 @@ public class ThrowAxe : MonoBehaviour {
 		Invoke ("EnableCollider", .2f);
 		rb = GetComponent<Rigidbody> ();
 		audio = GetComponent<AudioSource> ();
-		audio.PlayOneShot (throwSound);
+		audio.PlayOneShot (throwSound, 0.1f);
 		playerTarget = GameObject.FindGameObjectWithTag ("Player");
 		directionToThrow = (new Vector3(playerTarget.transform.position.x, playerTarget.transform.position.y + 3.0f , playerTarget.transform.position.z) - this.transform.position).normalized;
 
