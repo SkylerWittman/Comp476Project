@@ -41,7 +41,8 @@ public class ThrowAxe : MonoBehaviour {
 	void OnCollisionEnter(Collision coll){
 
 		if (coll.gameObject.tag == "Player") {
-			Debug.Log ("hit player deal damge");
-		}
+            GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(4.0f);
+            Debug.Log("Throwing goblin did " + 4 + " damage");
+        }
 	}
 }

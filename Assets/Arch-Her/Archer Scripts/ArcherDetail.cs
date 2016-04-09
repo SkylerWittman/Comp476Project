@@ -14,13 +14,15 @@ public class ArcherDetail : MonoBehaviour {
 	public float health;
 	public float playerHealthCritical;
     public float healthPowerupAdded;
+    public bool isDead;
+    public AnimationClip deathClip;
 
     GameObject arrowDisplay;
 	// Use this for initialization
 	void Start () {
         arrow_type = arrowType.regular;
         arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplayParticle");
-       
+        isDead = false;
 	}
 	
 	// Update is called once per frame
@@ -62,7 +64,11 @@ public class ArcherDetail : MonoBehaviour {
         }
         setArrow();
 
+        if (health <= 0.0f)
+        {
+            isDead = true;
 
+        }
     }
 
     void setArrow()
