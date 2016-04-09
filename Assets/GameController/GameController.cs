@@ -12,7 +12,9 @@ public class GameController : MonoBehaviour {
 		private List<TreeNode> listOfTreeNodes = new List<TreeNode>();
 		private Vector3 tempPosition;
 		private bool canSlowTime = true;
+		private bool canUseForce = true;
 		public bool cursorVisible = true;
+
 		private Camera theCamera;
 
 		void Start()
@@ -100,6 +102,11 @@ public class GameController : MonoBehaviour {
 			canSlowTime = true;
 		}
 
+		void ResetForceUse(){
+			
+			canUseForce = true;
+		}
+
 		private void ForcePower()
 		{
 
@@ -110,7 +117,13 @@ public class GameController : MonoBehaviour {
 				if (hit.transform.tag == "BadGuy" || hit.transform.tag == "SwarmSpider") {
 					Debug.Log ("im looking at " + hit.transform.name);
 					hit.rigidbody.velocity = Vector3.zero;
-					hit.rigidbody.AddForce (Vector3.up * 100, ForceMode.VelocityChange);
+					canUseForce = false;
+					
+					for (int i = 0; i < 10000; i++) {
+						hit.rigidbody.AddForce (Vector3.up * 100, ForceMode.Force);
+
+					}
+					
 				}
 			}
 		}
@@ -132,9 +145,12 @@ public class GameController : MonoBehaviour {
 
 			}
 
-			if (Input.GetButton("Fire2"))
+			if (Input.GetButton("Fire2") && canUseForce)
 			{
-				ForcePower();
+				
+				ForcePower();	
+				Invoke ("ResetForceUse", 2.0f);
+				
 
 			}
 
