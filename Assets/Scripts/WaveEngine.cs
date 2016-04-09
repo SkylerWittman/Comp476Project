@@ -105,7 +105,7 @@ public class WaveEngine : MonoBehaviour {
     //Checks to see if the position is close to a bad guy or player
     private bool checkAroundPosition(Vector3 position)
     {
-        Collider[] colliders = Physics.OverlapSphere(position, 20.0f);
+        Collider[] colliders = Physics.OverlapSphere(position, 40.0f);
         bool found = false;
         
         for (int i = 0; i < colliders.Length; i++)

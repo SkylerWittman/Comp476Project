@@ -6,13 +6,14 @@ public class DinoBehavior : MonoBehaviour {
 
     public float acceleration = 3.0f;
     public float maxSpeed = 5.0f;
-    public float maxRunSpeed = 10.0f;
+    public float maxRunSpeed = 7.5f;
 
     private Rigidbody rigidbody;
     private Vector3 newDirection;
     private float directionToHeadTo;
     private Transform player;
 
+    private Grid grid;
     private AStar pathFinder;
     private List<Node> currentPath;
     private Node currentNode;
@@ -85,6 +86,7 @@ public class DinoBehavior : MonoBehaviour {
 
         anim.Play(walkClip.name);
 
+        grid = GameObject.FindGameObjectWithTag("TerrainEngine").GetComponent<Grid>();
         pathFinder = GameObject.FindGameObjectWithTag("TerrainEngine").GetComponent<AStar>();
         currentPath = new List<Node>();
         currentNode = null;
@@ -120,11 +122,7 @@ public class DinoBehavior : MonoBehaviour {
             int numIterations = 0; //TEMPORARY DEBUGGING
             while (currentPath.Count < 1)
             {
-                //We will attempt to wander to some position that is +/- 40 units from the dino's current position. It is clamped to the boundaries of the level
-                float wanderX = Random.Range(Mathf.Clamp(transform.position.x - 40.0f, 0.0f, 1000.0f), Mathf.Clamp(transform.position.x + 40.0f, 0.0f, 1000.0f));
-                float wanderZ = Random.Range(Mathf.Clamp(transform.position.z - 40.0f, 0.0f, 1000.0f), Mathf.Clamp(transform.position.z + 40.0f, 0.0f, 1000.0f));
-                Vector3 targetPos = new Vector3(wanderX, 0.0f, wanderZ);
-                currentPath = pathFinder.getPath(transform.position, targetPos);
+                currentPath = pathFinder.getPath(transform.position, grid.getRandomNodeCloseToPos(transform.position).position);
                 
                 numIterations++;
                 if (numIterations == 20)

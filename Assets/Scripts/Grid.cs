@@ -29,26 +29,29 @@ public class Grid : MonoBehaviour {
      * UNCOMMENT THE START IF YOU WANT TO SEE THE NODES GENERATED
      */
 
-    //void Start()
-    //{
-    //    for (int i = 0; i < reducedGrid.GetLength(0); i++)
-    //    {
-    //        for (int j = 0; j < reducedGrid.GetLength(1); j++)
-    //        {
-    //            Node tempNode = reducedGrid[i, j];
-    //            GameObject m = Instantiate(marker, reducedGrid[i, j].position, Quaternion.identity) as GameObject;
-    //            Renderer r = m.GetComponent<Renderer>();
-    //            if (tempNode.walkable)
-    //            {
-    //                r.material.color = Color.green;
-    //            }
-    //            else
-    //            {
-    //                r.material.color = Color.red;
-    //            }
-    //        }
-    //    }
-    //}
+    void Start()
+    {
+        //RNG initialization
+        Random.seed = (int)System.DateTime.Now.Ticks;
+
+        //for (int i = 0; i < reducedGrid.GetLength(0); i++)
+        //{
+        //    for (int j = 0; j < reducedGrid.GetLength(1); j++)
+        //    {
+        //        Node tempNode = reducedGrid[i, j];
+        //        GameObject m = Instantiate(marker, reducedGrid[i, j].position, Quaternion.identity) as GameObject;
+        //        Renderer r = m.GetComponent<Renderer>();
+        //        if (tempNode.walkable)
+        //        {
+        //            r.material.color = Color.green;
+        //        }
+        //        else
+        //        {
+        //            r.material.color = Color.red;
+        //        }
+        //    }
+        //}
+    }
 
     //Initializes grid, not reducedGrid
     private void initializeGrid()
@@ -124,5 +127,13 @@ public class Grid : MonoBehaviour {
         }
 
         return reducedGrid;
+    }
+
+    public Node getRandomNodeCloseToPos(Vector3 pos)
+    {
+        Node node = NodeFromPoint(pos);
+        int x = Random.Range(Mathf.Clamp(node.gridX - 5, 0, 49), Mathf.Clamp(node.gridX + 5, 0, 49));
+        int y = Random.Range(Mathf.Clamp(node.gridY - 5, 0, 49), Mathf.Clamp(node.gridY + 5, 0, 49));
+        return reducedGrid[x, y];
     }
 }
