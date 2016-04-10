@@ -74,7 +74,7 @@ public class TerrainEngine : MonoBehaviour
         terrainData.size = new Vector3(terrainSize, terrainHeight, terrainSize);
         terrain = Terrain.CreateTerrainGameObject(terrainData).GetComponent<Terrain>();
         terrain.transform.parent = gameObject.transform;
-        terrain.transform.position = new Vector3(0.0f, -waterLevel, 0.0f);
+        terrain.transform.position = new Vector3(0.0f, -waterLevel+2.0f, 0.0f);
         terrain.terrainData.splatPrototypes = splatPrototypes;
         terrain.terrainData.treePrototypes = treePrototypes;
         float[,] heights = new float[terrain.terrainData.heightmapWidth, terrain.terrainData.heightmapHeight];
@@ -82,8 +82,8 @@ public class TerrainEngine : MonoBehaviour
         {
             for (int k = 0; k < terrain.terrainData.heightmapHeight; k++)
             {
-                float x = Random.Range(0.0f, 0.3f);
-                float z = Random.Range(0.0f, 0.3f);
+                float x = Random.Range(0.0f, 0.1f);
+                float z = Random.Range(0.0f, 0.1f);
                 heights[i, k] = Mathf.PerlinNoise(x, z) / 10.0f;
             }
         }
