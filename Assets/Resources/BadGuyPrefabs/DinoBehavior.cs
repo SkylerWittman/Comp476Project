@@ -55,9 +55,6 @@ public class DinoBehavior : MonoBehaviour {
 
     void Start()
     {
-        GetComponent<NPCDetail>().health = dinoHealth;
-        GetComponent<NPCDetail>().damage = dinoDamage;
-
         //RNG initialization
         Random.seed = (int)System.DateTime.Now.Ticks;
         
@@ -77,6 +74,8 @@ public class DinoBehavior : MonoBehaviour {
         player = null;
 
         canAttack = true;
+        dinoHealth = GetComponent<NPCDetail>().health;
+        dinoDamage = GetComponent<NPCDetail>().damage;
 
         anim = GetComponent<Animation>();
         //Changing layers and adding weights allows us to play 2 animations at the same time
