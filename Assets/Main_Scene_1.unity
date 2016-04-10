@@ -3554,7 +3554,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: health
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: playerHealthCritical
@@ -3563,11 +3563,11 @@ Prefab:
     - target: {fileID: 11428578, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: attack
       value: 
-      objectReference: {fileID: 7400048, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+      objectReference: {fileID: 7400032, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: deathClip
       value: 
-      objectReference: {fileID: 7400048, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+      objectReference: {fileID: 7400046, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
   m_IsPrefabParent: 0

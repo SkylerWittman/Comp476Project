@@ -15,7 +15,10 @@ public class ArcherDetail : MonoBehaviour {
 	public float playerHealthCritical;
     public float healthPowerupAdded;
     public bool isDead;
+    public bool deathAnimationPlayed;
+    Animation anim;
     public AnimationClip deathClip;
+
 
     GameObject arrowDisplay;
 	// Use this for initialization
@@ -23,7 +26,8 @@ public class ArcherDetail : MonoBehaviour {
         arrow_type = arrowType.regular;
         arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplayParticle");
         isDead = false;
-	}
+        anim = GetComponent<Animation>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -67,7 +71,13 @@ public class ArcherDetail : MonoBehaviour {
         if (health <= 0.0f)
         {
             isDead = true;
-
+            //if (!deathAnimationPlayed)
+            //{
+                anim.Play(deathClip.name);
+              //  deathAnimationPlayed = true;
+            //}
+            //Freeze all movement/rotations when NPC has been slain
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 
