@@ -25,8 +25,10 @@ public class ArcherDetail : MonoBehaviour {
 	void Start () {
         arrow_type = arrowType.regular;
         arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplayParticle");
+        deathAnimationPlayed = false;
         isDead = false;
         anim = GetComponent<Animation>();
+        anim[deathClip.name].wrapMode = WrapMode.Once;    
     }
 	
 	// Update is called once per frame
@@ -71,11 +73,13 @@ public class ArcherDetail : MonoBehaviour {
         if (health <= 0.0f)
         {
             isDead = true;
-            //if (!deathAnimationPlayed)
-            //{
-                anim.Play(deathClip.name);
-              //  deathAnimationPlayed = true;
-            //}
+            if (!deathAnimationPlayed)
+            {
+                Debug.Log("got here");
+                
+                anim.Play(deathClip.name, PlayMode.StopAll);
+                StartCoroutine(waitToDisableAnim());
+            }
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -151,5 +155,11 @@ public class ArcherDetail : MonoBehaviour {
         Debug.Log("Health is currently " + health);
         health -= amountOfDamage;
         GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().doDamageHUD(amountOfDamage);
+    }
+
+    private IEnumerator waitToDisableAnim()
+    {
+        yield return new WaitForSeconds(2.0f);
+        deathAnimationPlayed = true;
     }
 }
