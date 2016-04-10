@@ -62,8 +62,8 @@ public class WaveEngine : MonoBehaviour {
                     dinoInstance.transform.localScale = new Vector3(randSize, randSize, randSize);
                     dinoInstance.GetComponent<DinoBehavior>().maxSpeed = 11.0f - randSize;
                     dinoInstance.GetComponent<DinoBehavior>().maxRunSpeed = 16.0f - randSize;
-                    dinoInstance.GetComponent<NPCDetail>().health = 50.0f * randSize;
-                    dinoInstance.GetComponent<NPCDetail>().damage = 20.0f * randSize;
+                    dinoInstance.GetComponent<NPCDetail>().health = 20.0f * randSize;
+                    dinoInstance.GetComponent<NPCDetail>().damage = 2.0f * randSize;
                     break;
                 case 2:
                     int spiderType = Random.Range(0, numOfSpiders);

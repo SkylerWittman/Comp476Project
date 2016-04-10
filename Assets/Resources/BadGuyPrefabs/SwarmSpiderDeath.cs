@@ -11,7 +11,8 @@ public class SwarmSpiderDeath : MonoBehaviour {
 	public AudioClip spiderDeath;
 	public float health;
 	public float damage;
-	int counter = 0;
+    public int spiderScore;
+    int counter = 0;
     private bool triedSpawning = false;
     private PowerupSpawner powerupSpawner;
 	// Use this for initialization
@@ -62,6 +63,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			//Freeze all movement/rotations when NPC has been slain
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<SwarmSpiderBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
+            GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().addScore(spiderScore);
 			Destroy(this.gameObject, anim[die.name].length + 1.0f);
 
 		}

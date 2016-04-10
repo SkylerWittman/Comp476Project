@@ -9,6 +9,7 @@ public class NPCDetail : MonoBehaviour {
     public float health;
     public float damage;
     int counter = 0;
+    public int deathScore = 10;
 
     private AudioSource audioSource;
 
@@ -16,6 +17,8 @@ public class NPCDetail : MonoBehaviour {
 
     private bool triedSpawning = false;
     private PowerupSpawner powerupSpawner;
+
+    public bool isAlive;
 
     void Awake()
     {
@@ -33,12 +36,17 @@ public class NPCDetail : MonoBehaviour {
         hitSound = Resources.Load("Sounds/GeneralSounds/Hit") as AudioClip;
 
         powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").GetComponent<PowerupSpawner>();
+        isAlive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isAlive && health <= 0.0f)
+        {
+            isAlive = false;
+            GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().addScore(deathScore);
+        }
         if (LockA == true)
         {
             if (counter > 5)
@@ -51,7 +59,6 @@ public class NPCDetail : MonoBehaviour {
         Vector3 pos = transform.position;
         if(health <= 0.0f)
         {
-           
             anim.Play(die.name);
             //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
             transform.position = pos;
@@ -62,10 +69,10 @@ public class NPCDetail : MonoBehaviour {
                 powerupSpawner.trySpawn(pos);
                 triedSpawning = true;
             }
-            
-            
+
+            GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().addScore(deathScore);
+            isAlive = false;
 			Destroy(this.gameObject, anim[die.name].length+.5f);
-            
         }
 
     }

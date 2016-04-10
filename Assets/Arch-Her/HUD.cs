@@ -22,6 +22,7 @@ public class HUD : MonoBehaviour {
     //Score
 	public static int score;
 	public Text scoreText;
+    public int winScore;
 
     //Arrow type
     Canvas arrowDisplay;
@@ -61,6 +62,12 @@ public class HUD : MonoBehaviour {
 
         //Score
         scoreText.text = "score: " + score;
+
+        if (score >= winScore)
+        {
+            //trigger win screen
+            //Debug.Log("You win!");
+        }
     }
 
 	//IEnumerator HealthWait()

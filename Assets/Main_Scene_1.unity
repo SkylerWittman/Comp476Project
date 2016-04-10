@@ -2550,6 +2550,7 @@ MonoBehaviour:
   display: {fileID: 0}
   sliderFill: {fileID: 0}
   scoreText: {fileID: 0}
+  winScore: 30
   cameraTransform: {fileID: 0}
   HUDarrowTransform: {fileID: 0}
 --- !u!114 &780882537
@@ -3561,6 +3562,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11428578, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: attack
+      value: 
+      objectReference: {fileID: 7400048, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: deathClip
       value: 
       objectReference: {fileID: 7400048, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
     m_RemovedComponents: []
