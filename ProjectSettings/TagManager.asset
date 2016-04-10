@@ -41,6 +41,7 @@ TagManager:
   - SpiderDead
   - HealthPowerup
   - PowerupSpawner
+  - GameOverScreen
   layers:
   - Default
   - TransparentFX
