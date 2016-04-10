@@ -9,7 +9,7 @@ public class TerrainEngine : MonoBehaviour
     public float terrainHeight = 1500.0f;
     public const int gridSize = (int)(terrainSize / 2);
     public static Grid terrainGrid; //This grid is referring to grid in the Grid class (the 500 x 500 grid used for spawning)
-    public static float waterLevel = 75.0f;  
+    public static float waterLevel = 73.0f;  
 
     //Tree vars
     private const int numOfTrees = 200;
@@ -98,7 +98,7 @@ public class TerrainEngine : MonoBehaviour
             float z = Random.value;
 
             //While the starting x and z values within the grid are occupied and/or under the water level, get new values
-            while (terrainGrid.grid[(int)(x*gridSize), (int)(z*gridSize)].walkable == false || terrain.SampleHeight(new Vector3(x * terrainSize, 0.0f, z * terrainSize)) <= waterLevel)
+            while (terrainGrid.grid[(int)(x*gridSize), (int)(z*gridSize)].walkable == false || terrain.SampleHeight(new Vector3(x * terrainSize, 0.0f, z * terrainSize)) < waterLevel)
             {
                 x = Random.value;
                 z = Random.value;
