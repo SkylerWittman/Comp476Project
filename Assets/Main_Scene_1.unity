@@ -2411,14 +2411,13 @@ GameObject:
   - 224: {fileID: 529744904}
   - 222: {fileID: 529744906}
   - 114: {fileID: 529744905}
-  - 95: {fileID: 529744907}
   m_Layer: 5
   m_Name: GameOverScreen
   m_TagString: GameOverScreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &529744904
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2470,23 +2469,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 529744903}
---- !u!95 &529744907
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 529744903}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fe5d78731b056334893712119a411638, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &556826609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,7 +2691,7 @@ MonoBehaviour:
   display: {fileID: 0}
   sliderFill: {fileID: 0}
   scoreText: {fileID: 0}
-  winScore: 10
+  winScore: 0
   gameOverClip: {fileID: 7400000, guid: c358a5cbc51740f4692c0ccd1d44e7d8, type: 2}
 --- !u!114 &780882537
 MonoBehaviour:
@@ -3713,7 +3695,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: health
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: playerHealthCritical
@@ -3725,6 +3707,10 @@ Prefab:
       objectReference: {fileID: 7400032, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: deathClip
+      value: 
+      objectReference: {fileID: 7400046, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: lyingDeadClip
       value: 
       objectReference: {fileID: 7400046, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
     m_RemovedComponents: []

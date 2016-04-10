@@ -18,6 +18,7 @@ public class ArcherDetail : MonoBehaviour {
     public bool deathAnimationPlayed;
     Animation anim;
     public AnimationClip deathClip;
+    public AnimationClip lyingDeadClip;
 
 
     GameObject arrowDisplay;
@@ -79,6 +80,7 @@ public class ArcherDetail : MonoBehaviour {
                 
                 anim.Play(deathClip.name, PlayMode.StopAll);
                 StartCoroutine(waitToDisableAnim());
+                //anim.Play(lyingDeadClip.name);
             }
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;

@@ -24,7 +24,7 @@ public class HUD : MonoBehaviour {
 	public static int score;
 	public Text scoreText;
     public int winScore;
-    public AnimationClip gameOverClip;
+    //public AnimationClip gameOverClip;
 
     //Arrow type
     Canvas arrowDisplay;
@@ -66,8 +66,7 @@ public class HUD : MonoBehaviour {
 
         if (score >= winScore)
         {
-            GameObject.FindGameObjectWithTag("GameOverScreen").GetComponent<Image>().enabled = true;
-            anim.Play(gameOverClip.name);
+            //anim.Play(gameOverClip.name);
         }
     }
 
