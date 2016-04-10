@@ -9,7 +9,7 @@ public class TerrainEngine : MonoBehaviour
     public float terrainHeight = 1500.0f;
     public const int gridSize = (int)(terrainSize / 2);
     public static Grid terrainGrid; //This grid is referring to grid in the Grid class (the 500 x 500 grid used for spawning)
-    public static float waterLevel = 73.0f;  
+    public static float waterLevel = 75.0f;  
 
     //Tree vars
     private const int numOfTrees = 200;
@@ -155,7 +155,7 @@ public class TerrainEngine : MonoBehaviour
             {
                 if (terrainGrid.grid[x, z].walkable)
                 {
-                    terrainGrid.grid[x, z].walkable = terrain.SampleHeight(new Vector3(x*2.0f, 0.0f, z*2.0f)) >= waterLevel;
+                    terrainGrid.grid[x, z].walkable = terrain.SampleHeight(new Vector3(x*2.0f, 0.0f, z*2.0f)) >= waterLevel-2;
                 }
                 terrainGrid.grid[x, z].position.y = terrain.SampleHeight(new Vector3(x * 2.0f, 0.0f, z * 2.0f)) - waterLevel;
             }
