@@ -78,6 +78,8 @@ public class ArcherDetail : MonoBehaviour {
             //}
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //lock position of camera maybe?
+            //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().transform.rotation;
         }
     }
 

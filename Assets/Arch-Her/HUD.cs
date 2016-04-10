@@ -9,9 +9,10 @@ public class HUD : MonoBehaviour {
     public ArcherDetail archerDetailScript;
 	float playerHealth;
 	float projectileDamage;
+    Animation anim;
 
-	//tag used to compare collision tag and damage player
-	public string collisionTag;
+    //tag used to compare collision tag and damage player
+    public string collisionTag;
 
 	//UI elements
 	//Health
@@ -23,13 +24,12 @@ public class HUD : MonoBehaviour {
 	public static int score;
 	public Text scoreText;
     public int winScore;
+    public AnimationClip gameOverClip;
 
     //Arrow type
     Canvas arrowDisplay;
     ParticleSystem poisonParticleSystem;
     ParticleSystem explosiveParticleSystem;
-    public Transform cameraTransform;
-    public Transform HUDarrowTransform;
 
     // Use this for initialization
     void Start () 
@@ -44,6 +44,7 @@ public class HUD : MonoBehaviour {
         playerHealth = archerDetailScript.health;
 
         score = 0;
+        anim = GetComponent<Animation>();
     }
 
     void Update () 
@@ -65,8 +66,8 @@ public class HUD : MonoBehaviour {
 
         if (score >= winScore)
         {
-            //trigger win screen
-            //Debug.Log("You win!");
+            GameObject.FindGameObjectWithTag("GameOverScreen").GetComponent<Image>().enabled = true;
+            anim.Play(gameOverClip.name);
         }
     }
 
