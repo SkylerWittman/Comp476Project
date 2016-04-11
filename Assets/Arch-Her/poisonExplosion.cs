@@ -2,16 +2,16 @@
 using System.Collections;
 
 public class poisonExplosion : MonoBehaviour {
-    public int gasTime = 300;
+    int gasTime;
 	// Use this for initialization
 	void Start () {
-	
+        gasTime = 350;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (gasTime < 0)
+        if (gasTime < 1)
         {
             Destroy(this.gameObject);
         }

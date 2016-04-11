@@ -94,7 +94,6 @@ public class NPCDetail : MonoBehaviour {
                 playHitSound();
                 Destroy(other.gameObject);
                 break;
-                //misspelled poison...
             case "PoisonArrow":
                 health -= other.GetComponent<Arrow>().damage;
                 anim.CrossFade(hit.name, 0.5f);
