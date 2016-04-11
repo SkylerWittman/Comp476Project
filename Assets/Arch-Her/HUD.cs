@@ -9,17 +9,14 @@ public class HUD : MonoBehaviour {
     public ArcherDetail archerDetailScript;
 	float playerHealth;
     Animation anim;
-    //public GameObject deathScreenPrefab;
+
+    //UI elements
     bool deathScreenPlayed;
     public GameObject deathScreenObject;
     public AnimationClip deathScreenAnimation;
 
-    //tag used to compare collision tag and damage player
-    public string collisionTag;
-
-	//UI elements
-	//Health
-	public Text hpText;
+    //Health
+    public Text hpText;
 	public Slider display;
 	public Image sliderFill;
 	
@@ -27,7 +24,9 @@ public class HUD : MonoBehaviour {
 	public static int score;
 	public Text scoreText;
     public int winScore;
-    public AnimationClip gameOverClip;
+    bool winScreenPlayed;
+    public GameObject winScreenObject;
+    public AnimationClip winScreenAnimation;
 
     // Use this for initialization
     void Start () 
@@ -42,8 +41,8 @@ public class HUD : MonoBehaviour {
         playerHealth = archerDetailScript.health;
 
         score = 0;
-        //deathScreenObject = GameObject.FindGameObjectWithTag("DeathScreen").GetComponent<GameObject>();
         deathScreenPlayed = false;
+        winScreenPlayed = false;
         anim = GetComponent<Animation>();
     }
 
@@ -51,11 +50,17 @@ public class HUD : MonoBehaviour {
 	{
         display.value = playerHealth;
         playerHealth = archerDetailScript.health;
-        //display.value = playerHealth;
+
+        //if player health gets critical, change HP colour to red
         if (playerHealth <= archerDetailScript.playerHealthCritical)
         {
-            sliderFill.color = Color.red;
-            hpText.color = Color.red;
+            sliderFill.color = new Color(1.0f, 0.607f, 0.317f);
+            hpText.color = new Color(1.0f, 0.607f, 0.317f);
+        }
+        else
+        {
+            sliderFill.color = Color.green;
+            hpText.color = Color.green;
         }
         
         //if player is dead
@@ -69,10 +74,12 @@ public class HUD : MonoBehaviour {
         //Score
         scoreText.text = "score: " + score;
 
-        if (score >= winScore)
+        //if player has won by getting enough score
+        if (score >= winScore && !winScreenPlayed)
         {
-            //Time.timeScale = 0.0f;
-            //anim.Play(gameOverClip.name);
+            winScreenPlayed = true;
+            winScreenObject.SetActive(true);
+            StartCoroutine(waitToDisableTime());
         }
     }
 
