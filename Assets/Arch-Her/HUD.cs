@@ -22,7 +22,9 @@ public class HUD : MonoBehaviour {
 	
     //Score
 	public int score;
+    public int highScore;
 	public Text scoreText;
+    public Text highScoreText;
     public int winScore;
     bool winScreenPlayed;
     public GameObject winScreenObject;
@@ -37,6 +39,8 @@ public class HUD : MonoBehaviour {
 		sliderFill = GameObject.FindGameObjectWithTag ("HPFill").GetComponent<Image> ();
 		hpText = GameObject.FindGameObjectWithTag ("HPText").GetComponent<Text> ();
         scoreText = GameObject.FindGameObjectWithTag ("Score").GetComponent<Text>();
+        highScoreText = GameObject.FindGameObjectWithTag("Highscore").GetComponent<Text>();
+        highScore = GameObject.FindGameObjectWithTag("Player").GetComponent<HighScore>().highScore;
 
         playerHealth = archerDetailScript.health;
 
@@ -73,6 +77,7 @@ public class HUD : MonoBehaviour {
 
         //Score
         scoreText.text = "score: " + score;
+        highScoreText.text = "Highscore: " + highScore;
 
         //if player has won by getting enough score
         if (score >= winScore && !winScreenPlayed)

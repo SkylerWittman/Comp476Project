@@ -44,6 +44,8 @@ TagManager:
   - GameOverScreen
   - DeathScreen
   - LoadScreen
+  - Highscore
+  - New Tag
   layers:
   - Default
   - TransparentFX
