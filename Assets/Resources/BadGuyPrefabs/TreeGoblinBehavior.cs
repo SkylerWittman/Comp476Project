@@ -14,7 +14,7 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	private AnimationClip getUpClip;
 	private bool canAttack = true;
 	private bool canChaseTarget = false;
-
+	private float rotateSpeed = 8.0f;
 	public float maxSpeed = 6;
 	public float acceleration = 3;
 	public float attackDistance = 3;
@@ -71,7 +71,13 @@ public class TreeGoblinBehavior : MonoBehaviour {
 
 	void Update(){
 		if (Vector3.Distance (target.transform.position, this.transform.position) < attackDistance && canAttack) {
+			canChaseTarget = false;
 			StartCoroutine (attack ());
+
+		}
+
+		if (Vector3.Distance (target.transform.position, this.transform.position) > attackDistance) {
+			canChaseTarget = true;
 		}
 	}
 
@@ -83,14 +89,13 @@ public class TreeGoblinBehavior : MonoBehaviour {
 			anim.Play(runClip.name);
 
 			//apply gravity to enemies
-			rb.AddForce (Vector3.down * rb.mass * 30);
+			//rb.AddForce (Vector3.down * rb.mass * 30);
 
 			//find direction towards target and look towards target
 			directionToMove = (target.transform.position - this.transform.position).normalized;
-			Quaternion newRotation = Quaternion.LookRotation (directionToMove);
-			newRotation.x = 0.0f;
-			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.RotateTowards (transform.rotation, newRotation, 500.0f* Time.deltaTime);
+			Vector3 newRotation = Vector3.RotateTowards(transform.forward, directionToMove, rotateSpeed * Time.deltaTime, 0.0f);
+			transform.rotation = Quaternion.LookRotation(newRotation);
+
 
 			directionToMove.y = 0.0f;
 

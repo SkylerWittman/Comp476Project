@@ -6,6 +6,7 @@ public class AttackState : IGoblinState {
 	private readonly StatePattern rangeGoblin;
 	private float distanceToAttack = 75;
 	private float timer = 0;
+	private float rotateSpeed = 8.0f;
 	private Vector3 directionToLook;
 
 	public AttackState(StatePattern pattern){
@@ -17,8 +18,8 @@ public class AttackState : IGoblinState {
 		timer -= Time.deltaTime;
 		LookForTarget ();
 	
-		Quaternion newRotation = Quaternion.LookRotation (rangeGoblin.playerTarget - rangeGoblin.transform.position);
-		rangeGoblin.transform.rotation = Quaternion.RotateTowards (rangeGoblin.transform.rotation, newRotation, 400.0f* Time.deltaTime);
+		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, rangeGoblin.playerTarget - rangeGoblin.transform.position, rotateSpeed * Time.deltaTime, 0.0f);
+		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
 
 		if (timer <= 0) {
 			Attack ();

@@ -19,6 +19,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private bool cantSeePlayer = true;
 	private bool canAttack = true;
 	private float moveSpeed = 10;
+	private float rotateSpeed = 8.0f;
 	private float collisionTimer = 120;
 	private float searchTimer = 120;
 	private float distanceToHunt = 50;
@@ -50,7 +51,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		anim ["walkSpider"].speed = 7.0f;
 		runClip = anim.GetClip("walkSpider");
 		attackClip = anim.GetClip("attackSpider");
-
+		rb.AddForce (Vector3.down * 500, ForceMode.VelocityChange);
 		canWander = true;
 
 	}
@@ -268,7 +269,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		if (canWander) {
 
 			//apply gravity to enemies
-			rb.AddForce (Vector3.down * rb.mass * 40);
+			//rb.AddForce (Vector3.down * rb.mass * 40);
 
 
 			//recalcualte swarm information to be used in movement
@@ -280,10 +281,8 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			wanderVector = (swarmer.GetWanderTarget() - transform.position);
 			wanderVector.y = 0.0f;
 
-			Quaternion newRotation = Quaternion.LookRotation(wanderVector);
-			newRotation.x = 0.0f;
-			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 500.0f * Time.deltaTime);
+			Vector3 newRotation = Vector3.RotateTowards(transform.forward, wanderVector, rotateSpeed * Time.deltaTime, 0.0f);
+			transform.rotation = Quaternion.LookRotation(newRotation);
 
 			rb.velocity += ( wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
 			rb.velocity = rb.velocity.normalized * moveSpeed;
@@ -295,7 +294,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		if (canHunt) {
 
 			//apply gravity to enemies
-			rb.AddForce (Vector3.down * rb.mass * 30);
+			//rb.AddForce (Vector3.down * rb.mass * 30);
 
 			//recalcualte swarm information to be used in movement
 			alignment = AlignVectorCalculate ();
@@ -304,10 +303,8 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 
 			//look towards the target
 			Vector3 newDirection = (target.transform.position - this.transform.position).normalized;
-			Quaternion newRotation = Quaternion.LookRotation(newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
-			newRotation.x = 0.0f;
-			newRotation.z = 0.0f;
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 500.0f * Time.deltaTime);
+			Vector3 newRotation = Vector3.RotateTowards(transform.forward, newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized, rotateSpeed * Time.deltaTime, 0.0f);
+			transform.rotation = Quaternion.LookRotation (newRotation);
 
 			//move towards the target as a swarm
 			newDirection.y = 0.0f;
