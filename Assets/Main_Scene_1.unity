@@ -3988,11 +3988,11 @@ Prefab:
       objectReference: {fileID: 137712, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: poisonArrowStock
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: explosiveArrowStock
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8220354, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder
@@ -4018,6 +4018,34 @@ Prefab:
       propertyPath: lyingDeadClip
       value: 
       objectReference: {fileID: 7400048, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
+    - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: poisonPowerupAddedArrowStock
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: explosivePowerupAddedArrowStock
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: healthPowerupAdded
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473554, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: maximumY
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473554, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: minimumY
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473554, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: minimumX
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473554, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: isMouseInversed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
   m_IsPrefabParent: 0

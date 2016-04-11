@@ -113,7 +113,7 @@ public class Shoot : MonoBehaviour {
                     runForce(shootArrow); // applies physics to the arrow
                     mouseCounter = 0; // reset mouse counter
                 }
-                shootOnce = 1; // Ensuring multiple arrows cant be instaniated 
+                shootOnce = 1; // Ensuring multiple arrows cant be instantiated 
                 if (lockCam == false) // Ensuring the zooom out of the camera
                 {
                     Vector3 moveUp = transform.forward;
