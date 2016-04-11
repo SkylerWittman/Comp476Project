@@ -3993,7 +3993,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: explosiveArrowStock
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8220354, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder
@@ -4021,11 +4021,11 @@ Prefab:
       objectReference: {fileID: 7400048, guid: b8b8e15dc3e194246b1d72243ed33bb3, type: 3}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: poisonPowerupAddedArrowStock
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: explosivePowerupAddedArrowStock
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: healthPowerupAdded
