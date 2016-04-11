@@ -8,8 +8,11 @@ public class HUD : MonoBehaviour {
     public GameObject playerObject;
     public ArcherDetail archerDetailScript;
 	float playerHealth;
-	float projectileDamage;
     Animation anim;
+    //public GameObject deathScreenPrefab;
+    bool deathScreenPlayed;
+    public GameObject deathScreenObject;
+    public AnimationClip deathScreenAnimation;
 
     //tag used to compare collision tag and damage player
     public string collisionTag;
@@ -24,12 +27,7 @@ public class HUD : MonoBehaviour {
 	public static int score;
 	public Text scoreText;
     public int winScore;
-    //public AnimationClip gameOverClip;
-
-    //Arrow type
-    Canvas arrowDisplay;
-    ParticleSystem poisonParticleSystem;
-    ParticleSystem explosiveParticleSystem;
+    public AnimationClip gameOverClip;
 
     // Use this for initialization
     void Start () 
@@ -44,46 +42,53 @@ public class HUD : MonoBehaviour {
         playerHealth = archerDetailScript.health;
 
         score = 0;
+        //deathScreenObject = GameObject.FindGameObjectWithTag("DeathScreen").GetComponent<GameObject>();
+        deathScreenPlayed = false;
         anim = GetComponent<Animation>();
     }
 
     void Update () 
 	{
+        display.value = playerHealth;
+        playerHealth = archerDetailScript.health;
         //display.value = playerHealth;
         if (playerHealth <= archerDetailScript.playerHealthCritical)
         {
             sliderFill.color = Color.red;
             hpText.color = Color.red;
-
         }
-        //		if (playerHealth <= 0)
-        //		{
-        //			//die? restart screen?
-        //		}
+        
+        //if player is dead
+        if (archerDetailScript.checkAliveStatus() && !deathScreenPlayed)
+        {
+            deathScreenPlayed = true;
+            deathScreenObject.SetActive(true);
+            StartCoroutine(waitToDisableTime());
+        }
 
         //Score
         scoreText.text = "score: " + score;
 
         if (score >= winScore)
         {
+            //Time.timeScale = 0.0f;
             //anim.Play(gameOverClip.name);
         }
     }
 
-	//IEnumerator HealthWait()
-	//{
-	//	yield return new WaitForSeconds(3);
- //       playerHealth = archerDetailScript.playerHealthCritical;
- //       addScore(50);
-	//}
+    private IEnumerator waitToDisableTime()
+    {
+        yield return new WaitForSeconds(2.8f);
+        Time.timeScale = 0.0f;
+    }
 
     public void addScore(int addedScore)
     {
         score += addedScore;
     }
 
-    public void doDamageHUD(float amountOfDamage)
+    public void addHealthHUD(float amountOfHealth)
     {
-        display.value -= amountOfDamage;
+        display.value += amountOfHealth;
     }
 }

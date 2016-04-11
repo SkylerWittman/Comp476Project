@@ -14,6 +14,7 @@ public class ArcherDetail : MonoBehaviour {
 	public float health;
 	public float playerHealthCritical;
     public float healthPowerupAdded;
+    HUD hudScript;
     public bool isDead;
     public bool deathAnimationPlayed;
     Animation anim;
@@ -24,6 +25,7 @@ public class ArcherDetail : MonoBehaviour {
     GameObject arrowDisplay;
 	// Use this for initialization
 	void Start () {
+        hudScript = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>();
         arrow_type = arrowType.regular;
         arrowDisplay = GameObject.FindGameObjectWithTag("ArrowDisplayParticle");
         deathAnimationPlayed = false;
@@ -76,7 +78,7 @@ public class ArcherDetail : MonoBehaviour {
             isDead = true;
             if (!deathAnimationPlayed)
             {
-                Debug.Log("got here");
+                //Debug.Log("got here");
                 
                 anim.Play(deathClip.name, PlayMode.StopAll);
                 StartCoroutine(waitToDisableAnim());
@@ -150,6 +152,7 @@ public class ArcherDetail : MonoBehaviour {
         {
             Debug.Log("+ " + healthPowerupAdded + " health");
             health += healthPowerupAdded;
+            hudScript.addHealthHUD(healthPowerupAdded);
             Destroy(col.gameObject);
         }
 	}
@@ -158,12 +161,16 @@ public class ArcherDetail : MonoBehaviour {
     {
         Debug.Log("Health is currently " + health);
         health -= amountOfDamage;
-        GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().doDamageHUD(amountOfDamage);
     }
 
     private IEnumerator waitToDisableAnim()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2.5f);
         deathAnimationPlayed = true;
+    }
+
+    public bool checkAliveStatus()
+    {
+        return isDead;
     }
 }
