@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/NewMapGeneratorScene(Test).unity
   - enabled: 0
     path: Assets/Scenes/MapGeneratorScene(Test).unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Load Screen.unity
   - enabled: 1
     path: Assets/Main_Scene_1.unity
