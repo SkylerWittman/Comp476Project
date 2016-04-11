@@ -68,7 +68,10 @@ public class HUD : MonoBehaviour {
         {
             deathScreenPlayed = true;
             deathScreenObject.SetActive(true);
+            Cursor.visible = enabled;
+            Cursor.lockState = CursorLockMode.None;
             StartCoroutine(waitToDisableTime());
+           
         }
 
         //Score
@@ -79,6 +82,8 @@ public class HUD : MonoBehaviour {
         {
             winScreenPlayed = true;
             winScreenObject.SetActive(true);
+            Cursor.visible = enabled;
+            Cursor.lockState = CursorLockMode.None;
             StartCoroutine(waitToDisableTime());
         }
     }
