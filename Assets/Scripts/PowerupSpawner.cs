@@ -26,7 +26,7 @@ public class PowerupSpawner : MonoBehaviour {
     {
         yield return new WaitForSeconds(3.0f);
         Vector3 spawnPos = new Vector3(spawnPosition.x, spawnPosition.y + 8.0f, spawnPosition.z);
-        int chance = Random.Range(0, 5);
+        int chance = Random.Range(0, 4);
 
         if (chance == 0 || chance == 1)
         {
