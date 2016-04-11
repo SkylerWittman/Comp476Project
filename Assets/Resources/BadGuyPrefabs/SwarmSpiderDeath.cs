@@ -83,7 +83,10 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		case "ExplosiveArrow":
 			Destroy(this.gameObject, anim[die.name].length + .5f);
 			break;
-		}
+        case "Gas":
+            LockA = true;
+           break;
+        }
 
 
 		Destroy(other.gameObject);
