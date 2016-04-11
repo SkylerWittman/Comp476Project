@@ -4033,11 +4033,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11473554, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: maximumY
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 11473554, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: minimumY
-      value: -50
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 11473554, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: minimumX

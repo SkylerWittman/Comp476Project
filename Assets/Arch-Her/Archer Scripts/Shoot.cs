@@ -103,7 +103,7 @@ public class Shoot : MonoBehaviour {
             {
                 isAttack = false;
                 playOnce = 0;
-                if (mouseCounter > 5.0f)
+                if (mouseCounter > 2.0f)
                 {
 
                     mouseCounter = 0.0f;

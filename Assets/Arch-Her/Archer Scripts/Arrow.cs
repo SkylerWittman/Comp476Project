@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour {
     public float damage;
     int counter = 0;
     public ArcherDetail archer;
+    public Shoot shoot;
     public Explosion explosion;
     public poisonExplosion poisonExplosion;
 
@@ -17,6 +18,7 @@ public class Arrow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         archer = GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>();
+        shoot = GameObject.FindGameObjectWithTag("Player").GetComponent<Shoot>();
 	}
 	
 	// Update is called once per frame
@@ -31,23 +33,26 @@ public class Arrow : MonoBehaviour {
                 {
                     case ArcherDetail.arrowType.regular:
                         transform.tag = "RegularArrow";
-                        damage = 10;
+                        damage = (shoot.arrowSpeed*.75f ) + 20;
+                        Debug.Log("Arrow Damage:" + damage);
                         break;
                     case ArcherDetail.arrowType.poison:
                         poisonLock = true;
                         transform.tag = "PoisonArrow";
-                        damage = 50;
+                        damage = (shoot.arrowSpeed )+80;
+                        Debug.Log("Arrow Damage:" + damage);
                         break;
                     case ArcherDetail.arrowType.explosive:
                         hitLock = true;
                         transform.tag = "ExplosiveArrow";
-                        damage = 15;
+                        damage = (shoot.arrowSpeed) +50;
+                        Debug.Log("Arrow Damage:" + damage);
                         break;
 
                 }
             }
         }
-        if (counter > 45)
+        if (counter > 60)
         {
             GameObject.Destroy(gameObject, 0);
         }
