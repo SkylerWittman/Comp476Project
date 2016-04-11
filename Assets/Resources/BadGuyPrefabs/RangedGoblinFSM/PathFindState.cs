@@ -24,7 +24,7 @@ public class PathFindState : IGoblinState {
 	public float distanceToNewTree = 15.0f;
 	private float distanceToAttack = 75;
 	private float slowDownRadius = 30;
-
+	private float rotateSpeed = 8.0f;
 
 	public PathFindState(StatePattern pattern){
 		rangeGoblin = pattern;
@@ -116,7 +116,7 @@ public class PathFindState : IGoblinState {
 
 	private void TraversePath(){
 		//apply gravity to enemies
-		rb.AddForce (Vector3.down * rb.mass * 30);
+		//rb.AddForce (Vector3.down * rb.mass * 30);
 	
 		rangeGoblin.anim.Play(rangeGoblin.runClip.name);
 
@@ -132,10 +132,8 @@ public class PathFindState : IGoblinState {
 		moveDirection.y = 0.0f;
 		steeringDirection.y = 0.0f;
 
-		Quaternion newRotation = Quaternion.LookRotation (moveDirection);
-		newRotation.x = 0.0f;
-		newRotation.z = 0.0f;
-		rangeGoblin.transform.rotation = Quaternion.RotateTowards (rangeGoblin.transform.rotation, newRotation, 500.0f * Time.deltaTime);
+		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, moveDirection, rotateSpeed * Time.deltaTime, 0.0f);
+		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
 
 		moveDirection *= acceleration;
 

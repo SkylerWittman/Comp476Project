@@ -17,7 +17,7 @@ public class SwarmController : MonoBehaviour {
 	
 	public void SetWanderTarget(){
 		float[] XZ = targetGenerator.getXZ ();
-		wanderVector = new Vector3 (XZ [0], -3.0f, XZ [1]);
+		wanderVector = new Vector3 (XZ [0], -10.0f, XZ [1]);
 
 	}
 
