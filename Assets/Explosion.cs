@@ -14,7 +14,6 @@ public class Explosion : MonoBehaviour {
         RaycastHit[] hit = Physics.SphereCastAll(transform.position - transform.up * 10.0f, 10.0f, transform.up, 100f);
         if (hit != null)
         {
-            Debug.Log(hit.Length);
 
             for (int i = 0; i < hit.Length; i++)
             {

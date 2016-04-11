@@ -34,19 +34,16 @@ public class Arrow : MonoBehaviour {
                     case ArcherDetail.arrowType.regular:
                         transform.tag = "RegularArrow";
                         damage = (shoot.arrowSpeed*.75f ) + 20;
-                        Debug.Log("Arrow Damage:" + damage);
                         break;
                     case ArcherDetail.arrowType.poison:
                         poisonLock = true;
                         transform.tag = "PoisonArrow";
                         damage = (shoot.arrowSpeed )+80;
-                        Debug.Log("Arrow Damage:" + damage);
                         break;
                     case ArcherDetail.arrowType.explosive:
                         hitLock = true;
                         transform.tag = "ExplosiveArrow";
                         damage = (shoot.arrowSpeed) +50;
-                        Debug.Log("Arrow Damage:" + damage);
                         break;
 
                 }
