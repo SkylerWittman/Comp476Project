@@ -21,7 +21,7 @@ public class HUD : MonoBehaviour {
 	public Image sliderFill;
 	
     //Score
-	public static int score;
+	public int score;
 	public Text scoreText;
     public int winScore;
     bool winScreenPlayed;
