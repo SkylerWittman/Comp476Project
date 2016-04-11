@@ -521,7 +521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &230336768
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2913,7 +2913,7 @@ MonoBehaviour:
   highScore: 0
   scoreText: {fileID: 0}
   highScoreText: {fileID: 0}
-  winScore: 60
+  winScore: 100
   winScreenObject: {fileID: 1201336208}
   winScreenAnimation: {fileID: 7400000, guid: 7005b21d65900894594e986d1bb4a79a, type: 2}
 --- !u!114 &780882537
@@ -3539,7 +3539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1201336209
 RectTransform:
   m_ObjectHideFlags: 0
