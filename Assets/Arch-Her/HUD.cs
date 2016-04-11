@@ -15,6 +15,8 @@ public class HUD : MonoBehaviour {
     bool deathScreenPlayed;
     public GameObject deathScreenObject;
     public AnimationClip deathScreenAnimation;
+    public GameObject pauseMenuObject;
+    bool isGamePaused;
 
     //Health
     public Text hpText;
@@ -48,6 +50,7 @@ public class HUD : MonoBehaviour {
         score = 0;
         deathScreenPlayed = false;
         winScreenPlayed = false;
+        isGamePaused = false;
         anim = GetComponent<Animation>();
     }
 
@@ -88,6 +91,28 @@ public class HUD : MonoBehaviour {
             winScreenObject.SetActive(true);
             doEndGameThings();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isGamePaused)
+            {
+                isGamePaused = true;
+                Time.timeScale = 0.0f;
+                pauseMenuObject.SetActive(true);
+                shoot.crosshairLockRestart = false;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                isGamePaused = false;
+                Time.timeScale = 1.0f;
+                pauseMenuObject.SetActive(false);
+                shoot.crosshairLockRestart = true;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
     }
 
     private IEnumerator waitToDisableTime()
@@ -109,7 +134,7 @@ public class HUD : MonoBehaviour {
     public void doEndGameThings()
     {
         shoot.crosshairLockRestart = false;
-        Cursor.visible = enabled;
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         StartCoroutine(waitToDisableTime());
         GameObject.FindGameObjectWithTag("controller").GetComponent<AudioSource>().enabled = false;

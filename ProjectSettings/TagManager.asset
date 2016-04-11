@@ -45,7 +45,7 @@ TagManager:
   - DeathScreen
   - LoadScreen
   - Highscore
-  - New Tag
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
