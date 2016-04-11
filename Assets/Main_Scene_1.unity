@@ -2748,7 +2748,7 @@ MonoBehaviour:
   display: {fileID: 0}
   sliderFill: {fileID: 0}
   scoreText: {fileID: 0}
-  winScore: 20
+  winScore: 60
   winScreenObject: {fileID: 1201336208}
   winScreenAnimation: {fileID: 7400000, guid: 7005b21d65900894594e986d1bb4a79a, type: 2}
 --- !u!114 &780882537
