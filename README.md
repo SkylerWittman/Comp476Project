@@ -66,20 +66,24 @@
 	</tr>
 	<tr>
 		<td>Score and end game trigger</td>
-		<td></td>
+		<td>Done</td>
 	</tr
 	<tr>
 		<td>In-game drops/add health potion drop</td>
-		<td></td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Enemy damage to player</td>
 		<td>Done</td>
 	</tr>
 	<tr>
-		<td>Start screen, load screen, end screen, settings</td>
+		<td>Start screen, load screen, end screen</td>
+		<td>Done</td>
+	</tr>
+		<tr>
+		<td>Settings screen (only if time permits)</td>
 		<td></td>
-	</tr>		
+	</tr>
 	<tr>
 		<td>Documentation slogging</td>
 		<td></td>
