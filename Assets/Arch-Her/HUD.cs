@@ -68,10 +68,7 @@ public class HUD : MonoBehaviour {
         {
             deathScreenPlayed = true;
             deathScreenObject.SetActive(true);
-            Cursor.visible = enabled;
-            Cursor.lockState = CursorLockMode.None;
-            StartCoroutine(waitToDisableTime());
-           
+            doEndGameThings();           
         }
 
         //Score
@@ -82,9 +79,7 @@ public class HUD : MonoBehaviour {
         {
             winScreenPlayed = true;
             winScreenObject.SetActive(true);
-            Cursor.visible = enabled;
-            Cursor.lockState = CursorLockMode.None;
-            StartCoroutine(waitToDisableTime());
+            doEndGameThings();
         }
     }
 
@@ -102,5 +97,13 @@ public class HUD : MonoBehaviour {
     public void addHealthHUD(float amountOfHealth)
     {
         display.value += amountOfHealth;
+    }
+
+    public void doEndGameThings()
+    {
+        Cursor.visible = enabled;
+        Cursor.lockState = CursorLockMode.None;
+        StartCoroutine(waitToDisableTime());
+        GameObject.FindGameObjectWithTag("controller").GetComponent<AudioSource>().enabled = false;
     }
 }

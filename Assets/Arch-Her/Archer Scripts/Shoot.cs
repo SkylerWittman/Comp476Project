@@ -36,7 +36,7 @@ public class Shoot : MonoBehaviour {
     Rect crossHairPosition;
     bool OriginalOn = true;
     bool lockCam = true;
-    int mouseCounter = 0;
+    float mouseCounter;
     public ArcherDetail archer;
     // Use this for initialization
     void Start () {
@@ -49,6 +49,7 @@ public class Shoot : MonoBehaviour {
 
         crossHairPosition = new Rect( ((Screen.width - crosshairTexture.width)/ 2.05f),
             ((Screen.height - crosshairTexture.height) /1.9f), crosshairTexture.width, crosshairTexture.height);
+        mouseCounter = 0.0f;
     }
 
     void OnGUI()// GUI for the crosshair
@@ -102,16 +103,16 @@ public class Shoot : MonoBehaviour {
             {
                 isAttack = false;
                 playOnce = 0;
-                if (mouseCounter > 5)
+                if (mouseCounter > 5.0f)
                 {
 
-                    mouseCounter = 0;
+                    mouseCounter = 0.0f;
                     arrow = getArrow();
                     checkArrowStock();
                     Quaternion rot = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z); // gets rotation of center of screen
 					GameObject shootArrow = Instantiate(arrow, bow.position, mainCamera.transform.rotation) as GameObject;   // instantiates arrow
                     runForce(shootArrow); // applies physics to the arrow
-                    mouseCounter = 0; // reset mouse counter
+                    mouseCounter = 0.0f; // reset mouse counter
                 }
                 shootOnce = 1; // Ensuring multiple arrows cant be instantiated 
                 if (lockCam == false) // Ensuring the zooom out of the camera
@@ -175,8 +176,8 @@ public class Shoot : MonoBehaviour {
     {
         arrow.GetComponent<Rigidbody>().AddForce((arrow.transform.forward * 5 * arrowSpeed) , ForceMode.Impulse);
         arrow.GetComponent<Arrow>().damage = arrowSpeed;
-        //shootArrow.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, 0, -2f); 
     }
+
     IEnumerator shoot() // CoRoutine to play the animation
     {
         yield return new WaitForSeconds(anim[attack.name].length);
