@@ -32,6 +32,7 @@ public class DinoBehavior : MonoBehaviour {
 
     private float pursueDistance = 100.0f;
     private bool canAttack;
+    private bool canMove;
     public float dinoHealth;
     public float dinoDamage;
     public float dinoAttackCooldown = 3.0f;
@@ -74,6 +75,7 @@ public class DinoBehavior : MonoBehaviour {
         player = null;
 
         canAttack = true;
+        canMove = true;
         dinoHealth = GetComponent<NPCDetail>().health;
         dinoDamage = GetComponent<NPCDetail>().damage;
 
@@ -130,6 +132,8 @@ public class DinoBehavior : MonoBehaviour {
                 {
                     Debug.Log("I BUGGED OUT LOL. COMMITTING SUICIDE NOW. IGNORE THE ARUMENT OUT OF RANGE EXCEPTION");
                     gameObject.name = "I BUGGED OUT LOL";
+                    currentPath.Add(grid.NodeFromPoint(transform.position));
+                    Destroy(gameObject);
                     Destroy(GetComponent<DinoBehavior>());
                     break;
                 }
@@ -230,8 +234,12 @@ public class DinoBehavior : MonoBehaviour {
         {
             StartCoroutine(attack());
         }
-        //If combat is called when the attack is on cooldown, we will continue to pursue the target
-        currentState = State.PURSUE;
+
+        if (!canMove)
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
+
     }
 
     //This finds whether the player is in a 70 unit radius of the dino
@@ -274,8 +282,17 @@ public class DinoBehavior : MonoBehaviour {
         Debug.Log("Dino did " + dinoDamage + " damage");
         anim.Play(attackClip.name);
         audioSource.PlayOneShot(dinoBite);
+        StartCoroutine(freezeMovementWhileAttacking());
         yield return new WaitForSeconds(dinoAttackCooldown);
         canAttack = true;
+    }
+
+    private IEnumerator freezeMovementWhileAttacking()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(attackClip.length);
+        canMove = true;
+        currentState = State.PURSUE;
     }
 
     //If the dino has been hit by an arrow, he will find the player and then follow the pursue routine
