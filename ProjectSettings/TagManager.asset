@@ -43,6 +43,7 @@ TagManager:
   - PowerupSpawner
   - GameOverScreen
   - DeathScreen
+  - LoadScreen
   layers:
   - Default
   - TransparentFX
