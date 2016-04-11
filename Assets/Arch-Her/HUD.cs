@@ -9,6 +9,7 @@ public class HUD : MonoBehaviour {
     public ArcherDetail archerDetailScript;
 	float playerHealth;
     Animation anim;
+    Shoot shoot;
 
     //UI elements
     bool deathScreenPlayed;
@@ -41,7 +42,7 @@ public class HUD : MonoBehaviour {
         scoreText = GameObject.FindGameObjectWithTag ("Score").GetComponent<Text>();
         highScoreText = GameObject.FindGameObjectWithTag("Highscore").GetComponent<Text>();
         highScore = GameObject.FindGameObjectWithTag("Player").GetComponent<HighScore>().highScore;
-
+        shoot = GameObject.FindGameObjectWithTag("Player").GetComponent<Shoot>();
         playerHealth = archerDetailScript.health;
 
         score = 0;
@@ -82,6 +83,7 @@ public class HUD : MonoBehaviour {
         //if player has won by getting enough score
         if (score >= winScore && !winScreenPlayed)
         {
+            
             winScreenPlayed = true;
             winScreenObject.SetActive(true);
             doEndGameThings();
@@ -106,6 +108,7 @@ public class HUD : MonoBehaviour {
 
     public void doEndGameThings()
     {
+        shoot.crosshairLockRestart = false;
         Cursor.visible = enabled;
         Cursor.lockState = CursorLockMode.None;
         StartCoroutine(waitToDisableTime());

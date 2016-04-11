@@ -36,11 +36,14 @@ public class Shoot : MonoBehaviour {
     Rect crossHairPosition;
     bool OriginalOn = true;
     bool lockCam = true;
+    public bool crosshairLockLoad = false;
+    public bool crosshairLockRestart = true;
     float mouseCounter;
     public ArcherDetail archer;
+    int chCounter = 0;
     // Use this for initialization
     void Start () {
-        
+        crosshairLockLoad = false;
         anim = GetComponent<Animation>();
         anim[attack.name].speed = 1.2f;
         rightHand = GameObject.FindGameObjectWithTag("righthand").transform;
@@ -54,7 +57,7 @@ public class Shoot : MonoBehaviour {
 
     void OnGUI()// GUI for the crosshair
     {
-        if (OriginalOn == true)
+        if (crosshairLockLoad == true && crosshairLockRestart == true)
         {
             GUI.DrawTexture(crossHairPosition, crosshairTexture);
         }
@@ -62,6 +65,15 @@ public class Shoot : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if(crosshairLockLoad == false)
+        {
+            chCounter++;
+            if(chCounter > 40)
+            {
+                chCounter = 0;
+                crosshairLockLoad = true;
+            }
+        }
         
         if (Input.GetMouseButton(0))//lock for knowing when the fire button has been pressed
         {
