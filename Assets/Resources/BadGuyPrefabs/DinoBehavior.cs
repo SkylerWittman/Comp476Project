@@ -329,7 +329,7 @@ public class DinoBehavior : MonoBehaviour {
             rightW.x += 4.0f;
 
             //Left whisker
-            if (Physics.Raycast(leftW, transform.forward, out hit, 100f))
+            if (Physics.Raycast(leftW, -transform.forward, out hit, 100f))
             {
                 if (hit.transform != transform)
                 {
@@ -338,7 +338,7 @@ public class DinoBehavior : MonoBehaviour {
             }
 
             //Right whisker
-            if (Physics.Raycast(rightW, transform.forward, out hit, 100f))
+            if (Physics.Raycast(rightW, -transform.forward, out hit, 100f))
             {
                 if (hit.transform != transform)
                 {
@@ -346,7 +346,9 @@ public class DinoBehavior : MonoBehaviour {
                 }
             }
 
-            target.y = 0.0f;  
+            target.y = 0.0f;
+            Quaternion chaseRotation = Quaternion.LookRotation(-target);
+            transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime);
             rigidbody.AddForce(target.normalized * acceleration, ForceMode.VelocityChange);
         }   
     }

@@ -78,6 +78,11 @@ public class NPCDetail : MonoBehaviour {
                 addedScore = true;
             }
 
+			StatePattern goblinFSM = GetComponent<StatePattern>();
+			if (goblinFSM != null)
+			{
+				goblinFSM.enabled = false;
+			}
            
 			Destroy(this.gameObject, anim[die.name].length+.5f);
         }
@@ -85,12 +90,6 @@ public class NPCDetail : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
-        DinoBehavior dinoBehave = GetComponent<DinoBehavior>();
-        if (dinoBehave != null)
-        {
-            dinoBehave.gotHit();
-        }
-        
 
         switch (other.gameObject.tag)
         {

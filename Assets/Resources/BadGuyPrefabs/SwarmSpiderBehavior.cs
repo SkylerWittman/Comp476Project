@@ -55,7 +55,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	{
 		canAttack = false;
 		//only works if there is a single player
-		GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(spiderDamage);
+		target.GetComponent<ArcherDetail>().takeDamage(spiderDamage);
 		Debug.Log("Spider did " + spiderDamage + " damage");
 		anim.Play(attackClip.name);
 		yield return new WaitForSeconds(2.0f);
@@ -234,7 +234,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			cantSeePlayer = false;
 			setCanHunt ();
 			InformSwarmMembersOfSighting ();
-			Debug.Log ("I CAN SEE THE PLAYER");
+
 		} 
 	}
 
