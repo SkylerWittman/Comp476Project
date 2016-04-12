@@ -20,7 +20,7 @@ public class PowerupSpawner : MonoBehaviour {
     public void trySpawn(Vector3 spawnPos)
     {
         int chance = Random.Range(0, 9);
-        if (chance < 9)
+        if (chance < 5)
         {
             StartCoroutine(spawnRandomPowerup(spawnPos));
         }

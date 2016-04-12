@@ -3287,7 +3287,7 @@ MonoBehaviour:
   highScore: 0
   scoreText: {fileID: 0}
   highScoreText: {fileID: 0}
-  winScore: 2000
+  winScore: 20000
   winScreenObject: {fileID: 1201336208}
   winScreenAnimation: {fileID: 7400000, guid: 7005b21d65900894594e986d1bb4a79a, type: 2}
 --- !u!114 &780882537
@@ -4979,11 +4979,11 @@ Prefab:
       objectReference: {fileID: 137712, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: poisonArrowStock
-      value: 20
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: explosiveArrowStock
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8220354, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder
@@ -5019,7 +5019,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: healthPowerupAdded
-      value: 35
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 11473554, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: maximumY
