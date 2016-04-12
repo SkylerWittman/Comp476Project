@@ -58,7 +58,7 @@
 	</tr>
 	<tr>
 		<td>Hit indicator possibly with camera shake</td>
-		<td></td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Score and end game trigger</td>
@@ -78,15 +78,15 @@
 	</tr>
 		<tr>
 		<td>Settings screen (only if time permits)</td>
-		<td></td>
+		<td>Done</td>
 	</tr>
 	<tr>
 		<td>Documentation slogging</td>
-		<td></td>
+		<td>in-progress</td>
 	</tr>
 	<tr>
 		<td>TWEAKING - enemy damage/hp, player damage/hp, etc.</td>
-		<td></td
+		<td>Done?</td
 	</tr>
 </table>
 
