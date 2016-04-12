@@ -97,7 +97,7 @@ public class PathFindState : IGoblinState {
 
 	private void CollisionAvoidance(){
 		RaycastHit hit;
-		Vector3 avoidanceVector;
+
 		if (Physics.Raycast (rangeGoblin.transform.position + Vector3.up, rangeGoblin.transform.forward, out hit, 40.0f)) {
 			if (hit.collider.tag == "TreeMarker") {
 				rangeGoblin.pathFound = false;
@@ -107,7 +107,8 @@ public class PathFindState : IGoblinState {
 				rb.AddForce (5.0f * Physics.gravity);
 
 				rangeGoblin.anim.Play(rangeGoblin.runClip.name);
-
+				rb.AddForce (-rangeGoblin.transform.forward * 15.0f);
+					
 				if (rb.velocity.magnitude <= maxSpeed) {
 					rb.AddForce (rangeGoblin.transform.right * acceleration, ForceMode.VelocityChange);
 				}
