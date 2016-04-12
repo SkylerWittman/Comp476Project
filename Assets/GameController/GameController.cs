@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour {
 		private bool canSlowTime = true;
 		private bool canUseForce = true;
 		public bool cursorVisible = true;
-		public GameObject auraEffect;
 		private Camera theCamera;
 		private float forceToApply = 2;	
 
@@ -119,7 +118,7 @@ public class GameController : MonoBehaviour {
 					Debug.Log ("im looking at " + hit.transform.name);
 					hit.rigidbody.velocity = Vector3.zero;
 					canUseForce = false;
-					Instantiate (auraEffect, hit.transform.position, Quaternion.identity);
+					//Instantiate (auraEffect, hit.transform.position, Quaternion.identity);
 					
 				for (int i = 0; i < 10000; i++) {
 						if (i % 1000 == 0) {
@@ -152,8 +151,8 @@ public class GameController : MonoBehaviour {
 			if (Input.GetButton("Fire2") && canUseForce)
 			{
 				
-				ForcePower();	
-				Invoke ("ResetForceUse", 2.0f);
+				//ForcePower();	
+				//Invoke ("ResetForceUse", 2.0f);
 				
 
 			}

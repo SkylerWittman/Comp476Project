@@ -30,22 +30,18 @@ public class SwarmSpiderDeath : MonoBehaviour {
 	void Update()
 	{
 
-		if (LockA == true)
-		{
-			if (counter < 100)
-			{
-				health -= -15f;
-				++counter;
-			}
-			else
-			{
-				LockA = false;
-				counter = 0;
-			}
-		}
-		//Vector3 pos = transform.position;
+        if (LockA == true)
+        {
+            if (counter > 6)
+            {
+                health -= 10.0f;
+                counter = 0;
+            }
+            counter++;
+        }
+        //Vector3 pos = transform.position;
 
-		if(health < 0.0f && !isDead)
+        if (health < 0.0f && !isDead)
 		{
 
 			this.gameObject.tag = "SpiderDead";

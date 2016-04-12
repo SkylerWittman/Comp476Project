@@ -1365,7 +1365,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 1.89
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -1404,7 +1404,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
+      value: 0.225
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1474,8 +1474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da77ad9abcd08f4696cd388dff32c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeGoblinHealth: 150
-  treeGoblinDamage: 5
 --- !u!136 &13678306
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1648,6 +1646,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.225
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DopplerLevel
+      value: 1.89
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

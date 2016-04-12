@@ -61,7 +61,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   Priority: 223
-  DopplerLevel: 0
+  DopplerLevel: 0.73
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -100,7 +100,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0.6166667
+      value: 0.47777778
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7534d11278821de45b96dad0afcf5bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gasTime: 300
 --- !u!198 &19861064
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1707,7 +1706,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
-      value: 0.6166667
+      value: 0.47777778
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
@@ -1715,7 +1714,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: DopplerLevel
-      value: 0
+      value: 0.73
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
