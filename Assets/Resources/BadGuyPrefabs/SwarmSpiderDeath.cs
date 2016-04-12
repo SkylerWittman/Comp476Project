@@ -34,7 +34,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		{
 			if (counter < 100)
 			{
-				health -= 50.0f;
+				health -= -15f;
 				++counter;
 			}
 			else

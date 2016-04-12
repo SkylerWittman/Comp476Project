@@ -38,7 +38,7 @@ public class Arrow : MonoBehaviour {
                     case ArcherDetail.arrowType.poison:
                         poisonLock = true;
                         transform.tag = "PoisonArrow";
-                        damage = (shoot.arrowSpeed )+80;
+                        damage = (shoot.arrowSpeed )+30;
                         break;
                     case ArcherDetail.arrowType.explosive:
                         hitLock = true;

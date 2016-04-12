@@ -46,7 +46,7 @@ public class DinoDeath : MonoBehaviour {
 	{
 		if (LockA == true)
 		{
-			if (counter > 5)
+			if (counter > 10)
 			{
 				health -= 10.0f;
 				counter = 0;
