@@ -19,6 +19,7 @@ public class AttackState : IGoblinState {
 		LookForTarget ();
 	
 		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, rangeGoblin.playerTarget - rangeGoblin.transform.position, rotateSpeed * Time.deltaTime, 0.0f);
+		newRotation.y = 0.0f;
 		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
 
 		if (timer <= 0) {

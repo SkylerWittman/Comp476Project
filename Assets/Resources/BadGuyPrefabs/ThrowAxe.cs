@@ -11,15 +11,16 @@ public class ThrowAxe : MonoBehaviour {
 	private Vector3 throwRotation;
 	private AudioSource audio;
 	public AudioClip throwSound;
+	public AudioClip chopSound;
 
 	// Use this for initialization
 	void Start () {
 		Invoke ("EnableCollider", .2f);
 		rb = GetComponent<Rigidbody> ();
 		audio = GetComponent<AudioSource> ();
-		audio.PlayOneShot (throwSound, 0.1f);
+		audio.PlayOneShot (throwSound, 0.4f);
 		playerTarget = GameObject.FindGameObjectWithTag ("Player");
-		directionToThrow = (new Vector3(playerTarget.transform.position.x, playerTarget.transform.position.y + 3.0f , playerTarget.transform.position.z) - this.transform.position).normalized;
+		directionToThrow = (new Vector3(playerTarget.transform.position.x, playerTarget.transform.position.y + 4.0f , playerTarget.transform.position.z) - this.transform.position).normalized;
 
 		rb.AddForce (directionToThrow * impulseForce, ForceMode.VelocityChange);
 		transform.LookAt (playerTarget.transform);
@@ -41,8 +42,9 @@ public class ThrowAxe : MonoBehaviour {
 	void OnCollisionEnter(Collision coll){
 
 		if (coll.gameObject.tag == "Player") {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(4.0f);
-            Debug.Log("Throwing goblin did " + 4 + " damage");
+			playerTarget.GetComponent<ArcherDetail>().takeDamage(4.0f);
+			audio.PlayOneShot (chopSound, 0.4f);
+			Destroy (this.gameObject);
         }
 	}
 }
