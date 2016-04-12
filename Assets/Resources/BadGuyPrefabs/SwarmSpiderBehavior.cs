@@ -23,8 +23,8 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private float rotateSpeed = 2.0f;
 	private float collisionTimer = 120.0f;
 	private float searchTimer = 120.0f;
-	private float distanceToHunt = 50.0f;
-	private float spiderDamage = 2.0f;
+	private float distanceToHunt;
+	private float spiderDamage;
 	private float attackDistance = 5.0f;
 	private Animation anim;
 	private AnimationClip runClip;
@@ -32,13 +32,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 
 	public float swarmDistance = 100.0f;
 
-
-	public float swarmSpiderHealth;
-	public float swarmSpiderDamage;
-
 	void Start () {
-		GetComponent<SwarmSpiderDeath>().health = swarmSpiderHealth;
-		GetComponent<SwarmSpiderDeath>().damage = swarmSpiderDamage;
 
 		rb = GetComponent<Rigidbody> ();
 		swarmController = GameObject.FindGameObjectWithTag("controller");
