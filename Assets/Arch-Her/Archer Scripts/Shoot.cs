@@ -46,6 +46,7 @@ public class Shoot : MonoBehaviour {
         crosshairLockLoad = false;
         anim = GetComponent<Animation>();
         anim[attack.name].speed = 1.4f;
+        anim[hold.name].speed = 1.4f;
         rightHand = GameObject.FindGameObjectWithTag("righthand").transform;
         bow = GameObject.FindGameObjectWithTag("bow").transform;
         archer = GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>();

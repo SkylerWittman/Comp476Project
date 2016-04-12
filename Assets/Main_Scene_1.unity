@@ -2356,7 +2356,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: You Died
+  m_Text: You Lose
 --- !u!222 &293644375
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3456,7 +3456,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -4126,7 +4126,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'HighScore: 0'
+  m_Text: 'HighScore: '
 --- !u!222 &1184485727
 CanvasRenderer:
   m_ObjectHideFlags: 0
