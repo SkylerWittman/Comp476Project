@@ -160,7 +160,7 @@ public class DinoBehavior : MonoBehaviour {
             rigidbody.AddForce(-transform.forward * acceleration, ForceMode.VelocityChange);
         }
 
-        if (rigidbody.velocity.magnitude > maxSpeed)
+        if (rigidbody.velocity.magnitude >= maxSpeed)
         {
             rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
         }
@@ -210,7 +210,7 @@ public class DinoBehavior : MonoBehaviour {
             rigidbody.AddForce(chaseDirection.normalized * acceleration, ForceMode.VelocityChange);
         }
 
-        if (rigidbody.velocity.magnitude > maxRunSpeed)
+        if (rigidbody.velocity.magnitude >= maxRunSpeed)
         {
             rigidbody.velocity = rigidbody.velocity.normalized * maxRunSpeed;
         }

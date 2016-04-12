@@ -18,11 +18,18 @@ public class Timer : MonoBehaviour {
 
     private string convertToTime(int seconds) 
     {
-        int m = seconds / 60;
-        int s = seconds % 60;
-        string mins = (m < 10 ? "0" + m.ToString() : m.ToString());
-        string secs = (s < 10 ? "0" + s.ToString() : s.ToString());
-        return mins + ":" + secs;
+        if (seconds <= 0)
+        {
+            return "00:00";
+        }
+        else
+        {
+            int m = seconds / 60;
+            int s = seconds % 60;
+            string mins = (m < 10 ? "0" + m.ToString() : m.ToString());
+            string secs = (s < 10 ? "0" + s.ToString() : s.ToString());
+            return mins + ":" + secs;
+        }
     }
 
     private void countDown()

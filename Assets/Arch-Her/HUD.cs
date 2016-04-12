@@ -33,6 +33,9 @@ public class HUD : MonoBehaviour {
     public GameObject winScreenObject;
     public AnimationClip winScreenAnimation;
 
+    private Timer timer;
+    private int currentTime;
+
     //Guitar Solo
     private AudioSource audioSource;
     private AudioClip guitarSolo;
@@ -62,6 +65,9 @@ public class HUD : MonoBehaviour {
         isGamePaused = false;
         anim = GetComponent<Animation>();
 
+        timer = GameObject.FindGameObjectWithTag("WaveCount").GetComponent<Timer>();
+        currentTime = timer.getCurrentTime();
+
         guitarSolo = Resources.Load("Sounds/GeneralSounds/GuitarSolo") as AudioClip;
     }
 
@@ -69,6 +75,7 @@ public class HUD : MonoBehaviour {
 	{
         display.value = playerHealth;
         playerHealth = archerDetailScript.health;
+        currentTime = timer.getCurrentTime();
 
         //if player health gets critical, change HP colour to red
         if (playerHealth <= archerDetailScript.playerHealthCritical)
@@ -101,6 +108,13 @@ public class HUD : MonoBehaviour {
             winScreenPlayed = true;
             winScreenObject.SetActive(true);
             doEndGameThings();
+        }
+
+        if (currentTime <= 0 && !deathScreenPlayed)
+        {
+            deathScreenPlayed = true;
+            deathScreenObject.SetActive(true);
+            doEndGameThings(); 
         }
 
         //if you press escape to pause the game
