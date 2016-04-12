@@ -19,7 +19,9 @@ public class HighScore : MonoBehaviour {
         if(score > highScore)
         {
             highScore = score;
+           
             PlayerPrefs.SetInt("High Score", highScore);
+            PlayerPrefs.Save();
             Debug.Log("High Score is: " + highScore);
         }
 

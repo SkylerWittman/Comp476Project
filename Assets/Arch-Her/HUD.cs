@@ -99,6 +99,7 @@ public class HUD : MonoBehaviour {
 
         //Score
         scoreText.text = "score: " + score;
+        highScore = GameObject.FindGameObjectWithTag("Player").GetComponent<HighScore>().highScore;
         highScoreText.text = "HighScore: " + highScore;
 
         //if player has won by getting enough score
