@@ -308,7 +308,7 @@ public class DinoBehavior : MonoBehaviour {
 
     private void collisionAvoidance()
     {
-        if (currentState == State.PURSUE)
+        if (currentState == State.PURSUE && player != null)
         {
             Vector3 target = player.position - transform.position;
             RaycastHit hit;
