@@ -105,7 +105,10 @@ public class PathFindState : IGoblinState {
 			if (hit.collider.tag == "TreeMarker") {
 				pathFound = false;
 				avoidTree = true;
-
+				tempMoveTarget = hit.normal;
+				tempMoveTarget *= 8.0f;
+				Debug.DrawRay (hit.point, hit.normal, Color.black, 30.0f);
+				Debug.Log ("Tree in the way");
 			}
 		}
 	}
@@ -121,17 +124,15 @@ public class PathFindState : IGoblinState {
 
 	private void TraverseAvoidenceRoute(){
 		Vector3 moveDirection = (tempMoveTarget - rangeGoblin.transform.position);
-		Vector3 steeringDirection = (moveDirection - rb.velocity).normalized;
+
 		moveDirection.Normalize ();
 		moveDirection.y = 0.0f;
-		steeringDirection.y = 0.0f;
-
-		//Debug.Log ("Avoiding tree");
 
 		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, rangeGoblin.transform.right, rotateSpeed * Time.deltaTime, 0.0f);
 		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
 
-		rb.AddForce (rangeGoblin.transform.forward * 5.0f);
+
+		rb.velocity += moveDirection*8.0f;
 
 
 

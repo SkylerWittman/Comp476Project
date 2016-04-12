@@ -23,8 +23,8 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private float rotateSpeed = 2.0f;
 	private float collisionTimer = 120.0f;
 	private float searchTimer = 120.0f;
-	private float distanceToHunt = 60.0;
-	private float spiderDamage;
+	private float distanceToHunt = 50.0f;
+	private float spiderDamage = 2.0f;
 	private float attackDistance = 5.0f;
 	private Animation anim;
 	private AnimationClip runClip;
@@ -234,6 +234,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			cantSeePlayer = false;
 			setCanHunt ();
 			InformSwarmMembersOfSighting ();
+			Debug.Log ("I CAN SEE THE PLAYER");
 		} 
 	}
 
@@ -273,8 +274,6 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 
 			//apply gravity to enemies
 			rb.AddForce (7.0f * Physics.gravity);
-
-
 
 			//recalcualte swarm information to be used in movement
 			alignment = AlignVectorCalculate ();

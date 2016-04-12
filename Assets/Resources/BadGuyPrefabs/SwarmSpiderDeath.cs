@@ -10,7 +10,6 @@ public class SwarmSpiderDeath : MonoBehaviour {
 	private AudioSource audioSource;
 	public AudioClip spiderDeath;
 	public float health;
-	public float damage;
     public int spiderScore;
     int counter = 0;
     private bool triedSpawning = false;
@@ -52,7 +51,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			isDead = true;
 			GetComponent<SwarmSpiderBehavior> ().SpiderDeath ();
 			GetComponent<Collider> ().enabled = false;
-			audioSource.PlayOneShot (spiderDeath, .5f);
+			audioSource.PlayOneShot (spiderDeath, 1.0f);
 			anim.Play(die.name);
 
             if (!triedSpawning)
