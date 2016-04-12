@@ -1511,9 +1511,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   die: {fileID: 7400000, guid: 2788750f9cd2c174aa4fa84ba74dab03, type: 3}
   hit: {fileID: 7400000, guid: 05a28ecbb33a989479703c11c26c36f5, type: 3}
-  health: 50
+  health: 130
   damage: 4
-  deathScore: 10
+  deathScore: 50
   isAlive: 0
 --- !u!114 &11499442
 MonoBehaviour:
@@ -1697,11 +1697,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: health
-      value: 50
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: damage
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deathScore
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
