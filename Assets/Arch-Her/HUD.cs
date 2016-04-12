@@ -115,6 +115,9 @@ public class HUD : MonoBehaviour {
                 shoot.crosshairLockRestart = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouseLook>().enabled = false;
+                //causes an error in script because ThirdPersonCamera.js references it
+                //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().enabled = false;
             }
             else
             //if the game is paused and you want to start again, unpause time, enable crosshair again etc.
@@ -125,6 +128,8 @@ public class HUD : MonoBehaviour {
                 shoot.crosshairLockRestart = true;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.None;
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouseLook>().enabled = true;
+                //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().enabled = true;
             }
         }
     }

@@ -3500,17 +3500,6 @@ CanvasRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 174746, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
   m_PrefabInternal: {fileID: 1664725775}
---- !u!114 &856730821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 856730820}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11b262e07b96745449be81d25aef6dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &856730822 stripped
 Camera:
   m_PrefabParentObject: {fileID: 2057456, guid: f1c23deabd337714197715cb3a6bb31d,
