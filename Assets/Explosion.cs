@@ -20,10 +20,16 @@ public class Explosion : MonoBehaviour {
                 switch (hit[i].transform.gameObject.tag)
                 {
                     case "BadGuy":
-                        hit[i].transform.GetComponent<NPCDetail>().health -= Vector3.Distance(transform.position, hit[i].transform.position) *20f;
+                        if (hit[i].transform.GetComponent<DinoDeath>() != null)
+                        {
+                            hit[i].transform.GetComponent<DinoDeath>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 50f;
+                        }
+                        else {
+                            hit[i].transform.GetComponent<NPCDetail>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 50f;
+                        }
                         break;
                     case "SwarmSpider":
-                        hit[i].transform.GetComponent<SwarmSpiderDeath>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 20f;
+                        hit[i].transform.GetComponent<SwarmSpiderDeath>().health -= Vector3.Distance(transform.position, hit[i].transform.position) * 50f;
                         break;
                 }
 

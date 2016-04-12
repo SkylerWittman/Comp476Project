@@ -43,7 +43,7 @@ public class Arrow : MonoBehaviour {
                     case ArcherDetail.arrowType.explosive:
                         hitLock = true;
                         transform.tag = "ExplosiveArrow";
-                        damage = (shoot.arrowSpeed) +50;
+                        damage = (shoot.arrowSpeed) +500;
                         break;
 
                 }
