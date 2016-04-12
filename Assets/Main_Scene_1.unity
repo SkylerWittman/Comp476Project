@@ -3180,7 +3180,8 @@ GameObject:
   - 114: {fileID: 780882537}
   - 114: {fileID: 780882536}
   - 95: {fileID: 780882541}
-  - 114: {fileID: 780882542}
+  - 82: {fileID: 780882542}
+  - 114: {fileID: 780882543}
   m_Layer: 5
   m_Name: HUD
   m_TagString: HUD
@@ -3394,6 +3395,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &780882543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 780882535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67ee99ff2d9cc24d883d6e57646c0dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camTransform: {fileID: 856730826}
+  shakeDuration: 0.5
+  newShakeDuration: 0.5
+  shakeAmount: 0.05
+  decreaseFactor: 1
 --- !u!1 &781113333
 GameObject:
   m_ObjectHideFlags: 0
@@ -4970,6 +4987,10 @@ Prefab:
       propertyPath: m_HDR
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
   m_IsPrefabParent: 0
@@ -4993,7 +5014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1688867809
 RectTransform:
   m_ObjectHideFlags: 0

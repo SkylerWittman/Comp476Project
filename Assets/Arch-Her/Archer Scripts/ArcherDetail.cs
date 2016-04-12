@@ -13,7 +13,8 @@ public class ArcherDetail : MonoBehaviour {
     public int ArrowState = 0;
 
 	public float health;
-	public float playerHealthCritical;
+    public float maxHealth;
+    public float playerHealthCritical;
     public float healthPowerupAdded;
     public CameraShake cameraShakeObject;
     public Text arrowStock;
@@ -163,9 +164,15 @@ public class ArcherDetail : MonoBehaviour {
 
         if (col.gameObject.CompareTag("HealthPowerup"))
         {
+            if ((health + healthPowerupAdded) <= maxHealth)
+            {
+                health += healthPowerupAdded;
+            } else if ((health + healthPowerupAdded) >= maxHealth)
+            {
+                health = maxHealth;
+            }
+
             Debug.Log("+ " + healthPowerupAdded + " health");
-            health += healthPowerupAdded;
-            hudScript.addHealthHUD(healthPowerupAdded);
             Destroy(col.gameObject);
         }
 	}

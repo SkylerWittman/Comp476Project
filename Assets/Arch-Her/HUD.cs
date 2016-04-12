@@ -140,11 +140,6 @@ public class HUD : MonoBehaviour {
         score += addedScore;
     }
 
-    public void addHealthHUD(float amountOfHealth)
-    {
-        display.value += amountOfHealth;
-    }
-
     public void doEndGameThings()
     {
         shoot.crosshairLockRestart = false;
