@@ -19,7 +19,11 @@ public class PowerupSpawner : MonoBehaviour {
 
     public void trySpawn(Vector3 spawnPos)
     {
-        StartCoroutine(spawnRandomPowerup(spawnPos));
+        int chance = Random.Range(0, 9);
+        if (chance < 3)
+        {
+            StartCoroutine(spawnRandomPowerup(spawnPos));
+        }
     }
 
     private IEnumerator spawnRandomPowerup(Vector3 spawnPosition) 

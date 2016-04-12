@@ -152,7 +152,7 @@ public class DinoBehavior : MonoBehaviour {
     {
         //-chaseDirection because the dino model thinks its forward position is behind it. If not negative, the dino would walk backwards
         Quaternion chaseRotation = Quaternion.LookRotation(-chaseDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * maxSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, chaseRotation, Time.deltaTime * acceleration);
 
         if (rigidbody.velocity.magnitude < maxSpeed)
         {
@@ -311,13 +311,18 @@ public class DinoBehavior : MonoBehaviour {
         if (currentState == State.PURSUE)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, 10.0f);
+            Vector3 positionAvoiding = Vector3.zero;
             foreach (Collider c in colliders)
             {
                 if (c.gameObject.tag == "TreeMarker")
                 {
-                    rigidbody.AddForce(transform.right.normalized * acceleration, ForceMode.VelocityChange);
+                    positionAvoiding = c.transform.position;
+                    break;
                 }
             }
+            Vector3 avoidanceVector = Vector3.zero;
+            avoidanceVector.y = 0.0f;
+            rigidbody.AddForce(avoidanceVector.normalized * acceleration, ForceMode.VelocityChange);
         }
     }
 }
