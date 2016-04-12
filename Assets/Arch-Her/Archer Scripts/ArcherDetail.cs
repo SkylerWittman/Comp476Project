@@ -44,7 +44,7 @@ public class ArcherDetail : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetButtonDown("Fire2"))
         {
             if(ArrowState == 0)
             {
