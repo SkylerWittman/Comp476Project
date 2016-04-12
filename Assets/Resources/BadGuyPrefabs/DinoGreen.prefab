@@ -1478,6 +1478,8 @@ MonoBehaviour:
   hit: {fileID: 7400000, guid: d1ad455fa0850374cbe78b60bc11c305, type: 2}
   health: 100
   damage: 10
+  deathScore: 100
+  isAlive: 0
 --- !u!136 &13672668
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1652,6 +1654,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: dinoDamage
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deathScore
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
