@@ -20,7 +20,7 @@ public class PowerupSpawner : MonoBehaviour {
     public void trySpawn(Vector3 spawnPos)
     {
         int chance = Random.Range(0, 9);
-        if (chance < 5)
+        if (chance < 9)
         {
             StartCoroutine(spawnRandomPowerup(spawnPos));
         }
@@ -32,17 +32,22 @@ public class PowerupSpawner : MonoBehaviour {
         Vector3 spawnPos = new Vector3(spawnPosition.x, spawnPosition.y + 8.0f, spawnPosition.z);
         int chance = Random.Range(0, 5);
 
+		GameObject newObj;
         if (chance == 0 || chance == 1)
         {
-            Instantiate(poisonPowerup, spawnPos, Quaternion.identity);
+			newObj = Instantiate(poisonPowerup, spawnPos, Quaternion.identity) as GameObject;
         }
         else if (chance == 2 || chance == 3)
         {
-            Instantiate(healthPowerup, spawnPos, Quaternion.identity);
+			newObj = Instantiate(healthPowerup, spawnPos, Quaternion.identity) as GameObject;
         }
         else
         {
-            Instantiate(explosivePowerup, spawnPos, Quaternion.identity);
+			newObj = Instantiate(explosivePowerup, spawnPos, Quaternion.identity) as GameObject;
         }
+
+		yield return new WaitForSeconds (1.0f);
+		newObj.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+
     }
 }
