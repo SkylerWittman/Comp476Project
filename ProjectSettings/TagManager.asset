@@ -46,6 +46,7 @@ TagManager:
   - LoadScreen
   - Highscore
   - PauseMenu
+  - ArrowTag
   layers:
   - Default
   - TransparentFX
