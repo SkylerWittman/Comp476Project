@@ -103,8 +103,10 @@ public class HUD : MonoBehaviour {
             doEndGameThings();
         }
 
+        //if you press escape to pause the game
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            //if the game is not already paused then pause time and allow cursor movement, etc.
             if (!isGamePaused)
             {
                 isGamePaused = true;
@@ -115,6 +117,7 @@ public class HUD : MonoBehaviour {
                 Cursor.lockState = CursorLockMode.None;
             }
             else
+            //if the game is paused and you want to start again, unpause time, enable crosshair again etc.
             {
                 isGamePaused = false;
                 Time.timeScale = 1.0f;
