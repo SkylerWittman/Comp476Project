@@ -92,7 +92,7 @@ public class HUD : MonoBehaviour {
 
         //Score
         scoreText.text = "score: " + score;
-        highScoreText.text = "Highscore: " + highScore;
+        highScoreText.text = "HighScore: " + highScore;
 
         //if player has won by getting enough score
         if (score >= winScore && !winScreenPlayed)

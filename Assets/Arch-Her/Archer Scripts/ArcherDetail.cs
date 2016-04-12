@@ -84,16 +84,12 @@ public class ArcherDetail : MonoBehaviour {
         {
             isDead = true;
             if (!deathAnimationPlayed)
-            {
-                //Debug.Log("got here");
-                
+            {                
                 anim.Play(deathClip.name, PlayMode.StopAll);
                 StartCoroutine(waitToDisableAnim());
-                //anim.Play(lyingDeadClip.name);
             }
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            //lock position of camera maybe?
             //GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().transform.rotation;
         }
     }
@@ -105,8 +101,8 @@ public class ArcherDetail : MonoBehaviour {
             case 0:
                 arrow_type = arrowType.regular;
                 arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
-                arrowStock.text = "X" + regularArrowStock;
                 arrowStock.color = new Color(1.0f, 0.976f, 0.611f);
+                arrowStock.text = "X" + regularArrowStock;
                 ;
                 break;
             case 1:
@@ -114,21 +110,22 @@ public class ArcherDetail : MonoBehaviour {
                 {
                     arrow_type = arrowType.poison;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.green;
-                    arrowStock.text = "X" + poisonArrowStock;
                     arrowStock.color = Color.green;
+                    arrowStock.text = "X" + poisonArrowStock;
                 }
                 else if (explosiveArrowStock > 0)
                 {
                     ArrowState = 2;
                     arrow_type = arrowType.explosive;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.red;
+                    arrowStock.color = Color.red;
                     arrowStock.text = "X" + explosiveArrowStock;
                 }
                 else {
                     arrow_type = arrowType.regular;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
-                    arrowStock.text = "X" + regularArrowStock;
                     arrowStock.color = new Color(1.0f, 0.976f, 0.611f);
+                    arrowStock.text = "X" + regularArrowStock;
                     ArrowState = 0;
                 }
                 break;
@@ -137,8 +134,8 @@ public class ArcherDetail : MonoBehaviour {
                 {
                     arrow_type = arrowType.explosive;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.red;
-                    arrowStock.text = "X" + explosiveArrowStock;
                     arrowStock.color = Color.red;
+                    arrowStock.text = "X" + explosiveArrowStock;
                 }
                 else {
                     arrow_type = arrowType.regular;
