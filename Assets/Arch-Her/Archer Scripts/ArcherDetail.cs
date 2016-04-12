@@ -110,7 +110,6 @@ public class ArcherDetail : MonoBehaviour {
                 {
                     arrow_type = arrowType.poison;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.green;
-                    arrowStock.color = Color.green;
                     arrowStock.text = "X" + poisonArrowStock;
                 }
                 else if (explosiveArrowStock > 0)
