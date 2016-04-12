@@ -101,12 +101,11 @@ public class PathFindState : IGoblinState {
 	private void CollisionAvoidance(){
 		RaycastHit hit;
 		Vector3 avoidanceVector;
-		if (Physics.Raycast (rangeGoblin.transform.position, rangeGoblin.transform.forward, out hit, 10.0f)) {
+		if (Physics.Raycast (rangeGoblin.transform.position, rangeGoblin.transform.forward, out hit, 14.0f)) {
 			if (hit.collider.tag == "TreeMarker") {
 				pathFound = false;
 				avoidTree = true;
-				tempMoveTarget = rangeGoblin.transform.right;
-				tempMoveTarget.x += 15.0f;
+
 			}
 		}
 	}
@@ -129,22 +128,11 @@ public class PathFindState : IGoblinState {
 
 		//Debug.Log ("Avoiding tree");
 
-		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, moveDirection, rotateSpeed * Time.deltaTime, 0.0f);
+		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, rangeGoblin.transform.right, rotateSpeed * Time.deltaTime, 0.0f);
 		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
 
+		rb.AddForce (rangeGoblin.transform.forward * 5.0f);
 
-		moveDirection *= acceleration;
-		steeringDirection *= acceleration;
-
-		if (rb.velocity.magnitude < maxSpeed) {
-			rb.velocity += (steeringDirection + moveDirection);
-
-		}
-
-		if (rb.velocity.magnitude > maxSpeed) {
-			rb.velocity = rb.velocity.normalized * maxSpeed;
-
-		}
 
 
 

@@ -23,14 +23,14 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private float rotateSpeed = 2.0f;
 	private float collisionTimer = 120.0f;
 	private float searchTimer = 120.0f;
-	private float distanceToHunt;
+	private float distanceToHunt = 60.0;
 	private float spiderDamage;
 	private float attackDistance = 5.0f;
 	private Animation anim;
 	private AnimationClip runClip;
 	private AnimationClip attackClip;
 
-	public float swarmDistance = 100.0f;
+	private float swarmDistance = 100.0f;
 
 	void Start () {
 

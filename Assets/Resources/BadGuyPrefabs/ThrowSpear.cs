@@ -31,7 +31,7 @@ public class ThrowSpear : MonoBehaviour {
 
 		if (coll.gameObject.tag == "Player") {
 			playerTarget.GetComponent<ArcherDetail>().takeDamage(4.0f);
-			audio.PlayOneShot (chopSound, 0.4f);
+			audio.PlayOneShot (chopSound, 1.0f);
 			Destroy (this.gameObject);
         }
 	}

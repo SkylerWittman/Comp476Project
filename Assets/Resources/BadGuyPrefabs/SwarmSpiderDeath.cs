@@ -52,10 +52,9 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			isDead = true;
 			GetComponent<SwarmSpiderBehavior> ().SpiderDeath ();
 			GetComponent<Collider> ().enabled = false;
-			//audioSource.PlayOneShot (spiderDeath, .5f);
+			audioSource.PlayOneShot (spiderDeath, .5f);
 			anim.Play(die.name);
-			//GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
-			//transform.position = pos;
+
             if (!triedSpawning)
             {
                 powerupSpawner.trySpawn(transform.position);
