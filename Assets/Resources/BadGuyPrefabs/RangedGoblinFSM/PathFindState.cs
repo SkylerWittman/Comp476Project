@@ -103,7 +103,12 @@ public class PathFindState : IGoblinState {
 				rangeGoblin.pathFound = false;
 				rangeGoblin.StartCoroutine (rangeGoblin.ChangePathFound ());
 
-				if (rb.velocity.magnitude < maxSpeed) {
+				//apply gravity to enemies
+				rb.AddForce (5.0f * Physics.gravity);
+
+				rangeGoblin.anim.Play(rangeGoblin.runClip.name);
+
+				if (rb.velocity.magnitude <= maxSpeed) {
 					rb.AddForce (rangeGoblin.transform.right * acceleration, ForceMode.VelocityChange);
 				}
 
@@ -154,7 +159,7 @@ public class PathFindState : IGoblinState {
 
 
 
-		if (rb.velocity.magnitude < maxSpeed) {
+		if (rb.velocity.magnitude <= maxSpeed) {
 			rb.AddForce (moveDirection * acceleration, ForceMode.VelocityChange);
 		}
 

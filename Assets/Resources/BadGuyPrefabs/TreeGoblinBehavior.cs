@@ -71,8 +71,6 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	{
 		canAttack = false;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(treeGoblinDamage);
-		Debug.Log("Tree goblin did " + treeGoblinDamage + " damage");
-		Debug.Log("Strike player with goblin appendage");
 		anim.Play(attackClip.name);
 		yield return new WaitForSeconds(2.0f);
 		canAttack = true;
@@ -112,8 +110,9 @@ public class TreeGoblinBehavior : MonoBehaviour {
 			directionToMove.y = 0.0f;
 
 			//addforce in direction of character
-			if (rb.velocity.magnitude < maxSpeed) {
+			if (rb.velocity.magnitude <= maxSpeed) {
 				rb.AddForce ((directionToMove ) * acceleration, ForceMode.VelocityChange);
+
 			}
 
 			if (rb.velocity.magnitude > maxSpeed) {

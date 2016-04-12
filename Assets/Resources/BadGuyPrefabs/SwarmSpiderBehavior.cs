@@ -316,7 +316,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			Vector3 newDirection = (target.transform.position - this.transform.position).normalized;
 
 
-			Vector3 newRotation = Vector3.RotateTowards (transform.forward, newDirection + new Vector3 ((alignment.x + cohesion.x*0.5f + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)), rotateSpeed * Time.deltaTime, 0.0f);
+			Vector3 newRotation = Vector3.RotateTowards (transform.forward, newDirection + new Vector3 ((alignment.x + cohesion.x*0.4f + seperation.x), 0, (alignment.z + cohesion.z*0.4f+ seperation.z)), rotateSpeed * Time.deltaTime, 0.0f);
 			newRotation.y = 0.0f;
 			transform.rotation = Quaternion.LookRotation (newRotation);
 
@@ -325,7 +325,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			newDirection.y = 0.0f;
 
 			if (rb.velocity.magnitude <= moveSpeed) {
-				rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x*0.5f + seperation.x), 0, (alignment.z + cohesion.z*0.5f + seperation.z)));
+				rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x*0.4f + seperation.x), 0, (alignment.z + cohesion.z*0.4f + seperation.z)));
 			}
 
 			if (rb.velocity.magnitude > moveSpeed) {
