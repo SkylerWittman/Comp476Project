@@ -2794,7 +2794,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 09:59
+  m_Text: 04:59
 --- !u!222 &556826613
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3136,7 +3136,7 @@ MonoBehaviour:
   highScore: 0
   scoreText: {fileID: 0}
   highScoreText: {fileID: 0}
-  winScore: 10
+  winScore: 2000
   winScreenObject: {fileID: 1201336208}
   winScreenAnimation: {fileID: 7400000, guid: 7005b21d65900894594e986d1bb4a79a, type: 2}
 --- !u!114 &780882537
