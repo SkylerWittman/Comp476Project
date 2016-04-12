@@ -101,13 +101,9 @@ public class PathFindState : IGoblinState {
 	private void CollisionAvoidance(){
 		RaycastHit hit;
 		Vector3 avoidanceVector;
-		if (Physics.Raycast (rangeGoblin.transform.position, rangeGoblin.transform.forward, out hit, 14.0f)) {
+		if (Physics.Raycast (rangeGoblin.transform.position + Vector3.up, rangeGoblin.transform.forward, out hit, 14.0f)) {
 			if (hit.collider.tag == "TreeMarker") {
-				pathFound = false;
-				avoidTree = true;
-				tempMoveTarget = hit.normal;
-				tempMoveTarget *= 8.0f;
-				Debug.DrawRay (hit.point, hit.normal, Color.black, 30.0f);
+				rb.velocity += (hit.normal * 20);
 				Debug.Log ("Tree in the way");
 			}
 		}
