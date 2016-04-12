@@ -64,7 +64,8 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<SwarmSpiderBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
             GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().addScore(spiderScore);
-			Destroy(this.gameObject, anim[die.name].length + 1.0f);
+			GetComponent<SwarmSpiderBehavior> ().enabled = false;
+			Destroy(this.gameObject, anim[die.name].length + 0.5f);
 
 		}
 

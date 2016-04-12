@@ -16,9 +16,9 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	private bool canChaseTarget = false;
 	private bool gameStart = false;
 	private float rotateSpeed = 8.0f;
-	private float maxSpeed = 7;
-	private float acceleration = 3;
-	private float attackDistance = 3;
+	private float maxSpeed = 7.0f;
+	private float acceleration = 3.0f;
+	private float attackDistance = 4.0f;
 	private float impulse = 50;
 
 	public float treeGoblinHealth;

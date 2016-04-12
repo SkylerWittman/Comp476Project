@@ -11,6 +11,7 @@ public class ThrowSpear : MonoBehaviour {
 	private Vector3 throwRotation;
 	private AudioSource audio;
 	public AudioClip throwSound;
+	public AudioClip chopSound;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,7 @@ public class ThrowSpear : MonoBehaviour {
 
 		if (coll.gameObject.tag == "Player") {
 			playerTarget.GetComponent<ArcherDetail>().takeDamage(4.0f);
+			audio.PlayOneShot (chopSound, 0.4f);
 			Destroy (this.gameObject);
         }
 	}

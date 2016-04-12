@@ -20,7 +20,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private bool canAttack = true;
 	private bool isGrounded = false;
 	private float moveSpeed = 13.0f;
-	private float rotateSpeed = 3.0f;
+	private float rotateSpeed = 2.0f;
 	private float collisionTimer = 120.0f;
 	private float searchTimer = 120.0f;
 	private float distanceToHunt = 50.0f;
@@ -189,7 +189,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			}
 
 			if (spider != this) {
-				if (Vector3.Distance (spider.transform.position, this.transform.position) < 75.0f) {
+				if (Vector3.Distance (spider.transform.position, this.transform.position) < 15.0f && Vector3.Distance (spider.transform.position, this.transform.position) > 0.0f ) {
 					compuationVector.x += (this.transform.position.x - spider.transform.position.x);
 					compuationVector.z += (this.transform.position.z - spider.transform.position.z);
 
@@ -323,7 +323,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			Vector3 newDirection = (target.transform.position - this.transform.position).normalized;
 
 
-			Vector3 newRotation = Vector3.RotateTowards (transform.forward, newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)), rotateSpeed * Time.deltaTime, 0.0f);
+			Vector3 newRotation = Vector3.RotateTowards (transform.forward, newDirection + new Vector3 ((alignment.x + cohesion.x*0.5f + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)), rotateSpeed * Time.deltaTime, 0.0f);
 			newRotation.y = 0.0f;
 			transform.rotation = Quaternion.LookRotation (newRotation);
 
@@ -332,7 +332,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			newDirection.y = 0.0f;
 
 			if (rb.velocity.magnitude <= moveSpeed) {
-				rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
+				rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x*0.5f + seperation.x), 0, (alignment.z + cohesion.z*0.5f + seperation.z)));
 			}
 
 			if (rb.velocity.magnitude > moveSpeed) {
