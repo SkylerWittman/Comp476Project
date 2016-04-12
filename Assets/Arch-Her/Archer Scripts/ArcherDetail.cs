@@ -101,7 +101,7 @@ public class ArcherDetail : MonoBehaviour {
             case 0:
                 arrow_type = arrowType.regular;
                 arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
-                arrowStock.color = new Color(1.0f, 0.976f, 0.611f);
+                GameObject.FindGameObjectWithTag("ArrowTag").GetComponent<Text>().CrossFadeColor(new Color(1.0f, 0.976f, 0.611f), .01f, false, false);
                 arrowStock.text = "X" + regularArrowStock;
                 ;
                 break;
@@ -110,20 +110,22 @@ public class ArcherDetail : MonoBehaviour {
                 {
                     arrow_type = arrowType.poison;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.green;
+                    GameObject.FindGameObjectWithTag("ArrowTag").GetComponent<Text>().CrossFadeColor(Color.green, 1, true, false);
                     arrowStock.text = "X" + poisonArrowStock;
+                    
                 }
                 else if (explosiveArrowStock > 0)
                 {
                     ArrowState = 2;
                     arrow_type = arrowType.explosive;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.red;
-                    arrowStock.color = Color.red;
+                    GameObject.FindGameObjectWithTag("ArrowTag").GetComponent<Text>().CrossFadeColor(Color.red, 1, true, false);
                     arrowStock.text = "X" + explosiveArrowStock;
                 }
                 else {
                     arrow_type = arrowType.regular;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
-                    arrowStock.color = new Color(1.0f, 0.976f, 0.611f);
+                    GameObject.FindGameObjectWithTag("ArrowTag").GetComponent<Text>().CrossFadeColor(new Color(1.0f, 0.976f, 0.611f), .01f, false, false);
                     arrowStock.text = "X" + regularArrowStock;
                     ArrowState = 0;
                 }
@@ -133,14 +135,14 @@ public class ArcherDetail : MonoBehaviour {
                 {
                     arrow_type = arrowType.explosive;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.red;
-                    arrowStock.color = Color.red;
+                    GameObject.FindGameObjectWithTag("ArrowTag").GetComponent<Text>().CrossFadeColor(Color.red, .01f, false, false);
                     arrowStock.text = "X" + explosiveArrowStock;
                 }
                 else {
                     arrow_type = arrowType.regular;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
+                    GameObject.FindGameObjectWithTag("ArrowTag").GetComponent<Text>().CrossFadeColor(new Color(1.0f, 0.976f, 0.611f), .01f, false, false);
                     arrowStock.text = "X" + regularArrowStock;
-                    arrowStock.color = new Color(1.0f, 0.976f, 0.611f);
                     ArrowState = 0;
                 }
                 break;
