@@ -33,6 +33,15 @@ public class HUD : MonoBehaviour {
     public GameObject winScreenObject;
     public AnimationClip winScreenAnimation;
 
+    //Guitar Solo
+    private AudioSource audioSource;
+    private AudioClip guitarSolo;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Use this for initialization
     void Start () 
 	{
@@ -52,6 +61,8 @@ public class HUD : MonoBehaviour {
         winScreenPlayed = false;
         isGamePaused = false;
         anim = GetComponent<Animation>();
+
+        guitarSolo = Resources.Load("Sounds/GeneralSounds/GuitarSolo") as AudioClip;
     }
 
     void Update () 
@@ -138,5 +149,6 @@ public class HUD : MonoBehaviour {
         Cursor.lockState = CursorLockMode.None;
         StartCoroutine(waitToDisableTime());
         GameObject.FindGameObjectWithTag("controller").GetComponent<AudioSource>().enabled = false;
+        audioSource.PlayOneShot(guitarSolo, 0.1f);
     }
 }
