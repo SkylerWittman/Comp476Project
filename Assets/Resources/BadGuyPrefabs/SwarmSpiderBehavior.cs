@@ -326,7 +326,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			newDirection.y = 0.0f;
 
 			if (rb.velocity.magnitude <= moveSpeed) {
-				rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x*0.6f + seperation.x), 0, (alignment.z + cohesion.z*0.6f + seperation.z)));
+				rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x*0.5f + seperation.x), 0, (alignment.z + cohesion.z*0.5f + seperation.z)));
 			}
 
 			if (rb.velocity.magnitude > moveSpeed) {
