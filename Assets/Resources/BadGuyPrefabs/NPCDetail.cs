@@ -106,7 +106,7 @@ public class NPCDetail : MonoBehaviour {
                 LockA = true;
                 break;
             case "ExplosiveArrow":
-                Destroy(this.gameObject, anim[die.name].length + .5f);
+              //  Destroy(this.gameObject, anim[die.name].length + .5f);
                 anim.CrossFade(hit.name, 0.5f);
                 break;
             case "Gas":

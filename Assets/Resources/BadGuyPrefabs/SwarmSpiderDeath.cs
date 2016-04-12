@@ -10,7 +10,6 @@ public class SwarmSpiderDeath : MonoBehaviour {
 	private AudioSource audioSource;
 	public AudioClip spiderDeath;
 	public float health;
-	public float damage;
     public int spiderScore;
     int counter = 0;
     private bool triedSpawning = false;
@@ -52,7 +51,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			isDead = true;
 			GetComponent<SwarmSpiderBehavior> ().SpiderDeath ();
 			GetComponent<Collider> ().enabled = false;
-			audioSource.PlayOneShot (spiderDeath, .5f);
+			audioSource.PlayOneShot (spiderDeath, 1.0f);
 			anim.Play(die.name);
 
             if (!triedSpawning)
@@ -75,22 +74,25 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		switch (other.gameObject.tag)
 		{
 		case "RegularArrow":
+            Destroy(other.gameObject);
 			health -= other.GetComponent<Arrow>().damage;
 			break;
 		case "PoisonArrow":
 			health -= other.GetComponent<Arrow>().damage;
+            Destroy(other.gameObject);
 			LockA = true;
 			break;
 		case "ExplosiveArrow":
-			Destroy(this.gameObject, anim[die.name].length + .5f);
-			break;
+			//Destroy(this.gameObject, anim[die.name].length + .5f);
+           Destroy(other.gameObject);
+           break;
         case "Gas":
             LockA = true;
            break;
         }
 
 
-		Destroy(other.gameObject);
+		
 	}
 
 }
