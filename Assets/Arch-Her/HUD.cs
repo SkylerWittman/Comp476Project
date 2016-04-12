@@ -132,6 +132,7 @@ public class HUD : MonoBehaviour {
                 Cursor.lockState = CursorLockMode.None;
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouseLook>().enabled = false;
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ThirdPersonCamera>().enabled = false;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>().enabled = false;
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().enabled = false;
             }
             else
@@ -144,7 +145,8 @@ public class HUD : MonoBehaviour {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.None;
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouseLook>().enabled = true;
-                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ThirdPersonCamera>().enabled = false;
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ThirdPersonCamera>().enabled = true;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>().enabled = true;
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().enabled = true;
             }
         }

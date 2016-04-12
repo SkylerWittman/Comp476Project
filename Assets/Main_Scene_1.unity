@@ -5956,7 +5956,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treeMarker: {fileID: 153932, guid: c1f1bb793010afa40823bf67b28e16c1, type: 2}
   cursorVisible: 0
-  auraEffect: {fileID: 0}
 --- !u!4 &2059387997
 Transform:
   m_ObjectHideFlags: 0
