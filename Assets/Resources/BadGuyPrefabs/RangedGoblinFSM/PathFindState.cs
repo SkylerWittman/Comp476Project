@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class PathFindState : IGoblinState {
 
 
-	public float acceleration = 8;
-	public float maxSpeed = 15;
+	public float acceleration = 10;
+	public float maxSpeed = 20;
 
 	private readonly StatePattern rangeGoblin;
 	private List<TreeNode> listOfTreeNodes = new List<TreeNode>();
@@ -18,14 +18,13 @@ public class PathFindState : IGoblinState {
 	private AStarPathFinding pathFinder;
 	private Rigidbody rb;
 	private bool noPath = true;
-	private bool pathFound = false;
 	private bool startPath = false;
 	private bool avoidTree = false;
 	private float minDistanceFromTrees = 500;
 	public float distanceToNewTree = 15.0f;
 	private float distanceToAttack = 75;
-	private float slowDownRadius = 30;
 	private float rotateSpeed = 8.0f;
+	private float timer;
 
 	public PathFindState(StatePattern pattern){
 		rangeGoblin = pattern;
@@ -33,6 +32,7 @@ public class PathFindState : IGoblinState {
 		treeController = rangeGoblin.treeController;
 		pathFinder = rangeGoblin.pathFinder;
 		rb = rangeGoblin.rb;
+		rangeGoblin.pathFound = false;
 	}
 
 	public void UpdateState (){
@@ -45,12 +45,8 @@ public class PathFindState : IGoblinState {
 			FindPath ();
 		} 
 
-		if (pathFound) {
+		if (rangeGoblin.pathFound) {
 			TraversePath ();
-		}
-
-		if (avoidTree) {
-			TraverseAvoidenceRoute ();
 		}
 	}
 
@@ -98,16 +94,25 @@ public class PathFindState : IGoblinState {
 		}
 	}
 
+
 	private void CollisionAvoidance(){
 		RaycastHit hit;
 		Vector3 avoidanceVector;
-		if (Physics.Raycast (rangeGoblin.transform.position + Vector3.up, rangeGoblin.transform.forward, out hit, 14.0f)) {
+		if (Physics.Raycast (rangeGoblin.transform.position + Vector3.up, rangeGoblin.transform.forward, out hit, 40.0f)) {
 			if (hit.collider.tag == "TreeMarker") {
-				
-				rb.velocity += ((rangeGoblin.transform.forward + rangeGoblin.transform.right) * 50);
+				rangeGoblin.pathFound = false;
+				rangeGoblin.StartCoroutine (rangeGoblin.ChangePathFound ());
 
+				if (rb.velocity.magnitude < maxSpeed) {
+					rb.AddForce (rangeGoblin.transform.right * acceleration, ForceMode.VelocityChange);
+				}
 
-				Debug.Log ("Tree in the way");
+				if (rb.velocity.magnitude > maxSpeed) {
+					rb.velocity = rb.velocity.normalized* maxSpeed;
+				}
+
+				Quaternion rotation = Quaternion.LookRotation(rangeGoblin.transform.right);
+				rangeGoblin.transform.rotation = Quaternion.Slerp(rangeGoblin.transform.rotation, rotation, Time.deltaTime * rotateSpeed);
 			}
 		}
 	}
@@ -118,29 +123,9 @@ public class PathFindState : IGoblinState {
 		FindStartTree ();
 		finalPath = pathFinder.FindPathEuclidean (startTree, targetTree);
 		startPath = true;
-		pathFound = true;
+		rangeGoblin.pathFound = true;
 	}
 
-	private void TraverseAvoidenceRoute(){
-		Vector3 moveDirection = (tempMoveTarget - rangeGoblin.transform.position);
-
-		moveDirection.Normalize ();
-		moveDirection.y = 0.0f;
-
-		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, rangeGoblin.transform.right, rotateSpeed * Time.deltaTime, 0.0f);
-		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
-
-
-		rb.velocity += moveDirection*8.0f;
-
-
-
-
-		if (Vector3.Distance (rangeGoblin.transform.position, tempMoveTarget) < 5.0f) {
-			pathFound = true;
-			avoidTree = false;
-		}
-	}
 
 
 
@@ -149,7 +134,7 @@ public class PathFindState : IGoblinState {
 		rb.AddForce (5.0f * Physics.gravity);
 
 		rangeGoblin.anim.Play(rangeGoblin.runClip.name);
-
+	
 		//We'll assign the currentNode to the first node in the path, and goalNode to the last node in the path
 		if (startPath) {
 			rangeGoblin.currentNode = finalPath [0];
@@ -157,9 +142,8 @@ public class PathFindState : IGoblinState {
 			startPath = false;
 		}
 
-		Vector3 moveDirection = (rangeGoblin.currentNode.getPosition () - rangeGoblin.transform.position);
+		Vector3 moveDirection = (rangeGoblin.currentNode.getPosition () - rangeGoblin.transform.position).normalized;
 		Vector3 steeringDirection = (moveDirection - rb.velocity).normalized;
-		moveDirection.Normalize ();
 		moveDirection.y = 0.0f;
 		steeringDirection.y = 0.0f;
 
@@ -168,17 +152,14 @@ public class PathFindState : IGoblinState {
 		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
 
 
-		moveDirection *= acceleration;
-		steeringDirection *= acceleration;
+
 
 		if (rb.velocity.magnitude < maxSpeed) {
-			rb.velocity += (steeringDirection + moveDirection);
-
+			rb.AddForce (moveDirection * acceleration, ForceMode.VelocityChange);
 		}
 
 		if (rb.velocity.magnitude > maxSpeed) {
-			rb.velocity = rb.velocity.normalized * maxSpeed;
-
+			rb.velocity = rb.velocity.normalized* maxSpeed;
 		}
 
 

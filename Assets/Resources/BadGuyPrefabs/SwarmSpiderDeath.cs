@@ -9,6 +9,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 	public AnimationClip die;
 	private AudioSource audioSource;
 	public AudioClip spiderDeath;
+	private AudioClip hitSound;
 	public float health;
     public int spiderScore;
     int counter = 0;
@@ -22,7 +23,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		anim[die.name].speed = .7f;
 		audioSource = GetComponent<AudioSource> ();
         powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").GetComponent<PowerupSpawner>();
-
+		hitSound = Resources.Load("Sounds/GeneralSounds/Hit") as AudioClip;
 	}
 
 	// Update is called once per frame
@@ -48,10 +49,11 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		{
 
 			this.gameObject.tag = "SpiderDead";
+			audioSource.PlayOneShot (spiderDeath, 3.0f);
 			isDead = true;
 			GetComponent<SwarmSpiderBehavior> ().SpiderDeath ();
 			GetComponent<Collider> ().enabled = false;
-			audioSource.PlayOneShot (spiderDeath, 1.0f);
+
 			anim.Play(die.name);
 
             if (!triedSpawning)
@@ -75,6 +77,7 @@ public class SwarmSpiderDeath : MonoBehaviour {
 		{
 		case "RegularArrow":
             Destroy(other.gameObject);
+			playHitSound();
 			health -= other.GetComponent<Arrow>().damage;
 			break;
 		case "PoisonArrow":
@@ -90,9 +93,12 @@ public class SwarmSpiderDeath : MonoBehaviour {
             LockA = true;
            break;
         }
+				
+	}
 
-
-		
+	private void playHitSound()
+	{
+		audioSource.PlayOneShot(hitSound, 0.1f);
 	}
 
 }

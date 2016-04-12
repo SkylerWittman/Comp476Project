@@ -20,7 +20,7 @@ public class StatePattern : MonoBehaviour {
 	[HideInInspector] public List<TreeNode> listOfTreeNodes = new List<TreeNode>();
 	[HideInInspector] public TreeNode currentNode;
 	[HideInInspector] public TreeNode targetNode;
-
+	[HideInInspector] public bool pathFound;
 
 	public GameObject throwingAxe;
 	public GameObject spear;
@@ -48,10 +48,13 @@ public class StatePattern : MonoBehaviour {
 		StartCoroutine (GetTreePositions ());
 	}
 
-
+	public IEnumerator ChangePathFound(){
+		yield return new WaitForSeconds (2.0f);
+		pathFound = true;
+	}
 
 	IEnumerator GetTreePositions(){
-		yield return new WaitForSeconds (4.0f);
+		yield return new WaitForSeconds (3.0f);
 		treeController = controller.GetComponent<GameController>();
 		listOfTreeNodes = treeController.GetTreeNodes ();
 
@@ -88,7 +91,7 @@ public class StatePattern : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 	
 		playerTarget = player.transform.position;
 

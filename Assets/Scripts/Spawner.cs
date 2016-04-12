@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
     //Every 60 seconds and not at startTime, nor when the game ends
     private void trySpawn()
     {
-        if (timer.getCurrentTime() % 60 == 0 && timer.getCurrentTime() != 600 && timer.getCurrentTime() != 0)
+        if (timer.getCurrentTime() % 60 == 0 && timer.getCurrentTime() != 300 && timer.getCurrentTime() != 0)
         {
             waveEngine.spawnBadGuys(new Wave(++currentWaveCount));
             StartCoroutine(showWaveText());
