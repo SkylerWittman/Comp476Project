@@ -4979,11 +4979,11 @@ Prefab:
       objectReference: {fileID: 137712, guid: 25c690c7d5ff23b44bf38261243051d2, type: 2}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: poisonArrowStock
-      value: 20
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 11494806, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: explosiveArrowStock
-      value: 20
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8220354, guid: f1c23deabd337714197715cb3a6bb31d, type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder

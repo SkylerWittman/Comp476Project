@@ -23,7 +23,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private float rotateSpeed = 2.0f;
 	private float collisionTimer = 120.0f;
 	private float searchTimer = 120.0f;
-	private float distanceToHunt = 60.0;
+	private float distanceToHunt = 60.0f;
 	private float spiderDamage;
 	private float attackDistance = 5.0f;
 	private Animation anim;
