@@ -106,6 +106,7 @@ public class ArcherDetail : MonoBehaviour {
                 arrow_type = arrowType.regular;
                 arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
                 arrowStock.text = "X" + regularArrowStock;
+                arrowStock.color = new Color(1.0f, 0.976f, 0.611f);
                 ;
                 break;
             case 1:
@@ -114,6 +115,7 @@ public class ArcherDetail : MonoBehaviour {
                     arrow_type = arrowType.poison;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.green;
                     arrowStock.text = "X" + poisonArrowStock;
+                    arrowStock.color = Color.green;
                 }
                 else if (explosiveArrowStock > 0)
                 {
@@ -126,6 +128,7 @@ public class ArcherDetail : MonoBehaviour {
                     arrow_type = arrowType.regular;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
                     arrowStock.text = "X" + regularArrowStock;
+                    arrowStock.color = new Color(1.0f, 0.976f, 0.611f);
                     ArrowState = 0;
                 }
                 break;
@@ -135,11 +138,13 @@ public class ArcherDetail : MonoBehaviour {
                     arrow_type = arrowType.explosive;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.red;
                     arrowStock.text = "X" + explosiveArrowStock;
+                    arrowStock.color = Color.red;
                 }
                 else {
                     arrow_type = arrowType.regular;
                     arrowDisplay.GetComponent<ParticleSystem>().startColor = Color.white;
                     arrowStock.text = "X" + regularArrowStock;
+                    arrowStock.color = new Color(1.0f, 0.976f, 0.611f);
                     ArrowState = 0;
                 }
                 break;
