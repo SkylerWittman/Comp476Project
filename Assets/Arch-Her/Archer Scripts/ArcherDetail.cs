@@ -14,6 +14,8 @@ public class ArcherDetail : MonoBehaviour {
 	public float health;
 	public float playerHealthCritical;
     public float healthPowerupAdded;
+    public CameraShake cameraShakeObject;
+
     HUD hudScript;
     public bool isDead;
     public bool deathAnimationPlayed;
@@ -31,7 +33,8 @@ public class ArcherDetail : MonoBehaviour {
         deathAnimationPlayed = false;
         isDead = false;
         anim = GetComponent<Animation>();
-        anim[deathClip.name].wrapMode = WrapMode.Once;    
+        anim[deathClip.name].wrapMode = WrapMode.Once;
+        cameraShakeObject = GameObject.FindGameObjectWithTag("HUD").GetComponent<CameraShake>();
     }
 	
 	// Update is called once per frame
@@ -161,6 +164,8 @@ public class ArcherDetail : MonoBehaviour {
     {
         Debug.Log("Health is currently " + health);
         health -= amountOfDamage;
+        cameraShakeObject.enabled = true;
+        cameraShakeObject.addShakeDuration();
     }
 
     private IEnumerator waitToDisableAnim()
