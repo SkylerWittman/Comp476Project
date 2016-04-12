@@ -12,7 +12,7 @@ public class ThrowSpear : MonoBehaviour {
 	private AudioSource audio;
 	public AudioClip throwSound;
 	public AudioClip chopSound;
-	public float spearDamage = 4.0f;;
+	public float spearDamage = 4.0f;
 
 	// Use this for initialization
 	void Start () {
