@@ -60,6 +60,7 @@ public class NPCDetail : MonoBehaviour {
             transform.position = pos;
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+			GetComponent<Collider> ().enabled = false;
             if (!triedSpawning)
             {
                 powerupSpawner.trySpawn(pos);
