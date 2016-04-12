@@ -310,19 +310,44 @@ public class DinoBehavior : MonoBehaviour {
     {
         if (currentState == State.PURSUE)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 10.0f);
-            Vector3 positionAvoiding = Vector3.zero;
-            foreach (Collider c in colliders)
+            Vector3 target = player.position - transform.position;
+            RaycastHit hit;
+            
+            //Forward whisker
+            if (Physics.Raycast(transform.position, -transform.forward, out hit, 100f))
             {
-                if (c.gameObject.tag == "TreeMarker")
+                if (hit.transform != transform)
                 {
-                    positionAvoiding = c.transform.position;
-                    break;
+                    target += hit.normal * 50f;
                 }
             }
-            Vector3 avoidanceVector = Vector3.zero;
-            avoidanceVector.y = 0.0f;
-            rigidbody.AddForce(avoidanceVector.normalized * acceleration, ForceMode.VelocityChange);
-        }
+
+            Vector3 leftW = -transform.position;
+            Vector3 rightW = -transform.position;
+
+            leftW.x -= 4.0f;
+            rightW.x += 4.0f;
+
+            //Left whisker
+            if (Physics.Raycast(leftW, transform.forward, out hit, 100f))
+            {
+                if (hit.transform != transform)
+                {
+                    target += hit.normal * 50f;
+                }
+            }
+
+            //Right whisker
+            if (Physics.Raycast(rightW, transform.forward, out hit, 100f))
+            {
+                if (hit.transform != transform)
+                {
+                    target += hit.normal * 50f;
+                }
+            }
+
+            target.y = 0.0f;  
+            rigidbody.AddForce(target.normalized * acceleration, ForceMode.VelocityChange);
+        }   
     }
 }
