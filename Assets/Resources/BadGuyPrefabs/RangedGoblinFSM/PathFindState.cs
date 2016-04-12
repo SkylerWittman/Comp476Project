@@ -103,7 +103,10 @@ public class PathFindState : IGoblinState {
 		Vector3 avoidanceVector;
 		if (Physics.Raycast (rangeGoblin.transform.position + Vector3.up, rangeGoblin.transform.forward, out hit, 14.0f)) {
 			if (hit.collider.tag == "TreeMarker") {
-				rb.velocity += (hit.normal * 20);
+				
+				rb.velocity += ((rangeGoblin.transform.forward + rangeGoblin.transform.right) * 50);
+
+
 				Debug.Log ("Tree in the way");
 			}
 		}
