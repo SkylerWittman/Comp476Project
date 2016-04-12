@@ -6,6 +6,7 @@ public class WaitState : IGoblinState {
 
 	private readonly StatePattern rangeGoblin;
 	private float distanceToAttack = 75;
+	private float rotateSpeed = 8.0f;
 
 	public WaitState(StatePattern pattern){
 		rangeGoblin = pattern;
@@ -16,6 +17,10 @@ public class WaitState : IGoblinState {
 		
 		LookForTarget ();
 		rangeGoblin.startWait ();
+
+		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, rangeGoblin.playerTarget - rangeGoblin.transform.position, rotateSpeed * Time.deltaTime, 0.0f);
+		newRotation.y = 0.0f;
+		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
 
 		if (rangeGoblin.canChangeState) {
 			rangeGoblin.canChangeState = false;

@@ -5,8 +5,8 @@ public class TreeGoblinBehavior : MonoBehaviour {
 
 	private GameObject target;
 	private Rigidbody rb;
+	private Rigidbody targetRb;
 	private Vector3 directionToMove;
-	private Vector3 steering;
 	private Animation anim;
 	private AnimationClip runClip;
 	private AnimationClip attackClip;
@@ -14,24 +14,28 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	private AnimationClip getUpClip;
 	private bool canAttack = true;
 	private bool canChaseTarget = false;
+	private bool gameStart = false;
 	private float rotateSpeed = 8.0f;
-	public float maxSpeed = 6;
-	public float acceleration = 3;
-	public float attackDistance = 3;
-	public float impulse = 50;
+	private float maxSpeed = 7;
+	private float acceleration = 3;
+	private float attackDistance = 3;
+	private float impulse = 50;
 
-    public float treeGoblinHealth;
-    public float treeGoblinDamage;
+	public float treeGoblinHealth;
+	public float treeGoblinDamage;
 
-    void Start () {
+	void Start () {
 
-        GetComponent<NPCDetail>().health = treeGoblinHealth;
-        GetComponent<NPCDetail>().damage = treeGoblinDamage;
+		GetComponent<NPCDetail>().health = treeGoblinHealth;
+		GetComponent<NPCDetail>().damage = treeGoblinDamage;
 
-        target = GameObject.FindGameObjectWithTag ("Player");
+
+		target = GameObject.FindGameObjectWithTag ("Player");
 		rb = GetComponent<Rigidbody> ();
-		anim = GetComponent<Animation>();
+		StartCoroutine (EnableCollider ());
 		StartCoroutine (chaseTarget ());
+		targetRb = target.GetComponent<Rigidbody> ();
+		anim = GetComponent<Animation>();
 
 		//Changing layers and adding weights allows us to play 2 animations at the same time
 		anim["attack02"].layer = 1;
@@ -46,6 +50,12 @@ public class TreeGoblinBehavior : MonoBehaviour {
 
 	}
 
+	IEnumerator EnableCollider()
+	{
+		yield return new WaitForSeconds (0.5f);
+		GetComponent<Collider> ().enabled = true;
+	}
+
 
 	IEnumerator chaseTarget()
 	{
@@ -53,20 +63,21 @@ public class TreeGoblinBehavior : MonoBehaviour {
 		anim.Play(getUpClip.name);
 		yield return new WaitForSeconds (1.5f);
 		canChaseTarget = true;
+		gameStart = true;
 	}
 
 
 	IEnumerator attack()
 	{
 		canAttack = false;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(treeGoblinDamage);
-        Debug.Log("Tree goblin did " + treeGoblinDamage + " damage");
-        Debug.Log("Strike player with goblin appendage");
+		GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(treeGoblinDamage);
+		Debug.Log("Tree goblin did " + treeGoblinDamage + " damage");
+		Debug.Log("Strike player with goblin appendage");
 		anim.Play(attackClip.name);
 		yield return new WaitForSeconds(2.0f);
 		canAttack = true;
 	}
-	
+
 	// Update is called once per frame
 
 	void Update(){
@@ -76,7 +87,7 @@ public class TreeGoblinBehavior : MonoBehaviour {
 
 		}
 
-		if (Vector3.Distance (target.transform.position, this.transform.position) > attackDistance) {
+		if (Vector3.Distance (target.transform.position, this.transform.position) > attackDistance && gameStart) {
 			canChaseTarget = true;
 		}
 	}
@@ -89,19 +100,20 @@ public class TreeGoblinBehavior : MonoBehaviour {
 			anim.Play(runClip.name);
 
 			//apply gravity to enemies
-			//rb.AddForce (Vector3.down * rb.mass * 30);
+			rb.AddForce (5.0f * Physics.gravity);
 
 			//find direction towards target and look towards target
 			directionToMove = (target.transform.position - this.transform.position).normalized;
-			Vector3 newRotation = Vector3.RotateTowards(transform.forward, directionToMove, rotateSpeed * Time.deltaTime, 0.0f);
-			transform.rotation = Quaternion.LookRotation(newRotation);
 
+			Vector3 newRotation = Vector3.RotateTowards (transform.forward, directionToMove, rotateSpeed * Time.deltaTime, 0.0f);
+			newRotation.y = 0.0f;
+			transform.rotation = Quaternion.LookRotation (newRotation);
 
 			directionToMove.y = 0.0f;
 
 			//addforce in direction of character
 			if (rb.velocity.magnitude < maxSpeed) {
-				rb.AddForce ((directionToMove) * acceleration, ForceMode.VelocityChange);
+				rb.AddForce ((directionToMove ) * acceleration, ForceMode.VelocityChange);
 			}
 
 			if (rb.velocity.magnitude > maxSpeed) {

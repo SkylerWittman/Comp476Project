@@ -18,28 +18,29 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	private bool canWander = false;
 	private bool cantSeePlayer = true;
 	private bool canAttack = true;
-	private float moveSpeed = 10;
-	private float rotateSpeed = 8.0f;
-	private float collisionTimer = 120;
-	private float searchTimer = 120;
-	private float distanceToHunt = 50;
+	private bool isGrounded = false;
+	private float moveSpeed = 13.0f;
+	private float rotateSpeed = 3.0f;
+	private float collisionTimer = 120.0f;
+	private float searchTimer = 120.0f;
+	private float distanceToHunt = 50.0f;
 	private float spiderDamage = 2.0f;
-	private float attackDistance = 3.0f;
+	private float attackDistance = 5.0f;
 	private Animation anim;
 	private AnimationClip runClip;
 	private AnimationClip attackClip;
 
 	public float swarmDistance = 100.0f;
 
-    
-    public float swarmSpiderHealth;
+
+	public float swarmSpiderHealth;
 	public float swarmSpiderDamage;
 
-    void Start () {
+	void Start () {
 		GetComponent<SwarmSpiderDeath>().health = swarmSpiderHealth;
 		GetComponent<SwarmSpiderDeath>().damage = swarmSpiderDamage;
 
-        rb = GetComponent<Rigidbody> ();
+		rb = GetComponent<Rigidbody> ();
 		swarmController = GameObject.FindGameObjectWithTag("controller");
 		swarmer = swarmController.GetComponent<SwarmController> ();
 
@@ -51,7 +52,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		anim ["walkSpider"].speed = 7.0f;
 		runClip = anim.GetClip("walkSpider");
 		attackClip = anim.GetClip("attackSpider");
-		rb.AddForce (Vector3.down * 500, ForceMode.VelocityChange);
+		rb.AddForce (Vector3.down * 150, ForceMode.VelocityChange);
 		canWander = true;
 
 	}
@@ -81,7 +82,6 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 
 		for(int i =0; i< swarmNeighbors.Count; i++){
 			swarmNeighbors [i].GetComponent<SwarmSpiderBehavior> ().FindMySwarm ();
-
 		}
 	}
 
@@ -90,14 +90,13 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
 		for(int i =0; i< swarmNeighbors.Count; i++){
 			swarmNeighbors [i].GetComponent<SwarmSpiderBehavior> ().setCanHunt ();
-
 		}
 	}
 
 	//finds swarm spider who are nearby and add them to the list to keep track
 	public void FindMySwarm(){
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
-		GameObject[] swarm = swarmer.getSwarm (); //gets most recent list of spider on the map
+		GameObject[] swarm = swarmer.getSwarm (); //gets most recent list of spiders on the map
 		swarmNeighbors.Clear (); //clears the list
 		foreach (GameObject spider in swarm) {
 			if (Vector3.Distance (spider.transform.position, this.transform.position) < swarmDistance && (spider != this)) {
@@ -159,7 +158,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			}
 		}
 
-		//divide the vector values by the amount of spider in the swarm
+		//divide the vector values by the amount of spiders in the swarm
 		compuationVector.x /= swarmNeighbors.Count;
 		compuationVector.z /= swarmNeighbors.Count;
 
@@ -174,7 +173,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	//finds the distance between spider in the swarm, so the spider can stay serperated
 	private Vector3 SeperationOfSwarm(){
 		Vector3 compuationVector = new Vector3();
-		Vector3 finalVector;
+
 
 		//if you have nobody in the swarm then do nothing
 		if (swarmNeighbors.Count == 0) {
@@ -183,25 +182,27 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 
 		//find distance from spider and all other neighbours in the swarm and add it to the serperation vector
 		foreach (GameObject spider in swarmNeighbors) {
+			float distance;
 
 			if (spider == null) {
 				continue;
 			}
 
 			if (spider != this) {
-				compuationVector.x += spider.transform.position.x - this.transform.position.x;
-				compuationVector.z += spider.transform.position.z - this.transform.position.z;
+				if (Vector3.Distance (spider.transform.position, this.transform.position) < 75.0f) {
+					compuationVector.x += (this.transform.position.x - spider.transform.position.x);
+					compuationVector.z += (this.transform.position.z - spider.transform.position.z);
 
+					distance = Vector3.Distance(spider.transform.position, this.transform.position);
+					compuationVector /= distance;
+
+				}
 			}
 		}
 
-		//divide the vector values by the amount of spider in the swarm and negated the x and z values so the spider steers away from swarm properly
 		compuationVector.x /= swarmNeighbors.Count;
 		compuationVector.z /= swarmNeighbors.Count;
-		compuationVector.x *= -20;
-		compuationVector.z *= -20;
 		compuationVector.Normalize ();
-
 		return compuationVector;
 	}
 
@@ -219,16 +220,18 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		Vector3 avoidanceVector;
 		if (Physics.Raycast (transform.position, transform.forward, out hit, 10)) {
 			if (hit.collider.tag == "TreeMarker") {
-				rb.AddForce (transform.right * 30 * Time.deltaTime, ForceMode.VelocityChange);
+				rb.AddForce (transform.right * 30, ForceMode.VelocityChange);
+
 			}
 		}
 	}
-		
+
 
 	public void setCanHunt(){
 		canHunt = true;
 		canWander = false;
 	}
+
 
 
 	private void PlayerCloseEnoughToHunt(){
@@ -245,11 +248,17 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	void Update(){
 		if (Vector3.Distance (target.transform.position, this.transform.position) < attackDistance && canAttack) {
 			StartCoroutine (Attack ());
+			canHunt = false;
 		}
+
+		if (Vector3.Distance (target.transform.position, this.transform.position) > attackDistance) {
+			canHunt = true;
+		}
+
 	}
 
 	void FixedUpdate () {
-	
+
 		collisionTimer--;
 		searchTimer--;
 
@@ -269,7 +278,8 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		if (canWander) {
 
 			//apply gravity to enemies
-			//rb.AddForce (Vector3.down * rb.mass * 40);
+			rb.AddForce (7.0f * Physics.gravity);
+
 
 
 			//recalcualte swarm information to be used in movement
@@ -282,11 +292,19 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			wanderVector.y = 0.0f;
 
 			Vector3 newRotation = Vector3.RotateTowards(transform.forward, wanderVector, rotateSpeed * Time.deltaTime, 0.0f);
+			newRotation.y = 0.0f;
 			transform.rotation = Quaternion.LookRotation(newRotation);
 
-			rb.velocity += ( wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
-			rb.velocity = rb.velocity.normalized * moveSpeed;
-		
+
+			if (rb.velocity.magnitude <= moveSpeed) {
+				rb.velocity += (wanderVector + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
+			}
+
+			if (rb.velocity.magnitude > moveSpeed) {
+				rb.velocity = rb.velocity.normalized * moveSpeed;
+			}
+
+
 			anim.Play(runClip.name);
 		}
 
@@ -294,7 +312,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		if (canHunt) {
 
 			//apply gravity to enemies
-			//rb.AddForce (Vector3.down * rb.mass * 30);
+			rb.AddForce (7.0f * Physics.gravity);
 
 			//recalcualte swarm information to be used in movement
 			alignment = AlignVectorCalculate ();
@@ -303,16 +321,28 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 
 			//look towards the target
 			Vector3 newDirection = (target.transform.position - this.transform.position).normalized;
-			Vector3 newRotation = Vector3.RotateTowards(transform.forward, newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized, rotateSpeed * Time.deltaTime, 0.0f);
+
+
+			Vector3 newRotation = Vector3.RotateTowards (transform.forward, newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)), rotateSpeed * Time.deltaTime, 0.0f);
+			newRotation.y = 0.0f;
 			transform.rotation = Quaternion.LookRotation (newRotation);
+
 
 			//move towards the target as a swarm
 			newDirection.y = 0.0f;
-			rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)).normalized);
-			rb.velocity = rb.velocity.normalized * moveSpeed;
+
+			if (rb.velocity.magnitude <= moveSpeed) {
+				rb.velocity += (newDirection + new Vector3 ((alignment.x + cohesion.x + seperation.x), 0, (alignment.z + cohesion.z + seperation.z)));
+			}
+
+			if (rb.velocity.magnitude > moveSpeed) {
+				rb.velocity = rb.velocity.normalized * moveSpeed;
+			}
+
+
 
 			anim.Play(runClip.name);
 		}
-			
+
 	}
 }

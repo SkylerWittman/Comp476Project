@@ -17,7 +17,7 @@ public class ThrowAxe : MonoBehaviour {
 		Invoke ("EnableCollider", .2f);
 		rb = GetComponent<Rigidbody> ();
 		audio = GetComponent<AudioSource> ();
-		audio.PlayOneShot (throwSound, 0.1f);
+		audio.PlayOneShot (throwSound, 0.4f);
 		playerTarget = GameObject.FindGameObjectWithTag ("Player");
 		directionToThrow = (new Vector3(playerTarget.transform.position.x, playerTarget.transform.position.y + 3.0f , playerTarget.transform.position.z) - this.transform.position).normalized;
 
@@ -41,8 +41,8 @@ public class ThrowAxe : MonoBehaviour {
 	void OnCollisionEnter(Collision coll){
 
 		if (coll.gameObject.tag == "Player") {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(4.0f);
-            Debug.Log("Throwing goblin did " + 4 + " damage");
+			playerTarget.GetComponent<ArcherDetail>().takeDamage(4.0f);
+			Destroy (this.gameObject);
         }
 	}
 }
