@@ -170,6 +170,7 @@ MonoBehaviour:
   spinForce: 100
   impulseForce: 75
   throwSound: {fileID: 8300000, guid: b268631b279b16b48bbe4fa9c5bff92f, type: 3}
+  chopSound: {fileID: 8300000, guid: 3ea064513ba62704f8969305d7c4d8d0, type: 3}
 --- !u!136 &13693968
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -218,6 +219,10 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: chopSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ea064513ba62704f8969305d7c4d8d0, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174674}

@@ -191,8 +191,8 @@ GameObject:
   - 111: {fileID: 11121766}
   - 54: {fileID: 5484562}
   - 114: {fileID: 11412214}
-  - 114: {fileID: 11484978}
   - 82: {fileID: 8292332}
+  - 114: {fileID: 11459808}
   m_Layer: 0
   m_Name: DinoRed
   m_TagString: BadGuy
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   dinoHealth: 100
   dinoDamage: 10
   dinoAttackCooldown: 3
---- !u!114 &11484978
+--- !u!114 &11459808
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1471,13 +1471,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 126990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2a090b7d7875d41b15edf7312a6ff3, type: 3}
+  m_Script: {fileID: 11500000, guid: f3d6ad480f02d314c92123ffb649ded2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   die: {fileID: 7400000, guid: 92cf7fb090ba49a418f829d521feb727, type: 2}
   hit: {fileID: 7400000, guid: d1ad455fa0850374cbe78b60bc11c305, type: 2}
+  dinoCollider: {fileID: 184772}
   health: 100
   damage: 10
+  deathScore: 10
+  isAlive: 0
 --- !u!136 &13681930
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1651,6 +1654,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: dinoDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: collider
+      value: 
+      objectReference: {fileID: 184772}
+    - target: {fileID: 0}
+      propertyPath: dinoCollider
+      value: 
+      objectReference: {fileID: 184772}
+    - target: {fileID: 0}
+      propertyPath: deathScore
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []

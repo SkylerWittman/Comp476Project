@@ -76,8 +76,8 @@ public class DinoBehavior : MonoBehaviour {
 
         canAttack = true;
         canMove = true;
-        dinoHealth = GetComponent<NPCDetail>().health;
-        dinoDamage = GetComponent<NPCDetail>().damage;
+		dinoHealth = GetComponent<DinoDeath>().health;
+		dinoDamage = GetComponent<DinoDeath>().damage;
 
         anim = GetComponent<Animation>();
         //Changing layers and adding weights allows us to play 2 animations at the same time

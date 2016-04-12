@@ -53,15 +53,20 @@ public class NPCDetail : MonoBehaviour {
             counter++; 
         }
         Vector3 pos = transform.position;
-        if(health <= 0.0f)
+      
+		if(health <= 0.0f && isAlive)
         {
-            anim.Play(die.name);
-            //GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); ;
+			isAlive = false;
+			anim.Play(die.name);
+         
             transform.position = pos;
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<Collider> ().enabled = false;
-            if (!triedSpawning)
+
+
+            
+			if (!triedSpawning)
             {
                 powerupSpawner.trySpawn(pos);
                 triedSpawning = true;
@@ -73,7 +78,7 @@ public class NPCDetail : MonoBehaviour {
                 addedScore = true;
             }
 
-            isAlive = false;
+           
 			Destroy(this.gameObject, anim[die.name].length+.5f);
         }
 
