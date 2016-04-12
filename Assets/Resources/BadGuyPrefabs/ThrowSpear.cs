@@ -12,6 +12,7 @@ public class ThrowSpear : MonoBehaviour {
 	private AudioSource audio;
 	public AudioClip throwSound;
 	public AudioClip chopSound;
+	public float spearDamage = 4.0f;;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,8 @@ public class ThrowSpear : MonoBehaviour {
 	void OnCollisionEnter(Collision coll){
 
 		if (coll.gameObject.tag == "Player") {
-			playerTarget.GetComponent<ArcherDetail>().takeDamage(4.0f);
+			playerTarget.GetComponent<ArcherDetail>().takeDamage(spearDamage);
+			Debug.Log ("Spear throwing goblin did " + spearDamage + " damage");
 			audio.PlayOneShot (chopSound, 1.0f);
 			Destroy (this.gameObject);
         }

@@ -21,13 +21,13 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	private float attackDistance = 4.0f;
 	private float impulse = 50;
 
-	public float treeGoblinHealth;
-	public float treeGoblinDamage;
+	float treeGoblinHealth;
+	float treeGoblinDamage;
 
 	void Start () {
 
-		GetComponent<NPCDetail>().health = treeGoblinHealth;
-		GetComponent<NPCDetail>().damage = treeGoblinDamage;
+		treeGoblinHealth = GetComponent<NPCDetail> ().health;
+		treeGoblinDamage = GetComponent<NPCDetail> ().damage;
 
 
 		target = GameObject.FindGameObjectWithTag ("Player");
@@ -71,6 +71,7 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	{
 		canAttack = false;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(treeGoblinDamage);
+		Debug.Log("Tree goblin did " + treeGoblinDamage + " damage");
 		anim.Play(attackClip.name);
 		yield return new WaitForSeconds(2.0f);
 		canAttack = true;

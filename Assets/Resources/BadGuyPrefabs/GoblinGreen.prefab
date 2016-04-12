@@ -1459,8 +1459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   die: {fileID: 7400000, guid: 2788750f9cd2c174aa4fa84ba74dab03, type: 3}
   hit: {fileID: 7400000, guid: 05a28ecbb33a989479703c11c26c36f5, type: 3}
-  health: 50
-  damage: 7
+  health: 150
+  damage: 5
   deathScore: 75
   isAlive: 0
 --- !u!114 &11467328
@@ -1475,7 +1475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   treeGoblinHealth: 150
-  treeGoblinDamage: 10
+  treeGoblinDamage: 5
 --- !u!136 &13678306
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1627,11 +1627,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: health
-      value: 50
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: damage
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: treeGoblinHealth
@@ -1639,7 +1639,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: treeGoblinDamage
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: deathScore

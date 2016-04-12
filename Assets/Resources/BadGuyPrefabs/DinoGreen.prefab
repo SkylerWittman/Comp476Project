@@ -1462,7 +1462,7 @@ MonoBehaviour:
   dinoCollider: {fileID: 177664}
   health: 100
   damage: 10
-  deathScore: 10
+  deathScore: 100
   isAlive: 0
 --- !u!114 &11485522
 MonoBehaviour:
@@ -1658,7 +1658,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: deathScore
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: collider

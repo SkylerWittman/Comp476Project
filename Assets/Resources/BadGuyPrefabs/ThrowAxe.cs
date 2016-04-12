@@ -12,6 +12,7 @@ public class ThrowAxe : MonoBehaviour {
 	private AudioSource audio;
 	public AudioClip throwSound;
 	public AudioClip chopSound;
+	public float axeDamage = 4.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -42,7 +43,8 @@ public class ThrowAxe : MonoBehaviour {
 	void OnCollisionEnter(Collision coll){
 
 		if (coll.gameObject.tag == "Player") {
-			playerTarget.GetComponent<ArcherDetail>().takeDamage(4.0f);
+			playerTarget.GetComponent<ArcherDetail>().takeDamage(axeDamage);
+			Debug.Log ("Axe throwing goblin did " + axeDamage + " damage");
 			audio.PlayOneShot (chopSound, 1.0f);
 			Destroy (this.gameObject);
         }

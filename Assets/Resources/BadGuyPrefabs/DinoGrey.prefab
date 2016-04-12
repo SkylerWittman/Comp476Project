@@ -1479,7 +1479,7 @@ MonoBehaviour:
   dinoCollider: {fileID: 132256}
   health: 100
   damage: 10
-  deathScore: 10
+  deathScore: 100
   isAlive: 0
 --- !u!136 &13699262
 CapsuleCollider:
@@ -1670,7 +1670,7 @@ Prefab:
       objectReference: {fileID: 132256}
     - target: {fileID: 0}
       propertyPath: deathScore
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
