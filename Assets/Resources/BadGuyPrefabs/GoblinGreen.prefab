@@ -1460,7 +1460,7 @@ MonoBehaviour:
   die: {fileID: 7400000, guid: 2788750f9cd2c174aa4fa84ba74dab03, type: 3}
   hit: {fileID: 7400000, guid: 05a28ecbb33a989479703c11c26c36f5, type: 3}
   health: 150
-  damage: 5
+  damage: 6
   deathScore: 75
   isAlive: 0
 --- !u!114 &11467328
@@ -1629,7 +1629,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: damage
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: treeGoblinHealth

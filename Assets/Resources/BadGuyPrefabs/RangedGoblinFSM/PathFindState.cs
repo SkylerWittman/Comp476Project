@@ -23,7 +23,7 @@ public class PathFindState : IGoblinState {
 	private float minDistanceFromTrees = 500;
 	public float distanceToNewTree = 15.0f;
 	private float distanceToAttack = 75;
-	private float rotateSpeed = 8.0f;
+	private float rotateSpeed = 2.0f;
 	private float timer;
 
 	public PathFindState(StatePattern pattern){
