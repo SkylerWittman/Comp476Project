@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class PathFindState : IGoblinState {
 
 
-	public float acceleration = 10;
-	public float maxSpeed = 20;
+	public float acceleration = 7.0f;
+	public float maxSpeed = 18.0f;
 
 	private readonly StatePattern rangeGoblin;
 	private List<TreeNode> listOfTreeNodes = new List<TreeNode>();
@@ -20,9 +20,9 @@ public class PathFindState : IGoblinState {
 	private bool noPath = true;
 	private bool startPath = false;
 	private bool avoidTree = false;
-	private float minDistanceFromTrees = 500;
+	private float minDistanceFromTrees = 500.0f;
 	public float distanceToNewTree = 15.0f;
-	private float distanceToAttack = 75;
+	private float distanceToAttack = 75.0f;
 	private float rotateSpeed = 2.0f;
 	private float timer;
 
