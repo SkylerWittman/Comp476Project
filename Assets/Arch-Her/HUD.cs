@@ -130,11 +130,11 @@ public class HUD : MonoBehaviour {
         }
 
         //if player survives for given amount of time then play win screen
-        if (currentTime <= 0 && !deathScreenPlayed)
+        if (currentTime <= 0 && !winScreenPlayed)
         {
-            deathScreenPlayed = true;
-            deathScreenObject.SetActive(true);
-            doEndGameThings(); 
+            winScreenPlayed = true;
+            winScreenObject.SetActive(true);
+            doEndGameThings();
         }
 
         //if you press escape to pause the game
