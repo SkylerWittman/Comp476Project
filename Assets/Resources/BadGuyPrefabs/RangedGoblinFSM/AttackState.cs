@@ -28,6 +28,7 @@ public class AttackState : IGoblinState {
 		}
 	}
 
+	//changes states
 	public void ToAttackState(){
 		Debug.Log ("currently in state");
 	}
@@ -42,7 +43,8 @@ public class AttackState : IGoblinState {
 	}
 
 	 private void Attack(){
-		
+
+		//throwing an axe or a spear is choosen randomly
 		int rand = Random.Range (0, 2);
 
 		if (rand == 0) {
@@ -59,7 +61,7 @@ public class AttackState : IGoblinState {
 
 	}
 
-	private void LookForTarget(){
+	private void LookForTarget(){ //if player is out of attacking range go back to pathfinding
 		if (Vector3.Distance (rangeGoblin.transform.position, rangeGoblin.playerTarget) > distanceToAttack) {
 			ToPathFindingState ();
 

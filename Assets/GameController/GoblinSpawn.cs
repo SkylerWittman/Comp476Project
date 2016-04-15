@@ -26,15 +26,9 @@ public class GoblinSpawn : MonoBehaviour {
 		if (Vector3.Distance (this.transform.position, target.transform.position) < distanceToSpawn && canSpawn) {
 			canSpawn = false;
 
-			//tree marker is at base of tree so just spawn the goblins a bit higher and to the right, we can implement random values here if we think its nessecary
-			//generate a random number and modd it by 2, instantiate a goblin if number = 0, if 1 do nothing
-
 			int rand = Random.Range (0, 100);
-
-
 			if (rand <= 50) {
 				Instantiate (goblin, new Vector3 (this.transform.position.x, this.transform.position.y + 25, this.transform.position.z + 10), Quaternion.identity);
-			
 			}
 
 			StartCoroutine (resetSpawn ());

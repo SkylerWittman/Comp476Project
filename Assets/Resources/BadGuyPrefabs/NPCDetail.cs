@@ -52,6 +52,7 @@ public class NPCDetail : MonoBehaviour {
             }
             counter++; 
         }
+
         Vector3 pos = transform.position;
       
 		if(health <= 0.0f && isAlive)
@@ -60,12 +61,12 @@ public class NPCDetail : MonoBehaviour {
 			anim.Play(die.name);
          
             transform.position = pos;
+
             //Freeze all movement/rotations when NPC has been slain
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<Collider> ().enabled = false;
 
 
-            
 			if (!triedSpawning)
             {
                 powerupSpawner.trySpawn(pos);
@@ -78,7 +79,8 @@ public class NPCDetail : MonoBehaviour {
                 addedScore = true;
             }
 
-			StatePattern goblinFSM = GetComponent<StatePattern>();
+			StatePattern goblinFSM = GetComponent<StatePattern>(); //checks to see if the prefab this script is attached to is a goblin, if it is, disable the script so it doesnt respond to any more damage
+
 			if (goblinFSM != null)
 			{
 				goblinFSM.enabled = false;
@@ -105,7 +107,7 @@ public class NPCDetail : MonoBehaviour {
                 LockA = true;
                 break;
             case "ExplosiveArrow":
-              //  Destroy(this.gameObject, anim[die.name].length + .5f);
+             
                 anim.CrossFade(hit.name, 0.5f);
                 break;
             case "Gas":

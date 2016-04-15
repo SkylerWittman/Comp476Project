@@ -22,7 +22,7 @@ public class WaitState : IGoblinState {
 		newRotation.y = 0.0f;
 		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
 
-		if (rangeGoblin.canChangeState) {
+		if (rangeGoblin.canChangeState) { //this changes after two seconds, goblin waits for 2 seconds and goes back to pathfinding
 			rangeGoblin.canChangeState = false;
 			ToPathFindingState ();
 		}
@@ -41,7 +41,7 @@ public class WaitState : IGoblinState {
 		Debug.Log ("current state");
 	}
 
-	private void LookForTarget(){
+	private void LookForTarget(){ //if player is within attack range goblin changes state to attacking
 		if (Vector3.Distance (rangeGoblin.transform.position, rangeGoblin.playerTarget) <= distanceToAttack) {
 			ToAttackState ();
 

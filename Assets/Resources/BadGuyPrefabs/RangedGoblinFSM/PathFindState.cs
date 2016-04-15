@@ -50,7 +50,7 @@ public class PathFindState : IGoblinState {
 		}
 	}
 
-
+	//methods to change states
 	public void ToAttackState(){
 		rangeGoblin.currentState = rangeGoblin.attackState;
 	}
@@ -70,7 +70,7 @@ public class PathFindState : IGoblinState {
 		}
 	}
 
-	private void FindATreeTarget(){
+	private void FindATreeTarget(){ //finds a target tree to pathfind too, keeps looking for a tree target until a tree is found that is at least 500 units away
 		int rand = Random.Range (0, listOfTreeNodes.Count);
 
 		while (Vector3.Distance (rangeGoblin.transform.position, listOfTreeNodes [rand].getPosition ()) < minDistanceFromTrees) {
@@ -82,7 +82,7 @@ public class PathFindState : IGoblinState {
 
 	}
 
-	private void FindStartTree(){
+	private void FindStartTree(){ //finds the closest tree to the goblin to be used as the start node
 		float closestTree = 200;
 
 		foreach (TreeNode node in listOfTreeNodes) {
@@ -95,13 +95,14 @@ public class PathFindState : IGoblinState {
 	}
 
 
-	private void CollisionAvoidance(){
+	private void CollisionAvoidance(){ //casts a ray forward looking for collisions with tree, if a collision is found a force is applied in the oppisite direction of the characters transform forward
+		//as well as in the direction of the characters transform right, this slows him down and moves him out of the way of the tree
 		RaycastHit hit;
 
 		if (Physics.Raycast (rangeGoblin.transform.position + Vector3.up, rangeGoblin.transform.forward, out hit, 40.0f)) {
 			if (hit.collider.tag == "TreeMarker") {
-				rangeGoblin.pathFound = false;
-				rangeGoblin.StartCoroutine (rangeGoblin.ChangePathFound ());
+				rangeGoblin.pathFound = false; //stops his movement toward the next node in his path so he can avoid the tree properly
+				rangeGoblin.StartCoroutine (rangeGoblin.ChangePathFound ()); //allows him to move to his next node after 2 seconds
 
 				//apply gravity to enemies
 				rb.AddForce (5.0f * Physics.gravity);
@@ -123,7 +124,7 @@ public class PathFindState : IGoblinState {
 		}
 	}
 
-	private void FindPath(){
+	private void FindPath(){ //finds start and target node and uses a star to find the best possible route
 		treeController.ResetGCostOfNeighbours ();
 		FindATreeTarget ();
 		FindStartTree ();
@@ -156,8 +157,6 @@ public class PathFindState : IGoblinState {
 
 		Vector3 newRotation = Vector3.RotateTowards (rangeGoblin.transform.forward, moveDirection, rotateSpeed * Time.deltaTime, 0.0f);
 		rangeGoblin.transform.rotation = Quaternion.LookRotation (newRotation);
-
-
 
 
 		if (rb.velocity.magnitude <= maxSpeed) {

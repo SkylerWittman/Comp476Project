@@ -50,14 +50,14 @@ public class TreeGoblinBehavior : MonoBehaviour {
 
 	}
 
-	IEnumerator EnableCollider()
+	IEnumerator EnableCollider() //used so he doesnt collide with tree branches as he is falling from tree
 	{
 		yield return new WaitForSeconds (0.5f);
 		GetComponent<Collider> ().enabled = true;
 	}
 
 
-	IEnumerator chaseTarget()
+	IEnumerator chaseTarget() //allows the falling / getting up animation to run before he chases the target
 	{
 		yield return new WaitForSeconds (3.0f);
 		anim.Play(getUpClip.name);
@@ -67,7 +67,7 @@ public class TreeGoblinBehavior : MonoBehaviour {
 	}
 
 
-	IEnumerator attack()
+	IEnumerator attack() //restricts attacking to every 2 seconds
 	{
 		canAttack = false;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<ArcherDetail>().takeDamage(treeGoblinDamage);

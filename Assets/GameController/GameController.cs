@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
 
-		//empty game object used to find tree position
 		public GameObject treeMarker;
 		private TreeInstance[] arrayOfTrees;
 		private GameObject[] treeGameObjects;
@@ -13,29 +12,24 @@ public class GameController : MonoBehaviour {
 		private Vector3 tempPosition;
 		private bool canSlowTime = true;
 		private bool canUseForce = true;
-		public bool cursorVisible = true;
 		private Camera theCamera;
 		private float forceToApply = 2;	
 
 		void Start()
 		{
-
-			
-			Terrain.activeTerrain.tag = "Terrain";
-
-			Cursor.visible = cursorVisible;
+			Cursor.visible = false; //used to hide and lock cursor at middle of screen
 			Cursor.lockState = CursorLockMode.Locked;
-
+			Terrain.activeTerrain.tag = "Terrain";
 			theCamera = Camera.main;
 			StartCoroutine(runTree());
 		}
 
 
 		IEnumerator runTree()
-		{ //this method is called after 2 seconds (once all trees have been painted onto terrain) it then goes through each tree and finds the correct position
-			//of the tree by scaling the position to the size and orgin of the terrain, and empty game object is then instaniated at that position to be used as a marker for the tree
+		{ //this method is called after 3 seconds (once all trees have been painted onto terrain) it then goes through each tree and finds the correct position
+			//of the tree by scaling the position to the size and orgin of the terrain, an empty game object is then instaniated at that position to be used as a marker for the tree
 			yield return new WaitForSeconds(3);
-			arrayOfTrees = Terrain.activeTerrain.terrainData.treeInstances;
+			arrayOfTrees = Terrain.activeTerrain.terrainData.treeInstances; //gets trees on the map
 
 			foreach (TreeInstance tree in arrayOfTrees)
 			{
@@ -47,7 +41,7 @@ public class GameController : MonoBehaviour {
 			treeGameObjects = GameObject.FindGameObjectsWithTag("TreeMarker");
 
 			
-			foreach (GameObject tree in treeGameObjects) {
+			foreach (GameObject tree in treeGameObjects) { //create tree nodes for pathfinding at each tree position on the map
 				TreeNode node = new TreeNode(tree.transform.position);
 				listOfTreeNodes.Add (node);
 			}
@@ -66,7 +60,7 @@ public class GameController : MonoBehaviour {
 	}
 
 
-	private void FindVisibleTrees(){
+	private void FindVisibleTrees(){ //used for the LOS tree nodes, only trees that are within 300 units are visible to each other
 		foreach (TreeNode nodeA in listOfTreeNodes) {
 			foreach (TreeNode nodeB in listOfTreeNodes) {
 				
@@ -74,25 +68,21 @@ public class GameController : MonoBehaviour {
 					continue;
 				}
 
-				if (Vector3.Distance (nodeA.getPosition (), nodeB.getPosition ()) < 300.0f) {
+				if (Vector3.Distance (nodeA.getPosition (), nodeB.getPosition ()) < 300.0f) { 
 					nodeA.AddToNeighbourNodes (nodeB);
 
 				}
-
-
 			}
 		}
-
 	}
 
 		public List<TreeNode> GetTreeNodes()
 		{
-
 			return listOfTreeNodes;
 		}
 
 
-		IEnumerator SlowTime()
+		IEnumerator SlowTime() //slow mo effect used in the game
 		{
 			Time.timeScale = 0.4f;
 			canSlowTime = false;
@@ -107,7 +97,7 @@ public class GameController : MonoBehaviour {
 			canUseForce = true;
 		}
 
-		private void ForcePower()
+		private void ForcePower() //a feauture that we didnt have time to finish :(
 		{
 
 			Ray ray = theCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -130,37 +120,16 @@ public class GameController : MonoBehaviour {
 				}
 			}
 		}
-
-		private void toggleCursor()
-		{
-			cursorVisible = !cursorVisible;
-			Cursor.visible = cursorVisible;
-			Cursor.lockState = cursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
-		}
+		
 
 		// Update is called once per frame
 		void Update()
 		{
 
-			if (Input.GetKeyDown(KeyCode.F) && canSlowTime)
-			{
-				StartCoroutine(SlowTime());
+		if (Input.GetKeyDown (KeyCode.F) && canSlowTime) {
+			StartCoroutine (SlowTime ());
 
-			}
-
-			if (Input.GetButton("Fire2") && canUseForce)
-			{
-				
-				//ForcePower();	
-				//Invoke ("ResetForceUse", 2.0f);
-				
-
-			}
-
-			if (Input.GetKeyDown(KeyCode.M))
-			{
-				toggleCursor();
-			}
 		}
-
-}
+			
+		}
+	}

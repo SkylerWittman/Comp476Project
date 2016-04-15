@@ -39,7 +39,6 @@ public class SwarmSpiderDeath : MonoBehaviour {
             }
             counter++;
         }
-        //Vector3 pos = transform.position;
 
         if (health < 0.0f && !isDead)
 		{
@@ -57,9 +56,10 @@ public class SwarmSpiderDeath : MonoBehaviour {
                 powerupSpawner.trySpawn(transform.position);
                 triedSpawning = true;
             }
+
 			//Freeze all movement/rotations when NPC has been slain
 			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-			GetComponent<SwarmSpiderBehavior> ().InformSwarmMembersOfDeath (this.gameObject);
+			GetComponent<SwarmSpiderBehavior> ().InformSwarmMembersOfDeath (this.gameObject); //informs swarm members that spider has died so flocking vectors are calcualted accuratley
             GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>().addScore(spiderScore);
 			GetComponent<SwarmSpiderBehavior> ().enabled = false;
 			Destroy(this.gameObject, anim[die.name].length + 0.5f);
@@ -82,7 +82,6 @@ public class SwarmSpiderDeath : MonoBehaviour {
 			LockA = true;
 			break;
 		case "ExplosiveArrow":
-			//Destroy(this.gameObject, anim[die.name].length + .5f);
            Destroy(other.gameObject);
            break;
         case "Gas":

@@ -38,7 +38,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		swarmController = GameObject.FindGameObjectWithTag("controller");
 		swarmer = swarmController.GetComponent<SwarmController> ();
 
-		StartCoroutine (RecalculateSwarm ());
+		StartCoroutine (RecalculateSwarm ()); //finds swarm neighbours
 		target = GameObject.FindGameObjectWithTag ("Player");
 
 		anim = GetComponent<Animation>();
@@ -46,12 +46,12 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		anim ["walkSpider"].speed = 7.0f;
 		runClip = anim.GetClip("walkSpider");
 		attackClip = anim.GetClip("attackSpider");
-		rb.AddForce (Vector3.down * 150, ForceMode.VelocityChange);
+		rb.AddForce (Vector3.down * 150, ForceMode.VelocityChange); // grounds the spiders at the start of the game (they fall slowly on spawn for some reason)
 		canWander = true;
 
 	}
 
-	private IEnumerator Attack()
+	private IEnumerator Attack() //allows them to attack ever 2 seconds
 	{
 		canAttack = false;
 		//only works if there is a single player
@@ -62,7 +62,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		canAttack = true;
 	}
 
-	public void SpiderDeath(){
+	public void SpiderDeath(){ //stops movement and animation when they die
 		canWander = false;
 		canHunt = false;
 		anim.Stop ();
@@ -83,7 +83,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	public void InformSwarmMembersOfSighting(){
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
 		for(int i =0; i< swarmNeighbors.Count; i++){
-			swarmNeighbors [i].GetComponent<SwarmSpiderBehavior> ().setCanHunt ();
+			swarmNeighbors [i].GetComponent<SwarmSpiderBehavior> ().setCanHunt (); //sets each spider in the swarm to hunting mode
 		}
 	}
 
@@ -92,13 +92,14 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		swarmer.UpdateSwarm (); //updates the master swarm array in swarm controller
 		GameObject[] swarm = swarmer.getSwarm (); //gets most recent list of spiders on the map
 		swarmNeighbors.Clear (); //clears the list
-		foreach (GameObject spider in swarm) {
+		foreach (GameObject spider in swarm) { //looks through all spiders on the map, adding them to as a swarm neighbour if they are within 100 units
 			if (Vector3.Distance (spider.transform.position, this.transform.position) < swarmDistance && (spider != this)) {
 				swarmNeighbors.Add (spider);		
 			}
 		}
 	}
 
+	//allows the spiders to move in the same direction with a relative velocity
 	private Vector3 AlignVectorCalculate(){
 		Vector3 compuationVector = new Vector3();
 
@@ -164,7 +165,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	}
 
 
-	//finds the distance between spider in the swarm, so the spider can stay serperated
+	//keeps the spiders from getting to close to each other by finding their distance from each other and repeling ones that are too close
 	private Vector3 SeperationOfSwarm(){
 		Vector3 compuationVector = new Vector3();
 
@@ -183,11 +184,11 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 			}
 
 			if (spider != this) {
-				if (Vector3.Distance (spider.transform.position, this.transform.position) < 15.0f && Vector3.Distance (spider.transform.position, this.transform.position) > 0.0f ) {
-					compuationVector.x += (this.transform.position.x - spider.transform.position.x);
+				if (Vector3.Distance (spider.transform.position, this.transform.position) < 15.0f && Vector3.Distance (spider.transform.position, this.transform.position) > 0.0f ) { //if the spiders are with 15 units they should apply seperation
+					compuationVector.x += (this.transform.position.x - spider.transform.position.x); //finds the distance between the spiders 
 					compuationVector.z += (this.transform.position.z - spider.transform.position.z);
 
-					distance = Vector3.Distance(spider.transform.position, this.transform.position);
+					distance = Vector3.Distance(spider.transform.position, this.transform.position); //divide the vector by the distance to give weight, the closer the spider is the more you must repel it
 					compuationVector /= distance;
 
 				}
@@ -209,7 +210,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 		}
 	}
 
-	private void CollisionAvoidance(){
+	private void CollisionAvoidance(){ //simple collision avoidence to avoid trees, the flocking behavior seems to help them avoid trees as well
 		RaycastHit hit;
 		Vector3 avoidanceVector;
 		if (Physics.Raycast (transform.position, transform.forward, out hit, 10)) {
@@ -221,7 +222,7 @@ public class SwarmSpiderBehavior : MonoBehaviour {
 	}
 
 
-	public void setCanHunt(){
+	public void setCanHunt(){ 
 		canHunt = true;
 		canWander = false;
 	}

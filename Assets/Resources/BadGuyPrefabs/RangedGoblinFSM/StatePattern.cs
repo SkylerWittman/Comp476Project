@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class StatePattern : MonoBehaviour {
 
+	//these must all be public so each non mono behavior state class has access to the prefab and its mono behavior features
 	[HideInInspector] public IGoblinState currentState;
 	[HideInInspector] public AttackState attackState;
 	[HideInInspector] public WaitState waitState;
@@ -34,7 +35,7 @@ public class StatePattern : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Random.seed = System.DateTime.Now.Millisecond;
-		attackState = new AttackState (this);
+		attackState = new AttackState (this); //creates new state objects
 		waitState = new WaitState (this);
 		player = GameObject.FindGameObjectWithTag ("Player");
 		anim = GetComponent<Animation>();
@@ -53,17 +54,17 @@ public class StatePattern : MonoBehaviour {
 		pathFound = true;
 	}
 
-	IEnumerator GetTreePositions(){
+	IEnumerator GetTreePositions(){ //finds all the positions of the tree nodes on the map after they have been generated
 		yield return new WaitForSeconds (3.0f);
 		treeController = controller.GetComponent<GameController>();
 		listOfTreeNodes = treeController.GetTreeNodes ();
 
-		pathFindState = new PathFindState (this);
+		pathFindState = new PathFindState (this); //starts the goblin in path finding state
 		currentState = pathFindState;
 		gameStart = true;
 	}
 
-	public void ThrowAxe(){
+	public void ThrowAxe(){ //methods used to throw weapons
 		StartCoroutine (ThrowDelayAxe ());
 	}
 
@@ -75,13 +76,13 @@ public class StatePattern : MonoBehaviour {
 		StartCoroutine(WaitToMove());
 	}
 
-	public IEnumerator WaitToMove(){
+	public IEnumerator WaitToMove(){ //allows the goblin to begin pathfinding again after he has waited at the goal tree for 2 seconds
 		yield return new WaitForSeconds (2.0f);
 		canChangeState = true;
 	}
 
 	public IEnumerator ThrowDelaySpear(){
-		yield return new WaitForSeconds (.2f);
+		yield return new WaitForSeconds (.2f); //delays the throw so it lines up with the animation
 		Instantiate (spear, throwPosition.transform.position, Quaternion.identity);
 	}
 
@@ -96,7 +97,7 @@ public class StatePattern : MonoBehaviour {
 		playerTarget = player.transform.position;
 
 		if (gameStart) {
-			currentState.UpdateState ();
+			currentState.UpdateState (); //used to update the state of the goblin
 		}
 	}
 }

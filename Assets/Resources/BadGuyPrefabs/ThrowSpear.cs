@@ -19,20 +19,20 @@ public class ThrowSpear : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		audio = GetComponent<AudioSource> ();
 		audio.PlayOneShot (throwSound, 0.4f);
-		playerTarget = GameObject.FindGameObjectWithTag ("Player");
+		playerTarget = GameObject.FindGameObjectWithTag ("Player"); //when spear is instaniated it gets the direction to the player and a force is applied in this direction
+		// this allows the goblins to be not overly accurate but still somewhat accurate. 
 		directionToThrow = (new Vector3(playerTarget.transform.position.x, playerTarget.transform.position.y + 3.0f , playerTarget.transform.position.z) - this.transform.position).normalized;
 
 		rb.AddForce (directionToThrow * impulseForce, ForceMode.VelocityChange);
-		transform.LookAt (playerTarget.transform);
+		transform.LookAt (playerTarget.transform); //makes sure the rotation and orientation of the spear is correct
 		transform.Rotate (new Vector3 (90, 0, 0));
-		Destroy (this.gameObject, 3.0f);
+		Destroy (this.gameObject, 3.0f); 
 	}
 
 	void OnCollisionEnter(Collision coll){
 
 		if (coll.gameObject.tag == "Player") {
 			playerTarget.GetComponent<ArcherDetail>().takeDamage(spearDamage);
-			Debug.Log ("Spear throwing goblin did " + spearDamage + " damage");
 			audio.PlayOneShot (chopSound, 1.0f);
 			Destroy (this.gameObject);
         }

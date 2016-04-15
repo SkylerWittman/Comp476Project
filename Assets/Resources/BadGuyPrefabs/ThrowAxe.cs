@@ -16,22 +16,23 @@ public class ThrowAxe : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Invoke ("EnableCollider", .2f);
+		Invoke ("EnableCollider", .2f); //collider is enable shortly affter its thrown so it doesnt collide with the goblin throwing it
 		rb = GetComponent<Rigidbody> ();
 		audio = GetComponent<AudioSource> ();
 		audio.PlayOneShot (throwSound, 0.4f);
-		playerTarget = GameObject.FindGameObjectWithTag ("Player");
+		playerTarget = GameObject.FindGameObjectWithTag ("Player"); //when axe is instaniated it gets the direction to the player and a force is applied in this direction
+		// this allows the goblins to be not overly accurate but still somewhat accurate. 
 		directionToThrow = (new Vector3(playerTarget.transform.position.x, playerTarget.transform.position.y + 4.0f , playerTarget.transform.position.z) - this.transform.position).normalized;
 
 		rb.AddForce (directionToThrow * impulseForce, ForceMode.VelocityChange);
-		transform.LookAt (playerTarget.transform);
+		transform.LookAt (playerTarget.transform); //makes sure oreintation is correct
 		transform.Rotate (new Vector3 (0, -90, 0));
 		Destroy (this.gameObject, 3.0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		rb.maxAngularVelocity = 30.0f;
+		rb.maxAngularVelocity = 30.0f; //gives the axe a spinning effect
 		rb.AddTorque (-transform.forward *spinForce);
 
 	}
