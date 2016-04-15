@@ -316,7 +316,7 @@ public class DinoBehavior : MonoBehaviour {
             //Forward whisker
             if (Physics.Raycast(transform.position, -transform.forward, out hit, 100f))
             {
-                if (hit.transform != transform)
+                if (hit.transform != transform && hit.transform.gameObject.tag == "Tree")
                 {
                     target += hit.normal * 50f;
                 }
@@ -331,7 +331,7 @@ public class DinoBehavior : MonoBehaviour {
             //Left whisker
             if (Physics.Raycast(leftW, -transform.forward, out hit, 100f))
             {
-                if (hit.transform != transform)
+                if (hit.transform != transform && hit.transform.gameObject.tag == "Tree")
                 {
                     target += hit.normal * 50f;
                 }
@@ -340,7 +340,7 @@ public class DinoBehavior : MonoBehaviour {
             //Right whisker
             if (Physics.Raycast(rightW, -transform.forward, out hit, 100f))
             {
-                if (hit.transform != transform)
+                if (hit.transform != transform && hit.transform.gameObject.tag == "Tree")
                 {
                     target += hit.normal * 50f;
                 }
